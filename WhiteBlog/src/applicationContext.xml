@@ -26,4 +26,68 @@
 				</prop>
 			</props>
 		</property>
-	</bean></beans>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.whiteblog.entity.Admin</value>
+				<value>com.whiteblog.entity.Blog</value>
+				<value>com.whiteblog.entity.Blogtype</value>
+				<value>com.whiteblog.entity.Comment</value>
+				<value>com.whiteblog.entity.Mail</value>
+				<value>com.whiteblog.entity.Notice</value>
+				<value>com.whiteblog.entity.User</value></list>
+		</property></bean>
+	<bean id="AdminDAO" class="com.whiteblog.dao.AdminDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BlogDAO" class="com.whiteblog.dao.BlogDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BlogtypeDAO" class="com.whiteblog.dao.BlogtypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CommentDAO" class="com.whiteblog.dao.CommentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MailDAO" class="com.whiteblog.dao.MailDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="NoticeDAO" class="com.whiteblog.dao.NoticeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserDAO" class="com.whiteblog.dao.UserDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="UserManager" class="com.whiteblog.service.UserManagerImpl">
+		<property name="userdao">
+			<ref bean="UserDAO" />
+		</property>
+	</bean>
+	
+	<bean id="LoginAction" class="com.whiteblog.action.loginAction">
+		<property name="usermanager">
+			<ref bean="UserManager" />
+		</property>
+	</bean>	
+	
+	<bean id="RegisterAction" class="com.whiteblog.action.registerAction">
+		<property name="usermanager">
+			<ref bean="UserManager" />
+		</property>
+	</bean>	
+	
+</beans>
