@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<a data-filter=".pt-culture" href="#">culture</a>
 						<a data-filter=".pt-art" href="#">art</a>
 						<a data-filter="*" href="#" class="unfilter hide">all</a>
-						
+						<a href"#"><img src="assets/img/write.png"/></a>
 					</p>
 				</div>
 			</div>
@@ -753,7 +753,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="linkbox">
 							<a href="#">Forgot password ?</a>
 							<span>No account ? <a href="#" id="register-btn" data-toggle="modal" data-target="#register-form">Sign Up.</a></span>
-							<span class="form-warning"><i class="fa fa-exclamation"></i>Fill the require.</span>
+							<!-- <span class="form-warning"><i class="fa fa-exclamation"></i>Fill the require.</span> -->
 						</div>
 						<div class="linkbox">
 							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
@@ -775,25 +775,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
 				</div>
 				<div class="modal-body">
-					<form>
-						<div class="form-group">
+					<form action="register.action" method="post">
+						<!-- <div class="form-group">
 							<input class="form-control" placeholder="Name">
-						</div>
+						</div> -->
 						<div class="form-group">
-							<input class="form-control" placeholder="Username">
+							<input class="form-control" placeholder="Username" name="userform.username">
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<input class="form-control" placeholder="Email">
-						</div>
+						</div> -->
 						<div class="form-group">
-							<input class="form-control" type="password" placeholder="Password">
+							<input class="form-control" type="password" placeholder="Password" name="userform.password">
 						</div>
 						<div class="linkbox">
 							<span>Already got account? <a href="#" id="login-btn" data-target="#login-form">Sign In.</a></span>
 						</div>
 						<div class="linkbox">
 							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
-							<button type="button" class="btn btn-golden btn-signin">SIGN UP</button>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN UP</button>
 						</div>
 					</form>
 				</div>
@@ -821,6 +821,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
-	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	
 </body>
 </html>
