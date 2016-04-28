@@ -7,6 +7,10 @@
 			<result name="success">/success.jsp</result>
 			<result name="error">/404.html</result>
 		</action>
+		<action name="content" class="BlogContent">
+			<result name="success" >./success.jsp</result>
+			<result name="fail">./404.html</result>
+		</action>
 	</package>
 
 
