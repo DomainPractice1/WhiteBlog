@@ -12,6 +12,4 @@ public class BlogManagerImpl {
 	public void setBlogDao(BlogDAO blogDao) {
 		this.blogDao = blogDao;
 	}
-	
-	
 }

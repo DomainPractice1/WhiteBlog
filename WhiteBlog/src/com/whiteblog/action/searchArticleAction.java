@@ -1,6 +1,11 @@
 package com.whiteblog.action;
 
+import java.util.List;
+import java.util.Map;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.whiteblog.entity.Blog;
 import com.whiteblog.service.BlogManagerImpl;
 
 public class searchArticleAction extends ActionSupport {
@@ -21,9 +26,12 @@ public class searchArticleAction extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
-		if(searchText.equals("") || searchText == null) return ERROR;
-		System.out.println(searchText);
-		
+		if(searchText == null || searchText.equals("")) searchText = new String("asdf");
+		System.out.println("搜索内容："+searchText);
+		//List<Blog> articleList = blogManager.getBlogDao().findByContent(searchText);
+		List<Blog> articleList = blogManager.getBlogDao().findAll();
+		Map<String, Object> session = ActionContext.getContext().getSession();
+		session.put("searchList", articleList);
 		return SUCCESS;
 	}
 	
