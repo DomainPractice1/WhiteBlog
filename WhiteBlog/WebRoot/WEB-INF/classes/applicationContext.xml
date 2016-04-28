@@ -111,4 +111,15 @@
 		</property>
 	</bean>	
 	
+	<bean id="blogContentManage" class="com.whiteblog.service.BlogContentManageImpl">
+		<property name="blogDAO">
+			<ref bean="BlogDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="BlogContent" class="com.whiteblog.action.blogContentAction">
+		<property name="blogContentManage">
+			<ref bean="blogContentManage"/>
+		</property>
+	</bean>
 </beans>
