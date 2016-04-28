@@ -30,15 +30,9 @@ public class loginAction extends ActionSupport{
 	public String execute(){
 		
 		if(usermanager.checklogin(userform).equals("true")){
-			
 			return SUCCESS;
-			
 		}else{
-			
 			return ERROR;
-			
 		}
-	
 	}
-	
 }
