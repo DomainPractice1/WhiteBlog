@@ -99,6 +99,12 @@
 		</property>
 	</bean>
 	
+	<bean id="ShowBlogListService" class="com.whiteblog.service.ShowBlogListService">
+		<property name="blogDAO">
+			<ref bean="BlogDAO" />
+		</property>
+	</bean>
+	
 	<bean id="LoginAction" class="com.whiteblog.action.loginAction">
 		<property name="usermanager">
 			<ref bean="UserManager" />
@@ -111,6 +117,13 @@
 		</property>
 	</bean>
 	
+
+	<bean id="ShowBlogListAction" class="com.whiteblog.action.ShowBlogList">
+		<property name="showBlogListService">
+			<ref bean="ShowBlogListService" />
+		</property>
+	</bean>	
+
 	<bean id="BlogManager" class="com.whiteblog.service.BlogManagerImpl">
 		<property name="blogDao">
 			<ref bean="BlogDAO" />

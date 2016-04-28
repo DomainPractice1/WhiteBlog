@@ -11,13 +11,17 @@
 			<result name="success">/success.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
-		<action name="content" class="BlogContent">
-			<result name="success" >./success.jsp</result>
-			<result name="fail">./404.html</result>
+		<action name="content" class="BlogContent" method="execute">
+			<result name="success" >/success.jsp</result>
+			<result name="fail">/404.html</result>
 		</action>
 		<action name="searchArticle" class="SearchArticleAction" method="execute">
  			<result name="success">/articleListTest.jsp</result>
 			<result name="error">/404.html</result>
+		</action>
+		<action name="ShowBlogList" class="ShowBlogListAction" method="execute">
+			<result name="success">/index.jsp</result>
+			<result name="error">/index.jsp</result>
 		</action>
 	</package>
 

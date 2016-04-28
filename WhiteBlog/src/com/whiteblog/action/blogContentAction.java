@@ -1,5 +1,8 @@
 package com.whiteblog.action;
 
+import java.util.Map;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.service.BlogContentManageImpl;
@@ -25,11 +28,15 @@ public class blogContentAction extends ActionSupport{
 	public void setBlogContentManage(BlogContentManageImpl blogContentManage) {
 		this.blogContentManage = blogContentManage;
 	}
+	/**
+	 * @return 
+	 */
 	public String execute(){
 		Blog ins = blogContentManage.findById(id);
 		if(ins == null)
 			return FAIL;
-		
+		Map req = (Map)ActionContext.getContext();
+		req.put(id, ins);
 		return SUCCESS;
 	}
 }
