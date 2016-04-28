@@ -220,13 +220,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
 						<i class="fa fa-user"></i>
 					</a>
-					<form action="ShowBlogList" method="execute">
-						<a> gooda: 
-						1 #request.blogList.get(0).getTitle()
-						2 "${dishList.get(0).getName()}"
-						3 ${dishList.get(0).getName()}
-						</a>
-					</form>
+					
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-plus"></i>
