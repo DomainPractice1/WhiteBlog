@@ -6,33 +6,35 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
-        destroy-method="close">
-        <property name="driverClass">
-            <value>com.mysql.jdbc.Driver</value>
-        </property>
-        <property name="jdbcUrl">
-            <value>jdbc:mysql://10.125.103.139:3306/whiteblog</value>
-        </property>
-        <property name="user">
-            <value>qwe</value>
-        </property>
-        <property name="password">
-            <value>123</value>
-        </property>
-        <property name="maxPoolSize">
-            <value>80</value>
-        </property>
-        <property name="minPoolSize">
-            <value>1</value>
-        </property>
-        <property name="initialPoolSize">
-            <value>1</value>
-        </property>
-        <property name="maxIdleTime">
-            <value>20</value>
-        </property>
-    </bean>
+	 
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+         destroy-method="close"> 
+         <property name="driverClass"> 
+             <value>com.mysql.jdbc.Driver</value> 
+         </property> 
+         <property name="jdbcUrl"> 
+             <value>jdbc:mysql://10.125.103.139:3306/whiteblog</value> 
+         </property> 
+         <property name="user"> 
+             <value>qwe</value> 
+         </property> 
+         <property name="password"> 
+             <value>123</value> 
+         </property> 
+         <property name="maxPoolSize"> 
+             <value>80</value> 
+         </property> 
+         <property name="minPoolSize"> 
+             <value>1</value> 
+         </property> 
+         <property name="initialPoolSize"> 
+             <value>1</value> 
+         </property> 
+         <property name="maxIdleTime"> 
+             <value>20</value> 
+         </property> 
+     </bean> 
+     
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource">
@@ -113,11 +115,36 @@
 		<property name="usermanager">
 			<ref bean="UserManager" />
 		</property>
-	</bean>	
+	</bean>
 	
+
 	<bean id="ShowBlogListAction" class="com.whiteblog.action.ShowBlogList">
 		<property name="showBlogListService">
 			<ref bean="ShowBlogListService" />
 		</property>
 	</bean>	
+
+	<bean id="BlogManager" class="com.whiteblog.service.BlogManagerImpl">
+		<property name="blogDao">
+			<ref bean="BlogDAO" />
+		</property>
+	</bean>
+	
+	<bean id="SearchArticleAction" class = "com.whiteblog.action.searchArticleAction">
+		<property name="blogManager">
+			<ref bean="BlogManager" />
+		</property>
+	</bean>
+	
+	<bean id="blogContentManage" class="com.whiteblog.service.BlogContentManageImpl">
+		<property name="blogDAO">
+			<ref bean="BlogDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="BlogContent" class="com.whiteblog.action.blogContentAction">
+		<property name="blogContentManage">
+			<ref bean="blogContentManage"/>
+		</property>
+	</bean>
 </beans>

@@ -37,6 +37,8 @@ public class registerAction extends ActionSupport{
 			return ERROR;
 			
 		}
+		
+		
 	}
 	
 }

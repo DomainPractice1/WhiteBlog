@@ -5,6 +5,18 @@
 	<package name="whiteblog" extends="struts-default" namespace="/">
 		<action name="login" class="LoginAction" method="execute">
 			<result name="success">/success.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="register" class="RegisterAction" method="execute">
+			<result name="success">/success.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="content" class="BlogContent">
+			<result name="success" >./success.jsp</result>
+			<result name="fail">./404.html</result>
+		</action>
+		<action name="searchAriticle" class="SearchArticleAction" method="execute">
+			<result name="success">/success.jsp</result>
 			<result name="error">/404.html</result>
 		</action>
 		<action name="ShowBlogList" class="ShowBlogListAction" method="execute">
