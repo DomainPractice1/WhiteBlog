@@ -33,7 +33,7 @@ public class blogContentAction extends ActionSupport{
 		if(ins == null)
 			return FAIL;
 		Map req = (Map)ActionContext.getContext();
-		req.put(id, value);
+		req.put(id, ins);
 		return SUCCESS;
 	}
 }
