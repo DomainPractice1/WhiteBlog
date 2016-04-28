@@ -107,6 +107,18 @@
 		<property name="usermanager">
 			<ref bean="UserManager" />
 		</property>
-	</bean>	
+	</bean>
+	
+	<bean id="BlogManager" class="com.whiteblog.service.BlogManagerImpl">
+		<property name="blogDao">
+			<ref bean="BlogDAO" />
+		</property>
+	</bean>
+	
+	<bean id="SearchArticleAction" class = "com.whiteblog.action.searchArticleAction">
+		<property name="blogManager">
+			<ref bean="BlogManager" />
+		</property>
+	</bean>
 	
 </beans>
