@@ -40,7 +40,7 @@ public class UserManagerImpl {
 		User newuser = new User();
 		
 		BeanUtils.copyProperties(newuser,userform);
-		System.out.println("新的用户"+newuser.getUsername()+" "+newuser.getPassword());
+		//System.out.println("新的用户"+newuser.getUsername()+" "+newuser.getPassword());
 		userdao.save(newuser);
 		
 		return "SUCCESS";
