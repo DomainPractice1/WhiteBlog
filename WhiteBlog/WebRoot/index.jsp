@@ -3,7 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">
 <head>
@@ -220,6 +220,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
 						<i class="fa fa-user"></i>
 					</a>
+					<form action="ShowBlogList" method="execute">
+						<a> gooda: 
+						1 #request.blogList.get(0).getTitle()
+						2 "${dishList.get(0).getName()}"
+						3 ${dishList.get(0).getName()}
+						</a>
+					</form>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-plus"></i>
