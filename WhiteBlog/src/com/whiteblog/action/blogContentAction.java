@@ -25,11 +25,15 @@ public class blogContentAction extends ActionSupport{
 	public void setBlogContentManage(BlogContentManageImpl blogContentManage) {
 		this.blogContentManage = blogContentManage;
 	}
+	/**
+	 * @return 
+	 */
 	public String execute(){
 		Blog ins = blogContentManage.findById(id);
 		if(ins == null)
 			return FAIL;
-		
+		Map req = (Map)ActionContext.getContext();
+		req.put(id, value);
 		return SUCCESS;
 	}
 }
