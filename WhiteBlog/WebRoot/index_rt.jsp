@@ -344,8 +344,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 					<div class="laread-right">
 
-						<form class="laread-form search-form">
-							<div class="input"><input type="text" class="form-control" placeholder="Search..."></div>
+						<form action="searchArticle.action" class="laread-form search-form">
+							<div class="input"><input type="text" class="form-control" placeholder="Search..." name="searchText"></div>
 							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
 						</form>
 

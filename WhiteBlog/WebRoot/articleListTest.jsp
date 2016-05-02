@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -49,7 +49,7 @@ function load(){
 		<div class="loader-out">Loading...</div>
 	</div>
 
-	<aside class="navmenu">
+	<aside class="navmenu"> 
 		<div class="post-titles">
 			<div class="tag-title">
 				<div class="container">
@@ -346,7 +346,7 @@ function load(){
 
 					<div class="laread-right">
 
-						<form action="searchAriticle.action" class="laread-form search-form">
+						<form action="searchArticle.action" class="laread-form search-form">
 							<div class="input"><input type="text" class="form-control" placeholder="Search..." name="searchText"></div>
 							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
 						</form>
