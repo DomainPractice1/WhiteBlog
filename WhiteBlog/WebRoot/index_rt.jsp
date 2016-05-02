@@ -51,8 +51,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<a data-filter=".pt-culture" href="#">culture</a>
 						<a data-filter=".pt-art" href="#">art</a>
 						<a data-filter="*" href="#" class="unfilter hide">all</a>
-						<a href"#"><img src="assets/img/write.png"/></a>
 					</p>
+					<a class="tags" href="publish.jsp"><img src="assets/img/write.png"/></a>
 				</div>
 			</div>
 			<button type="button" class="remove-navbar"><i class="fa fa-times"></i></button>
