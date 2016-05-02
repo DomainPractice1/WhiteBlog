@@ -4,7 +4,7 @@
 	<constant name="struts.devMode" value="true"/>
 	<package name="whiteblog" extends="struts-default" namespace="/">
 		<action name="login" class="LoginAction" method="execute">
-			<result name="success">/success.jsp</result>
+			<result name="success">/index_rt.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
 		<action name="register" class="RegisterAction" method="execute">
@@ -12,7 +12,7 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		<action name="content" class="BlogContent" method="execute">
-			<result name="success" >/success.jsp</result>
+			<result name="success" >/blogcontent.jsp</result>
 			<result name="fail">/404.html</result>
 		</action>
 		<action name="searchArticle" class="SearchArticleAction" method="execute">
@@ -20,9 +20,10 @@
 			<result name="error">/404.html</result>
 		</action>
 		<action name="ShowBlogList" class="ShowBlogListAction" method="execute">
-			<result name="success">/index.jsp</result>
-			<result name="error">/index.jsp</result>
+			<result name="success">/success.jsp</result>
+			<result name="error">/404.html</result>
 		</action>
+		
 	</package>
 
 

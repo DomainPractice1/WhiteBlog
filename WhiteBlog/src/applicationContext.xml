@@ -146,5 +146,8 @@
 		<property name="blogContentManage">
 			<ref bean="blogContentManage"/>
 		</property>
+		<property name="userManager">
+			<ref bean="UserManager"/>
+		</property>
 	</bean>
 </beans>

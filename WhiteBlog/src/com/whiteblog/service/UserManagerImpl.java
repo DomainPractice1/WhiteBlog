@@ -46,4 +46,29 @@ public class UserManagerImpl {
 		return "SUCCESS";
 		
 	}
+	
+	public User findUser(String userName){
+		
+		List<User> result = userdao.findByUsername(userName);
+		
+		if(!result.isEmpty()){
+			
+			return result.get(0);
+			
+		}else{
+			
+			return null;
+			
+		}
+		
+	}
+	
+	public String findUsernameById(Integer id){
+		User u = userdao.findById(id);
+		if(u == null) 
+			return null;
+		return u.getUsername();
+	}
+	
+
 }
