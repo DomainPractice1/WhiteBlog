@@ -1,10 +1,9 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">
 <head>
@@ -35,21 +34,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- Custom styles for this template -->
 <link href="assets/css/style.css" rel="stylesheet">
 
-<script type="text/javascript">
-function load(){
-	if(${session.searchList == null})
-		location.href="searchArticle";
-}
-</script>
-
 </head>
-<body onload="load()">
-	<searchArticlene-loader">
+<body>
+	<div class="page-loader">
 		<div class="loader-in">Loading...</div>
 		<div class="loader-out">Loading...</div>
 	</div>
 
-	<aside class="navmenu"> 
+	<aside class="navmenu">
 		<div class="post-titles">
 			<div class="tag-title">
 				<div class="container">
@@ -71,7 +63,7 @@ function load(){
 							<a href="#">Five simple steps to designing grid systems preface</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 28</span>   â¢   
+							<span>June 28</span>   •   
 							<span>2 Comments</span>
 						</div>
 					</div>
@@ -83,7 +75,7 @@ function load(){
 							<a href="#">Hemingway: A Text Editor That Cares About What You Write</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 26</span>   â¢   
+							<span>June 26</span>   •   
 							<span>2 Comments</span>
 						</div>
 					</div>
@@ -95,7 +87,7 @@ function load(){
 							<a href="#">Mobile Design Inspiration and Creativity</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 25</span>   â¢   
+							<span>June 25</span>   •   
 							<span>4 Comments</span>
 						</div>
 					</div>
@@ -107,7 +99,7 @@ function load(){
 							<a href="#">Envato Stories: Coming August 2014</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 24</span>   â¢   
+							<span>June 24</span>   •   
 							<span>3 Comments</span>
 						</div>
 					</div>
@@ -119,7 +111,7 @@ function load(){
 							<a href="#">Meet #59 Interface Designer Kerem Suer</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 24</span>   â¢   
+							<span>June 24</span>   •   
 							<span>6 Comments</span>
 						</div>
 					</div>
@@ -131,7 +123,7 @@ function load(){
 							<a href="#">Founders, Travel and Epic Beards: What Happens After Envato</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 22</span>   â¢   
+							<span>June 22</span>   •   
 							<span>12 Comments</span>
 						</div>
 					</div>
@@ -143,7 +135,7 @@ function load(){
 							<a href="#">Why Designers Make Good Founders (and Cofounders)</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 21</span>   â¢   
+							<span>June 21</span>   •   
 							<span>9 Comments</span>
 						</div>
 					</div>
@@ -155,7 +147,7 @@ function load(){
 							<a href="#">Getting Your Team Through the Storm A Good Product Designer...</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 20</span>   â¢   
+							<span>June 20</span>   •   
 							<span>16 Comments</span>
 						</div>
 					</div>
@@ -167,7 +159,7 @@ function load(){
 							<a href="#">Introducing LaRead Chat Post</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 18</span>   â¢      
+							<span>June 18</span>   •      
 							<span>24 Comments</span>
 						</div>
 					</div>
@@ -179,7 +171,7 @@ function load(){
 							<a href="#">The Future of WordPress</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 16</span>   â¢      
+							<span>June 16</span>   •      
 							<span>13 Comments</span>
 						</div>
 					</div>
@@ -191,7 +183,7 @@ function load(){
 							<a href="#">Workshop: Brand Asset Management</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 16</span>   â¢      
+							<span>June 16</span>   •      
 							<span>8 Comments</span>
 						</div>
 					</div>
@@ -203,7 +195,7 @@ function load(){
 							<a href="#">Long Live The Kings - Short Film</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 12</span>   â¢   
+							<span>June 12</span>   •   
 							<span>26 Comments</span>
 						</div>
 					</div>
@@ -228,6 +220,7 @@ function load(){
 					<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
 						<i class="fa fa-user"></i>
 					</a>
+					
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-plus"></i>
@@ -319,11 +312,11 @@ function load(){
 													</div>
 													<h3><a href="#">${blog.title}</a></h3>
 <!-- 													<p>Praesent mollis sodales est, eget fringilla libero sagittis eget. Nunc gravida varius risus ac luctus. Mauris ornare eros sed libero euismod ornare. Nulla id sem a mauris egestas pulvinar vitae non dui. Cras odio tortor, feugiat nec sagittis sed, laoreet ut mauris. In hac habitasse platea dictumst. Mauris non libero ligula, sed volutpat mauris. <a href="#" class="more">[...]</a></p> -->
-													<p>${blog.content}<a href="#" class="more"><br>[...more]</a></p>
+													<p>${blog.content}<a href="#" class="more">[...]</a></p>
 												</div>
 												<div class="post-item-info clearfix">
 													<div class="pull-left">
-														<span>${blog.time}</span> Write By <a href="#">Daniele Zedda</a>
+														<span>${blog.time}</span>   •   By <a href="#">Daniele Zedda</a>
 													</div>
 													<div class="pull-right post-item-social">
 														<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
@@ -338,6 +331,216 @@ function load(){
 							</div>
 						</s:iterator>
 
+						<div class="container-fluid post-single">
+							<div class="container-medium">
+								<div class="row post-items">
+									<div class="col-md-12">
+										<div class="post-item">
+											<div class="post-item-paragraph">
+												<div>
+													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
+													<a href="#" class="mute-text">26 June 2015</a>
+												</div>
+												<h3><a href="#">Workshop: Brand Asset Management</a></h3>
+												<p class="five-lines">Consectetur adipiscing elit. Vivamus nec mauris pulvinar leo dignissim sollicitudin eleifend eget velit. Nunc sed dolor enim, vitae sodales diam. Aenean imperdiet urna a lectus imperdiet consequat. Fusce eu nibh metus. Curabitur nec dignissim diam. Nulla eget massa at urna sagittis malesuada eget a erat. Sed vel magna leo, in pretium nunc. Ut ornare turpis vel ipsum vulputate lacinia. Pellentesque blandit sagittis tempor. Curabitur adipiscing est vitae quam bibendum at euismod ligula dignissim. Duis nec volutpat leo. Nam mollis massa ut nibh blandit ac faucibus metus tincidunt. Cras sagittis facilisis dui, id posuere tortor aliquam in. Aenean rhoncus purus a tortor posuere at interdum mi venenatis. Integer at urna quis nulla egestas dapibus. <a href="#">[...]</a></p>
+											</div>
+											<div class="post-item-info clearfix">
+												<div class="pull-left">
+													By <a href="#">Jason Bourne</a>   •   <a href="#">#travel</a>
+												</div>
+												<div class="pull-right post-item-social">
+													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
+													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="container-fluid post-banner">
+							<div class="container-medium">
+								<div class="row post-items">
+									<div class="post-item-banner lg-banner">
+										<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+											<ol class="carousel-indicators">
+												<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+												<li data-target="#carousel-example-generic" data-slide-to="1"></li>
+												<li data-target="#carousel-example-generic" data-slide-to="2"></li>
+											</ol>
+											<div class="carousel-inner">
+												<div class="item active">
+													<img src="assets/img/img-16.png" alt="" />
+												</div>
+												<div class="item">
+													<img src="assets/img/img-16.png" alt="" />
+												</div>
+												<div class="item">
+													<img src="assets/img/img-16.png" alt="" />
+												</div>
+											</div>
+											<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"><i class="fa fa-angle-left"></i></a>
+											<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"><i class="fa fa-angle-right"></i></a>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="post-item">
+											<div class="post-item-paragraph">
+												<div>
+													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
+													<a href="#" class="mute-text">FUN</a>
+												</div>
+												<h3><a href="#">Harbiye Open Air Concerts</a></h3>
+												<p class="ellipsis-fade-five">Vodafone Smart 6 Harbiye Open Air Concerts will be at Harbiye Cemil Topuzlu Open Air Stage. Vivamus nec mauris pulvinar leo dignissim sollicitudin eleifend eget velit. Nunc sed dolor enim, vitae sodales diam. Mauris fermentum fringilla lorem, in rutrum massa sodales et. Praesent mollis sodales est, lorem eget fringilla libero sagittis animous ledra sitemah eget. Vivamus nec mauris pulvinar leo dignissim sollicitudin eleifend eget velit. Nunc sed dolor enim, vitae sodales diam. <a href="#" class="more"></a></p>
+											</div>
+											<div class="post-item-info clearfix">
+												<div class="pull-left">
+													<span>25 June</span>   •   By <a href="#">Gannon Burget</a>   •   <a href="#">#concert</a>
+												</div>
+												<div class="pull-right post-item-social">
+													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
+													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="container-fluid post-video">
+							<div class="container-medium">
+								<div class="row post-items">
+									<div class="post-item-banner embed-responsive embed-responsive-16by9">
+										
+									</div>
+									<div class="col-md-12">
+										<div class="post-item">
+											<div class="post-item-paragraph">
+												<div>
+													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
+													<a href="#" class="mute-text">Vimeo</a>
+												</div>
+												<h3><a href="#">Long Live The Kings - Short Film</a></h3>
+												<p>Sed vel magna leo, in pretium nunc. Ut ornare turpis vel ipsum vulputate lacinia. Pellentesque blandit sagittis tempor. Vivamus nec mauris pulvinar leo dignissim sollicitudin eleifend eget velit. Nunc sed dolor enim, vitae sodales diam. Mauris fermentum fringilla lorem, in rutrum massa. Nunc sed dolor enim, vitae sodales diam. Mauris fermentum fringilla lorem, in rutrum massa sodales et. Praesent mollis sodales est, eget fringilla libero sagittis eget. <a href="#" class="more">[...]</a></p>
+											</div>
+											<div class="post-item-info clearfix">
+												<div class="pull-left">
+													<span>24 June</span>   •   <a href="#">#video</a>
+												</div>
+												<div class="pull-right post-item-social">
+													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
+													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="container-fluid post-sound">
+							<div class="container-medium">
+								<div class="row post-items">
+									<div class="post-item-banner embed-responsive embed-responsive-16by9">
+										
+									</div>
+									<div class="col-md-12">
+										<div class="post-item">
+											<div class="post-item-paragraph">
+												<div>
+													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
+													<a href="#" class="mute-text">Soundcloud</a>
+												</div>
+												<h3><a href="#">Show Me Love (Out Now)</a></h3>
+												<p class="five-lines">Consectetur adipiscing elit. Vivamus nec mauris pulvinar leo dignissim sollicitudin eleifend eget velit. Nunc sed dolor enim, vitae sodales diam. Mauris fermentum fringilla lorem, in rutrum massa sodales et. Praesent mollis sodales est, eget fringilla libero sagittis eget. Nunc gravida varius risus ac luctus. Mauris ornare eros sed libero euismod ornare.  Praesent mollis sodales est, eget fringilla libero sagittis eget. Nunc gravida varius risus ac luctus. Mauris ornare eros sed libero euismod ornare. Praesent mollis sodales est, eget fringilla libero sagittis eget. Nunc gravida varius risus ac luctus. Mauris ornare eros sed libero euismod ornare. Praesent mollis sodales est, eget fringilla libero sagittis eget. Nunc gravida varius risus ac luctus. Mauris ornare eros sed libero euismod ornare. </p>
+											</div>
+											<div class="post-item-info clearfix">
+												<div class="pull-left">
+													<span>24 June</span>   •   <a href="#">#music</a>
+												</div>
+												<div class="pull-right post-item-social">
+													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
+													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="container-fluid post-quote">
+							<div class="container-medium">
+								<div class="row post-items">
+									<div class="col-md-12">
+										<div class="post-item">
+											<div class="in-quote">
+												<img src="assets/img/img-17.png" alt="">
+												<div class="block-overlay">
+													<div class="overlay-quote">
+														<span class="quote-icon">“</span>
+														<a href="#" class="spot">The difference between a successful person and others is not a lack of strength, not a lack of knowledge, but rather a lack of will.</a>
+														<span class="name">- Vince Lombardi</span>
+													</div>
+												</div>
+											</div>
+											<div class="post-item-info clearfix">
+												<div class="pull-left">
+													<span>22 June</span>   •   <a href="#">#vision</a>
+												</div>
+												<div class="pull-right post-item-social">
+													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="container-fluid post-link">
+							<div class="container-medium">
+								<div class="row post-items">
+									<div class="col-md-12">
+										<div class="post-item">
+											<div class="in-link">
+												<img src="assets/img/img-18.png" alt="" />
+												<div class="block-overlay">
+													<div class="overlay-link">
+														<i class="fa fa-link fa-rotate-90"></i>
+														<a href="#">http://themeforest.net/category/wordpress</a>
+														<span class="link-text">Inside - Personal or Corparete<br />Flexible and Multipurpose WP Theme</span>
+													</div>
+												</div>
+											</div>
+											<div class="post-item-info clearfix">
+												<div class="pull-left">
+													<span>21 June</span>   •   <a href="#">#project</a>
+												</div>
+												<div class="post-item-social">
+													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="col-md-12">
+								<a href="medium-image-v1-2.html" class="post-nav post-older">OLDER →</a>
+							</div>
+						</div>
 
 					</div>
 				</div>
@@ -406,7 +609,7 @@ function load(){
 
 						<div class="laread-list quotes-basic">
 							<i class="fa fa-quote-left"></i>
-							<p>âThe difference between stupidity and genius is that genius has its limits.â</p>
+							<p>“The difference between stupidity and genius is that genius has its limits.”</p>
 							<span class="whosay">- Albert Einstein </span>
 						</div>
 
@@ -469,7 +672,7 @@ function load(){
 
 								<h4>The Truth about Teens and Privacy</h4>
 
-								<p>Social media has introduced a new dimension to the well-worn fights over private space and personal expression. Teens do not want their parents to view their online profiles or look over their shoulder when theyâre chatting with friends. Parents are no longer simply worried about what their children wear out of the house but what they photograph themselves wearing in their bedroom to post online. Interactions that were previously invisible to adults suddenly have traces, prompting parents to fret over.</p>
+								<p>Social media has introduced a new dimension to the well-worn fights over private space and personal expression. Teens do not want their parents to view their online profiles or look over their shoulder when they’re chatting with friends. Parents are no longer simply worried about what their children wear out of the house but what they photograph themselves wearing in their bedroom to post online. Interactions that were previously invisible to adults suddenly have traces, prompting parents to fret over.</p>
 
 								<h4>Here are some of the ways you may be already being hacked:</h4>
 
@@ -495,12 +698,12 @@ function load(){
 
 								<h5>Blockquote</h5>
 
-								<p>Do officia aliqua, pop-up ut et occupy sriracha. YOLO meggings PBR sartorial mollit, Schlitz assumenda vero kitsch plaid post-ironic PBR&amp;B keffiyeh. Cosby sweater wolf YOLO Austin bespoke, American Apparel crucifix paleo flexitarian. Aliquip bitters food truck, incididunt tofu accusamus magna nesciunt typewriter drinking vinegar Shoreditch try-hard you probably havenât heard of them labore. </p>
+								<p>Do officia aliqua, pop-up ut et occupy sriracha. YOLO meggings PBR sartorial mollit, Schlitz assumenda vero kitsch plaid post-ironic PBR&amp;B keffiyeh. Cosby sweater wolf YOLO Austin bespoke, American Apparel crucifix paleo flexitarian. Aliquip bitters food truck, incididunt tofu accusamus magna nesciunt typewriter drinking vinegar Shoreditch try-hard you probably haven’t heard of them labore. </p>
 
 								<blockquote>
-									<p><i>âThe Muppets Take Manhattanâ</i><br />
+									<p><i>“The Muppets Take Manhattan”</i><br />
 									This movie was a disappointment. The Muppets do not take Manhattan at all. They merely visit it.<br />
-									<span>âÂ No stars.</span></p>
+									<span>— No stars.</span></p>
 								</blockquote>
 
 								<p>Do officia aliqua, pop-up ut et occupy sriracha. YOLO meggings PBR sartorial mollit, Schlitz assumenda vero kitsch plaid post-ironic PBR&amp;B keffiyeh. Cosby sweater wolf YOLO Austin bespoke, American Apparel crucifix paleo flexitarian. Aliquip bitters food truck, incididunt tofu accusamus.</p>
@@ -511,20 +714,20 @@ function load(){
 			</div>
 		</div>
 		<div class="quick-read-bottom">
-			<p class="qr-info">By <a href="#">Daniele Zedda</a>Â Â Â â¢Â Â Â 18 February</p>
+			<p class="qr-info">By <a href="#">Daniele Zedda</a>   •   18 February</p>
 			<div class="qr-nav">
-				<a href="#" class="qr-prev">â PREV POST</a>
+				<a href="#" class="qr-prev">← PREV POST</a>
 				<a href="#" class="qr-share" tabindex="0" role="button" data-toggle="popover" data-placement="top" data-trigger="focus" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>"><i class="fa fa-share-alt"></i></a>
 				<a href="#" class="qr-comment"><i class="fa fa-comment"></i></a>
 				<a href="#" class="qr-like"><i class="fa fa-heart"></i> 34</a>
-				<a href="#" class="qr-next">NEXT POST â</a>
+				<a href="#" class="qr-next">NEXT POST →</a>
 			</div>
 		</div>
 		<div class="quick-read-bottom qr-bottom-2 hide">
 			<div class="qr-nav">
-				<a href="#" class="qr-prev">â PREV POST</a>
-				<p class="qr-info">By <a href="#">Daniele Zedda</a>   â¢   18 February</p>
-				<a href="#" class="qr-next">NEXT POST â</a>
+				<a href="#" class="qr-prev">← PREV POST</a>
+				<p class="qr-info">By <a href="#">Daniele Zedda</a>   •   18 February</p>
+				<a href="#" class="qr-next">NEXT POST →</a>
 				<a href="#" class="qr-like"><i class="fa fa-heart"></i> 34</a>
 				<div class="qr-sharebox">
 					<span>Share on</span>

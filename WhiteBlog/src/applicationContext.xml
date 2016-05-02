@@ -146,5 +146,32 @@
 		<property name="blogContentManage">
 			<ref bean="blogContentManage"/>
 		</property>
+		<property name="userManager">
+			<ref bean="UserManager"/>
+		</property>
+	</bean>
+	
+	<bean id="BlogService" class="com.whiteblog.service.BlogServiceImp">
+		<property name="blogDAO">
+			<ref bean="BlogDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="BlogtypeService" class="com.whiteblog.service.BlogTypeServiceImp">
+		<property name="blogtypeDAO">
+			<ref bean="BlogtypeDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="PublishAction" class="com.whiteblog.action.publishAction">
+		<property name="blogService">
+			<ref bean="BlogService"/>
+		</property>
+		<property name="usermanager">
+			<ref bean="UserManager" />
+		</property>
+		<property name="blogtypeService">
+			<ref bean="BlogtypeService" />
+		</property>
 	</bean>
 </beans>

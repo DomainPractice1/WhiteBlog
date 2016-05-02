@@ -28,12 +28,10 @@ public class searchArticleAction extends ActionSupport {
 		// TODO Auto-generated method stub
 		if(searchText == null || searchText.equals("")) searchText = new String("asdf");
 		System.out.println("搜索内容："+searchText);
-		//List<Blog> articleList = blogManager.getBlogDao().findByContent(searchText);
-		List<Blog> articleList = blogManager.getBlogDao().findAll();
+		List<Blog> articleList = blogManager.getBlogDao().findByContent(searchText);
+		//List<Blog> articleList = blogManager.getBlogDao().findAll();
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		session.put("searchList", articleList);
 		return SUCCESS;
 	}
-	
-	
 }

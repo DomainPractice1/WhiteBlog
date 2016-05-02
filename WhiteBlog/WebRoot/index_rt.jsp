@@ -4,7 +4,6 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">
 <head>
@@ -35,21 +34,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- Custom styles for this template -->
 <link href="assets/css/style.css" rel="stylesheet">
 
-<script type="text/javascript">
-function load(){
-	if(${session.searchList == null})
-		location.href="searchArticle";
-}
-</script>
-
 </head>
-<body onload="load()">
-	<searchArticlene-loader">
+<body>
+	<s:action name="ShowBlogList"/>
+	<div class="page-loader">
 		<div class="loader-in">Loading...</div>
 		<div class="loader-out">Loading...</div>
 	</div>
 
-	<aside class="navmenu"> 
+	<aside class="navmenu">
 		<div class="post-titles">
 			<div class="tag-title">
 				<div class="container">
@@ -58,8 +51,8 @@ function load(){
 						<a data-filter=".pt-culture" href="#">culture</a>
 						<a data-filter=".pt-art" href="#">art</a>
 						<a data-filter="*" href="#" class="unfilter hide">all</a>
-						<a href"#"><img src="assets/img/write.png"/></a>
 					</p>
+					<a class="tags" href="publish.jsp"><img src="assets/img/write.png"/></a>
 				</div>
 			</div>
 			<button type="button" class="remove-navbar"><i class="fa fa-times"></i></button>
@@ -211,7 +204,7 @@ function load(){
 			</ul>
 		</div>
 	</aside>
-
+	
 	<div class="canvas">
 		<div class="canvas-overlay"></div>
 		<header>
@@ -225,6 +218,7 @@ function load(){
 							<i class="fa fa-bars"></i>
 						</button>
 					</div>
+					
 					<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
 						<i class="fa fa-user"></i>
 					</a>
@@ -302,46 +296,50 @@ function load(){
 				<div class="col-md-8">
 
 					<div class="post-fluid post-medium-vertical">
-					
-						<s:iterator value="#session.searchList" var="blog">						
-							<div class="container-fluid post-default">
-								<div class="container-medium">
-									<div class="row post-items">
-										<div class="post-item-banner">
-											<img src="assets/img/img-16.png" alt="" />
-										</div>
-										<div class="col-md-12">
-											<div class="post-item">
-												<div class="post-item-paragraph">
-													<div>
-														<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
-														<a href="#" class="mute-text">DESIGN</a>
-													</div>
-													<h3><a href="#">${blog.title}</a></h3>
-<!-- 													<p>Praesent mollis sodales est, eget fringilla libero sagittis eget. Nunc gravida varius risus ac luctus. Mauris ornare eros sed libero euismod ornare. Nulla id sem a mauris egestas pulvinar vitae non dui. Cras odio tortor, feugiat nec sagittis sed, laoreet ut mauris. In hac habitasse platea dictumst. Mauris non libero ligula, sed volutpat mauris. <a href="#" class="more">[...]</a></p> -->
-													<p>${blog.content}<a href="#" class="more"><br>[...more]</a></p>
+					<s:iterator value = "#session.blogList" var = "blog">
+						<div class="container-fluid post-default">
+							<div class="container-medium">
+								<div class="row post-items">
+									<div class="post-item-banner">
+										<img src="assets/img/img-16.png" alt="" />
+									</div>
+									<div class="col-md-12">
+										<div class="post-item">
+											<div class="post-item-paragraph">
+												<div>
+													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
+													<a href="#" class="mute-text">DESIGN</a>
 												</div>
-												<div class="post-item-info clearfix">
-													<div class="pull-left">
-														<span>${blog.time}</span> Write By <a href="#">Daniele Zedda</a>
-													</div>
-													<div class="pull-right post-item-social">
-														<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
-														<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-														<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
-													</div>
+												<h3><a href="content?id=${blog.blogId}">${blog.title}</a></h3>
+												<p>${blog.content}<a href="#" class="more">[...]</a></p>
+											</div>
+											<div class="post-item-info clearfix">
+												<div class="pull-left">
+													<span>${blog.time}</span> By <a href="#">${blog.userId}</a>
+												</div>
+												<div class="pull-right post-item-social">
+													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
+													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+						</div>
 						</s:iterator>
+						
 
+						
 
+						<div class="container-fluid post-video">
+							
+						</div><div class="container-fluid post-sound">
+							
+						</div>
 					</div>
 				</div>
-
 				<aside class="col-md-4">
 
 					<div class="laread-right">
@@ -601,6 +599,7 @@ function load(){
 			</div>
 		</div>
 	</div>
+
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->
