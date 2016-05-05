@@ -41,6 +41,7 @@ public class blogContentAction extends ActionSupport{
 	 * @return 
 	 */
 	public String execute(){
+		System.out.println("Appear in BlogContentAction");
 		Blog ins = blogContentManage.findById(id);
 		if(ins == null)
 			return FAIL;
@@ -50,6 +51,7 @@ public class blogContentAction extends ActionSupport{
 		if(ActionContext.getContext().getSession().containsKey("req"))
 			ActionContext.getContext().getSession().remove("req");
 		ActionContext.getContext().put("req", blogContentForm);
+		ActionContext.getContext().getSession().put("blogId",id);
 		return SUCCESS;
 	}
 	

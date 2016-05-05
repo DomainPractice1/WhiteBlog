@@ -105,6 +105,12 @@
 		</property>
 	</bean>
 	
+	<bean id="ShowCommentListService" class="com.whiteblog.service.ShowCommentListService">
+		<property name="commentDAO">
+			<ref bean="CommentDAO" />
+		</property>
+	</bean>
+	
 	<bean id="LoginAction" class="com.whiteblog.action.loginAction">
 		<property name="usermanager">
 			<ref bean="UserManager" />
@@ -174,4 +180,10 @@
 			<ref bean="BlogtypeService" />
 		</property>
 	</bean>
+	
+	<bean id="ShowCommentListAction" class="com.whiteblog.action.ShowCommentList">
+		<property name="showCommentListService">
+			<ref bean="ShowCommentListService" />
+		</property>
+	</bean>	
 </beans>

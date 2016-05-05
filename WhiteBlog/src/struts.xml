@@ -12,7 +12,7 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		<action name="content" class="BlogContent" method="execute">
-			<result name="success" >/blogcontent.jsp</result>
+			<result name="success" >/blogcontent_rt.jsp</result>
 			<result name="fail">/404.html</result>
 		</action>
 		<action name="searchArticle" class="SearchArticleAction" method="execute">
@@ -28,7 +28,10 @@
 			<result name="success">/publish.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
-		
+		<action name="ShowCommentList" class="ShowCommentListAction" method="execute">
+			<result name="success">/blogcontent_rt.jsp</result>
+			<result name="error">/404.html</result>
+		</action>
 	</package>
 
 
