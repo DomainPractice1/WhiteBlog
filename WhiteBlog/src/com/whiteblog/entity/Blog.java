@@ -22,6 +22,7 @@ public class Blog implements java.io.Serializable {
 	private String title;
 	private String content;
 	private String time;
+	private String username;
 
 	// Constructors
 
@@ -29,14 +30,22 @@ public class Blog implements java.io.Serializable {
 	public Blog() {
 	}
 
+	/** minimal constructor */
+	public Blog(Integer userId, String title, String content) {
+		this.userId = userId;
+		this.title = title;
+		this.content = content;
+	}
+
 	/** full constructor */
 	public Blog(Integer userId, Integer typeId, String title, String content,
-			String time) {
+			String time, String username) {
 		this.userId = userId;
 		this.typeId = typeId;
 		this.title = title;
 		this.content = content;
 		this.time = time;
+		this.username = username;
 	}
 
 	// Property accessors
@@ -60,7 +69,7 @@ public class Blog implements java.io.Serializable {
 		this.userId = userId;
 	}
 
-	@Column(name = "typeID", nullable = false)
+	@Column(name = "typeID")
 	public Integer getTypeId() {
 		return this.typeId;
 	}
@@ -87,13 +96,22 @@ public class Blog implements java.io.Serializable {
 		this.content = content;
 	}
 
-	@Column(name = "time", nullable = false, length = 100)
+	@Column(name = "time", length = 100)
 	public String getTime() {
 		return this.time;
 	}
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	@Column(name = "username", length = 45)
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }

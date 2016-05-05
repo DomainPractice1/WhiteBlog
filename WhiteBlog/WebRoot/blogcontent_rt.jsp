@@ -290,9 +290,6 @@
 			<div class="container-fluid">
 				<div class="container">
 					<div class="row post-items">
-						<div class="post-item-banner">
-							<img src="assets/img/img-44.png" alt="" />
-						</div>
 						<div class="col-md-2">
 							<div class="post-item-short">
 								<span class="small-text">${req.blog.time}</span>
@@ -367,7 +364,7 @@
 												<img src="assets/img/profil_photo-05.png" alt="" />
 											</a>
 											<div class="comment-body">
-												<h6 class="comment-heading"> ${comment.userId} <span class="comment-date">${comment.time}</span></h6>
+												<h6 class="comment-heading"> ${comment.username} <span class="comment-date">${comment.time}</span></h6>
 												<p class="comment-text">${comment.content} </p>
 												<a href="#" class="comment-reply"><i class="reply-icon"></i> Reply</a>
 											</div>

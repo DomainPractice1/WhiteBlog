@@ -170,9 +170,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class="container-fluid post-default">
 							<div class="container-medium">
 								<div class="row post-items">
-									<div class="post-item-banner">
-										<img src="assets/img/img-16.png" alt="" />
-									</div>
 									<div class="col-md-12">
 										<div class="post-item">
 											<div class="post-item-paragraph">
@@ -185,7 +182,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											</div>
 											<div class="post-item-info clearfix">
 												<div class="pull-left">
-													<span>${blog.time}</span> By <a href="#">${blog.userId}</a>
+													<span>${blog.time}</span> By <a href="#">${blog.username}</a>
 												</div>
 												<div class="pull-right post-item-social">
 													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>

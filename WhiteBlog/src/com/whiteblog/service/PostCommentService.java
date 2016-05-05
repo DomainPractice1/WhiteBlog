@@ -21,7 +21,11 @@ public class PostCommentService {
 		Comment comment = new Comment();
 		BeanUtils.copyProperties(comment,commentform);
 		comment.setBlogId((Integer)ActionContext.getContext().getSession().get("blogId"));
-		comment.setUserId((Integer)ActionContext.getContext().getSession().get("loginUser"));
+		if(ActionContext.getContext().getSession().containsKey("loginUser")){
+			comment.setUserId((Integer)ActionContext.getContext().getSession().get("loginUser"));
+		}else{
+			comment.setUserId(-1);
+		}
 		commentDAO.save(comment);
 		return "SUCCESS";
 		
