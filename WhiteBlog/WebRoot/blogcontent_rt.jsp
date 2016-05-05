@@ -353,7 +353,7 @@
 							</div>
 
 							<div class="comment-box">
-								<a class="btn btn-golden" href="#">Leave a comment</a>
+								
 								<div class="comment-tab">
 									<a href="#" class="comment-info">Comments (28)</a>
 									<i class="i">|</i>
@@ -375,11 +375,9 @@
 									</s:iterator>
 
 									<div class="comment-form main-comment-form">
-										<form>
-											<textarea class="comment-textarea" placeholder="Leave a comment..."></textarea>
+										<form action="PostComment" method="post">
+											<textarea class="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></textarea>
 											<div class="at-focus">
-												<input class="comment-input" placeholder="Name" type="text" />
-												<input class="comment-input" placeholder="or Email" type="text" />
 												<button class="comment-submit">Post Comment</button>
 											</div>
 										</form>
