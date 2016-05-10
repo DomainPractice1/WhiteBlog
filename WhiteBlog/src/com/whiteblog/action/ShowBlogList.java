@@ -18,15 +18,13 @@ public class ShowBlogList extends ActionSupport{
 	private ShowBlogListService showBlogListService;
 
 	public String execute(){
-		Map<String,Object> session = ActionContext.getContext().getSession();	
-		System.out.println("!!!!!!!!!!!!fuck1");
+		Map<String,Object> session = ActionContext.getContext().getSession();		
 		if(!session.containsKey("loginUser")){
 			blogList=showBlogListService.getAllBlog();
 			ActionContext.getContext().getSession().put("blogList", blogList);
 		}else{
 			int userID = (Integer) session.get("loginUser");	
 			blogList=showBlogListService.findByUserId(userID);
-			System.out.println("!!!!!!!!!!!!fuck2");
 			//HttpServletRequest request=ServletActionContext.getRequest();   
 			//request.setAttribute("blogList", blogList);
 			ActionContext.getContext().getSession().put("blogList", blogList);

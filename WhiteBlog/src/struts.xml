@@ -2,7 +2,7 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<constant name="struts.devMode" value="true"/>
-	<package name="whiteblog" extends="struts-default" namespace="/">
+	<package name="whiteblog" extends="struts-default,json-default" namespace="/">
 		<action name="login" class="LoginAction" method="execute">
 			<result name="success">/index_rt.jsp</result>
 			<result name="error">/error.jsp</result>
@@ -27,6 +27,16 @@
 			<result name="input">/publish.jsp</result>
 			<result name="success">/publish.jsp</result>
 			<result name="error">/error.jsp</result>
+		</action>
+		<action name="notice" class="NoticeAction" method="execute">
+			<result name="success" type="json">
+				<param name="root">noticeList</param>
+			</result>
+		</action>
+		<action name="checkNotice" class="NoticeAction" method="checkNew">
+			<result name="success" type="json">
+				<param name="root">checkResult</param>
+			</result>
 		</action>
 		
 	</package>

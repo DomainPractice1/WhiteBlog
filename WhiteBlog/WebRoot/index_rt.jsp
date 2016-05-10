@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="assets/css/style.css" rel="stylesheet">
 
 </head>
-<body>
+<body onload="timedCount()">
 	<s:action name="ShowBlogList"/>
 	<div class="page-loader">
 		<div class="loader-in">Loading...</div>
@@ -56,151 +56,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<button type="button" class="remove-navbar"><i class="fa fa-times"></i></button>
-			<ul class="post-title-list clearfix">
-				<li class="pt-fashion pt-culture">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Five simple steps to designing grid systems preface</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 28</span>   â¢   
-							<span>2 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-culture pt-art">
-					<div>
-						<h5>
-							<i>26</i>
-							<a href="#">Hemingway: A Text Editor That Cares About What You Write</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 26</span>   â¢   
-							<span>2 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-link"></i>
-							<a href="#">Mobile Design Inspiration and Creativity</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 25</span>   â¢   
-							<span>4 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-culture">
-					<div>
-						<h5>
-							<i class="fa fa-comment"></i>
-							<a href="#">Envato Stories: Coming August 2014</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 24</span>   â¢   
-							<span>3 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-culture pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Meet #59 Interface Designer Kerem Suer</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 24</span>   â¢   
-							<span>6 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Founders, Travel and Epic Beards: What Happens After Envato</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 22</span>   â¢   
-							<span>12 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-culture">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Why Designers Make Good Founders (and Cofounders)</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 21</span>   â¢   
-							<span>9 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-culture pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Getting Your Team Through the Storm A Good Product Designer...</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 20</span>   â¢   
-							<span>16 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Introducing LaRead Chat Post</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 18</span>   â¢      
-							<span>24 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-culture">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">The Future of WordPress</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 16</span>   â¢      
-							<span>13 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-culture pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Workshop: Brand Asset Management</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 16</span>   â¢      
-							<span>8 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Long Live The Kings - Short Film</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 12</span>   â¢   
-							<span>26 Comments</span>
-						</div>
-					</div>
-				</li>
+			<ul id="slideform" class="post-title-list clearfix">
+			
 			</ul>
 		</div>
 	</aside>
@@ -213,12 +70,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="navbar-header">
 						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
 					</div>
-					<div class="get-post-titles">
-						<button type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
-							<i class="fa fa-bars"></i>
-						</button>
-					</div>
-					
+						<div class="get-post-titles">					
+							<button id="notice" type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
+								<i id="checkicon" class="fa fa-bell-o"></i>
+							</button>						
+						</div>
 					<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
 						<i class="fa fa-user"></i>
 					</a>
@@ -621,6 +477,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
-	
+	<script type="text/javascript">		
+		$("#notice").click(function(){
+			$("#slideform").empty();
+			$.ajax({
+				url:"notice",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data,function(i,list){  
+                       		var _tr = '<li class="pt-culture pt-art"><div><h5><i>26</i><a href="#">' + list.content + '</a>' +
+						'</h5><div class="post-subinfo"><span>June 26</span><span>2 Comments</span></div></div></li>'
+                       		 $("#slideform").append(_tr);
+                    })
+				}
+			})	
+		});
+	</script>
+	<script type="text/javascript">
+		var t
+		function timedCount()
+		{
+			$.ajax({
+				url:"checkNotice",
+				type:"POST",
+				datatype:"json",
+				success:function(data){
+					if(data == "new"){
+						$("#checkicon").attr("class","fa fa-bell");
+					}else{
+						$("#checkicon").attr("class","fa fa-bell-o")
+					}
+				}
+			})
+			t=setTimeout("timedCount()",5000)
+		}
+	</script>
 </body>
 </html>

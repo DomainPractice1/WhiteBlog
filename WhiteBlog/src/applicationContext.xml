@@ -99,6 +99,18 @@
 		</property>
 	</bean>
 	
+	<bean id="MailManager" class="com.whiteblog.service.MailManagerImpl">
+		<property name="maildao">
+			<ref bean="MailDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="NoticeManager" class="com.whiteblog.service.NoticeManagerImpl">
+		<property name="noticedao">
+			<ref bean="NoticeDAO"/>
+		</property>
+	</bean>
+	
 	<bean id="ShowBlogListService" class="com.whiteblog.service.ShowBlogListService">
 		<property name="blogDAO">
 			<ref bean="BlogDAO" />
@@ -172,6 +184,18 @@
 		</property>
 		<property name="blogtypeService">
 			<ref bean="BlogtypeService" />
+		</property>
+	</bean>
+	
+	<bean id="MailAction" class="com.whiteblog.action.mailAction">
+		<property name="mailManager">
+			<ref bean="MailManager"/>
+		</property>
+	</bean>
+	
+	<bean id="NoticeAction" class="com.whiteblog.action.noticeAction">
+		<property name="noticeManager">
+			<ref bean="NoticeManager"/>
 		</property>
 	</bean>
 </beans>
