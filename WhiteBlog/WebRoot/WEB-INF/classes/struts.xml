@@ -36,6 +36,10 @@
 			<result name="success">/blogcontent_rt.jsp</result>
 			<result name="error">/404.html</result>
 		</action>
+		<action name="ShowInformedBlogList" class="ShowInformedBlogListAction" method="execute">
+			<result name="success">/index_admin.jsp</result>
+			<result name="error">/404.html</result>
+		</action>
 	</package>
 
 

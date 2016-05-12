@@ -55,7 +55,8 @@
 				<value>com.whiteblog.entity.Comment</value>
 				<value>com.whiteblog.entity.Mail</value>
 				<value>com.whiteblog.entity.Notice</value>
-				<value>com.whiteblog.entity.User</value></list>
+				<value>com.whiteblog.entity.User</value>
+				<value>com.whiteblog.entity.Inform</value></list>
 		</property></bean>
 	<bean id="AdminDAO" class="com.whiteblog.dao.AdminDAO">
 		<property name="sessionFactory">
@@ -163,6 +164,13 @@
 		</property>
 	</bean>
 	
+	
+	<bean id="ShowInformedBlogListService" class="com.whiteblog.service.ShowInformedBlogListService">
+		<property name="informDAO">
+			<ref bean="InformDAO"/>
+		</property>
+	</bean>
+	
 	<bean id="BlogService" class="com.whiteblog.service.BlogServiceImp">
 		<property name="blogDAO">
 			<ref bean="BlogDAO"/>
@@ -198,4 +206,19 @@
 			<ref bean="PostCommentService" />
 		</property>
 	</bean>	
+	<bean id="InformDAO" class="com.whiteblog.dao.InformDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="ShowInformedBlogListAction" class="com.whiteblog.action.ShowInformedBlogList">
+		<property name="showInformedBlogListService">
+			<ref bean="ShowInformedBlogListService" />
+		</property>
+		<property name="blogDAO">
+			<ref bean="BlogDAO" />
+		</property>
+	</bean>	
+	
 </beans>
