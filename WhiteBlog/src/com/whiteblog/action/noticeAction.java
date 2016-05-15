@@ -7,6 +7,7 @@ import java.util.Map;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.entity.Notice;
+import com.whiteblog.entity.User;
 import com.whiteblog.service.NoticeManagerImpl;
 
 public class noticeAction extends ActionSupport {
@@ -49,11 +50,13 @@ public class noticeAction extends ActionSupport {
 		
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		
-		Integer userID = (Integer)session.get("loginUser");
+		User user = (User)session.get("loginUser");
 		
 		noticeList = new ArrayList<Notice>();
 		
-		noticeList = noticeManager.getNoticeList(userID);
+		noticeList = noticeManager.getNoticeList(user.getUserId());
+		
+		
 		
 		return SUCCESS;
 	}
@@ -62,9 +65,9 @@ public class noticeAction extends ActionSupport {
 		
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		
-		Integer userID = (Integer)session.get("loginUser");
+		User user = (User)session.get("loginUser");
 				
-		checkResult = noticeManager.checkNew(userID);
+		checkResult = noticeManager.checkNew(user.getUserId());
 		
 		return SUCCESS;
 	}

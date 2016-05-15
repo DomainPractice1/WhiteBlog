@@ -198,4 +198,10 @@
 			<ref bean="NoticeManager"/>
 		</property>
 	</bean>
+	
+	<bean id="UserAction" class="com.whiteblog.action.UserAction">
+		<property name="userManager">
+			<ref bean="UserManager"/>
+		</property>
+	</bean>
 </beans>

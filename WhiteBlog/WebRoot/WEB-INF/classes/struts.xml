@@ -39,6 +39,14 @@
 			</result>
 		</action>
 		
+		<action name="getalluser" class="UserAction" method="getAllUser">
+			<result name="success">/authors.jsp</result>
+		</action>
+		
+		<action name="deleteuser" class="UserAction" method="deleteUser">
+			<result name="success">/authors.jsp</result>
+		</action>
+		
 	</package>
 
 

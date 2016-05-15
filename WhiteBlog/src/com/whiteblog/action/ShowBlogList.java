@@ -11,6 +11,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.entity.Blog;
+import com.whiteblog.entity.User;
 import com.whiteblog.service.ShowBlogListService;
 
 public class ShowBlogList extends ActionSupport{
@@ -23,8 +24,8 @@ public class ShowBlogList extends ActionSupport{
 			blogList=showBlogListService.getAllBlog();
 			ActionContext.getContext().getSession().put("blogList", blogList);
 		}else{
-			int userID = (Integer) session.get("loginUser");	
-			blogList=showBlogListService.findByUserId(userID);
+			User user = (User) session.get("loginUser");	
+			blogList=showBlogListService.findByUserId(user.getUserId());
 			//HttpServletRequest request=ServletActionContext.getRequest();   
 			//request.setAttribute("blogList", blogList);
 			ActionContext.getContext().getSession().put("blogList", blogList);

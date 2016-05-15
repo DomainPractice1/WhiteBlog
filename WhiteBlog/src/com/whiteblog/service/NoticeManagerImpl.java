@@ -22,6 +22,14 @@ public class NoticeManagerImpl {
 		
 		List<Notice> result = noticedao.findByUserId(userID);
 		
+		for(int i=0;i<result.size();i++){
+			
+			result.get(i).setIsread("1");
+			
+			noticedao.attachDirty(result.get(i));
+			
+		}
+		
 		return result;
 		
 	}
@@ -42,4 +50,5 @@ public class NoticeManagerImpl {
 			return "new";//有新消息
 		}	
 	}
+	
 }

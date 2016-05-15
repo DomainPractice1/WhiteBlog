@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -60,7 +61,7 @@
 							<a href="#">Five simple steps to designing grid systems preface</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 28</span>   •   
+							<span>June 28</span>Â Â Â â¢Â Â Â 
 							<span>2 Comments</span>
 						</div>
 					</div>
@@ -72,7 +73,7 @@
 							<a href="#">Hemingway: A Text Editor That Cares About What You Write</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 26</span>   •   
+							<span>June 26</span>Â Â Â â¢Â Â Â 
 							<span>2 Comments</span>
 						</div>
 					</div>
@@ -84,7 +85,7 @@
 							<a href="#">Mobile Design Inspiration and Creativity</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 25</span>   •   
+							<span>June 25</span>Â Â Â â¢Â Â Â 
 							<span>4 Comments</span>
 						</div>
 					</div>
@@ -96,7 +97,7 @@
 							<a href="#">Envato Stories: Coming August 2014</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 24</span>   •   
+							<span>June 24</span>Â Â Â â¢Â Â Â 
 							<span>3 Comments</span>
 						</div>
 					</div>
@@ -108,7 +109,7 @@
 							<a href="#">Meet #59 Interface Designer Kerem Suer</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 24</span>   •   
+							<span>June 24</span>Â Â Â â¢Â Â Â 
 							<span>6 Comments</span>
 						</div>
 					</div>
@@ -120,7 +121,7 @@
 							<a href="#">Founders, Travel and Epic Beards: What Happens After Envato</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 22</span>   •   
+							<span>June 22</span>Â Â Â â¢Â Â Â 
 							<span>12 Comments</span>
 						</div>
 					</div>
@@ -132,7 +133,7 @@
 							<a href="#">Why Designers Make Good Founders (and Cofounders)</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 21</span>   •   
+							<span>June 21</span>Â Â Â â¢Â Â Â 
 							<span>9 Comments</span>
 						</div>
 					</div>
@@ -144,7 +145,7 @@
 							<a href="#">Getting Your Team Through the Storm A Good Product Designer...</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 20</span>   •   
+							<span>June 20</span>Â Â Â â¢Â Â Â 
 							<span>16 Comments</span>
 						</div>
 					</div>
@@ -156,7 +157,7 @@
 							<a href="#">Introducing LaRead Chat Post</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 18</span>   •   
+							<span>June 18</span>Â Â Â â¢Â Â Â 
 							<span>24 Comments</span>
 						</div>
 					</div>
@@ -168,7 +169,7 @@
 							<a href="#">The Future of WordPress</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 16</span>   •   
+							<span>June 16</span>Â Â Â â¢Â Â Â 
 							<span>13 Comments</span>
 						</div>
 					</div>
@@ -180,7 +181,7 @@
 							<a href="#">Workshop: Brand Asset Management</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 16</span>   •   
+							<span>June 16</span>Â Â Â â¢Â Â Â 
 							<span>8 Comments</span>
 						</div>
 					</div>
@@ -192,7 +193,7 @@
 							<a href="#">Long Live The Kings - Short Film</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 12</span>   •   
+							<span>June 12</span>Â Â Â â¢Â Â Â 
 							<span>26 Comments</span>
 						</div>
 					</div>
@@ -288,80 +289,28 @@
 
 		<div class="post-fluid">
 			<div class="container-fluid">
-
-				<article class="row laread-authors">
-					<div class="author-item">
-						<div class="author-picture">
-							<img src="assets/img/img-48.png" alt="" />
-						</div>
-						<div class="author-subdetail">
-							<h2><a href="#">Peter William</a></h2>
-							<p class="info-small">Graphic Designer   <span><i class="fa fa-map-marker"></i> Toronto, Canada</span></p>
-							<div class="author-connection">
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-								<a href="#"><i class="fa fa-envelope"></i></a>
+			<form action="deleteuser.action">
+				<c:forEach items="${sessionScope.allUser}" var="user">
+					<article class="row laread-authors">
+						<div class="author-item">
+							<div class="author-picture">
+								<img src="assets/img/img-48.png" alt="" />
 							</div>
-							<p class="author-bio">Duis facilisis elementum nisl, non aliquam enim tincidunt vitae. Donec laoreet est vitae erat auctor porttitor. Curabitur orci enim, congue at egestas a, feugiat luctus massa.Sed risus, dignissim a commodo sed, semper ac dolor. Suspendisse nunc, hendrerit vestibulum pharetra in, consectetur quis sapien.</p>
-							<button type="button" class="btn btn-grey btn-outline btn-rounded">Follow</button>
-						</div>
-					</div>
-				</article>
-
-				<article class="row laread-authors">
-					<div class="author-item">
-						<div class="author-picture">
-							<img src="assets/img/img-48.png" alt="" />
-						</div>
-						<div class="author-subdetail">
-							<h2><a href="#">Angelique Calmon</a></h2>
-							<p class="info-small">Art Director   <span><i class="fa fa-map-marker"></i> Montreal, Canada</span></p>
-							<div class="author-connection">
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-								<a href="#"><i class="fa fa-envelope"></i></a>
+							<div class="author-subdetail">
+								<h2><a href="#"></a></h2>
+								<p class="info-small">Graphic Designer<span><i class="fa fa-map-marker"></i>Toronto, Canada</span></p>
+								<div class="author-connection">
+									<a href="#"><i class="fa fa-twitter"></i></a>
+									<a href="#"><i class="fa fa-google-plus"></i></a>
+									<a href="#"><i class="fa fa-envelope"></i></a>
+								</div>
+								<p class="author-bio">userName:${user.username} </p>							
+								<button type="submit" class="btn btn-grey btn-outline btn-rounded" name="selectUser" value="${user.userId}">Delete</button>											
 							</div>
-							<p class="author-bio">Hi everybody, <br /> I'm Angélique, a freelance Interactive Art Director in Montréal, Canada. I create iOS and Android app design and also responsive webdesign. I'm really passionate by my job and I like to be aware about trends. </p>
-							<button type="button" class="btn btn-golden btn-golden-hover btn-rounded">Following</button>
 						</div>
-					</div>
-				</article>
-
-				<article class="row laread-authors">
-					<div class="author-item">
-						<div class="author-picture">
-							<img src="assets/img/img-48.png" alt="" />
-						</div>
-						<div class="author-subdetail">
-							<h2><a href="#">Nicolas Zentner</a></h2>
-							<p class="info-small">Traveler   <span><i class="fa fa-map-marker"></i> Lausanne, Switzerland</span></p>
-							<div class="author-connection">
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-							</div>
-							<p class="author-bio">Talented senior Manager & Designer of User-Experience and Interaction design with the proven know-how to combine creative and usability viewpoints resulting in world-class Web and Mobile applications.</p>
-							<button type="button" class="btn btn-grey btn-outline btn-rounded">Follow</button>
-						</div>
-					</div>
-				</article>
-
-				<article class="row laread-authors">
-					<div class="author-item">
-						<div class="author-picture">
-							<img src="assets/img/img-48.png" alt="" />
-						</div>
-						<div class="author-subdetail">
-							<h2><a href="#">Lina Skukauske</a></h2>
-							<p class="info-small">Photographer   <span><i class="fa fa-map-marker"></i> Munich, Germany</span></p>
-							<div class="author-connection">
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-envelope"></i></a>
-							</div>
-							<p class="author-bio">Hospitality & lifestyle photographer. I love creating aesthetic, high quality images and my passion is telling visual stories that inspire people. I focus on hospitality and lifestyle photography- subjects such as interiors, food, travel & people and my images are usually used for branding and marketing.</p>
-							<button type="button" class="btn btn-golden btn-golden-hover btn-rounded">Following</button>
-						</div>
-					</div>
-				</article>
+					</article>	
+				</c:forEach>
+			</form>		
 
 				<div class="row become-author">
 					<h5>Become an author</h5>
