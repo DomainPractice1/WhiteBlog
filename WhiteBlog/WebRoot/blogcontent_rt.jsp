@@ -63,7 +63,7 @@
 							<a href="#">Five simple steps to designing grid systems preface</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 28</span>Â Â Â â¢Â Â Â 
+							<span>June 28</span>
 							<span>2 Comments</span>
 						</div>
 					</div>
@@ -75,7 +75,7 @@
 							<a href="#">Hemingway: A Text Editor That Cares About What You Write</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 26</span>Â Â Â â¢Â Â Â 
+							<span>June 26</span>
 							<span>2 Comments</span>
 						</div>
 					</div>
@@ -87,7 +87,7 @@
 							<a href="#">Mobile Design Inspiration and Creativity</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 25</span>Â Â Â â¢Â Â Â 
+							<span>June 25</span>
 							<span>4 Comments</span>
 						</div>
 					</div>
@@ -99,7 +99,7 @@
 							<a href="#">Envato Stories: Coming August 2014</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 24</span>Â Â Â â¢Â Â Â 
+							<span>June 24</span>
 							<span>3 Comments</span>
 						</div>
 					</div>
@@ -111,7 +111,7 @@
 							<a href="#">Meet #59 Interface Designer Kerem Suer</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 24</span>Â Â Â â¢Â Â Â 
+							<span>June 24</span>
 							<span>6 Comments</span>
 						</div>
 					</div>
@@ -123,7 +123,7 @@
 							<a href="#">Founders, Travel and Epic Beards: What Happens After Envato</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 22</span>Â Â Â â¢Â Â Â 
+							<span>June 22</span>
 							<span>12 Comments</span>
 						</div>
 					</div>
@@ -135,7 +135,7 @@
 							<a href="#">Why Designers Make Good Founders (and Cofounders)</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 21</span>Â Â Â â¢Â Â Â 
+							<span>June 21</span>
 							<span>9 Comments</span>
 						</div>
 					</div>
@@ -147,7 +147,7 @@
 							<a href="#">Getting Your Team Through the Storm A Good Product Designer...</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 20</span>Â Â Â â¢Â Â Â 
+							<span>June 20</span>
 							<span>16 Comments</span>
 						</div>
 					</div>
@@ -159,7 +159,7 @@
 							<a href="#">Introducing LaRead Chat Post</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 18</span>Â Â Â â¢Â Â Â 
+							<span>June 18</span>
 							<span>24 Comments</span>
 						</div>
 					</div>
@@ -171,7 +171,7 @@
 							<a href="#">The Future of WordPress</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 16</span>Â Â Â â¢Â Â Â 
+							<span>June 16</span>
 							<span>13 Comments</span>
 						</div>
 					</div>
@@ -183,7 +183,7 @@
 							<a href="#">Workshop: Brand Asset Management</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 16</span>Â Â Â â¢Â Â Â 
+							<span>June 16</span>
 							<span>8 Comments</span>
 						</div>
 					</div>
@@ -195,7 +195,7 @@
 							<a href="#">Long Live The Kings - Short Film</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 12</span>Â Â Â â¢Â Â Â 
+							<span>June 12</span>
 							<span>26 Comments</span>
 						</div>
 					</div>
@@ -279,12 +279,7 @@
 			</nav>
 		</header>
 
-		<div class="container">
-			<div class="head-text text-highlight">
-				<h1>SHORTCODE</h1>
-				<p class="lead-text">COLUMNÂ Â Â â¢Â Â Â TABSÂ Â Â â¢Â Â Â TOGGLE</p>
-			</div>
-		</div>
+		
 
 		<section class="post-fluid">
 			<div class="container-fluid">
@@ -313,34 +308,17 @@
 										<a href="#"><i class="fa fa-facebook"></i></a>
 										<a href="#"><i class="fa fa-twitter"></i></a>
 										<a href="#"><i class="fa fa-google-plus"></i></a>
-										<a href="#"><i class="fa fa-heart"></i> 18</a>
 									</div>
 								</div>
 							</div>
 
-							<div class="next-prev-post clearfix">
-								<div class="post-direction">
-									<a href="#" class="post-prev">
-										<span class="post-way"><i class="fa fa-angle-left"></i> prev post</span>
-										<span class="title">Envato Stories: Isabel Castillo Guijarro (Isabelmdd)</span>
-									</a>
-									<a href="#"><span class="author">by <span>Gannon Burget</span></span></a>
-								</div>
-								<div class="post-direction">
-									<a href="#" class="post-next">
-										<span class="post-way">next post <i class="fa fa-angle-right"></i></span>
-										<span class="title">Rise of the Million Dollar Plugin Makers (Infographic)</span>
-									</a>
-									<a href="#"><span class="author">by <span>Jared Erondu</span></span></a>
-								</div>
-							</div>
+							
 
 							<div class="author-box">
 								<div class="author">
 									<a class="author-photo" href="#"><img src="assets/img/profil_photo-04.png" alt=""></a>
 									<div class="author-body">
-										<h4 class="author-name">Daniele Zedda</h4>
-										<a href="#">view all post</a>
+										<h4 class="author-name">${session.loginUser.username} </h4>
 									</div>
 									<div class="author-connection">
 										<a href="#"><i class="fa fa-twitter"></i></a>
@@ -352,9 +330,8 @@
 							<div class="comment-box">
 								
 								<div class="comment-tab">
-									<a href="#" class="comment-info">Comments (28)</a>
-									<i class="i">|</i>
-									<a href="#" class="comment-info"><i class="fa fa-comments"></i> Show all</a>
+									<a href="#" class="comment-info">评论列表</a>
+									<a href="#" class="comment-info"><i class="fa fa-comments">
 								</div>
 
 								<div class="comment-block">
@@ -366,7 +343,7 @@
 											<div class="comment-body">
 												<h6 class="comment-heading"> ${comment.username} <span class="comment-date">${comment.time}</span></h6>
 												<p class="comment-text">${comment.content} </p>
-												<a href="#" class="comment-reply"><i class="reply-icon"></i> Reply</a>
+												<a href="#" class="comment-reply"><i class="reply-icon">
 											</div>
 										</div>
 									</s:iterator>
@@ -375,7 +352,7 @@
 										<form action="PostComment" method="post">
 											<textarea class="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></textarea>
 											<div class="at-focus">
-												<button class="comment-submit">Post Comment</button>
+												<button class="comment-submit">发表评论</button>
 											</div>
 										</form>
 									</div>

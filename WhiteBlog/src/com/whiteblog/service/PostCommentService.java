@@ -22,7 +22,7 @@ public class PostCommentService {
 		BeanUtils.copyProperties(comment,commentform);
 		comment.setBlogId((Integer)ActionContext.getContext().getSession().get("blogId"));
 		if(ActionContext.getContext().getSession().containsKey("loginUser")){
-			comment.setUserId((Integer)ActionContext.getContext().getSession().get("loginUser"));
+			comment.setUserId((Integer)((User) ActionContext.getContext().getSession().get("loginUser")).getUserId());
 		}else{
 			comment.setUserId(-1);
 		}
