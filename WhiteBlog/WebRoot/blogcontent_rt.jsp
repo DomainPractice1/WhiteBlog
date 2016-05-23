@@ -195,7 +195,7 @@
 							<a href="#">Long Live The Kings - Short Film</a>
 						</h5>
 						<div class="post-subinfo">
-							<span>June 12</span>
+							<span>June 12</span>Â Â Â â¢Â Â Â 
 							<span>26 Comments</span>
 						</div>
 					</div>
@@ -308,17 +308,34 @@
 										<a href="#"><i class="fa fa-facebook"></i></a>
 										<a href="#"><i class="fa fa-twitter"></i></a>
 										<a href="#"><i class="fa fa-google-plus"></i></a>
+										<a href="#"><i class="fa fa-heart"></i> 18</a>
 									</div>
 								</div>
 							</div>
 
-							
+							<div class="next-prev-post clearfix">
+								<div class="post-direction">
+									<a href="#" class="post-prev">
+										<span class="post-way"><i class="fa fa-angle-left"></i> prev post</span>
+										<span class="title">Envato Stories: Isabel Castillo Guijarro (Isabelmdd)</span>
+									</a>
+									<a href="#"><span class="author">by <span>Gannon Burget</span></span></a>
+								</div>
+								<div class="post-direction">
+									<a href="#" class="post-next">
+										<span class="post-way">next post <i class="fa fa-angle-right"></i></span>
+										<span class="title">Rise of the Million Dollar Plugin Makers (Infographic)</span>
+									</a>
+									<a href="#"><span class="author">by <span>Jared Erondu</span></span></a>
+								</div>
+							</div>
 
 							<div class="author-box">
 								<div class="author">
 									<a class="author-photo" href="#"><img src="assets/img/profil_photo-04.png" alt=""></a>
 									<div class="author-body">
-										<h4 class="author-name">${session.loginUser.username} </h4>
+										<h4 class="author-name">Daniele Zedda</h4>
+										<a href="#">view all post</a>
 									</div>
 									<div class="author-connection">
 										<a href="#"><i class="fa fa-twitter"></i></a>
@@ -330,8 +347,9 @@
 							<div class="comment-box">
 								
 								<div class="comment-tab">
-									<a href="#" class="comment-info">评论列表</a>
-									<a href="#" class="comment-info"><i class="fa fa-comments">
+									<a href="#" class="comment-info">Comments (28)</a>
+									<i class="i">|</i>
+									<a href="#" class="comment-info"><i class="fa fa-comments"></i> Show all</a>
 								</div>
 
 								<div class="comment-block">
@@ -343,7 +361,7 @@
 											<div class="comment-body">
 												<h6 class="comment-heading"> ${comment.username} <span class="comment-date">${comment.time}</span></h6>
 												<p class="comment-text">${comment.content} </p>
-												<a href="#" class="comment-reply"><i class="reply-icon">
+												<a href="#" class="comment-reply"><i class="reply-icon"></i> Reply</a>
 											</div>
 										</div>
 									</s:iterator>
@@ -352,7 +370,7 @@
 										<form action="PostComment" method="post">
 											<textarea class="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></textarea>
 											<div class="at-focus">
-												<button class="comment-submit">发表评论</button>
+												<button class="comment-submit">Post Comment</button>
 											</div>
 										</form>
 									</div>
