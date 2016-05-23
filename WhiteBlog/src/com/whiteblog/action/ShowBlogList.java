@@ -27,13 +27,21 @@ public class ShowBlogList extends ActionSupport{
 			int userID = (Integer) session.get("loginUser");	
 			blogList=showBlogListService.findByUserId(userID);
 			System.out.println("!!!!!!!!!!!!fuck2");
-			//HttpServletRequest request=ServletActionContext.getRequest();   
-			//request.setAttribute("blogList", blogList);
 			ActionContext.getContext().getSession().put("blogList", blogList);
 		}
 		return SUCCESS;
 	}
 
+	public String changeBlogList(){
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		if(!session.containsKey("loginUser")){
+			blogList=showBlogListService.getAllBlog();
+		}else{
+			int userID = (Integer) session.get("loginUser");	
+			blogList=showBlogListService.findByUserId(userID);
+		}
+		return SUCCESS;
+	}
 	public List<Blog> getBlogList() {
 		return blogList;
 	}

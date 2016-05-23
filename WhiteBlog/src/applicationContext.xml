@@ -174,4 +174,10 @@
 			<ref bean="BlogtypeService" />
 		</property>
 	</bean>
+	
+	<bean id="DeleteBlogAction" class = "com.whiteblog.action.deleteBlogAction">
+		<property name="blogManager">
+			<ref bean="BlogManager" />
+		</property>
+	</bean>
 </beans>

@@ -11,6 +11,12 @@ import org.apache.commons.beanutils.BeanUtils;
 public class BlogServiceImp {
 	private BlogDAO blogDAO;
 
+	public String deleteBlog(int BId){
+		Blog eBlog = blogDAO.findById(BId);
+		if(eBlog == null) return "ERROR";
+		blogDAO.delete(eBlog);
+		return "SUCCESS";
+	}
 	public String addBlog(Blog blog)throws IllegalAccessException, InvocationTargetException{
 		Blog newBlog = new Blog();		
 		BeanUtils.copyProperties(blog,newBlog);		

@@ -2,7 +2,7 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<constant name="struts.devMode" value="true"/>
-	<package name="whiteblog" extends="struts-default" namespace="/">
+	<package name="whiteblog" extends="struts-default,json-default" namespace="/">
 		<action name="login" class="LoginAction" method="execute">
 			<result name="success">/index_rt.jsp</result>
 			<result name="error">/error.jsp</result>
@@ -28,7 +28,17 @@
 			<result name="success">/publish.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
-		
+		<action name="deleteBlog" class="DeleteBlogAction" method="execute">
+ 			<result name="success" type="json">
+ 				<param name="root">id</param>
+ 			</result>
+ 			<result name="error">/error.jsp</result>
+		</action>
+		<action name="changeDeleteList" class="ShowBlogListAction" method="changeBlogList">
+			<result name="success" type="json">
+				<param name="root">blogList</param>
+			</result>
+		</action>
 	</package>
 
 

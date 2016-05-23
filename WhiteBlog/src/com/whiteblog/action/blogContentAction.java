@@ -41,6 +41,7 @@ public class blogContentAction extends ActionSupport{
 	 * @return 
 	 */
 	public String execute(){
+		System.out.println(id);
 		Blog ins = blogContentManage.findById(id);
 		if(ins == null)
 			return FAIL;

@@ -27,6 +27,7 @@ public class BlogDAO extends HibernateDaoSupport {
 	public static final String TITLE = "title";
 	public static final String CONTENT = "content";
 	public static final String TIME = "time";
+	public static final String USERNAME="username";
 
 	protected void initDao() {
 		// do nothing
@@ -43,11 +44,12 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public void delete(Blog persistentInstance) {
+	public String delete(Blog persistentInstance) {
 		log.debug("deleting Blog instance");
 		try {
 			getHibernateTemplate().delete(persistentInstance);
 			log.debug("delete successful");
+			return "success";
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
 			throw re;

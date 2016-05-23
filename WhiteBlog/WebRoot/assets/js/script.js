@@ -212,20 +212,61 @@
 			$('.remove-navbar').trigger('click');
 		});
 
+		$('.push-navbar-full').on('click', function(e) {
+			var canvasHeight = $('.canvas').outerHeight();
+			$('.navmenu-quan').height(canvasHeight);
+
+			$('body').toggleClass('is-push-bar-full');
+			//$('body').toggleClass('is-push-bar');
+			
+			$('.push-navbar-full i').toggleClass('fa-bars');
+			$('.push-navbar-full i').toggleClass('fa-times');
+			$('.navmenu-quan').addClass('navmenu-full');
+			//$('.navmenu').addClass('navmenu-default');
+			$("#delete_vision").empty();
+			$("#delete_vision").removeClass("delete-blog");
+			$("#delete_vision").addClass("view-blog");
+			
+			var classes = $("#delete_vision").attr("class");
+			var actionStr = "#";
+			var delete_icon = "";
+			var onclick_str = "";
+			if(classes.indexOf("view-blog") >= 0) {
+				delete_icon = "delete_icon fa fa-file-text-o";
+			}else{
+				delete_icon = "delete_icon fa fa-times";
+//	 			onclick_str = "onclick=\"delete_row(this)\"";
+			}
+			$.ajax({
+				url:"changeDeleteList",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data, function(i, list){
+					if(classes.indexOf("view-blog") >= 0) actionStr = "content?id="+list.blogId;
+					else onclick_str="onclick=\"delete_row("+list.blogId+")\"";
+					var _tr = '<li class="pt-fashion pt-culture" id="blog-'+list.blogId+'"><div class="container"><h5><i class="'+delete_icon+'"></i>'+
+					'<a class="delete_qp" href="'+actionStr+'"'+onclick_str+'>'+list.title+'</a></h5><div class="post-subinfo">'+
+					'<span>'+list.time+'</span>   •   <span>2 Comments</span></div></div></li>';
+					$("#delete_vision").append(_tr);				
+				})
+				}
+			})
+			$('.post-title-list > li > div').toggleClass('container');
+			
+			$postTitleIsotoper.isotope();
+			e.stopPropagation();
+		});
+
 		$('.push-navbar').on('click', function(e) {
 			var navmenuType = $('.push-navbar').data('navbar-type');
 			var canvasHeight = $('.canvas').outerHeight();
 
 			$('.navmenu').height(canvasHeight);
-			if (navmenuType == 'default') {
-				$('body').toggleClass('is-push-bar');
-			} else if (navmenuType == 'full') {
-				$('body').toggleClass('is-push-bar-full');
-				$('.post-title-list > li > div').toggleClass('container');
-				$('.push-navbar i').toggleClass('fa-bars');
-				$('.push-navbar i').toggleClass('fa-times');
-			}
-			$('.navmenu').addClass('navmenu-' + navmenuType);
+			
+			$('body').toggleClass('is-push-bar');
+				
+			$('.navmenu').addClass('navmenu-default');
 			$postTitleIsotoper.isotope();
 			e.stopPropagation();
 		});
