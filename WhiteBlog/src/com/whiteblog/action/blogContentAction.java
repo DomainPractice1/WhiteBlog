@@ -41,7 +41,7 @@ public class blogContentAction extends ActionSupport{
 	 * @return 
 	 */
 	public String execute(){
-		System.out.println("Appear in BlogContentAction");
+		System.out.println("Appear in BlogContentAction: showing blog of id = " + id);
 		Blog ins = blogContentManage.findById(id);
 		if(ins == null)
 			return FAIL;

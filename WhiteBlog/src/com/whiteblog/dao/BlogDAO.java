@@ -46,11 +46,12 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public void delete(Blog persistentInstance) {
+	public String delete(Blog persistentInstance) {
 		log.debug("deleting Blog instance");
 		try {
 			getHibernateTemplate().delete(persistentInstance);
 			log.debug("delete successful");
+			return "success";
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
 			throw re;

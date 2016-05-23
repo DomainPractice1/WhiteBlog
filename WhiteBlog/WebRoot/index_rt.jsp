@@ -6,7 +6,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang="en">
+<!-- <html lang="en"> -->
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,7 +44,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="loader-in">Loading...</div>
 		<div class="loader-out">Loading...</div>
 	</div>
-
+	
+	<!-- 文章列表 -->
+	<aside class="navmenu-quan">
+		<div class="post-titles">
+			<div class="tag-title">
+				<div class="container">
+					<p class="tags" id="post-titles">
+						<a class="Edit_qp selected" href="#">删除文章</a>
+<!-- 						<a data-filter=".pt-fashion" href="#">fashion</a> -->
+<!-- 						<a data-filter=".pt-culture" href="#">culture</a> -->
+<!-- 						<a data-filter=".pt-art" href="#">art</a> -->
+<!-- 						<a data-filter="*" href="#" class="unfilter hide">all</a> -->
+					</p>
+				</div>
+			</div>
+			<button type="button" class="remove-navbar"><i class="fa fa-times"></i></button>
+			<ul class="post-title-list clearfix view-blog" id="delete_vision">
+<!-- 				<s:iterator value = "#session.blogList" var = "blog">  -->
+<!-- 					<li class="pt-fashion pt-culture">  -->
+<!-- 						<div>  -->
+<!-- 							<h5>  -->
+<!-- 								<i class="delete_icon fa fa-file-text-o"></i>  -->
+<!-- 								<a class="delete_qp" href="content?id=${blog.blogId}" onclick="delete_row()">${blog.title} -> ${blog.blogId}</a>  -->
+<!-- 								<a class="delete_qp" href="#" onclick="delete_row(this)">${blog.title} -> ${blog.blogId}</a>  -->
+<!-- 							</h5>  -->
+<!-- 							<div class="post-subinfo">  -->
+<!-- 								<span>${blog.time }</span>   •     -->
+<!-- 								<span>2 Comments</span>  -->
+<!-- 							</div>  -->
+<!-- 						</div>  -->
+<!-- 					</li> -->
+<!-- 				</s:iterator> -->
+			</ul>
+		</div>
+	</aside>
+	
 	<aside class="navmenu">
 		<div class="post-titles">
 			<div class="tag-title">
@@ -53,8 +89,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<a data-filter=".pt-culture" href="#">culture</a>
 						<a data-filter=".pt-art" href="#">art</a>
 						<a data-filter="*" href="#" class="unfilter hide">all</a>
+						<a class="tags" href="publish.jsp"><img src="assets/img/write.png"/></a>
 					</p>
-					<a class="tags" href="publish.jsp"><img src="assets/img/write.png"/></a>
 				</div>
 			</div>
 			<button type="button" class="remove-navbar"><i class="fa fa-times"></i></button>
@@ -65,7 +101,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div>
 							<h5>
 								<i class="fa fa-file-text-o"></i>
-								<h3><a href="content?id=${blog.blogId}">${blog.title}</a></h3>
+<!-- 								<h3><a href="content?id=${blog.blogId}">${blog.title}</a></h3> -->
+								<a href="content?id=${blog.blogId}">${blog.title}</a>
 							</h5>
 							<div class="post-subinfo">
 								<span>${blog.time}</span>
@@ -85,7 +122,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="container">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>					
+					</div>
+					
+					<div class="get-post-titles" style="margin-left:20px">
+						<button type="button" class="close_qp navbar-toggle push-navbar-full" data-navbar-type="article">
+							<i class="fa fa-bars"></i>
+						</button>
+					</div>		
+								
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
@@ -100,13 +144,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</div>
 							<a class="modal-form">${sessionScope.loginUser.username}</a>
 						</c:otherwise>
-					</c:choose>	
-													
-															
+					</c:choose>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-plus"></i>
 					</button>
+					
 					<div class="collapse navbar-collapse" id="main-nav">
 						<ul class="nav navbar-nav">
 							<li>
@@ -537,6 +580,69 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			})
 			t=setTimeout("timedCount()",10000)
 		}
+	</script>
+
+	<script type ="text/javascript">
+	function delete_row(delete_id){
+		if(confirm("确定要删除？")){
+			$.ajax({
+				url:"deleteBlog?id="+delete_id,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == -1){
+						$("li").remove("#blog-"+delete_id);
+						//$(delete_id).parent().parent().parent().remove();
+						window.alert("删除成功");
+					}else{
+						window.alert("删除失败");
+					}
+				}
+			})
+			//$("li").remove("#"+delete_id);
+		}
+	}
+	</script>
+	<script type ="text/javascript">
+		$(".Edit_qp").click(function(){
+			$("#delete_vision").empty();
+			$("#delete_vision").toggleClass("delete-blog");
+			$("#delete_vision").toggleClass("view-blog");
+			var classes = $("#delete_vision").attr("class");
+			var actionStr = "#";
+			var delete_icon = "";
+			var onclick_str = "";
+			if(classes.indexOf("view-blog") >= 0) {
+				delete_icon = "delete_icon fa fa-file-text-o";
+			}else{
+				delete_icon = "delete_icon fa fa-times";
+	// 			onclick_str = "onclick=\"delete_row(this)\"";
+			}
+			$.ajax({
+				url:"changeDeleteList",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data, function(i, list){
+					var color_str = ""
+					if(classes.indexOf("view-blog") >= 0) {
+						actionStr = "content?id="+list.blogId;
+						color_str="color:#ffffff";
+					}else {
+						onclick_str="onclick=\"delete_row("+list.blogId+")\"";
+						color_str="color:#FF4500";
+					}
+					var _tr = '<li class="pt-fashion pt-culture" id="blog-'+list.blogId+'"><div class="container"><h5><i class="'+delete_icon+'" style='+color_str+'></i>'+
+					'<a class="delete_qp" href="'+actionStr+'"'+onclick_str+'>'+list.title+'</a></h5><div class="post-subinfo">'+
+					'<span>'+list.time+'</span>   •   <span>2 Comments</span></div></div></li>';
+					$("#delete_vision").append(_tr);				
+				})
+				}
+			})
+			var canvasHeight = $('.canvas').outerHeight();
+			$('.navmenu-quan').height(canvasHeight);
+			$('.post-title-list > li > div').toggleClass('container');
+		})
 	</script>
 </body>
 </html>
