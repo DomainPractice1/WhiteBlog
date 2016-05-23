@@ -1,11 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -14,8 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="assets/img/favicon.ico">
-<title>White Blog</title>
-
+<title>LaRead - Shortcode 1</title>
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome CSS -->
@@ -31,14 +25,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- ColorBox CSS -->
 <link href="assets/css/colorbox.css" rel="stylesheet">
 <!-- Custom font -->
-<link href='assets/css/googleFont.css' rel='stylesheet' type='text/css'>
-<link href='assets/css/googleFont2.css' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Roboto+Slab&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 <!-- Custom styles for this template -->
 <link href="assets/css/style.css" rel="stylesheet">
-
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
 </head>
-<body onload="timedCount()">
-	<s:action name="ShowBlogList"/>
+<body>
+	<s:action name="ShowCommentList"/>
 	<div class="page-loader">
 		<div class="loader-in">Loading...</div>
 		<div class="loader-out">Loading...</div>
@@ -54,55 +52,171 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<a data-filter=".pt-art" href="#">art</a>
 						<a data-filter="*" href="#" class="unfilter hide">all</a>
 					</p>
-					<a class="tags" href="publish.jsp"><img src="assets/img/write.png"/></a>
 				</div>
 			</div>
 			<button type="button" class="remove-navbar"><i class="fa fa-times"></i></button>
-
 			<ul class="post-title-list clearfix">
-				<s:iterator value = "#session.blogList" var = "blog">
-					<li class="pt-fashion pt-culture">
-						<div>
-							<h5>
-								<i class="fa fa-file-text-o"></i>
-								<h3><a href="content?id=${blog.blogId}">${blog.title}</a></h3>
-							</h5>
-							<div class="post-subinfo">
-								<span>${blog.time}</span>
-								<span>2 Comments</span>
-							</div>
+				<li class="pt-fashion pt-culture">
+					<div>
+						<h5>
+							<i class="fa fa-file-text-o"></i>
+							<a href="#">Five simple steps to designing grid systems preface</a>
+						</h5>
+						<div class="post-subinfo">
+							<span>June 28</span>Â Â Â â¢Â Â Â 
+							<span>2 Comments</span>
 						</div>
-					</li>
-				</s:iterator>
+					</div>
+				</li>
+				<li class="pt-culture pt-art">
+					<div>
+						<h5>
+							<i>26</i>
+							<a href="#">Hemingway: A Text Editor That Cares About What You Write</a>
+						</h5>
+						<div class="post-subinfo">
+							<span>June 26</span>Â Â Â â¢Â Â Â 
+							<span>2 Comments</span>
+						</div>
+					</div>
+				</li>
+				<li class="pt-fashion pt-art">
+					<div>
+						<h5>
+							<i class="fa fa-link"></i>
+							<a href="#">Mobile Design Inspiration and Creativity</a>
+						</h5>
+						<div class="post-subinfo">
+							<span>June 25</span>Â Â Â â¢Â Â Â 
+							<span>4 Comments</span>
+						</div>
+					</div>
+				</li>
+				<li class="pt-fashion pt-culture">
+					<div>
+						<h5>
+							<i class="fa fa-comment"></i>
+							<a href="#">Envato Stories: Coming August 2014</a>
+						</h5>
+						<div class="post-subinfo">
+							<span>June 24</span>Â Â Â â¢Â Â Â 
+							<span>3 Comments</span>
+						</div>
+					</div>
+				</li>
+				<li class="pt-culture pt-art">
+					<div>
+						<h5>
+							<i class="fa fa-file-text-o"></i>
+							<a href="#">Meet #59 Interface Designer Kerem Suer</a>
+						</h5>
+						<div class="post-subinfo">
+							<span>June 24</span>Â Â Â â¢Â Â Â 
+							<span>6 Comments</span>
+						</div>
+					</div>
+				</li>
+				<li class="pt-fashion pt-art">
+					<div>
+						<h5>
+							<i class="fa fa-file-text-o"></i>
+							<a href="#">Founders, Travel and Epic Beards: What Happens After Envato</a>
+						</h5>
+						<div class="post-subinfo">
+							<span>June 22</span>Â Â Â â¢Â Â Â 
+							<span>12 Comments</span>
+						</div>
+					</div>
+				</li>
+				<li class="pt-fashion pt-culture">
+					<div>
+						<h5>
+							<i class="fa fa-file-text-o"></i>
+							<a href="#">Why Designers Make Good Founders (and Cofounders)</a>
+						</h5>
+						<div class="post-subinfo">
+							<span>June 21</span>Â Â Â â¢Â Â Â 
+							<span>9 Comments</span>
+						</div>
+					</div>
+				</li>
+				<li class="pt-culture pt-art">
+					<div>
+						<h5>
+							<i class="fa fa-file-text-o"></i>
+							<a href="#">Getting Your Team Through the Storm A Good Product Designer...</a>
+						</h5>
+						<div class="post-subinfo">
+							<span>June 20</span>Â Â Â â¢Â Â Â 
+							<span>16 Comments</span>
+						</div>
+					</div>
+				</li>
+				<li class="pt-fashion pt-art">
+					<div>
+						<h5>
+							<i class="fa fa-file-text-o"></i>
+							<a href="#">Introducing LaRead Chat Post</a>
+						</h5>
+						<div class="post-subinfo">
+							<span>June 18</span>Â Â Â â¢Â Â Â 
+							<span>24 Comments</span>
+						</div>
+					</div>
+				</li>
+				<li class="pt-fashion pt-culture">
+					<div>
+						<h5>
+							<i class="fa fa-file-text-o"></i>
+							<a href="#">The Future of WordPress</a>
+						</h5>
+						<div class="post-subinfo">
+							<span>June 16</span>Â Â Â â¢Â Â Â 
+							<span>13 Comments</span>
+						</div>
+					</div>
+				</li>
+				<li class="pt-culture pt-art">
+					<div>
+						<h5>
+							<i class="fa fa-file-text-o"></i>
+							<a href="#">Workshop: Brand Asset Management</a>
+						</h5>
+						<div class="post-subinfo">
+							<span>June 16</span>Â Â Â â¢Â Â Â 
+							<span>8 Comments</span>
+						</div>
+					</div>
+				</li>
+				<li class="pt-fashion pt-art">
+					<div>
+						<h5>
+							<i class="fa fa-file-text-o"></i>
+							<a href="#">Long Live The Kings - Short Film</a>
+						</h5>
+						<div class="post-subinfo">
+							<span>June 12</span>Â Â Â â¢Â Â Â 
+							<span>26 Comments</span>
+						</div>
+					</div>
+				</li>
 			</ul>
 		</div>
 	</aside>
-	
+
 	<div class="canvas">
 		<div class="canvas-overlay"></div>
 		<header>
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>					
-					<c:choose>
-						<c:when test="${sessionScope.loginUser == null}">
-							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
-								<i class="fa fa-user"></i>
-							</a>									
-						</c:when>
-						<c:otherwise>
-							<div class="get-post-titles">					
-								<button id="notice" type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
-									<i id="checkicon" class="fa fa-bell-o"></i>
-								</button>						
-							</div>
-							<a class="modal-form">${sessionScope.loginUser.username}</a>
-						</c:otherwise>
-					</c:choose>	
-													
-															
+						<a class="navbar-brand" href="shortcode-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+					</div>
+					<div class="get-post-titles">
+						<button type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
+							<i class="fa fa-bars"></i>
+						</button>
+					</div>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-plus"></i>
@@ -166,144 +280,113 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</header>
 
 		<div class="container">
-			<div class="head-text">
-				<h1>LaRead</h1>
-				<form action="getalluser.action">
-					<p class="lead-text">Blog. Designed for Read.</p>
-					<button type="submit" value="跳转"></button>
-				</form>
-				
+			<div class="head-text text-highlight">
+				<h1>SHORTCODE</h1>
+				<p class="lead-text">COLUMNÂ Â Â â¢Â Â Â TABSÂ Â Â â¢Â Â Â TOGGLE</p>
 			</div>
 		</div>
 
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8">
-					<div class="post-fluid post-medium-vertical">
-					<s:iterator value = "#session.blogList" var = "blog">
-						<div class="container-fluid post-default">
-							<div class="container-medium">
-								<div class="row post-items">
-									<div class="col-md-12">
-										<div class="post-item">
-											<div class="post-item-paragraph">
-												<div>
-													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
-													<a href="#" class="mute-text">DESIGN</a>
-												</div>
-												<h3><a href="content?id=${blog.blogId}">${blog.title}</a></h3>
-												<p>${blog.content}<a href="#" class="more">[...]</a></p>
-											</div>
-											<div class="post-item-info clearfix">
-												<div class="pull-left">
-													<span>${blog.time}</span> By <a href="#">${blog.username}</a>
-												</div>
-												<div class="pull-right post-item-social">
-													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
-													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
-												</div>
-											</div>
-										</div>
+		<section class="post-fluid">
+			<div class="container-fluid">
+				<div class="container">
+					<div class="row post-items">
+						<div class="col-md-2">
+							<div class="post-item-short">
+								<span class="small-text">${req.blog.time}</span>
+							</div>
+						</div>
+						<div class="col-md-10 ">
+							<div class="post-item">
+								<div class="post-item-paragraph">
+									<h2><a href="#" class="quick-read"><i class="fa fa-eye"></i></a>${req.blog.title}</h2>
+									<p class="post-item-two-column">
+									${req.blog.content}
+									</p>
+								</div>
+								<div class="post-item-info no-border clearfix">
+									<p class="post-tags">
+										<a href="#">fashion</a>
+										<a href="#">culture</a>
+										<a href="#">art</a>
+									</p>
+									<div class="post-item-social">
+										<a href="#"><i class="fa fa-facebook"></i></a>
+										<a href="#"><i class="fa fa-twitter"></i></a>
+										<a href="#"><i class="fa fa-google-plus"></i></a>
+										<a href="#"><i class="fa fa-heart"></i> 18</a>
 									</div>
 								</div>
 							</div>
-						</div>
-						</s:iterator>
-						
 
-						
+							<div class="next-prev-post clearfix">
+								<div class="post-direction">
+									<a href="#" class="post-prev">
+										<span class="post-way"><i class="fa fa-angle-left"></i> prev post</span>
+										<span class="title">Envato Stories: Isabel Castillo Guijarro (Isabelmdd)</span>
+									</a>
+									<a href="#"><span class="author">by <span>Gannon Burget</span></span></a>
+								</div>
+								<div class="post-direction">
+									<a href="#" class="post-next">
+										<span class="post-way">next post <i class="fa fa-angle-right"></i></span>
+										<span class="title">Rise of the Million Dollar Plugin Makers (Infographic)</span>
+									</a>
+									<a href="#"><span class="author">by <span>Jared Erondu</span></span></a>
+								</div>
+							</div>
 
-						<div class="container-fluid post-video">
-							
-						</div><div class="container-fluid post-sound">
-							
+							<div class="author-box">
+								<div class="author">
+									<a class="author-photo" href="#"><img src="assets/img/profil_photo-04.png" alt=""></a>
+									<div class="author-body">
+										<h4 class="author-name">Daniele Zedda</h4>
+										<a href="#">view all post</a>
+									</div>
+									<div class="author-connection">
+										<a href="#"><i class="fa fa-twitter"></i></a>
+										<a href="#"><i class="fa fa-envelope"></i></a>
+									</div>
+								</div>
+							</div>
+
+							<div class="comment-box">
+								
+								<div class="comment-tab">
+									<a href="#" class="comment-info">Comments (28)</a>
+									<i class="i">|</i>
+									<a href="#" class="comment-info"><i class="fa fa-comments"></i> Show all</a>
+								</div>
+
+								<div class="comment-block">
+									<s:iterator value = "#session.commentList" var = "comment">
+										<div class="comment-item">
+											<a class="comment-photo" href="#">
+												<img src="assets/img/profil_photo-05.png" alt="" />
+											</a>
+											<div class="comment-body">
+												<h6 class="comment-heading"> ${comment.username} <span class="comment-date">${comment.time}</span></h6>
+												<p class="comment-text">${comment.content} </p>
+												<a href="#" class="comment-reply"><i class="reply-icon"></i> Reply</a>
+											</div>
+										</div>
+									</s:iterator>
+
+									<div class="comment-form main-comment-form">
+										<form action="PostComment" method="post">
+											<textarea class="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></textarea>
+											<div class="at-focus">
+												<button class="comment-submit">Post Comment</button>
+											</div>
+										</form>
+									</div>
+
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<aside class="col-md-4">
-
-					<div class="laread-right">
-
-						<form action="searchArticle.action" class="laread-form search-form">
-							<div class="input"><input type="text" class="form-control" placeholder="Search..." name="searchText"></div>
-							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
-						</form>
-
-						<ul class="laread-list">
-							<li class="title">CATEGORY</li>
-							<li><a href="#">Branding</a><i class="line"></i></li>
-							<li><a href="#">Design (48)</a><i class="line"></i></li>
-							<li><a href="#">Photography</a><i class="line"></i></li>
-							<li><a href="#">Inspiration</a><i class="line"></i></li>
-							<li><a href="#">Life</a><i class="line"></i></li>
-							<li><a href="#">City</a><i class="line"></i></li>
-						</ul>
-
-						<ul class="laread-list">
-							<li class="title">RECENT POSTS</li>
-							<li><a href="#">The Nature of My Inspiration</a><i class="date">28 June</i></li>
-							<li><a href="#">Sam Feldt - Show Me Love</a><i class="date">27 June</i></li>
-							<li><a href="#">Do You Love Coffee?</a><i class="date">25 June</i></li>
-							<li><a href="#">The Game Before The Game</a><i class="date">23 June</i></li>
-							<li><a href="#">Long Live The Kings</a><i class="date">22 June</i></li>
-						</ul>
-
-						<ul class="laread-list">
-							<li class="title">TAGS</li>
-							<li class="bar-tags">
-								<a href="#">fashion</a>
-								<a href="#">culture</a>
-								<a href="#">art</a>
-								<a href="#">concept</a>
-								<a href="#">style</a>
-								<a href="#">advert</a>
-								<a href="#">movie</a>
-								<a href="#">color</a>
-								<a href="#">branding</a>
-								<a href="#">technology</a>
-								<a href="#">fashion</a>
-								<a href="#">culture</a>
-								<a href="#">art</a>
-								<a href="#">concept</a>
-							</li>
-						</ul>
-
-						<ul class="laread-list barbg-grey">
-							<li class="title">NEWSLETTER</li>
-							<li class="newsletter-bar">
-								<p>Vivamus nec mauris pulvinar leo dignissim sollicitudin eleifend eget velit.</p>
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-									<input type="text" class="form-control" placeholder="john@doe.com">
-									<span class="input-group-btn">
-										<button class="btn" type="button"><i class="fa fa-check"></i></button>
-									</span>
-								</div>
-							</li>
-						</ul>
-
-						<div class="laread-list quotes-basic">
-							<i class="fa fa-quote-left"></i>
-							<p>âThe difference between stupidity and genius is that genius has its limits.â</p>
-							<span class="whosay">- Albert Einstein </span>
-						</div>
-
-						<ul class="laread-list social-bar">
-							<li class="title">FOLLOW US</li>
-							<li class="social-icons">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-								<a href="#"><i class="fa fa-dribbble"></i></a>
-							</li>
-						</ul>
-
-					</div>
-
-				</aside>
 			</div>
-		</div>
+		</section>
 
 		<footer class="container-fluid footer">
 			<div class="container text-center">
@@ -414,74 +497,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 
-	<!-- Login Modal -->
-	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content" id="login-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
-				</div>
-				<div class="modal-body">
-					<form action="login.action" method="post">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Username" name="userform.username">
-						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" placeholder="Password" name="userform.password">
-						</div>
-						<div class="linkbox">
-							<a href="#">Forgot password ?</a>
-							<span>No account ? <a href="#" id="register-btn" data-toggle="modal" data-target="#register-form">Sign Up.</a></span>
-							<!-- <span class="form-warning"><i class="fa fa-exclamation"></i>Fill the require.</span> -->
-						</div>
-						<div class="linkbox">
-							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
-							<button type="submit" class="btn btn-golden btn-signin">SIGN IN</button>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<div class="provider">
-						<span>Sign In With</span>
-						<a href="#"><i class="fa fa-facebook"></i></a>
-						<a href="#"><i class="fa fa-twitter"></i></a>
-					</div>
-				</div>
-			</div>
-			<div class="modal-content" id="register-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
-				</div>
-				<div class="modal-body">
-					<form action="register.action" method="post">
-						<!-- <div class="form-group">
-							<input class="form-control" placeholder="Name">
-						</div> -->
-						<div class="form-group">
-							<input class="form-control" placeholder="Username" name="userform.username">
-						</div>
-						<!-- <div class="form-group">
-							<input class="form-control" placeholder="Email">
-						</div> -->
-						<div class="form-group">
-							<input class="form-control" type="password" placeholder="Password" name="userform.password">
-						</div>
-						<div class="linkbox">
-							<span>Already got account? <a href="#" id="login-btn" data-target="#login-form">Sign In.</a></span>
-						</div>
-						<div class="linkbox">
-							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
-							<button type="submit" class="btn btn-golden btn-signin">SIGN UP</button>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -493,50 +508,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="assets/js/jquery.blueimp-gallery.min.js"></script>
 	<script src="assets/js/imagesloaded.js"></script>
 	<script src="assets/js/masonry.js"></script>
-	<script src="assets/js/viewportchecker.js"></script>
+	<script src="assets/js/jquery.ellipsis.min.js"></script>
+	<script src="assets/js/isotope.pkgd.min.js"></script>
 	<script src="assets/js/jquery.dotdotdot.min.js"></script>
 	<script src="assets/js/jquery.colorbox-min.js"></script>
 	<script src="assets/js/jquery.nicescroll.min.js"></script>
-	<script src="assets/js/isotope.pkgd.min.js"></script>
-	<script src="assets/js/jquery.ellipsis.min.js"></script>
+	<script src="assets/js/viewportchecker.js"></script>
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
-	<script type="text/javascript">		
-		$("#notice").click(function(){
-			$("#slideform").empty();
-			$.ajax({
-				url:"notice",
-				type:"POST",
-				dataType:"json",
-				success:function(data){
-				$.each(data,function(i,list){  
-                       		var _tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a>' + list.content + '</a>' +
-						'</h5><div class="post-subinfo"></div></div></li>'
-                       		 $("#slideform").append(_tr);
-                    })
-				}
-			})	
-		});
-	</script>
-	<script type="text/javascript">
-		var t
-		function timedCount()
-		{
-			$.ajax({
-				url:"checkNotice",
-				type:"POST",
-				datatype:"json",
-				success:function(data){
-					if(data == "new"){
-						$("#checkicon").attr("class","fa fa-bell fa-spin");
-					}else{
-						$("#checkicon").attr("class","fa fa-bell-o")
-					}
-				}
-			})
-			t=setTimeout("timedCount()",10000)
-		}
-	</script>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </body>
 </html>

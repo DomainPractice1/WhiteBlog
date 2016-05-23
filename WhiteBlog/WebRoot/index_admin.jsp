@@ -4,7 +4,6 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html lang="en">
 <head>
@@ -15,7 +14,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <meta name="author" content="">
 <link rel="icon" href="assets/img/favicon.ico">
 <title>White Blog</title>
-
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome CSS -->
@@ -37,8 +35,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="assets/css/style.css" rel="stylesheet">
 
 </head>
-<body onload="timedCount()">
-	<s:action name="ShowBlogList"/>
+<body>
+	<s:action name="ShowInformedBlogList"/>
 	<div class="page-loader">
 		<div class="loader-in">Loading...</div>
 		<div class="loader-out">Loading...</div>
@@ -58,9 +56,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 			<button type="button" class="remove-navbar"><i class="fa fa-times"></i></button>
-
 			<ul class="post-title-list clearfix">
-				<s:iterator value = "#session.blogList" var = "blog">
+				<s:iterator value = "#session.informedBlogList" var = "blog">
 					<li class="pt-fashion pt-culture">
 						<div>
 							<h5>
@@ -85,24 +82,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="container">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>					
-					<c:choose>
-						<c:when test="${sessionScope.loginUser == null}">
-							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
-								<i class="fa fa-user"></i>
-							</a>									
-						</c:when>
-						<c:otherwise>
-							<div class="get-post-titles">					
-								<button id="notice" type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
-									<i id="checkicon" class="fa fa-bell-o"></i>
-								</button>						
-							</div>
-							<a class="modal-form">${sessionScope.loginUser.username}</a>
-						</c:otherwise>
-					</c:choose>	
-													
-															
+					</div>
+					<div class="get-post-titles">
+						<button type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
+							<i class="fa fa-bars"></i>
+						</button>
+					</div>
+					
+					<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
+						<i class="fa fa-user"></i>
+					</a>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-plus"></i>
@@ -168,25 +157,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="container">
 			<div class="head-text">
 				<h1>LaRead</h1>
-				<form action="getalluser.action">
-					<p class="lead-text">Blog. Designed for Read.</p>
-					<button type="submit" value="跳转"></button>
-				</form>
-				
+				<p class="lead-text">Blog. Designed for Read.</p>
 			</div>
 		</div>
 
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8">
+
 					<div class="post-fluid post-medium-vertical">
-					<s:iterator value = "#session.blogList" var = "blog">
+					<s:iterator value = "#session.informedBlogList" var = "blog">
 						<div class="container-fluid post-default">
 							<div class="container-medium">
 								<div class="row post-items">
 									<div class="col-md-12">
 										<div class="post-item">
 											<div class="post-item-paragraph">
+												<div>
+													<button type="button" class="btn btn-grey btn-outline btn-rounded">删除文章</button>
+												</div>
 												<div>
 													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
 													<a href="#" class="mute-text">DESIGN</a>
@@ -502,41 +491,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
-	<script type="text/javascript">		
-		$("#notice").click(function(){
-			$("#slideform").empty();
-			$.ajax({
-				url:"notice",
-				type:"POST",
-				dataType:"json",
-				success:function(data){
-				$.each(data,function(i,list){  
-                       		var _tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a>' + list.content + '</a>' +
-						'</h5><div class="post-subinfo"></div></div></li>'
-                       		 $("#slideform").append(_tr);
-                    })
-				}
-			})	
-		});
-	</script>
-	<script type="text/javascript">
-		var t
-		function timedCount()
-		{
-			$.ajax({
-				url:"checkNotice",
-				type:"POST",
-				datatype:"json",
-				success:function(data){
-					if(data == "new"){
-						$("#checkicon").attr("class","fa fa-bell fa-spin");
-					}else{
-						$("#checkicon").attr("class","fa fa-bell-o")
-					}
-				}
-			})
-			t=setTimeout("timedCount()",10000)
-		}
-	</script>
+	
 </body>
 </html>

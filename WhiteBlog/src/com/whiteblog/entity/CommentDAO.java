@@ -1,32 +1,28 @@
-package com.whiteblog.dao;
+package com.whiteblog.entity;
 
 import java.util.List;
-
 import org.hibernate.LockMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.whiteblog.entity.Blog;
-
 /**
- * A data access object (DAO) providing persistence and search support for Blog
- * entities. Transaction control of the save(), update() and delete() operations
- * can directly support Spring container-managed transactions or they can be
- * augmented to handle user-managed Spring transactions. Each of these methods
- * provides additional information for how to configure it for the desired type
- * of transaction control.
+ * A data access object (DAO) providing persistence and search support for
+ * Comment entities. Transaction control of the save(), update() and delete()
+ * operations can directly support Spring container-managed transactions or they
+ * can be augmented to handle user-managed Spring transactions. Each of these
+ * methods provides additional information for how to configure it for the
+ * desired type of transaction control.
  * 
- * @see com.whiteblog.entity.Blog
+ * @see com.whiteblog.entity.Comment
  * @author MyEclipse Persistence Tools
  */
-public class BlogDAO extends HibernateDaoSupport {
-	private static final Logger log = LoggerFactory.getLogger(BlogDAO.class);
+public class CommentDAO extends HibernateDaoSupport {
+	private static final Logger log = LoggerFactory.getLogger(CommentDAO.class);
 	// property constants
+	public static final String BLOG_ID = "blogId";
 	public static final String USER_ID = "userId";
-	public static final String TYPE_ID = "typeId";
-	public static final String TITLE = "title";
 	public static final String CONTENT = "content";
 	public static final String TIME = "time";
 	public static final String USERNAME = "username";
@@ -35,8 +31,8 @@ public class BlogDAO extends HibernateDaoSupport {
 		// do nothing
 	}
 
-	public void save(Blog transientInstance) {
-		log.debug("saving Blog instance");
+	public void save(Comment transientInstance) {
+		log.debug("saving Comment instance");
 		try {
 			getHibernateTemplate().save(transientInstance);
 			log.debug("save successful");
@@ -46,8 +42,8 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public void delete(Blog persistentInstance) {
-		log.debug("deleting Blog instance");
+	public void delete(Comment persistentInstance) {
+		log.debug("deleting Comment instance");
 		try {
 			getHibernateTemplate().delete(persistentInstance);
 			log.debug("delete successful");
@@ -57,11 +53,11 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public Blog findById(java.lang.Integer id) {
-		log.debug("getting Blog instance with id: " + id);
+	public Comment findById(java.lang.Integer id) {
+		log.debug("getting Comment instance with id: " + id);
 		try {
-			Blog instance = (Blog) getHibernateTemplate().get(
-					"com.whiteblog.entity.Blog", id);
+			Comment instance = (Comment) getHibernateTemplate().get(
+					"com.whiteblog.entity.Comment", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -69,10 +65,10 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public List<Blog> findByExample(Blog instance) {
-		log.debug("finding Blog instance by example");
+	public List<Comment> findByExample(Comment instance) {
+		log.debug("finding Comment instance by example");
 		try {
-			List<Blog> results = (List<Blog>) getHibernateTemplate()
+			List<Comment> results = (List<Comment>) getHibernateTemplate()
 					.findByExample(instance);
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -84,10 +80,10 @@ public class BlogDAO extends HibernateDaoSupport {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding Blog instance with property: " + propertyName
+		log.debug("finding Comment instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
-			String queryString = "from Blog as model where model."
+			String queryString = "from Comment as model where model."
 					+ propertyName + "= ?";
 			return getHibernateTemplate().find(queryString, value);
 		} catch (RuntimeException re) {
@@ -96,34 +92,30 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public List<Blog> findByUserId(Object userId) {
+	public List<Comment> findByBlogId(Object blogId) {
+		return findByProperty(BLOG_ID, blogId);
+	}
+
+	public List<Comment> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
 	}
 
-	public List<Blog> findByTypeId(Object typeId) {
-		return findByProperty(TYPE_ID, typeId);
-	}
-
-	public List<Blog> findByTitle(Object title) {
-		return findByProperty(TITLE, title);
-	}
-
-	public List<Blog> findByContent(Object content) {
+	public List<Comment> findByContent(Object content) {
 		return findByProperty(CONTENT, content);
 	}
 
-	public List<Blog> findByTime(Object time) {
+	public List<Comment> findByTime(Object time) {
 		return findByProperty(TIME, time);
 	}
 
-	public List<Blog> findByUsername(Object username) {
+	public List<Comment> findByUsername(Object username) {
 		return findByProperty(USERNAME, username);
 	}
 
 	public List findAll() {
-		log.debug("finding all Blog instances");
+		log.debug("finding all Comment instances");
 		try {
-			String queryString = "from Blog";
+			String queryString = "from Comment";
 			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -131,10 +123,11 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public Blog merge(Blog detachedInstance) {
-		log.debug("merging Blog instance");
+	public Comment merge(Comment detachedInstance) {
+		log.debug("merging Comment instance");
 		try {
-			Blog result = (Blog) getHibernateTemplate().merge(detachedInstance);
+			Comment result = (Comment) getHibernateTemplate().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -143,8 +136,8 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public void attachDirty(Blog instance) {
-		log.debug("attaching dirty Blog instance");
+	public void attachDirty(Comment instance) {
+		log.debug("attaching dirty Comment instance");
 		try {
 			getHibernateTemplate().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -154,8 +147,8 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public void attachClean(Blog instance) {
-		log.debug("attaching clean Blog instance");
+	public void attachClean(Comment instance) {
+		log.debug("attaching clean Comment instance");
 		try {
 			getHibernateTemplate().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -165,7 +158,7 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public static BlogDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (BlogDAO) ctx.getBean("BlogDAO");
+	public static CommentDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (CommentDAO) ctx.getBean("CommentDAO");
 	}
 }

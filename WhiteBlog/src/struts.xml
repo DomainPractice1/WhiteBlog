@@ -12,7 +12,7 @@
 			<result name="error">/error.jsp</result>
 		</action>
 		<action name="content" class="BlogContent" method="execute">
-			<result name="success" >/blogcontent.jsp</result>
+			<result name="success" >/blogcontent_rt.jsp</result>
 			<result name="fail">/404.html</result>
 		</action>
 		<action name="searchArticle" class="SearchArticleAction" method="execute">
@@ -28,6 +28,7 @@
 			<result name="success">/publish.jsp</result>
 			<result name="error">/error.jsp</result>
 		</action>
+		
 		<action name="notice" class="NoticeAction" method="execute">
 			<result name="success" type="json">
 				<param name="root">noticeList</param>
@@ -47,6 +48,18 @@
 			<result name="success">/authors.jsp</result>
 		</action>
 		
+		<action name="ShowCommentList" class="ShowCommentListAction" method="execute">
+			<result name="success">/blogcontent_rt.jsp</result>
+			<result name="error">/404.html</result>
+		</action>
+		<action name="PostComment" class="PostCommentAction" method="execute">
+			<result name="success">/blogcontent_rt.jsp</result>
+			<result name="error">/404.html</result>
+		</action>
+		<action name="ShowInformedBlogList" class="ShowInformedBlogListAction" method="execute">
+			<result name="success">/index_admin.jsp</result>
+			<result name="error">/404.html</result>
+		</action>
 	</package>
 
 

@@ -55,7 +55,8 @@
 				<value>com.whiteblog.entity.Comment</value>
 				<value>com.whiteblog.entity.Mail</value>
 				<value>com.whiteblog.entity.Notice</value>
-				<value>com.whiteblog.entity.User</value></list>
+				<value>com.whiteblog.entity.User</value>
+				<value>com.whiteblog.entity.Inform</value></list>
 		</property></bean>
 	<bean id="AdminDAO" class="com.whiteblog.dao.AdminDAO">
 		<property name="sessionFactory">
@@ -117,6 +118,18 @@
 		</property>
 	</bean>
 	
+	<bean id="ShowCommentListService" class="com.whiteblog.service.ShowCommentListService">
+		<property name="commentDAO">
+			<ref bean="CommentDAO" />
+		</property>
+	</bean>
+	
+	<bean id="PostCommentService" class="com.whiteblog.service.PostCommentService">
+		<property name="commentDAO">
+			<ref bean="CommentDAO" />
+		</property>
+	</bean>
+	
 	<bean id="LoginAction" class="com.whiteblog.action.loginAction">
 		<property name="usermanager">
 			<ref bean="UserManager" />
@@ -163,6 +176,13 @@
 		</property>
 	</bean>
 	
+	
+	<bean id="ShowInformedBlogListService" class="com.whiteblog.service.ShowInformedBlogListService">
+		<property name="informDAO">
+			<ref bean="InformDAO"/>
+		</property>
+	</bean>
+	
 	<bean id="BlogService" class="com.whiteblog.service.BlogServiceImp">
 		<property name="blogDAO">
 			<ref bean="BlogDAO"/>
@@ -204,4 +224,31 @@
 			<ref bean="UserManager"/>
 		</property>
 	</bean>
+
+	<bean id="ShowCommentListAction" class="com.whiteblog.action.ShowCommentList">
+		<property name="showCommentListService">
+			<ref bean="ShowCommentListService" />
+		</property>
+	</bean>	
+	
+	<bean id="PostCommentAction" class="com.whiteblog.action.PostComment">
+		<property name="postCommentService">
+			<ref bean="PostCommentService" />
+		</property>
+	</bean>	
+	<bean id="InformDAO" class="com.whiteblog.dao.InformDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="ShowInformedBlogListAction" class="com.whiteblog.action.ShowInformedBlogList">
+		<property name="showInformedBlogListService">
+			<ref bean="ShowInformedBlogListService" />
+		</property>
+		<property name="blogDAO">
+			<ref bean="BlogDAO" />
+		</property>
+	</bean>	
+	
 </beans>
