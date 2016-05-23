@@ -22,6 +22,7 @@ public class ShowBlogList extends ActionSupport{
 		Map<String,Object> session = ActionContext.getContext().getSession();		
 		if(!session.containsKey("loginUser")){
 			blogList=showBlogListService.getAllBlog();
+			System.out.println("blogList size:"+blogList.size());
 			ActionContext.getContext().getSession().put("blogList", blogList);
 		}else{
 			User user = (User) session.get("loginUser");	
