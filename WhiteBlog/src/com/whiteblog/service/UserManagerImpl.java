@@ -70,23 +70,5 @@ public class UserManagerImpl {
 		return u.getUsername();
 	}
 	
-	public String deleteUserById(Integer id){
-		User u = userdao.findById(id);
-		if(u != null){
-			userdao.delete(u);
-			return "success";
-		}else{
-			return "error";
-		}	
-	}
-	
-	public List<User> getAllUser(){
-		
-		List<User> result = userdao.findAll();
-	
-		return result;
-	}
-	
-	
 
 }

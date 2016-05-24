@@ -21,7 +21,6 @@ public class Comment implements java.io.Serializable {
 	private Integer userId;
 	private String content;
 	private String time;
-	private String username;
 
 	// Constructors
 
@@ -30,13 +29,11 @@ public class Comment implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Comment(Integer blogId, Integer userId, String content, String time,
-			String username) {
+	public Comment(Integer blogId, Integer userId, String content, String time) {
 		this.blogId = blogId;
 		this.userId = userId;
 		this.content = content;
 		this.time = time;
-		this.username = username;
 	}
 
 	// Property accessors
@@ -85,15 +82,6 @@ public class Comment implements java.io.Serializable {
 
 	public void setTime(String time) {
 		this.time = time;
-	}
-
-	@Column(name = "username", length = 45)
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 }

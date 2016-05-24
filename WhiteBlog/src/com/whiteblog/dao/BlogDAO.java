@@ -1,13 +1,11 @@
 package com.whiteblog.dao;
 
 import java.util.List;
-
 import org.hibernate.LockMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import com.whiteblog.entity.Blog;
 
 /**
@@ -29,7 +27,6 @@ public class BlogDAO extends HibernateDaoSupport {
 	public static final String TITLE = "title";
 	public static final String CONTENT = "content";
 	public static final String TIME = "time";
-	public static final String USERNAME = "username";
 
 	protected void initDao() {
 		// do nothing
@@ -46,12 +43,11 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public String delete(Blog persistentInstance) {
+	public void delete(Blog persistentInstance) {
 		log.debug("deleting Blog instance");
 		try {
 			getHibernateTemplate().delete(persistentInstance);
 			log.debug("delete successful");
-			return "success";
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
 			throw re;
@@ -115,10 +111,6 @@ public class BlogDAO extends HibernateDaoSupport {
 
 	public List<Blog> findByTime(Object time) {
 		return findByProperty(TIME, time);
-	}
-
-	public List<Blog> findByUsername(Object username) {
-		return findByProperty(USERNAME, username);
 	}
 
 	public List findAll() {
