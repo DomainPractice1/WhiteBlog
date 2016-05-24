@@ -85,10 +85,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="tag-title">
 				<div class="container">
 					<p class="tags" id="post-titles">
-						<a data-filter=".pt-fashion" href="#">fashion</a>
-						<a data-filter=".pt-culture" href="#">culture</a>
-						<a data-filter=".pt-art" href="#">art</a>
-						<a data-filter="*" href="#" class="unfilter hide">all</a>
+<!-- 						<a data-filter=".pt-fashion" href="#">fashion</a> -->
+<!-- 						<a data-filter=".pt-culture" href="#">culture</a> -->
+<!-- 						<a data-filter=".pt-art" href="#">art</a> -->
+<!-- 						<a data-filter="*" href="#" class="unfilter hide">all</a> -->
 						<a class="tags" href="publish.jsp"><img src="assets/img/write.png"/></a>
 					</p>
 				</div>
@@ -123,12 +123,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="navbar-header">
 						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
 					</div>
-					
-					<div class="get-post-titles" style="margin-left:20px">
-						<button type="button" class="close_qp navbar-toggle push-navbar-full" data-navbar-type="article">
-							<i class="fa fa-bars"></i>
-						</button>
-					</div>		
 								
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
@@ -137,6 +131,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</a>									
 						</c:when>
 						<c:otherwise>
+							<div class="get-post-titles" style="margin-left:20px">
+								<button type="button" class="close_qp navbar-toggle push-navbar-full" data-navbar-type="article">
+									<i class="fa fa-bars"></i>
+								</button>
+							</div>		
 							<div class="get-post-titles">					
 								<button id="notice" type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
 									<i id="checkicon" class="fa fa-bell-o"></i>
