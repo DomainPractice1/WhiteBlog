@@ -1,7 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<%@	taglib prefix="html" uri="/struts-tags"%> 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="html" uri="/struts-tags"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -47,9 +46,6 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
-
-<!-- Script自己定义的代码 -->
-  
 </head>
 <body>
 	<div class="page-loader">
@@ -204,7 +200,7 @@
 							<span>June 12</span>Â Â Â â¢Â Â Â  <span>26 Comments</span>
 						</div>
 					</div>
-				</li>
+				</li> -
 			</ul>
 		</div>
 	</aside>
@@ -297,7 +293,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8">
-					<!--  插入标签的地方之一 -->
+		<!--  插入标签的地方之一 -->
 					<s:iterator id="key" value="#req">
 						<div class="post-fluid post-medium-vertical">
 
@@ -310,155 +306,54 @@
 										<div class="col-md-12">
 											<div class="post-item">
 												<div class="post-item-paragraph">
-													<!-- 使用了blogid -->
+												<!-- 使用了blogid -->
 													<div>
 														<!-- <a href="#" class="quick-read qr-only-phone"><i
 															class="fa fa-eye"></i></a> <a href="#" class="mute-text">DESIGN</a> -->
-														<a href="#" class="quick-read qr-only-phone"><i
-															class="fa fa-eye"></i></a> <a href="#" class="mute-text"><s:property
-																value="#key.blog.blogId" /></a>
+													<a href="#" class="quick-read qr-only-phone"><i
+															class="fa fa-eye"></i></a> <a href="#" class="mute-text"><s:property value="#key.blog.blogId"/></a>             
 													</div>
 													<!-- 标题的地方 -->
 													<h3>
 														<!-- <a href="#">Meet #59 Interface Designer John Doe</a> -->
 														<a href="#"><s:property value="#key.blog.title" /></a>
 													</h3>
-													<!-- 文章内容 -->
-
-													<s:property value="#key.blog.content" />
-
+													<!-- 文章内容 -->  
+													 
+														<s:property value="#key.blog.content" />
+													 
 												</div>
 												<div class="post-item-info clearfix">
-													<!-- 日期和 用户的名字 -->
+												<!-- 日期和 用户的名字 -->
 													<div class="pull-left">
-														<%-- 														<span>28 June</span>&nbsp;&nbsp;&nbsp; <a href="#">Edison
+<%-- 														<span>28 June</span>&nbsp;&nbsp;&nbsp; <a href="#">Edison
 															Pan</a> --%>
-														<span><s:property value="#key.blog.time" /></span>&nbsp;&nbsp;&nbsp;<span >
-															<s:property value="#key.username" />
-														</span>
+															<span><s:property value="#key.blog.time"/></span>&nbsp;&nbsp;&nbsp;<span> <s:property value="#key.username"/> </span>
 													</div>
-														 
 													<div class="pull-right post-item-social">
-														<button class="btn btn-link btn-xs" data-toggle="modal" data-placement="top"
-															data-target="#myModal" name="id" value="<s:property value="#key.blog.blogId"/>" >
-															<i class="fa fa-eye"></i>
-														</button>
-														 <s:form class="form-horizontal" role="form" action="sendMessage" method="post"> 
-													
-															<!-- 模态框（Modal） -->
-															<div class="modal form-horizontal fade" id="myModal" tabindex="-1"
-																role="dialog" aria-labelledby="myModalLabel" 
-																aria-hidden="true">
-																<div class="modal-dialog">
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<button type="button" class="close"
-																				data-dismiss="modal" aria-hidden="true">×</button>
-																			<!-- 模态框的标题部分 -->
-																			 
-																			<h4  class="modal-title" id="myModalLabel" >私信我吧</h4>
-																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="<s:property value="#key.blog.blogId"/>" name="id" class="modal-title" id="id" /> 
-																		</div>
-																		<!-- 模态框的内容部分 -->
-																		<div class="form-group">
-																			<%-- <textarea class="form-control" id="mesContent" name="idtmp" placeholder="说点什么"><s:property value="#key.blog.blogId"/></textarea> --%>
-																			<textarea class="form-control" id="mesContent" name="mesContent"
-																				placeholder="说点什么"></textarea>
-																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-default btn-grey btn-outline" 
-																				data-dismiss="modal">关闭</button>
-																			<button type="submit" class="btn btn-primary btn-grey btn-outline">
-																				发送 </button>
-												                     <!--  	</a>  -->
-																		</div>
-																	</div>
-																	<!-- /.modal-content -->
-																</div>
-																<!-- /.modal-dialog -->
-															</div>
-															<!-- /.modal 模态框结束-->
-															</s:form> 
-															<script>
-  																 $(function () { $('#myModal').modal('hide')});
-  																 $("#myModal").modal().css({
-               																  "margin-top": function () {
-                  															   return - ($(this).height() / 2);}
-           																		  });
-  																 $(function() {$('#myModal2').modal('hide')});
-															</script>
-													  		
-														<button class="btn btn-link btn-xs" data-toggle="modal" data-placement="top"
-															data-target="#myModal2"   value="<s:property value="#key.blog.blogId"/>" >
-															<i class="fa fa-facebook"></i>
-														</button>													  		
-												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
-													
-															<!-- 模态框（Modal） -->
-															<div class="modal form-horizontal fade" id="myModal2" tabindex="-1"
-																role="dialog" aria-labelledby="myModalLabel" 
-																aria-hidden="true">
-																<div class="modal-dialog">
-																	<div class="modal-content">
-																		<div class="modal-header" id="header2">
-																			<button type="button" class="close"
-																				data-dismiss="modal" aria-hidden="true">×</button>
-																			<!-- 模态框的标题部分 -->
-																			 
-																			<h4  class="modal-title" id="myModalLabel2" >已有标签</h4>
-																			<textarea class="form-control" id="mesContent2" name="mesContent2"  
-																				placeholder="新建标签,在这写上新的标签吧"></textarea>																		 
-
-																	 		
-																			 <!-- 不用管下面这行 -->
-																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="<s:property value="#key.blog.userId"/>" name="id" class="modal-title" id="id" />
-																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="<s:property value="#key.blog.blogId"/>" name="bid" class="modal-title" id="bid" />  
-																		</div>
-																		<!-- 模态框的内容部分 -->
-																		<div class="modal-header">
-																			<c:forEach var="tag" items="${btl}" > 
-																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p>  
-																			</c:forEach>		
-																		 																
-																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
-																		</div>
-																	
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-default btn-grey btn-outline" 
-																				data-dismiss="modal">关闭</button>
-																			<button type="submit" class="btn btn-primary btn-grey btn-outline">添加</button>
-												                     <!--  	</a>  -->
-																		</div>
-
-																		
-																	</div>
-																	<!-- /.modal-content -->
-																</div>
-																<!-- /.modal-dialog -->
-															</div>
-															<!-- /.modal 模态框结束-->
-												</s:form> 	
-	
+														<a href="#" class="quick-read qr-not-phone"><i
+															class="fa fa-eye"></i></a> <a href="#" tabindex="0"
+															role="button" data-toggle="popover" data-trigger="focus"
+															data-placement="top"
+															data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>"
+															class="pis-share"><i class="fa fa-share-alt"></i></a> <a
+															href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
 													</div>
-													
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-				
-					
-					<div class="row">
-						<div class="col-md-12">
-							<a href="medium-image-v1-2.html" class="post-nav post-older">OLDER</a>
+					</s:iterator>
+					<!--  插入标签的地方之一 结束的地方 -->
+						<div class="row">
+							<div class="col-md-12">
+								<a href="medium-image-v1-2.html" class="post-nav post-older">OLDER</a>
+							</div>
 						</div>
-					</div>
 
-				</div>
-			</s:iterator>
-			<!--  插入标签的地方之一 结束的地方 -->
+					</div>
 			</div>
 
 			<aside class="col-md-4">
@@ -697,7 +592,7 @@
 					class="fa fa-share-alt"></i></a> <a href="#" class="qr-comment"><i
 					class="fa fa-comment"></i></a> <a href="#" class="qr-like"><i
 					class="fa fa-heart"></i> 34</a> <a href="#" class="qr-next">NEXT
-					POST â     </a>
+					POST â</a>
 			</div>
 		</div>
 		<div class="quick-read-bottom qr-bottom-2 hide">
@@ -823,26 +718,5 @@
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
- 	
 </body>
- 																				<script type="text/javascript">  
-																				    var i = "df"; var t = "";
-                                                                                   function getTypename(id){
-	                                                                                  i = document.getElementById(id).innerText; 
-	                                                                                  //var tmp = document.getElementById("mesContent2").value.replace(/(^[\s\t\xa0\u3000]+)|([\u3000\xa0\s\t]+$)/g, "");
-	                                                                                  document.getElementById("mesContent2").value = i;
-	                                                                            /*       if(tmp == "")
-	                                                                                  	document.getElementById("mesContent2").value = i;
-	                                                                                  else{
-	                                                                                     t = tmp;
-	                                                                                   // var pp = "/.";
-	                                                                                   // pp = pp.concat(i, "/");
-	                                                                                   // var isExist = t.match(i);
-	                                                                                    if(t.indexOf(i) < 0){ 
-	                                                                                    	t=t.concat(",", i);
-	                                                                                    	document.getElementById("mesContent2").value = t;
-	                                                                                    } 
-	                                                                                  } */
-	                                                                             } 
-	                                                                       </script>	
 </html>

@@ -1,6 +1,5 @@
 package com.whiteblog.action;
 
-import java.util.List;
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -8,9 +7,8 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.form.BlogContentForm;
 import com.whiteblog.service.BlogContentManageImpl;
-import com.whiteblog.service.BlogTypeServiceImp;
 import com.whiteblog.service.UserManagerImpl;
-import com.whiteblog.entity.*;
+
 public class blogContentAction extends ActionSupport{
 	/**
 	 * 
@@ -21,20 +19,6 @@ public class blogContentAction extends ActionSupport{
 	public final String SUCCESS = "success";
 	public final String FAIL = "fail";
 	private UserManagerImpl userManager;
-	private BlogTypeServiceImp blogtypeService;
-	private List<Blogtype> btl ;
-	public List<Blogtype> getBtl() {
-		return btl;
-	}
-	public void setBtl(List<Blogtype> btl) {
-		this.btl = btl;
-	}
-	public BlogTypeServiceImp getBlogtypeService() {
-		return blogtypeService;
-	}
-	public void setBlogtypeService(BlogTypeServiceImp blogtypeService) {
-		this.blogtypeService = blogtypeService;
-	}
 	public UserManagerImpl getUserManager() {
 		return userManager;
 	}
@@ -57,23 +41,17 @@ public class blogContentAction extends ActionSupport{
 	 * @return 
 	 */
 	public String execute(){
+		System.out.println("Appear in BlogContentAction: showing blog of id = " + id);
 		Blog ins = blogContentManage.findById(id);
 		if(ins == null)
 			return FAIL;
 		String username = userManager.findUsernameById(id);
-		System.out.println(username + " and " + ins.getContent() + " BlogContent");
-		
-		
-		BlogContentForm blogContentForm = new BlogContentForm(ins, username); 
-		System.out.println(blogContentForm.getUsername() + "blogcontentform");
-		Map<String, Object> map = ActionContext.getContext().getSession();
-		map.put("req", blogContentForm);
-		BlogContentForm b = (BlogContentForm)map.get("req");
-		System.out.println(b.getUsername() + " is from map of blogcontentAction");
-		ActionContext.getContext().put("req", b);
-		btl = blogtypeService.getBlogtypeDAO().findByUserId(ins.getUserId());
-		ActionContext.getContext().put("re", btl);
-		//ActionContext.getContext().getSession().put("req", blogContentForm);
+		System.out.println(username);
+		BlogContentForm blogContentForm = new BlogContentForm(ins, username);
+		if(ActionContext.getContext().getSession().containsKey("req"))
+			ActionContext.getContext().getSession().remove("req");
+		ActionContext.getContext().put("req", blogContentForm);
+		ActionContext.getContext().getSession().put("blogId",id);
 		return SUCCESS;
 	}
 	
