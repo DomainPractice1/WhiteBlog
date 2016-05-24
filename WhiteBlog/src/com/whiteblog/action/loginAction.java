@@ -39,7 +39,7 @@ public class loginAction extends ActionSupport{
 			
 			User loginUser = usermanager.findUser(userform.getUsername());
 			
-			session.put("loginUser",loginUser.getUserId());
+			session.put("loginUser",loginUser);
 			
 			return SUCCESS;
 			

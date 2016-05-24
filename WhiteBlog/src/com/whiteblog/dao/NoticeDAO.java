@@ -29,7 +29,7 @@ public class NoticeDAO extends HibernateDaoSupport {
 	protected void initDao() {
 		// do nothing
 	}
-
+	
 	public void save(Notice transientInstance) {
 		log.debug("saving Notice instance");
 		try {
