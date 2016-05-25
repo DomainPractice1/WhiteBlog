@@ -330,7 +330,7 @@
 																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="id" class="modal-title" id="id" /> 
 																		</div>
 																		<!-- 模态框的内容部分 -->
-																		<div class="form-group">
+																		<div class="form-group modal-header">
 																			<textarea class="form-control" id="mesContent" name="mesContent"
 																				placeholder="说点什么"></textarea>
 																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
@@ -359,8 +359,8 @@
 															</script>	
 										
 										
-													<button class="btn btn-link btn-xs" data-toggle="modal" data-placement="top"
-															data-target="#myModal2"   value="<s:property value="${req.blog.blogId}"/>" >
+													<button class="btn btn-link btn-xs" style="float:left;" data-toggle="modal" data-placement="top"
+															data-target="#myModal2"   value="${req.blog.blogId}" >
 															<i class="fa fa-facebook"></i>
 													</button>				
 												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
@@ -382,8 +382,8 @@
 
 																	 		
 																			 <!-- 不用管下面这行 -->
-																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="<s:property value="${req.blog.userId}"/>" name="id" class="modal-title" id="id" />
-																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="<s:property value="${req.blog.blogId}"/>" name="bid" class="modal-title" id="bid" />  
+																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.userId}" name="id" class="modal-title" id="id" />
+																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="bid" class="modal-title" id="bid" />  
 																		</div>
 																		<!-- 模态框的内容部分 -->
 																		<div class="modal-header">
