@@ -256,4 +256,29 @@
 			<ref bean="BlogManager" />
 		</property>
 	</bean>
+	
+	<bean id="addTagsAction" class="com.whiteblog.action.BlogTypeAction">
+		<property name="blogtypeService">
+			<ref bean="BlogtypeService" />
+		</property>
+		<property name="blogManager">
+			<ref bean="BlogManager" />
+		</property>
+	</bean>
+	
+	<bean id="SendMessageManage" class="com.whiteblog.service.SendMessageManage">
+		<property name="mailDAO">
+			<ref bean="MailDAO"/>
+		</property>
+		<property name="userDAO">
+			<ref bean="UserDAO" />
+		</property>
+	</bean>
+	
+	<bean id="SendMessageAction" class="com.whiteblog.action.sendMessageAction">
+		<property name="sendMessageManage">
+			<ref bean="SendMessageManage" />
+		</property>
+	</bean>
+	
 </beans>

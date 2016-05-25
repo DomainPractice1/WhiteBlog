@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -305,8 +306,112 @@
 										<a href="#">art</a>
 									</p>
 									<div class="post-item-social">
-										<a href="#"><i class="fa fa-facebook"></i></a>
-										<a href="#"><i class="fa fa-twitter"></i></a>
+									
+									
+								<button class="btn btn-link btn-xs" data-toggle="modal" data-placement="top"
+															data-target="#myModal" name="id" value="${req.blog.blogId}" >
+															<i class="fa fa-eye"></i>
+														</button>
+										
+									<s:form class="form-horizontal" role="form" action="sendMessage" method="post"> 
+													
+															<!-- 模态框（Modal） -->
+															<div class="modal form-horizontal fade" id="myModal" tabindex="-1"
+																role="dialog" aria-labelledby="myModalLabel" 
+																aria-hidden="true">
+																<div class="modal-dialog">
+																	<div class="modal-content">
+																		<div class="modal-header">
+																			<button type="button" class="close"
+																				data-dismiss="modal" aria-hidden="true">×</button>
+																			<!-- 模态框的标题部分 -->
+																			 
+																			<h4  class="modal-title" id="myModalLabel" >私信我吧</h4>
+																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="id" class="modal-title" id="id" /> 
+																		</div>
+																		<!-- 模态框的内容部分 -->
+																		<div class="form-group">
+																			<textarea class="form-control" id="mesContent" name="mesContent"
+																				placeholder="说点什么"></textarea>
+																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
+																		</div>
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-default btn-grey btn-outline" 
+																				data-dismiss="modal">关闭</button>
+																			<button type="submit" class="btn btn-primary btn-grey btn-outline">
+																				发送 </button>
+												                     <!--  	</a>  -->
+																		</div>
+																	</div>
+																	<!-- /.modal-content -->
+																</div>
+																<!-- /.modal-dialog -->
+															</div>
+															<!-- /.modal 模态框结束-->
+															</s:form> 
+															<script>
+  																 $(function () { $('#myModal').modal('hide')});
+  																 $("#myModal").modal().css({
+               																  "margin-top": function () {
+                  															   return - ($(this).height() / 2);}
+           																		  });
+  																 $(function() {$('#myModal2').modal('hide')});
+															</script>	
+										
+										
+													<button class="btn btn-link btn-xs" data-toggle="modal" data-placement="top"
+															data-target="#myModal2"   value="<s:property value="${req.blog.blogId}"/>" >
+															<i class="fa fa-facebook"></i>
+													</button>				
+												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
+													
+															<!-- 模态框（Modal） -->
+															<div class="modal form-horizontal fade" id="myModal2" tabindex="-1"
+																role="dialog" aria-labelledby="myModalLabel" 
+																aria-hidden="true">
+																<div class="modal-dialog">
+																	<div class="modal-content">
+																		<div class="modal-header" id="header2">
+																			<button type="button" class="close"
+																				data-dismiss="modal" aria-hidden="true">×</button>
+																			<!-- 模态框的标题部分 -->
+																			 
+																			<h4  class="modal-title" id="myModalLabel2" >已有标签</h4>
+																			<textarea class="form-control" id="mesContent2" name="mesContent2"  
+																				placeholder="新建标签,在这写上新的标签吧"></textarea>																		 
+
+																	 		
+																			 <!-- 不用管下面这行 -->
+																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="<s:property value="${req.blog.userId}"/>" name="id" class="modal-title" id="id" />
+																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="<s:property value="${req.blog.blogId}"/>" name="bid" class="modal-title" id="bid" />  
+																		</div>
+																		<!-- 模态框的内容部分 -->
+																		<div class="modal-header">
+																			<c:forEach var="tag" items="${btl}" > 
+																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p>  
+																			</c:forEach>		
+																		 																
+																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
+																		</div>
+																	
+																		<div class="modal-footer">
+																			<button type="button" class="btn btn-default btn-grey btn-outline" 
+																				data-dismiss="modal">关闭</button>
+																			<button type="submit" class="btn btn-primary btn-grey btn-outline">添加</button>
+												                     <!--  	</a>  -->
+																		</div>
+
+																		
+																	</div>
+																	<!-- /.modal-content -->
+																</div>
+																<!-- /.modal-dialog -->
+															</div>
+															<!-- /.modal 模态框结束-->
+												</s:form> 														
+										
+										
+										
 										<a href="#"><i class="fa fa-google-plus"></i></a>
 										<a href="#"><i class="fa fa-heart"></i> 18</a>
 									</div>
@@ -514,4 +619,24 @@
 	<script src="assets/js/script.js"></script>
 	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </body>
+ 																				<script type="text/javascript">  
+																				    var i = "df"; var t = "";
+                                                                                   function getTypename(id){
+	                                                                                  i = document.getElementById(id).innerText; 
+	                                                                                  //var tmp = document.getElementById("mesContent2").value.replace(/(^[\s\t\xa0\u3000]+)|([\u3000\xa0\s\t]+$)/g, "");
+	                                                                                  document.getElementById("mesContent2").value = i;
+	                                                                            /*       if(tmp == "")
+	                                                                                  	document.getElementById("mesContent2").value = i;
+	                                                                                  else{
+	                                                                                     t = tmp;
+	                                                                                   // var pp = "/.";
+	                                                                                   // pp = pp.concat(i, "/");
+	                                                                                   // var isExist = t.match(i);
+	                                                                                    if(t.indexOf(i) < 0){ 
+	                                                                                    	t=t.concat(",", i);
+	                                                                                    	document.getElementById("mesContent2").value = t;
+	                                                                                    } 
+	                                                                                  } */
+	                                                                             } 
+	                                                                       </script>	
 </html>
