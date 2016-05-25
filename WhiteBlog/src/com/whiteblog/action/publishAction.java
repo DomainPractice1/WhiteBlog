@@ -2,6 +2,7 @@ package com.whiteblog.action;
 
 import java.util.List;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.service.BlogServiceImp;
 import com.whiteblog.service.BlogTypeServiceImp;
@@ -12,8 +13,10 @@ import com.whiteblog.entity.User;
 import com.whiteblog.dao.BlogDAO;
 import com.whiteblog.dao.BlogtypeDAO;
 import com.whiteblog.dao.UserDAO;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class publishAction extends ActionSupport{
 	 	
@@ -30,14 +33,19 @@ public class publishAction extends ActionSupport{
 	 	private String title;
 	 	private String content;
 	 	private String tags;
+	 	private String category;
 	 	private String userName;
 	 	private String hint;
+	 	private int id;
 		//private 
 		public String execute(){		
 			UserDAO userDAO=usermanager.getUserdao();
 			BlogDAO blogDAO=blogService.getBlogDAO();
 			BlogtypeDAO blogtypeDAO=blogtypeService.getBlogtypeDAO();
 			
+			Map<String, Object> session = ActionContext.getContext().getSession();
+			User me=(User)session.get("loginUser");
+			userName=me.getUsername();
 			List<User> result = userDAO.findByUsername(userName);
 			int userID=0;
 			if(!result.isEmpty()){
@@ -48,12 +56,20 @@ public class publishAction extends ActionSupport{
 				return ERROR;
 			}
 						
-			int typeID=0;
-			List<Blogtype> typesAlready=blogtypeDAO.findByTypename(tags);
-			if(!typesAlready.isEmpty()){
-				typeID=typesAlready.get(0).getTypeId();
+			int typeID=-1;
+			List<Blogtype> typesAlready = null;
+			if(!tags.trim().equals("")){
+				typesAlready=blogtypeDAO.findByTypename(tags);
+				if(!typesAlready.isEmpty()){
+					typeID=typesAlready.get(0).getTypeId();
+				}
 			}
 			else{
+				typeID=Integer.parseInt(category);
+			}
+			
+								
+			if(typeID==-1){
 				blogtype=new Blogtype();
 				blogtype.setTypename(tags);
 				blogtype.setUserId(userID);
@@ -75,10 +91,23 @@ public class publishAction extends ActionSupport{
 			blog.setTitle(title);
 			blog.setTypeId(typeID);
 			blog.setUserId(userID);
+			blog.setUsername(userName);
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 			blog.setTime(df.format(new Date()));// new Date()为获取当前系统时间
 			blogDAO.save(blog);
 			hint="成功发布！";
+			
+			List<Blog> newBlog = blogDAO.findAll();
+			int blogID=0;
+			if(!newBlog.isEmpty()){
+				int size=newBlog.size();
+				blogID=newBlog.get(size-1).getBlogId();
+			}
+			else{
+				hint="发布不成功请重试！";
+				return ERROR;
+			}
+			id=blogID;
 			return SUCCESS;
 		}
 		public void validate() {
@@ -91,14 +120,10 @@ public class publishAction extends ActionSupport{
 			{
 				addFieldError("content","文章内容为空");
 			}
-			if (tags == null || tags.trim().equals(""))
+			if ((tags == null || tags.trim().equals(""))&&((category == null || category.trim().equals(""))))
 			{
-				addFieldError("tags","请定义文章分类");
-			}
-			if (userName == null || userName.trim().equals(""))
-			{
-				addFieldError("userName","用户未登录");
-			}
+				addFieldError("tags","请选择文章分类或新建个人分类");
+			}			
 		}
 		public BlogServiceImp getBlogService() {
 			return blogService;
@@ -159,6 +184,18 @@ public class publishAction extends ActionSupport{
 		}
 		public void setHint(String hint) {
 			this.hint = hint;
+		}
+		public String getCategory() {
+			return category;
+		}
+		public void setCategory(String category) {
+			this.category = category;
+		}
+		public int getId() {
+			return id;
+		}
+		public void setId(int id) {
+			this.id = id;
 		}
 	
 		

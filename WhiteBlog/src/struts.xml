@@ -25,7 +25,10 @@
 		</action>
 		<action name="publish" class="PublishAction" method="execute">
 			<result name="input">/publish.jsp</result>
-			<result name="success">/publish.jsp</result>
+			<result name="success" type="redirectAction">
+			 	<param name="actionName">content</param>
+                <param name="id">${id}</param>
+			</result>
 			<result name="error">/error.jsp</result>
 		</action>
 		<action name="notice" class="NoticeAction" method="execute">

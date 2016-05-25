@@ -19,6 +19,7 @@ public class ShowBlogList extends ActionSupport{
 	private ShowBlogListService showBlogListService;
 
 	public String execute(){
+		System.out.println("[At ShowBlogList]");
 		Map<String,Object> session = ActionContext.getContext().getSession();		
 		if(!session.containsKey("loginUser")){
 			blogList=showBlogListService.getAllBlog();

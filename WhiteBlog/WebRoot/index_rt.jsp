@@ -102,7 +102,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<h5>
 								<i class="fa fa-file-text-o"></i>
 <!-- 								<h3><a href="content?id=${blog.blogId}">${blog.title}</a></h3> -->
-								<a href="content?id=${blog.blogId}">${blog.title}</a>
+								<a href="content.action?id=${blog.blogId}">${blog.title}</a>
 							</h5>
 							<div class="post-subinfo">
 								<span>${blog.time}</span>
@@ -233,7 +233,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
 													<a href="#" class="mute-text">DESIGN</a>
 												</div>
-												<h3><a href="content?id=${blog.blogId}">${blog.title}</a></h3>
+												<h3><a href="content.action?id=${blog.blogId}">${blog.title}</a></h3>
 												<p>${blog.content}<a href="#" class="more">[...]</a></p>
 											</div>
 											<div class="post-item-info clearfix">
@@ -548,7 +548,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#notice").click(function(){
 			$("#slideform").empty();
 			$.ajax({
-				url:"notice",
+				url:"notice.action",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -566,7 +566,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function timedCount()
 		{
 			$.ajax({
-				url:"checkNotice",
+				url:"checkNotice.action",
 				type:"POST",
 				datatype:"json",
 				success:function(data){
@@ -585,7 +585,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function delete_row(delete_id){
 		if(confirm("确定要删除？")){
 			$.ajax({
-				url:"deleteBlog?id="+delete_id,
+				url:"deleteBlog.action?id="+delete_id,
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -618,14 +618,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	// 			onclick_str = "onclick=\"delete_row(this)\"";
 			}
 			$.ajax({
-				url:"changeDeleteList",
+				url:"changeDeleteList.action",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
 				$.each(data, function(i, list){
 					var color_str = ""
 					if(classes.indexOf("view-blog") >= 0) {
-						actionStr = "content?id="+list.blogId;
+						actionStr = "content.action?id="+list.blogId;
 						color_str="color:#ffffff";
 					}else {
 						onclick_str="onclick=\"delete_row("+list.blogId+")\"";

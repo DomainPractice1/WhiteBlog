@@ -74,6 +74,7 @@ public class blogContentAction extends ActionSupport{
 		btl = blogtypeService.getBlogtypeDAO().findByUserId(ins.getUserId());
 		ActionContext.getContext().put("re", btl);
 		//ActionContext.getContext().getSession().put("req", blogContentForm);
+		ActionContext.getContext().getSession().put("blogId",id);
 		return SUCCESS;
 	}
 	
