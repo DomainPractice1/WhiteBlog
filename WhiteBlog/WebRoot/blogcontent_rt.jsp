@@ -30,6 +30,20 @@
 <link href='http://fonts.googleapis.com/css?family=Roboto+Slab&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 <!-- Custom styles for this template -->
 <link href="assets/css/style.css" rel="stylesheet">
+<link type="text/css" rel="stylesheet" href="assets/styles/shCoreDefault.css"></link>
+<link type="text/css" rel="stylesheet" href="assets/styles/shCore.css"></link>
+<script type="text/javascript" src="assets/scripts/shCore.js" ></script>
+<script type="text/javascript" src="assets/scripts/shBrushCpp.js" ></script>
+<script type="text/javascript" src="assets/scripts/shBrushCSharp.js" ></script>
+<script type="text/javascript" src="assets/scripts/shBrushCss.js" ></script>
+<script type="text/javascript" src="assets/scripts/shBrushJava.js" ></script>
+<script type="text/javascript" src="assets/scripts/shBrushJScript.js" ></script>
+<script type="text/javascript" src="assets/scripts/shBrushPhp.js" ></script>
+<script type="text/javascript" src="assets/scripts/shBrushPython.js" ></script>
+<script type="text/javascript" src="assets/scripts/shBrushSql.js" ></script>
+<script type="text/javascript" src="assets/scripts/shBrushXml.js" ></script>
+<script type="text/javascript">SyntaxHighlighter.all();</script>
+
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -295,8 +309,8 @@
 							<div class="post-item">
 								<div class="post-item-paragraph">
 									<h2><a href="#" class="quick-read"><i class="fa fa-eye"></i></a>${req.blog.title}</h2>
-									<p class="post-item-two-column">
-									${req.blog.content}
+									<p class="post-item-two-column">																		
+									${req.blog.content}	
 									</p>
 								</div>
 								<div class="post-item-info no-border clearfix">

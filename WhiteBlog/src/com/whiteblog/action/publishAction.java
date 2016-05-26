@@ -153,7 +153,52 @@ public class publishAction extends ActionSupport{
 			return content;
 		}
 		public void setContent(String content) {
-			this.content = content;
+			String blogContentFormer=content;
+			while(true){
+				int start=blogContentFormer.indexOf("[code=");
+				if(start==-1){
+					break;
+				}
+				String pre="<pre class=\"brush:";
+				//blogContentFormer.replaceFirst("[code=", "<pre class=\"brush:\"");
+				int endStart=blogContentFormer.indexOf("]",start);
+				String typeCode=blogContentFormer.substring(start+6, endStart);
+				String typeJs="";
+				switch(typeCode.charAt(0)){
+				case 'c':
+					if(typeCode.length()==1){//c
+						typeJs="cpp";					
+					}else if(typeCode.length()==2){//cs
+						typeJs="cs";
+					}				
+					else//css
+						typeJs="css";				
+					break;
+				case 'h':			
+					typeJs="xml";
+					break;
+				case 'j':
+					if(typeCode.length()==2)					
+						typeJs="js";
+					else
+						typeJs="java";
+					break;
+				case 'p':
+					if(typeCode.equals("php"))
+						typeJs="php";
+					else if(typeCode.equals("py"))
+						typeJs="python";
+					break;				
+				default:
+					break;
+				}
+				blogContentFormer=blogContentFormer.substring(0,start)+pre+typeJs+";\">"+blogContentFormer.substring(endStart+1,blogContentFormer.length());
+				int endTag=blogContentFormer.indexOf("[/code]");
+				blogContentFormer=blogContentFormer.substring(0,endTag)+"</pre>"+blogContentFormer.substring(endTag+7,blogContentFormer.length());
+			}	
+			//System.out.println(blogContentFormer.contains("<br />"));
+			blogContentFormer=blogContentFormer.replace("<br />", "\n");						
+			this.content = blogContentFormer;
 		}
 		public String getTags() {
 			return tags;

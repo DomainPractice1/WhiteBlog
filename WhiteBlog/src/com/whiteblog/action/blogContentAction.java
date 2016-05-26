@@ -61,10 +61,9 @@ public class blogContentAction extends ActionSupport{
 		if(ins == null)
 			return FAIL;
 		String username = userManager.findUsernameById(id);
-		System.out.println(username + " and " + ins.getContent() + " BlogContent");
+		System.out.println(username + " and " + ins.getContent() + " BlogContent");		
 		
-		
-		BlogContentForm blogContentForm = new BlogContentForm(ins, username); 
+		BlogContentForm blogContentForm = new BlogContentForm(ins, username); 		
 		System.out.println(blogContentForm.getUsername() + "blogcontentform");
 		Map<String, Object> map = ActionContext.getContext().getSession();
 		map.put("req", blogContentForm);
