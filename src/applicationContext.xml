@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+
+	 
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" 
+         destroy-method="close"> 
+         <property name="driverClass"> 
+             <value>com.mysql.jdbc.Driver</value> 
+         </property> 
+         <property name="jdbcUrl"> 
+             <value>jdbc:mysql://10.125.103.139:3306/whiteblog</value> 
+         </property> 
+         <property name="user"> 
+             <value>qwe</value> 
+         </property> 
+         <property name="password"> 
+             <value>123</value> 
+         </property> 
+         <property name="maxPoolSize"> 
+             <value>80</value> 
+         </property> 
+         <property name="minPoolSize"> 
+             <value>1</value> 
+         </property> 
+         <property name="initialPoolSize"> 
+             <value>1</value> 
+         </property> 
+         <property name="maxIdleTime"> 
+             <value>20</value> 
+         </property> 
+     </bean> 
+     
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>com.whiteblog.entity.Admin</value>
+				<value>com.whiteblog.entity.Blog</value>
+				<value>com.whiteblog.entity.Blogtype</value>
+				<value>com.whiteblog.entity.Comment</value>
+				<value>com.whiteblog.entity.Mail</value>
+				<value>com.whiteblog.entity.Notice</value>
+				<value>com.whiteblog.entity.User</value>
+				<value>com.whiteblog.entity.Inform</value></list>
+		</property></bean>
+	<bean id="AdminDAO" class="com.whiteblog.dao.AdminDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BlogDAO" class="com.whiteblog.dao.BlogDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="BlogtypeDAO" class="com.whiteblog.dao.BlogtypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CommentDAO" class="com.whiteblog.dao.CommentDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="MailDAO" class="com.whiteblog.dao.MailDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="NoticeDAO" class="com.whiteblog.dao.NoticeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UserDAO" class="com.whiteblog.dao.UserDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="UserManager" class="com.whiteblog.service.UserManagerImpl">
+		<property name="userdao">
+			<ref bean="UserDAO" />
+		</property>
+	</bean>
+	
+	<bean id="MailManager" class="com.whiteblog.service.MailManagerImpl">
+		<property name="maildao">
+			<ref bean="MailDAO"/>
+		</property>
+		<property name="userdao">
+			<ref bean="UserDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="NoticeManager" class="com.whiteblog.service.NoticeManagerImpl">
+		<property name="noticedao">
+			<ref bean="NoticeDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="ShowBlogListService" class="com.whiteblog.service.ShowBlogListService">
+		<property name="blogDAO">
+			<ref bean="BlogDAO" />
+		</property>
+	</bean>
+	
+	<bean id="ShowCommentListService" class="com.whiteblog.service.ShowCommentListService">
+		<property name="commentDAO">
+			<ref bean="CommentDAO" />
+		</property>
+	</bean>
+	
+	<bean id="PostCommentService" class="com.whiteblog.service.PostCommentService">
+		<property name="commentDAO">
+			<ref bean="CommentDAO" />
+		</property>
+	</bean>
+	
+	<bean id="LoginAction" class="com.whiteblog.action.loginAction">
+		<property name="usermanager">
+			<ref bean="UserManager" />
+		</property>
+	</bean>	
+	
+	<bean id="RegisterAction" class="com.whiteblog.action.registerAction">
+		<property name="usermanager">
+			<ref bean="UserManager" />
+		</property>
+	</bean>
+	
+
+	<bean id="ShowBlogListAction" class="com.whiteblog.action.ShowBlogList">
+		<property name="showBlogListService">
+			<ref bean="ShowBlogListService" />
+		</property>
+	</bean>	
+
+	<bean id="BlogManager" class="com.whiteblog.service.BlogManagerImpl">
+		<property name="blogDao">
+			<ref bean="BlogDAO" />
+		</property>
+	</bean>
+	
+	<bean id="SearchArticleAction" class = "com.whiteblog.action.searchArticleAction">
+		<property name="blogManager">
+			<ref bean="BlogManager" />
+		</property>
+	</bean>
+	
+	<bean id="blogContentManage" class="com.whiteblog.service.BlogContentManageImpl">
+		<property name="blogDAO">
+			<ref bean="BlogDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="BlogContent" class="com.whiteblog.action.blogContentAction">
+		<property name="blogContentManage">
+			<ref bean="blogContentManage"/>
+		</property>
+		<property name="userManager">
+			<ref bean="UserManager"/>
+		</property>
+		<property name="blogtypeService">
+			<ref bean="BlogtypeService" />
+		</property>
+	</bean>
+	
+	
+	<bean id="ShowInformedBlogListService" class="com.whiteblog.service.ShowInformedBlogListService">
+		<property name="informDAO">
+			<ref bean="InformDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="BlogService" class="com.whiteblog.service.BlogServiceImp">
+		<property name="blogDAO">
+			<ref bean="BlogDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="BlogtypeService" class="com.whiteblog.service.BlogTypeServiceImp">
+		<property name="blogtypeDAO">
+			<ref bean="BlogtypeDAO"/>
+		</property>
+	</bean>
+	
+	<bean id="PublishAction" class="com.whiteblog.action.publishAction">
+		<property name="blogService">
+			<ref bean="BlogService"/>
+		</property>
+		<property name="usermanager">
+			<ref bean="UserManager" />
+		</property>
+		<property name="blogtypeService">
+			<ref bean="BlogtypeService" />
+		</property>
+	</bean>
+	
+	<bean id="MailAction" class="com.whiteblog.action.mailAction">
+		<property name="mailManager">
+			<ref bean="MailManager"/>
+		</property>
+	</bean>
+	
+	<bean id="NoticeAction" class="com.whiteblog.action.noticeAction">
+		<property name="noticeManager">
+			<ref bean="NoticeManager"/>
+		</property>
+	</bean>
+	
+	<bean id="UserAction" class="com.whiteblog.action.UserAction">
+		<property name="userManager">
+			<ref bean="UserManager"/>
+		</property>
+	</bean>
+
+	<bean id="ShowCommentListAction" class="com.whiteblog.action.ShowCommentList">
+		<property name="showCommentListService">
+			<ref bean="ShowCommentListService" />
+		</property>
+	</bean>	
+	
+	<bean id="PostCommentAction" class="com.whiteblog.action.PostComment">
+		<property name="postCommentService">
+			<ref bean="PostCommentService" />
+		</property>
+		<property name="noticeManager">
+			<ref bean="NoticeManager"/>
+		</property>
+		<property name="blogManager">
+			<ref bean="BlogManager"/>
+		</property>
+	</bean>
+	<bean id="InformDAO" class="com.whiteblog.dao.InformDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="ShowInformedBlogListAction" class="com.whiteblog.action.ShowInformedBlogList">
+		<property name="showInformedBlogListService">
+			<ref bean="ShowInformedBlogListService" />
+		</property>
+		<property name="blogDAO">
+			<ref bean="BlogDAO" />
+		</property>
+	</bean>	
+
+	<bean id="DeleteBlogAction" class = "com.whiteblog.action.deleteBlogAction">
+		<property name="blogManager">
+			<ref bean="BlogManager" />
+		</property>
+	</bean>
+	
+	<bean id="addTagsAction" class="com.whiteblog.action.BlogTypeAction">
+		<property name="blogtypeService">
+			<ref bean="BlogtypeService" />
+		</property>
+		<property name="blogManager">
+			<ref bean="BlogManager" />
+		</property>
+	</bean>
+	
+	<bean id="SendMessageManage" class="com.whiteblog.service.SendMessageManage">
+		<property name="mailDAO">
+			<ref bean="MailDAO"/>
+		</property>
+		<property name="userDAO">
+			<ref bean="UserDAO" />
+		</property>
+	</bean>
+	
+	<bean id="SendMessageAction" class="com.whiteblog.action.sendMessageAction">
+		<property name="sendMessageManage">
+			<ref bean="SendMessageManage" />
+		</property>
+		<property name="noticeManager">
+			<ref bean="NoticeManager"/>
+		</property>
+		<property name="blogManager">
+			<ref bean="BlogManager"/>
+		</property>
+	</bean>
+	
+	<bean id="showMailListAction" class="com.whiteblog.action.mailAction">
+		<property name="mailManager">
+			<ref bean="MailManager"/>
+		</property>
+	</bean>
+</beans>
