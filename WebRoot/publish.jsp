@@ -97,21 +97,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//var document.getElementsByName("filedata");
 	</script>	
   </head>
-<body>
+<body onload="timedCount()">
   <s:div class="canvas">
 	<s:div cssClass="canvas-overlay"></s:div>
   		<header>
-		<nav class="navbar navbar-fixed-top nav-down navbar-laread">
-			<s:div cssClass="container">
-				<s:div cssClass="navbar-header">
-					<s:a cssClass="navbar-brand" href="index.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></s:a>
-				</s:div>				
-				<s:a href="#" data-toggle="modal" data-target="#login-form" cssClass="modal-form">
-					<i class="fa fa-user"></i>
-				</s:a>														
-			</s:div>
-		</nav>
-		</header>  
+			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
+				<div class="container">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+					</div>
+								
+					<c:choose>
+						<c:when test="${sessionScope.loginUser == null}">
+							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
+								<i class="fa fa-user"></i>
+							</a>									
+						</c:when>
+						<c:otherwise>
+							<div class="get-post-titles" style="margin-left:20px">
+								<button  type="button" class="close_qp navbar-toggle push-navbar-full" data-navbar-type="article">
+									<i class="fa fa-bars"></i>
+								</button>
+							</div>		
+							<div class="get-post-titles">					
+								<button id="notice" type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
+									<i id="checkicon" class="fa fa-bell-o"></i>
+								</button>						
+							</div>
+							<div class="get-post-titles" style="margin-right:10px">					
+								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.action'">
+									<i class="fa fa-envelope"></i>
+								</button>						
+							</div>
+							<a class="modal-form">${sessionScope.loginUser.username}</a>
+						</c:otherwise>
+					</c:choose>
+					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
+						<span class="sr-only">Toggle navigation</span>
+						<i class="fa fa-plus"></i>
+					</button>
+				</div>
+			</nav>
+		</header> 
 		  
 		<s:div cssClass="container">		
 			<s:form action="publish" method="POST" id="frmDemo" enctype="multipart/form-data" theme="simple">	
@@ -152,6 +179,177 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        </s:div>                   
 	   </s:form>		
 		</s:div>		
-	</s:div>  	   
+	</s:div> 
+	
+	<!-- Login Modal -->
+	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
+				</div>
+				<div class="modal-body">
+					<form action="login.action" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Username" name="userform.username">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" placeholder="Password" name="userform.password">
+						</div>
+						<div class="linkbox">
+							<a href="#">Forgot password ?</a>
+							<span>No account ? <a href="#" id="register-btn" data-toggle="modal" data-target="#register-form">Sign Up.</a></span>
+							<!-- <span class="form-warning"><i class="fa fa-exclamation"></i>Fill the require.</span> -->
+						</div>
+						<div class="linkbox">
+							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN IN</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div class="provider">
+						<span>Sign In With</span>
+						<a href="#"><i class="fa fa-facebook"></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-content" id="register-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
+				</div>
+				<div class="modal-body">
+					<form action="register.action" method="post">
+						<!-- <div class="form-group">
+							<input class="form-control" placeholder="Name">
+						</div> -->
+						<div class="form-group">
+							<input class="form-control" placeholder="Username" name="userform.username">
+						</div>
+						<!-- <div class="form-group">
+							<input class="form-control" placeholder="Email">
+						</div> -->
+						<div class="form-group">
+							<input class="form-control" type="password" placeholder="Password" name="userform.password">
+						</div>
+						<div class="linkbox">
+							<span>Already got account? <a href="#" id="login-btn" data-target="#login-form">Sign In.</a></span>
+						</div>
+						<div class="linkbox">
+							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN UP</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div> 	   
   </body>
+  <script type="text/javascript">		
+		$("#notice").click(function(){
+			$("#slideform").empty();
+			$.ajax({
+				url:"notice.action",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data,function(i,list){  
+                       		var _tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a>' + list.content + '</a>' +
+						'</h5><div class="post-subinfo"></div></div></li>'
+                       		 $("#slideform").append(_tr);
+                    })
+				}
+			})	
+		});
+	</script>
+	
+	
+	
+	<script type="text/javascript">
+		var t
+		function timedCount()
+		{
+			$.ajax({
+				url:"checkNotice.action",
+				type:"POST",
+				datatype:"json",
+				success:function(data){
+					if(data == "new"){
+						$("#checkicon").attr("class","fa fa-bell fa-spin");
+					}else{
+						$("#checkicon").attr("class","fa fa-bell-o")
+					}
+				}
+			})
+			t=setTimeout("timedCount()",10000)
+		}
+	</script>
+
+	<script type ="text/javascript">
+	function delete_row(delete_id){
+		if(confirm("确定要删除？")){
+			$.ajax({
+				url:"deleteBlog.action?id="+delete_id,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == -1){
+						$("li").remove("#blog-"+delete_id);
+						//$(delete_id).parent().parent().parent().remove();
+						window.alert("删除成功");
+					}else{
+						window.alert("删除失败");
+					}
+				}
+			})
+			//$("li").remove("#"+delete_id);
+		}
+	}
+	</script>
+	<script type ="text/javascript">
+		$(".Edit_qp").click(function(){
+			$("#delete_vision").empty();
+			$("#delete_vision").toggleClass("delete-blog");
+			$("#delete_vision").toggleClass("view-blog");
+			var classes = $("#delete_vision").attr("class");
+			var actionStr = "#";
+			var delete_icon = "";
+			var onclick_str = "";
+			if(classes.indexOf("view-blog") >= 0) {
+				delete_icon = "delete_icon fa fa-file-text-o";
+			}else{
+				delete_icon = "delete_icon fa fa-times";
+	// 			onclick_str = "onclick=\"delete_row(this)\"";
+			}
+			$.ajax({
+				url:"changeDeleteList.action",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data, function(i, list){
+					var color_str = ""
+					if(classes.indexOf("view-blog") >= 0) {
+						$(".Edit_qp").html("删除文章");
+						actionStr = "content.action?id="+list.blogId;
+						color_str="color:#ffffff";
+					}else {
+						$(".Edit_qp").html("返回");
+						onclick_str="onclick=\"delete_row("+list.blogId+")\"";
+						color_str="color:#FF4500";
+					}
+					var _tr = '<li class="pt-fashion pt-culture" id="blog-'+list.blogId+'"><div class="container"><h5><i class="'+delete_icon+'" style='+color_str+'></i>'+
+					'<a class="delete_qp" href="'+actionStr+'"'+onclick_str+'>'+list.title+'</a></h5><div class="post-subinfo">'+
+					'<span>'+list.time+'</span>   •   <span>2 Comments</span></div></div></li>';
+					$("#delete_vision").append(_tr);				
+				})
+				}
+			})
+			var canvasHeight = $('.canvas').outerHeight();
+			$('.navmenu-quan').height(canvasHeight);
+			$('.post-title-list > li > div').toggleClass('container');
+		})
+	</script>
 </html>

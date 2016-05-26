@@ -33,7 +33,7 @@ public class loginAction extends ActionSupport{
 	
 	public String execute(){
 		
-		if(usermanager.checklogin(userform).equals("true")){
+		if(usermanager.checklogin(userform).equals("user")){
 			
 			Map<String,Object> session = ActionContext.getContext().getSession();
 			
@@ -41,12 +41,20 @@ public class loginAction extends ActionSupport{
 			
 			session.put("loginUser",loginUser);
 			
-			return SUCCESS;
+			return "user";
+			
+		}else if(usermanager.checklogin(userform).equals("admin")){
+			
+			Map<String,Object> session = ActionContext.getContext().getSession();
+			
+			User loginUser = usermanager.findUser(userform.getUsername());
+			
+			session.put("loginUser",loginUser);
+			
+			return "admin";
 			
 		}else{
-			
 			return ERROR;
-			
 		}
 	
 	}

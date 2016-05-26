@@ -52,10 +52,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="container">
 					<p class="tags" id="post-titles">
 						<a class="Edit_qp selected" href="#">删除文章</a>
-<!-- 						<a data-filter=".pt-fashion" href="#">fashion</a> -->
-<!-- 						<a data-filter=".pt-culture" href="#">culture</a> -->
-<!-- 						<a data-filter=".pt-art" href="#">art</a> -->
-<!-- 						<a data-filter="*" href="#" class="unfilter hide">all</a> -->
 					</p>
 				</div>
 			</div>
@@ -71,10 +67,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="tag-title">
 				<div class="container">
 					<p class="tags" id="post-titles">
-<!-- 						<a data-filter=".pt-fashion" href="#">fashion</a> -->
-<!-- 						<a data-filter=".pt-culture" href="#">culture</a> -->
-<!-- 						<a data-filter=".pt-art" href="#">art</a> -->
-<!-- 						<a data-filter="*" href="#" class="unfilter hide">all</a> -->
 						<a class="tags" href="publish.jsp"><img src="assets/img/write.png"/></a>
 					</p>
 				</div>
@@ -111,6 +103,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<i id="checkicon" class="fa fa-bell-o"></i>
 								</button>						
 							</div>
+							<div class="get-post-titles" style="margin-right:10px">					
+								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.action'">
+									<i class="fa fa-envelope"></i>
+								</button>						
+							</div>
 							<a class="modal-form">${sessionScope.loginUser.username}</a>
 						</c:otherwise>
 					</c:choose>
@@ -118,73 +115,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-plus"></i>
 					</button>
-					
-					<div class="collapse navbar-collapse" id="main-nav">
-						<ul class="nav navbar-nav">
-							<li>
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HOME</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="large-image-v1-1.html">Large Image v1</a></li>
-									<li><a href="large-image-v2-1.html">Large Image v2</a></li>
-									<li><a href="medium-image-v1-1.html">Medium Image v1</a></li>
-									<li><a href="medium-image-v2-1.html">Medium Image v2</a></li>
-									<li><a href="masonry-1.html">Masonry</a></li>
-									<li><a href="banner-v1.html">BannerMode v1</a></li>
-									<li><a href="banner-v2.html">-v2</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">GALLERY</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="gallery-v1.html">Gallery v1</a></li>
-									<li><a href="gallery-v2.html">Gallery v2</a></li>
-									<li><a href="gallery-v3.html">Gallery v3</a></li>
-									<li><a href="gallery-v4.html">Gallery v4</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">PAGES</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="about-v1.html">About v1</a></li>
-									<li><a href="about-v2.html">-v2</a></li>
-									<li><a href="authors.html">Authors</a></li>
-									<li><a href="author-detail.html">Author Detail</a></li>
-									<li><a href="archive.html">Archive</a></li>
-									<li><a href="contact-v1.html">Contact v1</a></li>
-									<li><a href="contact-v2.html">-v2</a></li>
-									<li><a href="404.html">Not Found</a></li>
-									<li><a href="newsletter.html" target="_blank">Newsletter</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">FEATURES</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="widget.html">Widgets</a></li>
-									<li><a href="typography-1.html">Typography -1</a></li>
-									<li><a href="typography-2.html">-2</a></li>
-									<li><a href="typography-3.html">-3</a></li>
-									<li><a href="typography-4.html">-4</a></li>
-									<li><a href="shortcode-1.html">Shortcode -1</a></li>
-									<li><a href="shortcode-2.html">-2</a></li>
-									<li><a href="shortcode-3.html">-3</a></li>
-									<li><a href="shortcode-4.html">-4</a></li>
-
-								</ul>
-							</li>
-						</ul>
-					</div><!--/.nav-collapse -->
 				</div>
 			</nav>
 		</header>
 
 		<div class="container">
 			<div class="head-text">
-				<h1>LaRead</h1>
-				<form action="getalluser.action">
-					<p class="lead-text">Blog. Designed for Read.</p>
-					<button type="submit" value="跳转"></button>
-				</form>
-				
+				<h1>White Blog</h1>
+				<p class="lead-text">Blog. Designed for Read.</p>
 			</div>
 		</div>
 
@@ -201,7 +139,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 											<div class="post-item-paragraph">
 												<div>
 													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
-													<a href="#" class="mute-text">DESIGN</a>
 												</div>
 												<h3><a href="content.action?id=${blog.blogId}">${blog.title}</a></h3>
 												<p>${blog.content}<a href="#" class="more">[...]</a></p>
@@ -281,36 +218,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</li>
 						</ul>
 
-						<ul class="laread-list barbg-grey">
-							<li class="title">NEWSLETTER</li>
-							<li class="newsletter-bar">
-								<p>Vivamus nec mauris pulvinar leo dignissim sollicitudin eleifend eget velit.</p>
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-									<input type="text" class="form-control" placeholder="john@doe.com">
-									<span class="input-group-btn">
-										<button class="btn" type="button"><i class="fa fa-check"></i></button>
-									</span>
-								</div>
-							</li>
-						</ul>
-
-						<div class="laread-list quotes-basic">
-							<i class="fa fa-quote-left"></i>
-							<p>âThe difference between stupidity and genius is that genius has its limits.â</p>
-							<span class="whosay">- Albert Einstein </span>
-						</div>
-
-						<ul class="laread-list social-bar">
-							<li class="title">FOLLOW US</li>
-							<li class="social-icons">
-								<a href="#"><i class="fa fa-facebook"></i></a>
-								<a href="#"><i class="fa fa-twitter"></i></a>
-								<a href="#"><i class="fa fa-google-plus"></i></a>
-								<a href="#"><i class="fa fa-dribbble"></i></a>
-							</li>
-						</ul>
-
 					</div>
 
 				</aside>
@@ -321,11 +228,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<div class="container text-center">
 				<div class="footer-logo"><img src="assets/img/logo-black.png" alt=""></div>
 				<p class="laread-motto">Designed for Read.</p>
-				<div class="laread-social">
-					<a href="#" class="fa fa-twitter"></a>
-					<a href="#" class="fa fa-facebook"></a>
-					<a href="#" class="fa fa-pinterest"></a>
-				</div>
+				
 			</div>
 		</footer>
 	</div>
@@ -531,6 +434,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			})	
 		});
 	</script>
+	
+	
+	
 	<script type="text/javascript">
 		var t
 		function timedCount()
@@ -595,9 +501,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				$.each(data, function(i, list){
 					var color_str = ""
 					if(classes.indexOf("view-blog") >= 0) {
+						$(".Edit_qp").html("删除文章");
 						actionStr = "content.action?id="+list.blogId;
 						color_str="color:#ffffff";
 					}else {
+						$(".Edit_qp").html("返回");
 						onclick_str="onclick=\"delete_row("+list.blogId+")\"";
 						color_str="color:#FF4500";
 					}

@@ -25,7 +25,7 @@ public class mailAction extends ActionSupport{
 
 
 
-	public String showMailList(){
+	public String execute(){
 		
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		

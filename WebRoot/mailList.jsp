@@ -1,3 +1,5 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -8,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="assets/img/favicon.ico">
-<title>LaRead - Authors</title>
+<title>LaRead - Author Detail</title>
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome CSS -->
@@ -114,50 +116,45 @@
 			</nav>
 		</header>
 
-		<div class="container">
-
-			<div class="head-author">
-				<h1 class="author-h1">LaRead Authors</h1>
-				<p class="lead about-lead">Welcome to my blog, take your time give it a read and browse around.</p>
-			</div>
-
-		</div>
-
-
-		<div class="post-fluid">
-			<div class="container-fluid">
-			<form action="deleteuser.action">
-				<c:forEach items="${sessionScope.allUser}" var="user">
-					<article class="row laread-authors">
-						<div class="author-item">
-							<div class="author-picture">
-								<img src="assets/img/img-48.png" alt="" />
-							</div>
-							<div class="author-subdetail">
-								<h2><a href="#"></a></h2>
-								<p class="info-small">Graphic Designer<span><i class="fa fa-map-marker"></i>Toronto, Canada</span></p>
-								<div class="author-connection">
-									<a href="#"><i class="fa fa-twitter"></i></a>
-									<a href="#"><i class="fa fa-google-plus"></i></a>
-									<a href="#"><i class="fa fa-envelope"></i></a>
-								</div>
-								<p class="author-bio">userName:${user.username} </p>							
-								<button type="submit" class="btn btn-grey btn-outline btn-rounded" name="selectUser" value="${user.userId}">Delete</button>											
-							</div>
+		<section class="post-fluid">
+			<div class="container-fluid">		
+				
+				<div class="row author-article-list">
+					<div class="article-list-box">
+						<div class="article-type clearfix" role="tablist">
+							<ul>
+								<li role="presentation" class="active">
+									<a href="#lastest" id="lastest-tab" role="tab" data-toggle="tab" aria-controls="lastest" aria-expanded="true">我的私信</a>
+								</li>
+							</ul>
 						</div>
-					</article>	
-				</c:forEach>
-			</form>		
-
-				<div class="row become-author">
-					<h5>Become an author</h5>
-					<p>Vivamus nec mauris pulvinar leo dignissim sollicitudin eleifend eget velit. Mauris fermentum fringilla lorem, in rutrum massa.</p>
-					<a href="#"><i class="fa fa-envelope"></i></a>
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane fade in active" id="lastest" aria-labelledBy="lastest-tab">
+								<ul class="article-list">
+								<s:iterator value="#session.MailList" var="mail" status='st'>
+									<li>
+										<div class="media clearfix">
+											<div class="media-right"><a href="#" class="article-number hidden-xs"><s:property value='#st.index'/></a></div>
+											<div class="media-body">
+												<h4 class="media-heading"><a href="#">${mail.fromusername}</a></h4>
+												<p>${mail.content}</p>
+												<div class="article-info"><span class="visible-xs-inline">${mail.time}</span></div>
+											</div>
+										</div>
+									</li>
+								</s:iterator>				
+								</ul>
+							</div>		
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 
-		<footer class="container-fluid footer no-mt">
+
+		<!-- /.container -->
+
+		<footer class="container-fluid footer">
 			<div class="container text-center">
 				<div class="footer-logo"><img src="assets/img/logo-black.png" alt=""></div>
 				<p class="laread-motto">Designed for Read.</p>
@@ -178,15 +175,15 @@
 	<script src="assets/js/jasny-bootstrap.min.js"></script>
 	<script src="assets/js/prettify.js"></script>
 	<script src="assets/js/lang-css.js"></script>
+	<script src="assets/js/jquery.blueimp-gallery.min.js"></script>
+	<script src="assets/js/imagesloaded.js"></script>
+	<script src="assets/js/isotope.pkgd.min.js"></script>
 	<script src="assets/js/jquery.ellipsis.min.js"></script>
 	<script src="assets/js/jquery.dotdotdot.min.js"></script>
 	<script src="assets/js/jquery.colorbox-min.js"></script>
 	<script src="assets/js/jquery.nicescroll.min.js"></script>
-	<script src="assets/js/jquery.blueimp-gallery.min.js"></script>
-	<script src="assets/js/imagesloaded.js"></script>
 	<script src="assets/js/masonry.js"></script>
 	<script src="assets/js/viewportchecker.js"></script>
-	<script src="assets/js/isotope.pkgd.min.js"></script>
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>

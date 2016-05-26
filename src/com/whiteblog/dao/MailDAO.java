@@ -1,11 +1,13 @@
 package com.whiteblog.dao;
 
 import java.util.List;
+
 import org.hibernate.LockMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
 import com.whiteblog.entity.Mail;
 
 /**
@@ -26,6 +28,7 @@ public class MailDAO extends HibernateDaoSupport {
 	public static final String TOUSER_ID = "touserId";
 	public static final String CONTENT = "content";
 	public static final String TIME = "time";
+	public static final String FROMUSERNAME = "fromusername";
 
 	protected void initDao() {
 		// do nothing
@@ -106,6 +109,10 @@ public class MailDAO extends HibernateDaoSupport {
 
 	public List<Mail> findByTime(Object time) {
 		return findByProperty(TIME, time);
+	}
+
+	public List<Mail> findByFromusername(Object fromusername) {
+		return findByProperty(FROMUSERNAME, fromusername);
 	}
 
 	public List findAll() {

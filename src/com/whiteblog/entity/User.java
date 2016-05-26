@@ -19,6 +19,7 @@ public class User implements java.io.Serializable {
 	private Integer userId;
 	private String username;
 	private String password;
+	private String identity;
 
 	// Constructors
 
@@ -26,10 +27,17 @@ public class User implements java.io.Serializable {
 	public User() {
 	}
 
-	/** full constructor */
+	/** minimal constructor */
 	public User(String username, String password) {
 		this.username = username;
 		this.password = password;
+	}
+
+	/** full constructor */
+	public User(String username, String password, String identity) {
+		this.username = username;
+		this.password = password;
+		this.identity = identity;
 	}
 
 	// Property accessors
@@ -60,6 +68,15 @@ public class User implements java.io.Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	@Column(name = "identity", length = 45)
+	public String getIdentity() {
+		return this.identity;
+	}
+
+	public void setIdentity(String identity) {
+		this.identity = identity;
 	}
 
 }

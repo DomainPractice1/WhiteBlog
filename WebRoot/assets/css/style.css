@@ -510,6 +510,14 @@ a:focus {
 	width: 16px;
 	height: 18px;
 }
+.push-navbar-undo {
+	display: block;
+	padding-right: 0;
+}
+.push-navbar-undo > i {
+	width: 16px;
+	height: 18px;
+}
 .push-navbar {
 	display: block;
 	padding-right: 0;

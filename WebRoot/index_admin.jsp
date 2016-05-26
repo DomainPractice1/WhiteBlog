@@ -35,42 +35,41 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link href="assets/css/style.css" rel="stylesheet">
 
 </head>
-<body>
+<body onload="timedCount()">
 	<s:action name="ShowInformedBlogList"/>
 	<div class="page-loader">
 		<div class="loader-in">Loading...</div>
 		<div class="loader-out">Loading...</div>
 	</div>
 
+	<!-- 文章列表 -->
+	<aside class="navmenu-quan">
+		<div class="post-titles">
+			<div class="tag-title">
+				<div class="container">
+					<p class="tags" id="post-titles">
+						<a class="Edit_qp selected" href="#">删除文章</a>
+					</p>
+				</div>
+			</div>
+			<button type="button" class="remove-navbar"><i class="fa fa-times"></i></button>
+			<ul class="post-title-list clearfix view-blog" id="delete_vision">
+			
+			</ul>
+		</div>
+	</aside>
+	
 	<aside class="navmenu">
 		<div class="post-titles">
 			<div class="tag-title">
 				<div class="container">
 					<p class="tags" id="post-titles">
-						<a data-filter=".pt-fashion" href="#">fashion</a>
-						<a data-filter=".pt-culture" href="#">culture</a>
-						<a data-filter=".pt-art" href="#">art</a>
-						<a data-filter="*" href="#" class="unfilter hide">all</a>
+						<a class="tags" href="publish.jsp"><img src="assets/img/write.png"/></a>
 					</p>
-					<a class="tags" href="publish.jsp"><img src="assets/img/write.png"/></a>
 				</div>
 			</div>
 			<button type="button" class="remove-navbar"><i class="fa fa-times"></i></button>
-			<ul class="post-title-list clearfix">
-				<s:iterator value = "#session.informedBlogList" var = "blog">
-					<li class="pt-fashion pt-culture">
-						<div>
-							<h5>
-								<i class="fa fa-file-text-o"></i>
-								<h3><a href="content?id=${blog.blogId}">${blog.title}</a></h3>
-							</h5>
-							<div class="post-subinfo">
-								<span>${blog.time}</span>
-								<span>2 Comments</span>
-							</div>
-						</div>
-					</li>
-				</s:iterator>
+			<ul id="slideform" class="post-title-list clearfix">
 			</ul>
 		</div>
 	</aside>
@@ -96,60 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-plus"></i>
 					</button>
-					<div class="collapse navbar-collapse" id="main-nav">
-						<ul class="nav navbar-nav">
-							<li>
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HOME</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="large-image-v1-1.html">Large Image v1</a></li>
-									<li><a href="large-image-v2-1.html">Large Image v2</a></li>
-									<li><a href="medium-image-v1-1.html">Medium Image v1</a></li>
-									<li><a href="medium-image-v2-1.html">Medium Image v2</a></li>
-									<li><a href="masonry-1.html">Masonry</a></li>
-									<li><a href="banner-v1.html">BannerMode v1</a></li>
-									<li><a href="banner-v2.html">-v2</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">GALLERY</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="gallery-v1.html">Gallery v1</a></li>
-									<li><a href="gallery-v2.html">Gallery v2</a></li>
-									<li><a href="gallery-v3.html">Gallery v3</a></li>
-									<li><a href="gallery-v4.html">Gallery v4</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">PAGES</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="about-v1.html">About v1</a></li>
-									<li><a href="about-v2.html">-v2</a></li>
-									<li><a href="authors.html">Authors</a></li>
-									<li><a href="author-detail.html">Author Detail</a></li>
-									<li><a href="archive.html">Archive</a></li>
-									<li><a href="contact-v1.html">Contact v1</a></li>
-									<li><a href="contact-v2.html">-v2</a></li>
-									<li><a href="404.html">Not Found</a></li>
-									<li><a href="newsletter.html" target="_blank">Newsletter</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">FEATURES</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="widget.html">Widgets</a></li>
-									<li><a href="typography-1.html">Typography -1</a></li>
-									<li><a href="typography-2.html">-2</a></li>
-									<li><a href="typography-3.html">-3</a></li>
-									<li><a href="typography-4.html">-4</a></li>
-									<li><a href="shortcode-1.html">Shortcode -1</a></li>
-									<li><a href="shortcode-2.html">-2</a></li>
-									<li><a href="shortcode-3.html">-3</a></li>
-									<li><a href="shortcode-4.html">-4</a></li>
-
-								</ul>
-							</li>
-						</ul>
-					</div><!--/.nav-collapse -->
+					
 				</div>
 			</nav>
 		</header>
@@ -491,6 +437,109 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">		
+		$("#notice").click(function(){
+			$("#slideform").empty();
+			$.ajax({
+				url:"notice.action",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data,function(i,list){  
+                       		var _tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a>' + list.content + '</a>' +
+						'</h5><div class="post-subinfo"></div></div></li>'
+                       		 $("#slideform").append(_tr);
+                    })
+				}
+			})	
+		});
+	</script>
 	
+	
+	
+	<script type="text/javascript">
+		var t
+		function timedCount()
+		{
+			$.ajax({
+				url:"checkNotice.action",
+				type:"POST",
+				datatype:"json",
+				success:function(data){
+					if(data == "new"){
+						$("#checkicon").attr("class","fa fa-bell fa-spin");
+					}else{
+						$("#checkicon").attr("class","fa fa-bell-o")
+					}
+				}
+			})
+			t=setTimeout("timedCount()",10000)
+		}
+	</script>
+
+	<script type ="text/javascript">
+	function delete_row(delete_id){
+		if(confirm("确定要删除？")){
+			$.ajax({
+				url:"deleteBlog.action?id="+delete_id,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == -1){
+						$("li").remove("#blog-"+delete_id);
+						//$(delete_id).parent().parent().parent().remove();
+						window.alert("删除成功");
+					}else{
+						window.alert("删除失败");
+					}
+				}
+			})
+			//$("li").remove("#"+delete_id);
+		}
+	}
+	</script>
+	<script type ="text/javascript">
+		$(".Edit_qp").click(function(){
+			$("#delete_vision").empty();
+			$("#delete_vision").toggleClass("delete-blog");
+			$("#delete_vision").toggleClass("view-blog");
+			var classes = $("#delete_vision").attr("class");
+			var actionStr = "#";
+			var delete_icon = "";
+			var onclick_str = "";
+			if(classes.indexOf("view-blog") >= 0) {
+				delete_icon = "delete_icon fa fa-file-text-o";
+			}else{
+				delete_icon = "delete_icon fa fa-times";
+	// 			onclick_str = "onclick=\"delete_row(this)\"";
+			}
+			$.ajax({
+				url:"changeDeleteList.action",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data, function(i, list){
+					var color_str = ""
+					if(classes.indexOf("view-blog") >= 0) {
+						$(".Edit_qp").html("删除文章");
+						actionStr = "content.action?id="+list.blogId;
+						color_str="color:#ffffff";
+					}else {
+						$(".Edit_qp").html("返回");
+						onclick_str="onclick=\"delete_row("+list.blogId+")\"";
+						color_str="color:#FF4500";
+					}
+					var _tr = '<li class="pt-fashion pt-culture" id="blog-'+list.blogId+'"><div class="container"><h5><i class="'+delete_icon+'" style='+color_str+'></i>'+
+					'<a class="delete_qp" href="'+actionStr+'"'+onclick_str+'>'+list.title+'</a></h5><div class="post-subinfo">'+
+					'<span>'+list.time+'</span>   •   <span>2 Comments</span></div></div></li>';
+					$("#delete_vision").append(_tr);				
+				})
+				}
+			})
+			var canvasHeight = $('.canvas').outerHeight();
+			$('.navmenu-quan').height(canvasHeight);
+			$('.post-title-list > li > div').toggleClass('container');
+		})
+	</script>
 </body>
 </html>

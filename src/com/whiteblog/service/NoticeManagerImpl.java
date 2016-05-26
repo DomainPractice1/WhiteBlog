@@ -51,4 +51,20 @@ public class NoticeManagerImpl {
 		}	
 	}
 	
+	public void savemailNotice(Integer userID){
+		Notice newnotice = new Notice();
+		newnotice.setContent("您有一封新的私信");
+		newnotice.setIsread("0");
+		newnotice.setUserId(userID);
+		noticedao.save(newnotice);	
+	}
+	
+	public void savecommentNotice(Integer userID){
+		Notice newnotice = new Notice();
+		newnotice.setContent("您的文章有了新的评论");
+		newnotice.setIsread("0");
+		newnotice.setUserId(userID);
+		noticedao.save(newnotice);
+	}
+	
 }

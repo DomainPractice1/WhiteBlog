@@ -50,171 +50,41 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body onload="timedCount()">
 	<s:action name="ShowCommentList"/>
 	<div class="page-loader">
 		<div class="loader-in">Loading...</div>
 		<div class="loader-out">Loading...</div>
 	</div>
 
+	<!-- 文章列表 -->
+	<aside class="navmenu-quan">
+		<div class="post-titles">
+			<div class="tag-title">
+				<div class="container">
+					<p class="tags" id="post-titles">
+						<a class="Edit_qp selected" href="#">删除文章</a>
+					</p>
+				</div>
+			</div>
+			<button type="button" class="remove-navbar"><i class="fa fa-times"></i></button>
+			<ul class="post-title-list clearfix view-blog" id="delete_vision">
+			
+			</ul>
+		</div>
+	</aside>
+	
 	<aside class="navmenu">
 		<div class="post-titles">
 			<div class="tag-title">
 				<div class="container">
 					<p class="tags" id="post-titles">
-						<a data-filter=".pt-fashion" href="#">fashion</a>
-						<a data-filter=".pt-culture" href="#">culture</a>
-						<a data-filter=".pt-art" href="#">art</a>
-						<a data-filter="*" href="#" class="unfilter hide">all</a>
+						<a class="tags" href="publish.jsp"><img src="assets/img/write.png"/></a>
 					</p>
 				</div>
 			</div>
 			<button type="button" class="remove-navbar"><i class="fa fa-times"></i></button>
-			<ul class="post-title-list clearfix">
-				<li class="pt-fashion pt-culture">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Five simple steps to designing grid systems preface</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 28</span>
-							<span>2 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-culture pt-art">
-					<div>
-						<h5>
-							<i>26</i>
-							<a href="#">Hemingway: A Text Editor That Cares About What You Write</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 26</span>
-							<span>2 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-link"></i>
-							<a href="#">Mobile Design Inspiration and Creativity</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 25</span>
-							<span>4 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-culture">
-					<div>
-						<h5>
-							<i class="fa fa-comment"></i>
-							<a href="#">Envato Stories: Coming August 2014</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 24</span>
-							<span>3 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-culture pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Meet #59 Interface Designer Kerem Suer</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 24</span>
-							<span>6 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Founders, Travel and Epic Beards: What Happens After Envato</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 22</span>
-							<span>12 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-culture">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Why Designers Make Good Founders (and Cofounders)</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 21</span>
-							<span>9 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-culture pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Getting Your Team Through the Storm A Good Product Designer...</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 20</span>
-							<span>16 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Introducing LaRead Chat Post</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 18</span>
-							<span>24 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-culture">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">The Future of WordPress</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 16</span>
-							<span>13 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-culture pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Workshop: Brand Asset Management</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 16</span>
-							<span>8 Comments</span>
-						</div>
-					</div>
-				</li>
-				<li class="pt-fashion pt-art">
-					<div>
-						<h5>
-							<i class="fa fa-file-text-o"></i>
-							<a href="#">Long Live The Kings - Short Film</a>
-						</h5>
-						<div class="post-subinfo">
-							<span>June 12</span>Â Â Â â¢Â Â Â 
-							<span>26 Comments</span>
-						</div>
-					</div>
-				</li>
+			<ul id="slideform" class="post-title-list clearfix">
 			</ul>
 		</div>
 	</aside>
@@ -225,71 +95,38 @@
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="shortcode-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
 					</div>
-					<div class="get-post-titles">
-						<button type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
-							<i class="fa fa-bars"></i>
-						</button>
-					</div>
+								
+					<c:choose>
+						<c:when test="${sessionScope.loginUser == null}">
+							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
+								<i class="fa fa-user"></i>
+							</a>									
+						</c:when>
+						<c:otherwise>
+							<div class="get-post-titles" style="margin-left:20px">
+								<button  type="button" class="close_qp navbar-toggle push-navbar-full" data-navbar-type="article">
+									<i class="fa fa-bars"></i>
+								</button>
+							</div>		
+							<div class="get-post-titles">					
+								<button id="notice" type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
+									<i id="checkicon" class="fa fa-bell-o"></i>
+								</button>						
+							</div>
+							<div class="get-post-titles" style="margin-right:10px">					
+								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.action'">
+									<i class="fa fa-envelope"></i>
+								</button>						
+							</div>
+							<a class="modal-form">${sessionScope.loginUser.username}</a>
+						</c:otherwise>
+					</c:choose>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-plus"></i>
 					</button>
-					<div class="collapse navbar-collapse" id="main-nav">
-						<ul class="nav navbar-nav">
-							<li>
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">HOME</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="large-image-v1-1.html">Large Image v1</a></li>
-									<li><a href="large-image-v2-1.html">Large Image v2</a></li>
-									<li><a href="medium-image-v1-1.html">Medium Image v1</a></li>
-									<li><a href="medium-image-v2-1.html">Medium Image v2</a></li>
-									<li><a href="masonry-1.html">Masonry</a></li>
-									<li><a href="banner-v1.html">BannerMode v1</a></li>
-									<li><a href="banner-v2.html">-v2</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">GALLERY</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="gallery-v1.html">Gallery v1</a></li>
-									<li><a href="gallery-v2.html">Gallery v2</a></li>
-									<li><a href="gallery-v3.html">Gallery v3</a></li>
-									<li><a href="gallery-v4.html">Gallery v4</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">PAGES</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="about-v1.html">About v1</a></li>
-									<li><a href="about-v2.html">-v2</a></li>
-									<li><a href="authors.html">Authors</a></li>
-									<li><a href="author-detail.html">Author Detail</a></li>
-									<li><a href="archive.html">Archive</a></li>
-									<li><a href="contact-v1.html">Contact v1</a></li>
-									<li><a href="contact-v2.html">-v2</a></li>
-									<li><a href="404.html">Not Found</a></li>
-									<li><a href="newsletter.html" target="_blank">Newsletter</a></li>
-								</ul>
-							</li>
-							<li>
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">FEATURES</a>
-								<ul class="dropdown-menu" role="menu">
-									<li><a href="widget.html">Widgets</a></li>
-									<li><a href="typography-1.html">Typography -1</a></li>
-									<li><a href="typography-2.html">-2</a></li>
-									<li><a href="typography-3.html">-3</a></li>
-									<li><a href="typography-4.html">-4</a></li>
-									<li><a href="shortcode-1.html">Shortcode -1</a></li>
-									<li><a href="shortcode-2.html">-2</a></li>
-									<li><a href="shortcode-3.html">-3</a></li>
-									<li><a href="shortcode-4.html">-4</a></li>
-
-								</ul>
-							</li>
-						</ul>
-					</div><!--/.nav-collapse -->
 				</div>
 			</nav>
 		</header>
@@ -314,11 +151,7 @@
 									</p>
 								</div>
 								<div class="post-item-info no-border clearfix">
-									<p class="post-tags">
-										<a href="#">fashion</a>
-										<a href="#">culture</a>
-										<a href="#">art</a>
-									</p>
+									
 									<div class="post-item-social">
 									
 									
@@ -432,28 +265,12 @@
 								</div>
 							</div>
 
-							<div class="next-prev-post clearfix">
-								<div class="post-direction">
-									<a href="#" class="post-prev">
-										<span class="post-way"><i class="fa fa-angle-left"></i> prev post</span>
-										<span class="title">Envato Stories: Isabel Castillo Guijarro (Isabelmdd)</span>
-									</a>
-									<a href="#"><span class="author">by <span>Gannon Burget</span></span></a>
-								</div>
-								<div class="post-direction">
-									<a href="#" class="post-next">
-										<span class="post-way">next post <i class="fa fa-angle-right"></i></span>
-										<span class="title">Rise of the Million Dollar Plugin Makers (Infographic)</span>
-									</a>
-									<a href="#"><span class="author">by <span>Jared Erondu</span></span></a>
-								</div>
-							</div>
-
+							
 							<div class="author-box">
 								<div class="author">
 									<a class="author-photo" href="#"><img src="assets/img/profil_photo-04.png" alt=""></a>
 									<div class="author-body">
-										<h4 class="author-name">Daniele Zedda</h4>
+										<h4 class="author-name">${sessionScope.loginUser.username}</h4>
 										<a href="#">view all post</a>
 									</div>
 									<div class="author-connection">
@@ -486,7 +303,7 @@
 									</s:iterator>
 
 									<div class="comment-form main-comment-form">
-										<form action="PostComment" method="post">
+										<form action="PostComment.action" method="post">
 											<textarea class="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></textarea>
 											<div class="at-focus">
 												<button class="comment-submit">Post Comment</button>
@@ -587,7 +404,8 @@
 			</div>
 		</div>
 		<div class="quick-read-bottom">
-			<p class="qr-info">By <a href="#">Daniele Zedda</a>Â Â Â â¢Â Â Â 18 February</p>
+			<p class="qr-info">By <a href="#">Daniele Zedda</a></p>
+			
 			<div class="qr-nav">
 				<a href="#" class="qr-prev">â PREV POST</a>
 				<a href="#" class="qr-share" tabindex="0" role="button" data-toggle="popover" data-placement="top" data-trigger="focus" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>"><i class="fa fa-share-alt"></i></a>
@@ -631,6 +449,110 @@
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">		
+		$("#notice").click(function(){
+			$("#slideform").empty();
+			$.ajax({
+				url:"notice.action",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data,function(i,list){  
+                       		var _tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a>' + list.content + '</a>' +
+						'</h5><div class="post-subinfo"></div></div></li>'
+                       		 $("#slideform").append(_tr);
+                    })
+				}
+			})	
+		});
+	</script>
+	
+	
+	
+	<script type="text/javascript">
+		var t
+		function timedCount()
+		{
+			$.ajax({
+				url:"checkNotice.action",
+				type:"POST",
+				datatype:"json",
+				success:function(data){
+					if(data == "new"){
+						$("#checkicon").attr("class","fa fa-bell fa-spin");
+					}else{
+						$("#checkicon").attr("class","fa fa-bell-o")
+					}
+				}
+			})
+			t=setTimeout("timedCount()",10000)
+		}
+	</script>
+
+	<script type ="text/javascript">
+	function delete_row(delete_id){
+		if(confirm("确定要删除？")){
+			$.ajax({
+				url:"deleteBlog.action?id="+delete_id,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == -1){
+						$("li").remove("#blog-"+delete_id);
+						//$(delete_id).parent().parent().parent().remove();
+						window.alert("删除成功");
+					}else{
+						window.alert("删除失败");
+					}
+				}
+			})
+			//$("li").remove("#"+delete_id);
+		}
+	}
+	</script>
+	<script type ="text/javascript">
+		$(".Edit_qp").click(function(){
+			$("#delete_vision").empty();
+			$("#delete_vision").toggleClass("delete-blog");
+			$("#delete_vision").toggleClass("view-blog");
+			var classes = $("#delete_vision").attr("class");
+			var actionStr = "#";
+			var delete_icon = "";
+			var onclick_str = "";
+			if(classes.indexOf("view-blog") >= 0) {
+				delete_icon = "delete_icon fa fa-file-text-o";
+			}else{
+				delete_icon = "delete_icon fa fa-times";
+	// 			onclick_str = "onclick=\"delete_row(this)\"";
+			}
+			$.ajax({
+				url:"changeDeleteList.action",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data, function(i, list){
+					var color_str = ""
+					if(classes.indexOf("view-blog") >= 0) {
+						$(".Edit_qp").html("删除文章");
+						actionStr = "content.action?id="+list.blogId;
+						color_str="color:#ffffff";
+					}else {
+						$(".Edit_qp").html("返回");
+						onclick_str="onclick=\"delete_row("+list.blogId+")\"";
+						color_str="color:#FF4500";
+					}
+					var _tr = '<li class="pt-fashion pt-culture" id="blog-'+list.blogId+'"><div class="container"><h5><i class="'+delete_icon+'" style='+color_str+'></i>'+
+					'<a class="delete_qp" href="'+actionStr+'"'+onclick_str+'>'+list.title+'</a></h5><div class="post-subinfo">'+
+					'<span>'+list.time+'</span>   •   <span>2 Comments</span></div></div></li>';
+					$("#delete_vision").append(_tr);				
+				})
+				}
+			})
+			var canvasHeight = $('.canvas').outerHeight();
+			$('.navmenu-quan').height(canvasHeight);
+			$('.post-title-list > li > div').toggleClass('container');
+		})
+	</script>
 	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </body>
  																				<script type="text/javascript">  

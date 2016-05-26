@@ -1,11 +1,13 @@
 package com.whiteblog.dao;
 
 import java.util.List;
+
 import org.hibernate.LockMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
 import com.whiteblog.entity.User;
 
 /**
@@ -24,6 +26,7 @@ public class UserDAO extends HibernateDaoSupport {
 	// property constants
 	public static final String USERNAME = "username";
 	public static final String PASSWORD = "password";
+	public static final String IDENTITY = "identity";
 
 	protected void initDao() {
 		// do nothing
@@ -96,6 +99,10 @@ public class UserDAO extends HibernateDaoSupport {
 
 	public List<User> findByPassword(Object password) {
 		return findByProperty(PASSWORD, password);
+	}
+
+	public List<User> findByIdentity(Object identity) {
+		return findByProperty(IDENTITY, identity);
 	}
 
 	public List findAll() {

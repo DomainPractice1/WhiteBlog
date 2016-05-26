@@ -104,6 +104,9 @@
 		<property name="maildao">
 			<ref bean="MailDAO"/>
 		</property>
+		<property name="userdao">
+			<ref bean="UserDAO"/>
+		</property>
 	</bean>
 	
 	<bean id="NoticeManager" class="com.whiteblog.service.NoticeManagerImpl">
@@ -238,7 +241,13 @@
 		<property name="postCommentService">
 			<ref bean="PostCommentService" />
 		</property>
-	</bean>	
+		<property name="noticeManager">
+			<ref bean="NoticeManager"/>
+		</property>
+		<property name="blogManager">
+			<ref bean="BlogManager"/>
+		</property>
+	</bean>
 	<bean id="InformDAO" class="com.whiteblog.dao.InformDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -282,6 +291,17 @@
 		<property name="sendMessageManage">
 			<ref bean="SendMessageManage" />
 		</property>
+		<property name="noticeManager">
+			<ref bean="NoticeManager"/>
+		</property>
+		<property name="blogManager">
+			<ref bean="BlogManager"/>
+		</property>
 	</bean>
 	
+	<bean id="showMailListAction" class="com.whiteblog.action.mailAction">
+		<property name="mailManager">
+			<ref bean="MailManager"/>
+		</property>
+	</bean>
 </beans>

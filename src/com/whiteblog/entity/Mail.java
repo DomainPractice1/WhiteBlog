@@ -21,6 +21,7 @@ public class Mail implements java.io.Serializable {
 	private Integer touserId;
 	private String content;
 	private String time;
+	private String fromusername;
 
 	// Constructors
 
@@ -30,11 +31,12 @@ public class Mail implements java.io.Serializable {
 
 	/** full constructor */
 	public Mail(Integer fromuserId, Integer touserId, String content,
-			String time) {
+			String time, String fromusername) {
 		this.fromuserId = fromuserId;
 		this.touserId = touserId;
 		this.content = content;
 		this.time = time;
+		this.fromusername = fromusername;
 	}
 
 	// Property accessors
@@ -83,6 +85,15 @@ public class Mail implements java.io.Serializable {
 
 	public void setTime(String time) {
 		this.time = time;
+	}
+
+	@Column(name = "fromusername", length = 45)
+	public String getFromusername() {
+		return this.fromusername;
+	}
+
+	public void setFromusername(String fromusername) {
+		this.fromusername = fromusername;
 	}
 
 }

@@ -26,7 +26,11 @@ public class UserManagerImpl {
 		List<User> result = userdao.findByUsername(userform.getUsername());
 		if(!result.isEmpty()){
 			if(result.get(0).getPassword().equals(userform.getPassword())){
-				return "true";
+				if(result.get(0).getIdentity().equals("user")){
+					return "user";
+				}else{
+					return "admin";
+				}			
 			}else{
 				return "false";
 			}
@@ -40,7 +44,7 @@ public class UserManagerImpl {
 		User newuser = new User();
 		
 		BeanUtils.copyProperties(newuser,userform);
-		//System.out.println("新的用户"+newuser.getUsername()+" "+newuser.getPassword());
+		newuser.setIdentity("user");
 		userdao.save(newuser);
 		
 		return "SUCCESS";
@@ -86,7 +90,6 @@ public class UserManagerImpl {
 	
 		return result;
 	}
-	
 	
 
 }
