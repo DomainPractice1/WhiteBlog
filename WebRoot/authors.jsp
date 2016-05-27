@@ -8,7 +8,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="assets/img/favicon.ico">
-<title>LaRead - Authors</title>
+<title>White Blog - 管理员</title>
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome CSS -->
@@ -117,7 +117,7 @@
 		<div class="container">
 
 			<div class="head-author">
-				<h1 class="author-h1">LaRead Authors</h1>
+				<h1 class="author-h1">管理员面板</h1>
 				<p class="lead about-lead">Welcome to my blog, take your time give it a read and browse around.</p>
 			</div>
 

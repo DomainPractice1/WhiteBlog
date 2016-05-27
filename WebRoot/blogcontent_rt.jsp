@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="assets/img/favicon.ico">
-<title>LaRead - Shortcode 1</title>
+<title>White Blog - 博文内容</title>
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome CSS -->
