@@ -1,34 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project adv-config="true">
-<<<<<<< HEAD
-  <add-on id="spring.aop"/>
-  <add-on id="hibernate.emanager"/>
-  <add-on id="spring.misc"/>
-  <add-on id="spring.web"/>
-  <add-on id="spring.test"/>
-  <container path="com.genuitec.runtime.library/com.genuitec.struts_2.1">
-    <disable name="antlr-2.7.2.jar" type="jar"/>
-  </container>
-  <container path="com.genuitec.runtime.library/com.genuitec.spring_3.0">
-    <disable name="jmxri.jar" type="jar"/>
-    <disable name="jmxremote_optional.jar" type="jar"/>
-    <disable name="jamon-2.7.jar" type="jar"/>
-    <disable name="jmxremote.jar" type="jar"/>
-    <disable name="com.springsource.org.quartz-1.6.2.jar" type="jar"/>
-    <disable name="com.springsource.org.jruby-1.4.0.jar" type="jar"/>
-    <disable name="com.springsource.edu.emory.mathcs.backport-3.0.0.jar" type="jar"/>
-    <disable name="com.springsource.commonj-1.1.0.jar" type="jar"/>
-    <disable name="com.springsource.bsh-2.0.0.b4.jar" type="jar"/>
-    <disable name="com.springsource.org.codehaus.groovy-1.6.5.jar" type="jar"/>
-=======
   <add-on id="spring.web"/>
   <add-on id="hibernate.emanager"/>
   <add-on id="spring.aop"/>
   <container path="com.genuitec.runtime.library/com.genuitec.struts_2.1">
     <disable name="antlr-2.7.2.jar" type="jar"/>
-  </container>
-  <container path="com.genuitec.runtime.library/com.genuitec.hibernate_3.3">
-    <disable name="cglib-2.2.jar" type="jar"/>
->>>>>>> 874c5764e85f823294495350d4d2a823791ae9e3
   </container>
 </project>
