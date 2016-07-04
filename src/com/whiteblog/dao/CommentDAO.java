@@ -1,4 +1,4 @@
-package com.whiteblog.dao;
+package com.whiteblog.entity;
 
 import java.util.List;
 import org.hibernate.LockMode;
@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-import com.whiteblog.entity.Comment;
 
 /**
  * A data access object (DAO) providing persistence and search support for
@@ -26,6 +25,7 @@ public class CommentDAO extends HibernateDaoSupport {
 	public static final String USER_ID = "userId";
 	public static final String CONTENT = "content";
 	public static final String TIME = "time";
+	public static final String USERNAME = "username";
 
 	protected void initDao() {
 		// do nothing
@@ -106,6 +106,10 @@ public class CommentDAO extends HibernateDaoSupport {
 
 	public List<Comment> findByTime(Object time) {
 		return findByProperty(TIME, time);
+	}
+
+	public List<Comment> findByUsername(Object username) {
+		return findByProperty(USERNAME, username);
 	}
 
 	public List findAll() {
