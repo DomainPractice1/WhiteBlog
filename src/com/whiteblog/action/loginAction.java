@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.entity.User;
 import com.whiteblog.form.UserForm;
 import com.whiteblog.service.UserManagerImpl;
+import com.whiteblog.service.fileManagerImpl;
 
 public class loginAction extends ActionSupport{
 	
@@ -40,6 +41,10 @@ public class loginAction extends ActionSupport{
 			User loginUser = usermanager.findUser(userform.getUsername());
 			
 			session.put("loginUser",loginUser);
+			
+			String p = org.apache.struts2.ServletActionContext.getServletContext().getRealPath("/");
+			
+			fileManagerImpl.readTxtFile(p+"/WEB-INF/classes/words.txt");
 			
 			return "user";
 			

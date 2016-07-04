@@ -36,6 +36,13 @@ public class searchArticleAction extends ActionSupport {
 		articleList.removeAll(tmp);
 		articleList.addAll(tmp);
 		
+		for(int i=0;i<articleList.size();i++){
+			if(articleList.get(i).getFilterwords()==0){
+				articleList.remove(i);
+				i--;
+			}
+		}
+		
 		//List<Blog> articleList = blogManager.getBlogDao().findAll();
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		session.put("searchList", articleList);

@@ -1,11 +1,14 @@
-package com.whiteblog.entity;
+package com.whiteblog.dao;
 
 import java.util.List;
+
 import org.hibernate.LockMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
+import com.whiteblog.entity.Comment;
 
 /**
  * A data access object (DAO) providing persistence and search support for
