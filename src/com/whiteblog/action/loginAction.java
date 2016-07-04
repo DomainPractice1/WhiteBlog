@@ -1,19 +1,39 @@
 package com.whiteblog.action;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.whiteblog.entity.Blogtype;
 import com.whiteblog.entity.User;
 import com.whiteblog.form.UserForm;
+import com.whiteblog.service.BlogTypeServiceImp;
 import com.whiteblog.service.UserManagerImpl;
 
 public class loginAction extends ActionSupport{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8628585232251444052L;
+
 	private UserManagerImpl usermanager;
 	
 	private UserForm userform;
 	
+	private BlogTypeServiceImp blogtypeService;
+	
+	
+	
+	public BlogTypeServiceImp getBlogtypeService() {
+		return blogtypeService;
+	}
+
+	public void setBlogtypeService(BlogTypeServiceImp blogtypeService) {
+		this.blogtypeService = blogtypeService;
+	}
 
 	public UserForm getUserform() {
 		return userform;
@@ -40,6 +60,25 @@ public class loginAction extends ActionSupport{
 			User loginUser = usermanager.findUser(userform.getUsername());
 			
 			session.put("loginUser",loginUser);
+			
+			/*增加了一部分工能，显示所有的Tags*/
+			List<Blogtype> abtl = (List<Blogtype>)blogtypeService.getBlogtypeDAO().findAll();
+			
+			List<Blogtype> tmpList = new ArrayList<Blogtype>();
+			
+			for(Blogtype bt: abtl){
+				boolean flag = false;
+				for(Blogtype tmp: tmpList){
+					if(tmp.getTypename().compareTo(bt.getTypename())== 0){
+						flag = true;
+						break;
+					}
+				}
+				if(!flag)
+					tmpList.add(bt);
+			}
+			
+			session.put("allTags", tmpList);
 			
 			return "user";
 			

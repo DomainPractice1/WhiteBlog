@@ -27,6 +27,8 @@ public class searchArticleAction extends ActionSupport {
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		if(searchText == null || searchText.equals("")) searchText = new String(" ");
+		byte ptext[] = searchText.getBytes();
+		searchText = new String(ptext, "UTF-8");
 		System.out.println("[SearchAritcle]: 搜索内容："+searchText);
 		List<Blog> articleList = blogManager.getBlogDao().findByPartTitle(searchText);
 		List<Blog> tmp = blogManager.getBlogDao().findByPartContent(searchText);

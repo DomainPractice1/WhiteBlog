@@ -74,6 +74,14 @@ public class blogContentAction extends ActionSupport{
 		ActionContext.getContext().put("re", btl);
 		//ActionContext.getContext().getSession().put("req", blogContentForm);
 		ActionContext.getContext().getSession().put("blogId",id);
+		
+		/*标签的部分*/
+		System.out.println("添加标签，载入标签");
+		int bti = b.getBlog().getTypeId();
+		System.out.println("Tag type 是 " + bti);
+		Blogtype bt = blogtypeService.getBlogtype(bti);
+		ActionContext.getContext().put("bt", bt);
+		
 		return SUCCESS;
 	}
 	

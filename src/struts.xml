@@ -85,6 +85,9 @@
 		<action name="showMailList" class="showMailListAction" method="execute">
 			<result name="success">/mailList.jsp</result>
 		</action>
+		<action name="findBlogByTagAction" class="FindBlogByTagAction" method="findBlogs">
+			<result name="success">./blogAndTags.jsp</result>
+		</action>
 	</package>
 
 
