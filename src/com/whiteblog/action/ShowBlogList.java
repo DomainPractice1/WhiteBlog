@@ -16,6 +16,7 @@ import com.whiteblog.service.ShowBlogListService;
 
 public class ShowBlogList extends ActionSupport{
 	private List<Blog> blogList;
+	private List<Blog> unCheckBlog;
 	private ShowBlogListService showBlogListService;
 
 	public String execute(){
@@ -29,6 +30,12 @@ public class ShowBlogList extends ActionSupport{
 //<<<<<<< HEAD
 			User user = (User) session.get("loginUser");	
 			blogList=showBlogListService.findByUserId(user.getUserId());
+			for(int i=0;i<blogList.size();i++){
+				if(blogList.get(i).getFilterwords()==0){
+					blogList.remove(i);
+					i--;
+				}
+			}
 			//HttpServletRequest request=ServletActionContext.getRequest();   
 			//request.setAttribute("blogList", blogList);
 //=======
@@ -65,5 +72,15 @@ public class ShowBlogList extends ActionSupport{
 
 	public void setShowBlogListService(ShowBlogListService showBlogListService) {
 		this.showBlogListService = showBlogListService;
+	}
+	
+	public String showUNCheckBlog(){
+		
+		Map<String,Object> session = ActionContext.getContext().getSession();	
+		unCheckBlog = showBlogListService.getuncheckBlog();
+		System.out.println("[uncheckblog size]:"+unCheckBlog.size());
+		session.put("uncheckblog",unCheckBlog);
+		
+		return SUCCESS;
 	}
 }
