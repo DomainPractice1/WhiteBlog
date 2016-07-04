@@ -11,6 +11,7 @@ import com.whiteblog.entity.User;
 import com.whiteblog.form.UserForm;
 import com.whiteblog.service.BlogTypeServiceImp;
 import com.whiteblog.service.UserManagerImpl;
+import com.whiteblog.service.fileManagerImpl;
 
 public class loginAction extends ActionSupport{
 	
@@ -61,6 +62,7 @@ public class loginAction extends ActionSupport{
 			
 			session.put("loginUser",loginUser);
 			
+
 			/*增加了一部分工能，显示所有的Tags*/
 			List<Blogtype> abtl = (List<Blogtype>)blogtypeService.getBlogtypeDAO().findAll();
 			
@@ -79,6 +81,11 @@ public class loginAction extends ActionSupport{
 			}
 			
 			session.put("allTags", tmpList);
+
+			String p = org.apache.struts2.ServletActionContext.getServletContext().getRealPath("/");
+			
+			fileManagerImpl.readTxtFile(p+"/WEB-INF/classes/words.txt");
+
 			
 			return "user";
 			
