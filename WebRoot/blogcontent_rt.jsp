@@ -25,9 +25,6 @@
 <link href="assets/css/bootstrap-gallery.css" rel="stylesheet">
 <!-- ColorBox CSS -->
 <link href="assets/css/colorbox.css" rel="stylesheet">
-<!-- Custom font -->
-<link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Roboto+Slab&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 <!-- Custom styles for this template -->
 <link href="assets/css/style.css" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="assets/styles/shCoreDefault.css"></link>
@@ -556,7 +553,7 @@
 			$('.post-title-list > li > div').toggleClass('container');
 		})
 	</script>
-	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+	
 </body>
  																				<script type="text/javascript">  
 																				    var i = "df"; var t = "";

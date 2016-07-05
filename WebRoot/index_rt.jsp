@@ -18,7 +18,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>White Blog</title>
 
 <!-- Bootstrap core CSS -->
-<link href="assets/css/bootstrap.min.css" rel="stylesheet">
+<link href="assets/css/bootstrap.mi
+n.css" rel="stylesheet">
 <!-- Font Awesome CSS -->
 <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 <!-- Jasny CSS -->
@@ -32,8 +33,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!-- ColorBox CSS -->
 <link href="assets/css/colorbox.css" rel="stylesheet">
 <!-- Custom font -->
-<link href='assets/css/googleFont.css' rel='stylesheet' type='text/css'>
-<link href='assets/css/googleFont2.css' rel='stylesheet' type='text/css'>
 <!-- Custom styles for this template -->
 <link href="assets/css/style.css" rel="stylesheet">
 

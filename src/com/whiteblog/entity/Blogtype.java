@@ -1,10 +1,9 @@
 package com.whiteblog.entity;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -17,9 +16,14 @@ public class Blogtype implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2790743504300345715L;
 	private Integer typeId;
 	private String typename;
 	private Integer userId;
+	private String superTypename;
 
 	// Constructors
 
@@ -28,16 +32,15 @@ public class Blogtype implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Blogtype(Integer typeId, String typename) {
-		this.typeId = typeId;
+	public Blogtype(String typename) {
 		this.typename = typename;
 	}
 
 	/** full constructor */
-	public Blogtype(Integer typeId, String typename, Integer userId) {
-		this.typeId = typeId;
+	public Blogtype(String typename, Integer userId, String superTypename) {
 		this.typename = typename;
 		this.userId = userId;
+		this.superTypename = superTypename;
 	}
 
 	// Property accessors
@@ -68,6 +71,15 @@ public class Blogtype implements java.io.Serializable {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	@Column(name = "superTypename", length = 45)
+	public String getSuperTypename() {
+		return this.superTypename;
+	}
+
+	public void setSuperTypename(String superTypename) {
+		this.superTypename = superTypename;
 	}
 
 }
