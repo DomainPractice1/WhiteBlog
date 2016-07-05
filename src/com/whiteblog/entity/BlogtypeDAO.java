@@ -1,4 +1,4 @@
-package com.whiteblog.dao;
+package com.whiteblog.entity;
 
 import java.util.List;
 
