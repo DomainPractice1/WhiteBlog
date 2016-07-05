@@ -27,6 +27,8 @@ public class UserDAO extends HibernateDaoSupport {
 	public static final String USERNAME = "username";
 	public static final String PASSWORD = "password";
 	public static final String IDENTITY = "identity";
+	public static final String HOBBY = "hobby";
+	public static final String IMAGE = "image";
 
 	protected void initDao() {
 		// do nothing
@@ -103,6 +105,14 @@ public class UserDAO extends HibernateDaoSupport {
 
 	public List<User> findByIdentity(Object identity) {
 		return findByProperty(IDENTITY, identity);
+	}
+
+	public List<User> findByHobby(Object hobby) {
+		return findByProperty(HOBBY, hobby);
+	}
+
+	public List<User> findByImage(Object image) {
+		return findByProperty(IMAGE, image);
 	}
 
 	public List findAll() {

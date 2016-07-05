@@ -101,7 +101,7 @@ public class BlogDAO extends HibernateDaoSupport {
 			throw re;
 		}
 	}
-	
+
 	public List findByPartMatch(String propertyName, Object value){
 		log.debug("finding Blog instance with property: " + propertyName
 				+ ", value: " + value);
@@ -114,7 +114,7 @@ public class BlogDAO extends HibernateDaoSupport {
 			throw re;
 		}
 	}
-	
+
 	public List<Blog> findByPartTitle(Object title) {
 		return findByPartMatch(TITLE, title);
 	}
@@ -218,5 +218,5 @@ public class BlogDAO extends HibernateDaoSupport {
 
 	public static BlogDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (BlogDAO) ctx.getBean("BlogDAO");
-	}
+	}	
 }

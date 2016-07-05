@@ -1,4 +1,4 @@
-﻿<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -142,7 +142,7 @@
 									<a href="#"><i class="fa fa-envelope"></i></a>
 								</div>
 								<p class="author-bio">${blog.title}</p>							
-								<button type="submit" class="btn btn-grey btn-outline btn-rounded" name="id" value="${blog.blogId}">查看文章</button>											
+								<button type="submit" class="btn btn-grey btn-outline btn-rounded" name="id" value="${blog.blogId}">查看文章</button>													
 							</div>
 						</div>
 					</article>	

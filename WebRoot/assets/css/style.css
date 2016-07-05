@@ -10320,9 +10320,8 @@ only screen and (                min-resolution: 2dppx){
 	.navbar-brand img {
 		opacity: 0;
 	}
-	
 }
-	.mails{
+.mails{
 		background: url(../img/mail.png) no-repeat 0 0;	
 		background-size:18px 18px;
 		width:18px;
@@ -10347,3 +10346,15 @@ only screen and (                min-resolution: 2dppx){
 		width:18px;
 		height:18px;	
 	}	
+.modify{	
+	background: url(../img/modify.png) no-repeat 0 0;	
+	background-size:18px 18px;
+	width:18px;
+	height:18px;
+}
+.modify:hover{
+	background: url(../img/modifyHover.png) no-repeat 0 0;	
+	background-size:18px 18px;
+	width:18px;
+	height:18px;	
+}

@@ -152,8 +152,8 @@
 										
 									</li>
 								</ul>
-						 
 						</div>
+						
 						<div class="col-md-10 ">
 							<div class="post-item">
 								<div class="post-item-paragraph">
@@ -163,10 +163,9 @@
 									</p>
 								</div>
 								<div class="post-item-info no-border clearfix">
-									
-									<div class="post-item-social">
-									
-								<!-- <a data-toggle="modal" data-placement="top"	data-target="#myModal" style="float:right" ><i class="fa fa-eye"></i></a> -->
+																																	
+								<div class="post-item-social">
+								
 										
 									<s:form class="form-horizontal" role="form" action="sendMessage" method="post"> 
 													
@@ -202,8 +201,13 @@
 																</div>
 																<!-- /.modal-dialog -->
 															</div>
-															<!-- /.modal 模态框结束-->
+															<!-- /.modal 模态框结束-->															
 															</s:form> 
+										<div class="pull-right post-item-social" >
+											<a  data-toggle="modal" data-placement="top"	data-target="#myModal"><div class="mails"> </div></a>
+											<a  tabindex="0"  data-toggle="modal" data-placement="top" data-target="#myModal2"> <div class="tag" ></div>  </a>
+											<a href="#" class="post-like qr-like"><i class="fa fa-heart"></i><span>18</span></a>
+										</div>
 															<script>
   																 $(function () { $('#myModal').modal('hide')});
   																 $("#myModal").modal().css({
@@ -212,8 +216,7 @@
            																		  });
   																 $(function() {$('#myModal2').modal('hide')});
 															</script>	
-
-													<!-- <a style="float:right;" 	data-toggle="modal" data-placement="top" data-target="#myModal2"> <i class="fa fa-facebook"></i>  </a>	 -->
+																																		
 												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
 													
 															<!-- 模态框（Modal） -->
@@ -259,15 +262,7 @@
 																<!-- /.modal-dialog -->
 															</div>
 															<!-- /.modal 模态框结束-->
-												</s:form> 														
-										
-									<!-- <div class="post-item-info clearfix"> -->
-										<div class="pull-right post-item-social" >
-											<a  data-toggle="modal" data-placement="top"	data-target="#myModal"><div class="mails"> </div></a>
-											<a  tabindex="0"  data-toggle="modal" data-placement="top" data-target="#myModal2"> <div class="tag" ></div>  </a>
-											<a href="#" class="post-like qr-like"><i class="fa fa-heart"></i><span>18</span></a>
-										</div>
-									<!-- </div> -->	 
+												</s:form> 																																																		
 									</div>
 								</div>
 							</div>
@@ -278,6 +273,8 @@
 									<a class="author-photo" href="#"><img src="assets/img/profil_photo-04.png" alt=""></a>
 									<div class="author-body">
 										<h4 class="author-name">作者：${req.username}</h4>
+										<h4 class="author-name">${sessionScope.loginUser.username}</h4>
+										<a href="#">view all post</a>
 									</div>
 									<div class="author-connection">
 										<a href="#"><i class="fa fa-twitter"></i></a>

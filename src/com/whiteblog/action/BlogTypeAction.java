@@ -81,7 +81,7 @@ public class BlogTypeAction {
 					}
 				}
 			}
- 
+			
 			/*增加了一部分工能，显示所有的Tags*/
 			List<Blogtype> abtl = (List<Blogtype>)blogtypeService.getBlogtypeDAO().findAll();
 			
@@ -99,7 +99,7 @@ public class BlogTypeAction {
 					tmpList.add(bt);
 			}
 			
-			ActionContext.getContext().put("allTags", tmpList);
+			ActionContext.getContext().put("allTags", tmpList);		
 		return SUCCESS;
 	}
 }

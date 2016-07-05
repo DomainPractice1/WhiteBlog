@@ -2,7 +2,7 @@
 <beans
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:p="http://www.springframework.org/schema/p"	
 	xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -26,7 +26,6 @@
          <property name="password"> 
              <value>123</value> 
          </property> 
-         <!-- 连接池 connection pool -->
          <property name="maxPoolSize"> 
              <value>80</value> 
          </property> 
@@ -63,9 +62,8 @@
 				<value>com.whiteblog.entity.Notice</value>
 				<value>com.whiteblog.entity.User</value>
 				<value>com.whiteblog.entity.Inform</value></list>
-		</property>
-	</bean>
-	
+		</property></bean>
+		
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory"/>
@@ -90,9 +88,7 @@
 	<aop:config>
 		<aop:advisor advice-ref="transactionAdvice" pointcut="execution(* com.whiteblog.service..*(..))"/>
 	</aop:config>
-	
-	
-	
+			
 	<bean id="AdminDAO" class="com.whiteblog.dao.AdminDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -343,16 +339,35 @@
 		</property>
 	</bean>
 	
-	<bean id="FindBlogByTagAction" class="com.whiteblog.action.FindBlogByTagAction">
-		<property name="blogManager">
-			<ref bean="BlogManager" />
+	<bean id="modifyAction" class="com.whiteblog.action.modifyAction">
+		<property name="blogService">
+			<ref bean="BlogService"/>
 		</property>
-		<property name="blogtypeService" >
+		<property name="usermanager">
+			<ref bean="UserManager" />
+		</property>
+		<property name="blogtypeService">
 			<ref bean="BlogtypeService" />
 		</property>
 	</bean>
 	
+	<bean id="showBlogToModifyAciton" class="com.whiteblog.action.showBlogToModifyAciton">
+		<property name="blogService">
+			<ref bean="BlogService"/>
+		</property>	
+		<property name="blogtypeService">
+			<ref bean="BlogtypeService" />
+		</property>
+	</bean>
 	
-	 
+	<bean id="FindBlogByTagAction" class="com.whiteblog.action.FindBlogByTagAction">
+		<property name="blogManager">
+			<ref bean="BlogManager" />
+		</property>
+		<property name="blogtypeService">
+			<ref bean="BlogtypeService" />
+		</property>
+	</bean>
+	
 	
 </beans>

@@ -1,13 +1,11 @@
 package com.whiteblog.dao;
 
 import java.util.List;
-
 import org.hibernate.LockMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import com.whiteblog.entity.Comment;
 
 /**
@@ -114,7 +112,7 @@ public class CommentDAO extends HibernateDaoSupport {
 	public List<Comment> findByUsername(Object username) {
 		return findByProperty(USERNAME, username);
 	}
-
+	
 	public List findAll() {
 		log.debug("finding all Comment instances");
 		try {

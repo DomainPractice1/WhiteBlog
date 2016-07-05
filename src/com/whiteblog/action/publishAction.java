@@ -1,3 +1,4 @@
+
 package com.whiteblog.action;
 
 import java.util.List;
@@ -59,7 +60,7 @@ public class publishAction extends ActionSupport{
 						
 			int typeID=-1;
 			List<Blogtype> typesAlready = null;
-			if(!tags.trim().equals("")){
+			if(!tags.trim().equals("")){//优先个人新建的分类
 				typesAlready=blogtypeDAO.findByTypename(tags);
 				if(!typesAlready.isEmpty()){
 					typeID=typesAlready.get(0).getTypeId();
@@ -96,7 +97,6 @@ public class publishAction extends ActionSupport{
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 			blog.setTime(df.format(new Date()));// new Date()为获取当前系统时间
 			
-			
 			List<String> filterWords = fileManagerImpl.getWords();
 			System.out.println("[filterWords size]"+filterWords.size());
 			blog.setFilterwords(1);
@@ -111,9 +111,9 @@ public class publishAction extends ActionSupport{
 			}
 			
 			
-			
 			blogDAO.save(blog);
-			hint="成功发布！";		
+			hint="成功发布！";
+			
 			List<Blog> newBlog = blogDAO.findAll();
 			int blogID=0;
 			if(!newBlog.isEmpty()){
@@ -259,6 +259,6 @@ public class publishAction extends ActionSupport{
 		public void setId(int id) {
 			this.id = id;
 		}
-		
+	
 		
 }

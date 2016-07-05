@@ -1,9 +1,8 @@
 package com.whiteblog.action;
 
+import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.entity.Blogtype;
@@ -14,20 +13,17 @@ import com.whiteblog.service.UserManagerImpl;
 import com.whiteblog.service.fileManagerImpl;
 
 public class loginAction extends ActionSupport{
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -8628585232251444052L;
-
+	
 	private UserManagerImpl usermanager;
 	
 	private UserForm userform;
 	
 	private BlogTypeServiceImp blogtypeService;
-	
-	
-	
+		
 	public BlogTypeServiceImp getBlogtypeService() {
 		return blogtypeService;
 	}
@@ -52,8 +48,7 @@ public class loginAction extends ActionSupport{
 		this.usermanager = usermanager;
 	}
 	
-	public String execute(){
-		
+	public String execute(){		
 		if(usermanager.checklogin(userform).equals("user")){
 			
 			Map<String,Object> session = ActionContext.getContext().getSession();
@@ -62,7 +57,6 @@ public class loginAction extends ActionSupport{
 			
 			session.put("loginUser",loginUser);
 			
-
 			/*增加了一部分工能，显示所有的Tags*/
 			List<Blogtype> abtl = (List<Blogtype>)blogtypeService.getBlogtypeDAO().findAll();
 			
@@ -85,7 +79,6 @@ public class loginAction extends ActionSupport{
 			String p = org.apache.struts2.ServletActionContext.getServletContext().getRealPath("/");
 			
 			fileManagerImpl.readTxtFile(p+"/WEB-INF/classes/words.txt");
-
 			
 			return "user";
 			

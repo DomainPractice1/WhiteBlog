@@ -117,9 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</div> -->
 								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
 								<i class="fa fa-power-off"></i>
-								</a>
-							
-							
+							</a>
 						</c:otherwise>
 					</c:choose>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
@@ -159,6 +157,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													<span>${blog.time}</span> By <a href="#">${blog.username}</a>
 												</div>
 												<div class="pull-right post-item-social">
+													<c:choose>
+														<c:when test="${sessionScope.loginUser!=null && sessionScope.loginUser.username==blog.username}">
+															<a href="showBlogToModify.action?blogId=${blog.blogId}"><div class="modify"></div></a>
+														</c:when>
+													</c:choose>													
 													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
 													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
 													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
@@ -215,6 +218,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<s:iterator value="#session.allTags" var="tag">
 									<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename" /></a>
 								</s:iterator>
+								<a href="#">fashion</a>
+								<a href="#">culture</a>
+								<a href="#">art</a>
+								<a href="#">concept</a>
+								<a href="#">style</a>
+								<a href="#">advert</a>
+								<a href="#">movie</a>
+								<a href="#">color</a>
+								<a href="#">branding</a>
+								<a href="#">technology</a>
+								<a href="#">fashion</a>
+								<a href="#">culture</a>
+								<a href="#">art</a>
+								<a href="#">concept</a>
 							</li>
 						</ul>
 
@@ -395,6 +412,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</div>
+
 	<!-- logout -->
 	<div class="modal leread-modal fade" id="logout-form" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
@@ -413,7 +431,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</div>
-
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

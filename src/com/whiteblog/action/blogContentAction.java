@@ -81,7 +81,6 @@ public class blogContentAction extends ActionSupport{
 		System.out.println("Tag type 是 " + bti);
 		Blogtype bt = blogtypeService.getBlogtype(bti);
 		ActionContext.getContext().put("bt", bt);
-		
 		return SUCCESS;
 	}
 	
@@ -103,8 +102,7 @@ public class blogContentAction extends ActionSupport{
 		ActionContext.getContext().put("re", btl);
 		//ActionContext.getContext().getSession().put("req", blogContentForm);
 		ActionContext.getContext().getSession().put("blogId",id);
-		return SUCCESS;
-		
+		return SUCCESS;		
 	}
 	
 	public String review(){		
