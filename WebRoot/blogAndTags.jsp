@@ -147,11 +147,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<div class="pull-left">
 													<span>${blog.time}</span> By <a href="#">${blog.username}</a>
 												</div>
-												<div class="pull-right post-item-social">
-													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
-													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
-												</div>
+												<c:choose>
+													<c:when test="${sessionScope.loginUser != null}">
+														<div class="pull-right post-item-social">
+															<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
+															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+															<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
+														</div>
+													</c:when>
+												</c:choose>
 											</div>
 										</div>
 									</div>

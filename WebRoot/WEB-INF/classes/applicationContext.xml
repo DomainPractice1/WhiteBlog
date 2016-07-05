@@ -61,7 +61,8 @@
 				<value>com.whiteblog.entity.Mail</value>
 				<value>com.whiteblog.entity.Notice</value>
 				<value>com.whiteblog.entity.User</value>
-				<value>com.whiteblog.entity.Inform</value></list>
+				<value>com.whiteblog.entity.Inform</value>
+				<value>com.whiteblog.entity.Likeit</value></list>
 		</property></bean>
 		
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -370,4 +371,8 @@
 	</bean>
 	
 	
-</beans>
+	<bean id="LikeitDAO" class="com.whiteblog.dao.LikeitDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean></beans>
