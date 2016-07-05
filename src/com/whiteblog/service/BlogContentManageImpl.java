@@ -14,5 +14,7 @@ public class BlogContentManageImpl {
 	public Blog findById(java.lang.Integer id){
 		return blogDAO.findById(id);
 	}
-	
+	public void setupdateBlog(Blog blog){
+		blogDAO.attachDirty(blog);
+	}
 }

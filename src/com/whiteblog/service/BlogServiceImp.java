@@ -23,6 +23,10 @@ public class BlogServiceImp {
 		blogDAO.save(newBlog);		
 		return "SUCCESS";
 	}
+	public String updateBlog(Blog blog)throws IllegalAccessException, InvocationTargetException{		
+		blogDAO.attachDirty(blog);
+		return "SUCCESS";
+	}
 	public Blog getBlog(int blogID){
 		return blogDAO.findById(blogID);
 	}

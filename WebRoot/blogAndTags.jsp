@@ -1,8 +1,13 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!-- <html lang="en"> -->
+<html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +15,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="icon" href="assets/img/favicon.ico">
-<title>White Blog - 博文内容</title>
+<title>White Blog</title>
+
 <!-- Bootstrap core CSS -->
 <link href="assets/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome CSS -->
@@ -26,37 +32,19 @@
 <!-- ColorBox CSS -->
 <link href="assets/css/colorbox.css" rel="stylesheet">
 <!-- Custom font -->
-<link href='http://fonts.googleapis.com/css?family=Raleway:400,200,100,300,500,600,700,800,900' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Roboto+Slab&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+<link href='assets/css/googleFont.css' rel='stylesheet' type='text/css'>
+<link href='assets/css/googleFont2.css' rel='stylesheet' type='text/css'>
 <!-- Custom styles for this template -->
 <link href="assets/css/style.css" rel="stylesheet">
-<link type="text/css" rel="stylesheet" href="assets/styles/shCoreDefault.css"></link>
-<link type="text/css" rel="stylesheet" href="assets/styles/shCore.css"></link>
-<script type="text/javascript" src="assets/scripts/shCore.js" ></script>
-<script type="text/javascript" src="assets/scripts/shBrushCpp.js" ></script>
-<script type="text/javascript" src="assets/scripts/shBrushCSharp.js" ></script>
-<script type="text/javascript" src="assets/scripts/shBrushCss.js" ></script>
-<script type="text/javascript" src="assets/scripts/shBrushJava.js" ></script>
-<script type="text/javascript" src="assets/scripts/shBrushJScript.js" ></script>
-<script type="text/javascript" src="assets/scripts/shBrushPhp.js" ></script>
-<script type="text/javascript" src="assets/scripts/shBrushPython.js" ></script>
-<script type="text/javascript" src="assets/scripts/shBrushSql.js" ></script>
-<script type="text/javascript" src="assets/scripts/shBrushXml.js" ></script>
-<script type="text/javascript">SyntaxHighlighter.all();</script>
 
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
 </head>
 <body onload="timedCount()">
-	<s:action name="ShowCommentList"/>
+	<s:action name="ShowBlogList"/>
 	<div class="page-loader">
 		<div class="loader-in">Loading...</div>
 		<div class="loader-out">Loading...</div>
 	</div>
-
+	
 	<!-- 文章列表 -->
 	<aside class="navmenu-quan">
 		<div class="post-titles">
@@ -88,14 +76,14 @@
 			</ul>
 		</div>
 	</aside>
-
+	
 	<div class="canvas">
 		<div class="canvas-overlay"></div>
 		<header>
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
 					</div>
 								
 					<c:choose>
@@ -131,206 +119,105 @@
 			</nav>
 		</header>
 
-		
+		<div class="container">
+			<div class="head-text">
+				<h1>White Blog</h1>
+				<p class="lead-text">Blog. Designed for Read.</p>
+			</div>
+		</div>
 
-		<section class="post-fluid">
-			<div class="container-fluid">
-				<div class="container">
-					<div class="row post-items">
-						<div class="col-md-2">
-							<div class="post-item-short">
-								<span class="small-text">${req.blog.time}</span>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<div class="post-fluid post-medium-vertical">
+					<s:iterator value = "#resBlog" var = "blog">
+						<div class="container-fluid post-default">
+							<div class="container-medium">
+								<div class="row post-items">
+									<div class="col-md-12">
+										<div class="post-item">
+											<div class="post-item-paragraph">
+												<div>
+													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
+												</div>
+												<h3><a href="content.action?id=${blog.blogId}">${blog.title}</a></h3>
+												<p>${blog.content}<a href="#" class="more">[...]</a></p>
+											</div>
+											<div class="post-item-info clearfix">
+												<div class="pull-left">
+													<span>${blog.time}</span> By <a href="#">${blog.username}</a>
+												</div>
+												<div class="pull-right post-item-social">
+													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
+													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
 							</div>
-							<br>
-							 
-								<ul id="tags" class="laread-list">
-									<li class="title">Tags</li>
-									<li class="bar-tags">
-										<s:iterator value="bt" var="tag">
-											<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename"/></a>
-										</s:iterator>
-										
-									</li>
-								</ul>
 						</div>
+						</s:iterator>
 						
-						<div class="col-md-10 ">
-							<div class="post-item">
-								<div class="post-item-paragraph">
-									<h2><a href="#" class="quick-read"><i class="fa fa-envelop"></i></a>${req.blog.title}</h2>
-									<p class="post-item-two-column">																		
-									${req.blog.content}	
-									</p>
-								</div>
-								<div class="post-item-info no-border clearfix">
-																																	
-								<div class="post-item-social">
-								
-										
-									<s:form class="form-horizontal" role="form" action="sendMessage" method="post"> 
-													
-															<!-- 模态框（Modal） -->
-															<div class="modal form-horizontal fade" id="myModal" tabindex="-1"
-																role="dialog" aria-labelledby="myModalLabel" 
-																aria-hidden="true">
-																<div class="modal-dialog">
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<button type="button" class="close"
-																				data-dismiss="modal" aria-hidden="true">×</button>
-																			<!-- 模态框的标题部分 -->
-																			 
-																			<h4  class="modal-title" id="myModalLabel" >私信我吧</h4>
-																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="id" class="modal-title" id="id" /> 
-																		</div>
-																		<!-- 模态框的内容部分 -->
-																		<div class="form-group modal-header">
-																			<textarea class="form-control" id="mesContent" name="mesContent"
-																				placeholder="说点什么"></textarea>
-																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-default btn-grey btn-outline" 
-																				data-dismiss="modal">关闭</button>
-																			<button type="submit" class="btn btn-primary btn-grey btn-outline">
-																				发送 </button>
-												                     <!--  	</a>  -->
-																		</div>
-																	</div>
-																	<!-- /.modal-content -->
-																</div>
-																<!-- /.modal-dialog -->
-															</div>
-															<!-- /.modal 模态框结束-->															
-															</s:form> 
-										<div class="pull-right post-item-social" >
-											<a  data-toggle="modal" data-placement="top"	data-target="#myModal"><div class="mails"> </div></a>
-											<a  tabindex="0"  data-toggle="modal" data-placement="top" data-target="#myModal2"> <div class="tag" ></div>  </a>
-											<a href="#" class="post-like qr-like"><i class="fa fa-heart"></i><span>18</span></a>
-										</div>
-															<script>
-  																 $(function () { $('#myModal').modal('hide')});
-  																 $("#myModal").modal().css({
-               																  "margin-top": function () {
-                  															   return - ($(this).height() / 2);}
-           																		  });
-  																 $(function() {$('#myModal2').modal('hide')});
-															</script>	
-																																		
-												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
-													
-															<!-- 模态框（Modal） -->
-															<div class="modal form-horizontal fade" id="myModal2" tabindex="-1"
-																role="dialog" aria-labelledby="myModalLabel" 
-																aria-hidden="true">
-																<div class="modal-dialog">
-																	<div class="modal-content">
-																		<div class="modal-header" id="header2">
-																			<button type="button" class="close"
-																				data-dismiss="modal" aria-hidden="true">×</button>
-																			<!-- 模态框的标题部分 -->
-																			 
-																			<h4  class="modal-title" id="myModalLabel2" >已有标签</h4>
-																			<textarea class="form-control" id="mesContent2" name="mesContent2"  
-																				placeholder="新建标签,在这写上新的标签吧"></textarea>																		 
 
-																	 		
-																			 <!-- 不用管下面这行 -->
-																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.userId}" name="id" class="modal-title" id="id" />
-																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="bid" class="modal-title" id="bid" />  
-																		</div>
-																		<!-- 模态框的内容部分 -->
-																		<div class="modal-header">
-																			<c:forEach var="tag" items="${btl}" > 
-																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p>  
-																			</c:forEach>		
-																		 																
-																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
-																		</div>
-																	
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-default btn-grey btn-outline" 
-																				data-dismiss="modal">关闭</button>
-																			<button type="submit" class="btn btn-primary btn-grey btn-outline">添加</button>
-												                     <!--  	</a>  -->
-																		</div>
+						
 
-																		
-																	</div>
-																	<!-- /.modal-content -->
-																</div>
-																<!-- /.modal-dialog -->
-															</div>
-															<!-- /.modal 模态框结束-->
-												</s:form> 																																																		
-									</div>
-								</div>
-							</div>
-
+						<div class="container-fluid post-video">
 							
-							<div class="author-box">
-								<div class="author">
-									<a class="author-photo" href="#"><img src="assets/img/profil_photo-04.png" alt=""></a>
-									<div class="author-body">
-										<h4 class="author-name">作者：${req.username}</h4>
-										<h4 class="author-name">${sessionScope.loginUser.username}</h4>
-										<a href="#">view all post</a>
-									</div>
-									<div class="author-connection">
-										<a href="#"><i class="fa fa-twitter"></i></a>
-										<a href="#"><i class="fa fa-envelope"></i></a>
-									</div>
-								</div>
-							</div>
-
-							<div class="comment-box">
-								
-								<div class="comment-tab">
-									<a href="#" class="comment-info">Comments (28)</a>
-									<i class="i">|</i>
-									<a href="#" class="comment-info"><i class="fa fa-comments"></i> Show all</a>
-								</div>
-
-								<div class="comment-block">
-									<s:iterator value = "#session.commentList" var = "comment">
-										<div class="comment-item">
-											<a class="comment-photo" href="#">
-												<img src="assets/img/profil_photo-05.png" alt="" />
-											</a>
-											<div class="comment-body">
-												<h6 class="comment-heading"> ${comment.username} <span class="comment-date">${comment.time}</span></h6>
-												<p class="comment-text">${comment.content} </p>
-												<a href="#" class="comment-reply"><i class="reply-icon"></i> Reply</a>
-											</div>
-										</div>
-									</s:iterator>
-
-									<div class="comment-form main-comment-form">
-										<form action="PostComment.action" method="post">
-											<textarea class="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></textarea>
-											<div class="at-focus">
-												<button class="comment-submit">Post Comment</button>
-											</div>
-										</form>
-									</div>
-
-								</div>
-							</div>
+						</div><div class="container-fluid post-sound">
+							
 						</div>
 					</div>
 				</div>
+				<aside class="col-md-4">
+
+					<div class="laread-right">
+
+						<form action="searchArticle.action" class="laread-form search-form">
+							<div class="input"><input type="text" class="form-control" placeholder="Search..." name="searchText"></div>
+							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
+						</form>
+
+						<ul class="laread-list">
+							<li class="title">CATEGORY</li>
+							<li><a href="#">Branding</a><i class="line"></i></li>
+							<li><a href="#">Design (48)</a><i class="line"></i></li>
+							<li><a href="#">Photography</a><i class="line"></i></li>
+							<li><a href="#">Inspiration</a><i class="line"></i></li>
+							<li><a href="#">Life</a><i class="line"></i></li>
+							<li><a href="#">City</a><i class="line"></i></li>
+						</ul>
+
+						<ul class="laread-list">
+							<li class="title">RECENT POSTS</li>
+							<li><a href="#">The Nature of My Inspiration</a><i class="date">28 June</i></li>
+							<li><a href="#">Sam Feldt - Show Me Love</a><i class="date">27 June</i></li>
+							<li><a href="#">Do You Love Coffee?</a><i class="date">25 June</i></li>
+							<li><a href="#">The Game Before The Game</a><i class="date">23 June</i></li>
+							<li><a href="#">Long Live The Kings</a><i class="date">22 June</i></li>
+						</ul>
+
+						<ul class="laread-list">
+							<li class="title">ALL TAGS</li>
+							<li class="bar-tags">
+								<s:iterator value="#session.allTags" var="tag">
+									<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename" /></a>
+								</s:iterator>						 
+							</li>
+						</ul>
+
+					</div>
+
+				</aside>
 			</div>
-		</section>
+		</div>
 
 		<footer class="container-fluid footer">
 			<div class="container text-center">
 				<div class="footer-logo"><img src="assets/img/logo-black.png" alt=""></div>
 				<p class="laread-motto">Designed for Read.</p>
-				<div class="laread-social">
-					<a href="#" class="fa fa-twitter"></a>
-					<a href="#" class="fa fa-facebook"></a>
-					<a href="#" class="fa fa-pinterest"></a>
-				</div>
+				
 			</div>
 		</footer>
 	</div>
@@ -407,8 +294,7 @@
 			</div>
 		</div>
 		<div class="quick-read-bottom">
-			<p class="qr-info">By <a href="#">Daniele Zedda</a></p>
-			
+			<p class="qr-info">By <a href="#">Daniele Zedda</a>Â Â Â â¢Â Â Â 18 February</p>
 			<div class="qr-nav">
 				<a href="#" class="qr-prev">â PREV POST</a>
 				<a href="#" class="qr-share" tabindex="0" role="button" data-toggle="popover" data-placement="top" data-trigger="focus" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>"><i class="fa fa-share-alt"></i></a>
@@ -432,6 +318,74 @@
 		</div>
 	</div>
 
+	<!-- Login Modal -->
+	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
+				</div>
+				<div class="modal-body">
+					<form action="login.action" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Username" name="userform.username">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" placeholder="Password" name="userform.password">
+						</div>
+						<div class="linkbox">
+							<a href="#">Forgot password ?</a>
+							<span>No account ? <a href="#" id="register-btn" data-toggle="modal" data-target="#register-form">Sign Up.</a></span>
+							<!-- <span class="form-warning"><i class="fa fa-exclamation"></i>Fill the require.</span> -->
+						</div>
+						<div class="linkbox">
+							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN IN</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div class="provider">
+						<span>Sign In With</span>
+						<a href="#"><i class="fa fa-facebook"></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-content" id="register-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
+				</div>
+				<div class="modal-body">
+					<form action="register.action" method="post">
+						<!-- <div class="form-group">
+							<input class="form-control" placeholder="Name">
+						</div> -->
+						<div class="form-group">
+							<input class="form-control" placeholder="Username" name="userform.username">
+						</div>
+						<!-- <div class="form-group">
+							<input class="form-control" placeholder="Email">
+						</div> -->
+						<div class="form-group">
+							<input class="form-control" type="password" placeholder="Password" name="userform.password">
+						</div>
+						<div class="linkbox">
+							<span>Already got account? <a href="#" id="login-btn" data-target="#login-form">Sign In.</a></span>
+						</div>
+						<div class="linkbox">
+							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN UP</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -443,12 +397,12 @@
 	<script src="assets/js/jquery.blueimp-gallery.min.js"></script>
 	<script src="assets/js/imagesloaded.js"></script>
 	<script src="assets/js/masonry.js"></script>
-	<script src="assets/js/jquery.ellipsis.min.js"></script>
-	<script src="assets/js/isotope.pkgd.min.js"></script>
+	<script src="assets/js/viewportchecker.js"></script>
 	<script src="assets/js/jquery.dotdotdot.min.js"></script>
 	<script src="assets/js/jquery.colorbox-min.js"></script>
 	<script src="assets/js/jquery.nicescroll.min.js"></script>
-	<script src="assets/js/viewportchecker.js"></script>
+	<script src="assets/js/isotope.pkgd.min.js"></script>
+	<script src="assets/js/jquery.ellipsis.min.js"></script>
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
@@ -556,26 +510,5 @@
 			$('.post-title-list > li > div').toggleClass('container');
 		})
 	</script>
-	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </body>
- 																				<script type="text/javascript">  
-																				    var i = "df"; var t = "";
-                                                                                   function getTypename(id){
-	                                                                                  i = document.getElementById(id).innerText; 
-	                                                                                  //var tmp = document.getElementById("mesContent2").value.replace(/(^[\s\t\xa0\u3000]+)|([\u3000\xa0\s\t]+$)/g, "");
-	                                                                                  document.getElementById("mesContent2").value = i;
-	                                                                            /*       if(tmp == "")
-	                                                                                  	document.getElementById("mesContent2").value = i;
-	                                                                                  else{
-	                                                                                     t = tmp;
-	                                                                                   // var pp = "/.";
-	                                                                                   // pp = pp.concat(i, "/");
-	                                                                                   // var isExist = t.match(i);
-	                                                                                    if(t.indexOf(i) < 0){ 
-	                                                                                    	t=t.concat(",", i);
-	                                                                                    	document.getElementById("mesContent2").value = t;
-	                                                                                    } 
-	                                                                                  } */
-	                                                                             } 
-	                                                                       </script>	
 </html>

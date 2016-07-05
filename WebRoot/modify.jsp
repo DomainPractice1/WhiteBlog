@@ -4,13 +4,14 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <base href="<%=basePath%>">
     
-    <title>White Blog - 发表博文</title>
+    <title>White Blog - 修改博文</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -104,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
 					</div>
 								
 					<c:choose>
@@ -141,20 +142,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</header> 
 		  
 		<s:div cssClass="container">		
-			<s:form action="publish" method="POST" id="frmDemo" enctype="multipart/form-data" theme="simple">	
+			<s:form action="modify" method="POST" id="frmDemo" enctype="multipart/form-data" theme="simple">	
 				<s:div cssClass="head-text">				
 					<h1>${sessionScope.loginUser.username}</h1>
+					<s:hidden name="id" value="%{blogId}"></s:hidden>
 				</s:div>			
 	      	<s:div>		 	            		       	      
 	           <p>文章标题</p>                     
-	           <s:textfield  cssClass="form-control" name="title" size="8"/>
+	           <s:textfield  cssClass="form-control" name="currentBlog.title" size="8" value="%{blog.title}"/>
 	           <s:fielderror cssStyle="color:red;font-size:8pt;list-style-type:none;margin-left:0;"> 
 	    		  <s:param>title</s:param>    
 	   		   </s:fielderror>
 	        </s:div>   
 	        <s:div>                          
 	          	<p>文章内容</p>             	          	 
-	          	<s:textarea id="elm1" name="content" class="xheditor" rows="12" cols="80" style="width: 100%"></s:textarea>
+	          	<s:textarea id="elm1" name="currentBlog.content" class="xheditor" rows="12" cols="80" style="width: 100%" value="%{blog.content}"></s:textarea>
 	          	<s:fielderror cssStyle="color:red;font-size:8pt;list-style-type:none;"> 
 	    		  <s:param>content</s:param>    
 	   		   </s:fielderror>                        
@@ -162,11 +164,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      	<s:div id="uploadList"></s:div>        		      	
 	      	<s:div>
 		       	<p>文章分类</p>
-		       	<s:radio list="#{'0':'移动开发','1':'Web前端','2':'架构设计','3':'编程语言','4':'互联网','5':'数据库','6':'系统运维','7':'云计算','8':'研发管理','9':'综合'}" name="category"/>		      		     
+		       	<s:radio list="#{'0':'移动开发','1':'Web前端','2':'架构设计','3':'编程语言','4':'互联网','5':'数据库','6':'系统运维','7':'云计算','8':'研发管理','9':'综合'}" name="category" value="%{blogtype.typeId}"/>		      		     
 	        </s:div>
 	      	<s:div>
-		       	<p>新建分类</p>
-		       	<s:textfield cssClass="form-control" name="tags" size="8"/><s:label>（多个分类之间用“,”分隔）</s:label>
+		       	<p>新建分类</p>		     
+		       	<s:textfield cssClass="form-control" name="blogtype.typename" size="8" value="%{blogtype.typename}" />		
+		       	<s:label>（多个分类之间用“,”分隔）</s:label>
 		       	<s:fielderror cssStyle="color:red;font-size:8pt;list-style-type:none;"> 
 	    		  <s:param>tags</s:param>    
 	   		   </s:fielderror>                  

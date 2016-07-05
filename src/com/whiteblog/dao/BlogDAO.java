@@ -30,6 +30,7 @@ public class BlogDAO extends HibernateDaoSupport {
 	public static final String CONTENT = "content";
 	public static final String TIME = "time";
 	public static final String USERNAME = "username";
+	public static final String FILTERWORDS = "filterwords";
 
 	protected void initDao() {
 		// do nothing
@@ -96,6 +97,7 @@ public class BlogDAO extends HibernateDaoSupport {
 			throw re;
 		}
 	}
+
 	public List findByPartMatch(String propertyName, Object value){
 		log.debug("finding Blog instance with property: " + propertyName
 				+ ", value: " + value);
@@ -145,6 +147,10 @@ public class BlogDAO extends HibernateDaoSupport {
 		return findByProperty(USERNAME, username);
 	}
 
+	public List<Blog> findByFilterwords(Object filterwords) {
+		return findByProperty(FILTERWORDS, filterwords);
+	}
+
 	public List findAll() {
 		log.debug("finding all Blog instances");
 		try {
@@ -192,5 +198,5 @@ public class BlogDAO extends HibernateDaoSupport {
 
 	public static BlogDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (BlogDAO) ctx.getBean("BlogDAO");
-	}
+	}	
 }

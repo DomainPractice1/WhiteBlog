@@ -141,130 +141,25 @@
 							<div class="post-item-short">
 								<span class="small-text">${req.blog.time}</span>
 							</div>
-							<br>
-							 
-								<ul id="tags" class="laread-list">
-									<li class="title">Tags</li>
-									<li class="bar-tags">
-										<s:iterator value="bt" var="tag">
-											<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename"/></a>
-										</s:iterator>
-										
-									</li>
-								</ul>
 						</div>
-						
 						<div class="col-md-10 ">
 							<div class="post-item">
 								<div class="post-item-paragraph">
-									<h2><a href="#" class="quick-read"><i class="fa fa-envelop"></i></a>${req.blog.title}</h2>
+									<h2><a href="#" class="quick-read"><i class="fa fa-eye"></i></a>${req.blog.title}</h2>
 									<p class="post-item-two-column">																		
 									${req.blog.content}	
 									</p>
 								</div>
-								<div class="post-item-info no-border clearfix">
-																																	
-								<div class="post-item-social">
-								
-										
-									<s:form class="form-horizontal" role="form" action="sendMessage" method="post"> 
-													
-															<!-- 模态框（Modal） -->
-															<div class="modal form-horizontal fade" id="myModal" tabindex="-1"
-																role="dialog" aria-labelledby="myModalLabel" 
-																aria-hidden="true">
-																<div class="modal-dialog">
-																	<div class="modal-content">
-																		<div class="modal-header">
-																			<button type="button" class="close"
-																				data-dismiss="modal" aria-hidden="true">×</button>
-																			<!-- 模态框的标题部分 -->
-																			 
-																			<h4  class="modal-title" id="myModalLabel" >私信我吧</h4>
-																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="id" class="modal-title" id="id" /> 
-																		</div>
-																		<!-- 模态框的内容部分 -->
-																		<div class="form-group modal-header">
-																			<textarea class="form-control" id="mesContent" name="mesContent"
-																				placeholder="说点什么"></textarea>
-																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
-																		</div>
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-default btn-grey btn-outline" 
-																				data-dismiss="modal">关闭</button>
-																			<button type="submit" class="btn btn-primary btn-grey btn-outline">
-																				发送 </button>
-												                     <!--  	</a>  -->
-																		</div>
-																	</div>
-																	<!-- /.modal-content -->
-																</div>
-																<!-- /.modal-dialog -->
-															</div>
-															<!-- /.modal 模态框结束-->															
-															</s:form> 
-										<div class="pull-right post-item-social" >
-											<a  data-toggle="modal" data-placement="top"	data-target="#myModal"><div class="mails"> </div></a>
-											<a  tabindex="0"  data-toggle="modal" data-placement="top" data-target="#myModal2"> <div class="tag" ></div>  </a>
-											<a href="#" class="post-like qr-like"><i class="fa fa-heart"></i><span>18</span></a>
-										</div>
-															<script>
-  																 $(function () { $('#myModal').modal('hide')});
-  																 $("#myModal").modal().css({
-               																  "margin-top": function () {
-                  															   return - ($(this).height() / 2);}
-           																		  });
-  																 $(function() {$('#myModal2').modal('hide')});
-															</script>	
-																																		
-												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
-													
-															<!-- 模态框（Modal） -->
-															<div class="modal form-horizontal fade" id="myModal2" tabindex="-1"
-																role="dialog" aria-labelledby="myModalLabel" 
-																aria-hidden="true">
-																<div class="modal-dialog">
-																	<div class="modal-content">
-																		<div class="modal-header" id="header2">
-																			<button type="button" class="close"
-																				data-dismiss="modal" aria-hidden="true">×</button>
-																			<!-- 模态框的标题部分 -->
-																			 
-																			<h4  class="modal-title" id="myModalLabel2" >已有标签</h4>
-																			<textarea class="form-control" id="mesContent2" name="mesContent2"  
-																				placeholder="新建标签,在这写上新的标签吧"></textarea>																		 
-
-																	 		
-																			 <!-- 不用管下面这行 -->
-																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.userId}" name="id" class="modal-title" id="id" />
-																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="bid" class="modal-title" id="bid" />  
-																		</div>
-																		<!-- 模态框的内容部分 -->
-																		<div class="modal-header">
-																			<c:forEach var="tag" items="${btl}" > 
-																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p>  
-																			</c:forEach>		
-																		 																
-																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
-																		</div>
-																	
-																		<div class="modal-footer">
-																			<button type="button" class="btn btn-default btn-grey btn-outline" 
-																				data-dismiss="modal">关闭</button>
-																			<button type="submit" class="btn btn-primary btn-grey btn-outline">添加</button>
-												                     <!--  	</a>  -->
-																		</div>
-
-																		
-																	</div>
-																	<!-- /.modal-content -->
-																</div>
-																<!-- /.modal-dialog -->
-															</div>
-															<!-- /.modal 模态框结束-->
-												</s:form> 																																																		
+								<div class="post-item-info no-border clearfix">									
+									<div class="post-item-social">		 												
+										<a href="#"><i class="fa fa-google-plus"></i></a>
+										<a href="#"><i class="fa fa-heart"></i> 18</a>
 									</div>
 								</div>
+								<form action="review.action">
+									<button type="submit" class="btn btn-grey btn-outline btn-rounded">审核通过</button>
+								</form>
+								<button class="btn btn-grey btn-outline btn-rounded">审核未通过</button>
 							</div>
 
 							
@@ -273,47 +168,11 @@
 									<a class="author-photo" href="#"><img src="assets/img/profil_photo-04.png" alt=""></a>
 									<div class="author-body">
 										<h4 class="author-name">作者：${req.username}</h4>
-										<h4 class="author-name">${sessionScope.loginUser.username}</h4>
-										<a href="#">view all post</a>
 									</div>
 									<div class="author-connection">
 										<a href="#"><i class="fa fa-twitter"></i></a>
 										<a href="#"><i class="fa fa-envelope"></i></a>
 									</div>
-								</div>
-							</div>
-
-							<div class="comment-box">
-								
-								<div class="comment-tab">
-									<a href="#" class="comment-info">Comments (28)</a>
-									<i class="i">|</i>
-									<a href="#" class="comment-info"><i class="fa fa-comments"></i> Show all</a>
-								</div>
-
-								<div class="comment-block">
-									<s:iterator value = "#session.commentList" var = "comment">
-										<div class="comment-item">
-											<a class="comment-photo" href="#">
-												<img src="assets/img/profil_photo-05.png" alt="" />
-											</a>
-											<div class="comment-body">
-												<h6 class="comment-heading"> ${comment.username} <span class="comment-date">${comment.time}</span></h6>
-												<p class="comment-text">${comment.content} </p>
-												<a href="#" class="comment-reply"><i class="reply-icon"></i> Reply</a>
-											</div>
-										</div>
-									</s:iterator>
-
-									<div class="comment-form main-comment-form">
-										<form action="PostComment.action" method="post">
-											<textarea class="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></textarea>
-											<div class="at-focus">
-												<button class="comment-submit">Post Comment</button>
-											</div>
-										</form>
-									</div>
-
 								</div>
 							</div>
 						</div>
@@ -556,7 +415,6 @@
 			$('.post-title-list > li > div').toggleClass('container');
 		})
 	</script>
-	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 </body>
  																				<script type="text/javascript">  
 																				    var i = "df"; var t = "";

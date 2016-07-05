@@ -1,3 +1,4 @@
+
 package com.whiteblog.action;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.service.BlogServiceImp;
 import com.whiteblog.service.BlogTypeServiceImp;
 import com.whiteblog.service.UserManagerImpl;
+import com.whiteblog.service.fileManagerImpl;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Blogtype;
 import com.whiteblog.entity.User;
@@ -58,7 +60,7 @@ public class publishAction extends ActionSupport{
 						
 			int typeID=-1;
 			List<Blogtype> typesAlready = null;
-			if(!tags.trim().equals("")){
+			if(!tags.trim().equals("")){//优先个人新建的分类
 				typesAlready=blogtypeDAO.findByTypename(tags);
 				if(!typesAlready.isEmpty()){
 					typeID=typesAlready.get(0).getTypeId();
@@ -94,6 +96,21 @@ public class publishAction extends ActionSupport{
 			blog.setUsername(userName);
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 			blog.setTime(df.format(new Date()));// new Date()为获取当前系统时间
+			
+			List<String> filterWords = fileManagerImpl.getWords();
+			System.out.println("[filterWords size]"+filterWords.size());
+			blog.setFilterwords(1);
+			for(int i=0;i<filterWords.size();i++){
+				if(content.contains(filterWords.get(i))){
+					hint="文章中包含敏感词！";
+					blog.setFilterwords(0);
+					break;
+				}else{
+					continue;
+				}
+			}
+			
+			
 			blogDAO.save(blog);
 			hint="成功发布！";
 			

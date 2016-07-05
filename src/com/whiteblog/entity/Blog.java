@@ -23,6 +23,8 @@ public class Blog implements java.io.Serializable {
 	private String content;
 	private String time;
 	private String username;
+	private Integer filterwords;
+
 	// Constructors
 
 	/** default constructor */
@@ -38,13 +40,14 @@ public class Blog implements java.io.Serializable {
 
 	/** full constructor */
 	public Blog(Integer userId, Integer typeId, String title, String content,
-			String time, String username) {
+			String time, String username, Integer filterwords) {
 		this.userId = userId;
 		this.typeId = typeId;
 		this.title = title;
 		this.content = content;
 		this.time = time;
 		this.username = username;
+		this.filterwords = filterwords;
 	}
 
 	// Property accessors
@@ -58,15 +61,6 @@ public class Blog implements java.io.Serializable {
 	public void setBlogId(Integer blogId) {
 		this.blogId = blogId;
 	}
-	
-	@Column(name = "username", nullable = true, length = 45)
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
 
 	@Column(name = "userID", nullable = false)
 	public Integer getUserId() {
@@ -77,7 +71,7 @@ public class Blog implements java.io.Serializable {
 		this.userId = userId;
 	}
 
-	@Column(name = "typeID", nullable = true)
+	@Column(name = "typeID")
 	public Integer getTypeId() {
 		return this.typeId;
 	}
@@ -104,7 +98,7 @@ public class Blog implements java.io.Serializable {
 		this.content = content;
 	}
 
-	@Column(name = "time", nullable = true, length = 100)
+	@Column(name = "time", length = 100)
 	public String getTime() {
 		return this.time;
 	}
@@ -113,5 +107,22 @@ public class Blog implements java.io.Serializable {
 		this.time = time;
 	}
 
+	@Column(name = "username", length = 45)
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	@Column(name = "filterwords")
+	public Integer getFilterwords() {
+		return this.filterwords;
+	}
+
+	public void setFilterwords(Integer filterwords) {
+		this.filterwords = filterwords;
+	}
 
 }

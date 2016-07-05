@@ -5,7 +5,7 @@
 	<package name="whiteblog" extends="struts-default,json-default" namespace="/">
 		<action name="login" class="LoginAction" method="execute">
 			<result name="user">/index_rt.jsp</result>
-			<result name="admin" type="redirectAction">getalluser</result>
+			<result name="admin" type="redirectAction">showuncheckblog</result>
 			<result name="error">/error.jsp</result>
 		</action>
 		<action name="register" class="RegisterAction" method="execute">
@@ -15,6 +15,13 @@
 		<action name="content" class="BlogContent" method="execute">
 			<result name="success" >/blogcontent_rt.jsp</result>
 			<result name="fail">/404.html</result>
+		</action>
+		<action name="uncheckcontent" class="BlogContent" method="uncheck">
+			<result name="success" >/uncheckcontent.jsp</result>
+			<result name="fail">/404.html</result>
+		</action>
+		<action name="review" class="BlogContent" method="review">
+			<result name="success" type="redirectAction">showuncheckblog</result>
 		</action>
 		<action name="searchArticle" class="SearchArticleAction" method="execute">
  			<result name="success">/articleListTest.jsp</result>
@@ -74,6 +81,10 @@
 				<param name="root">blogList</param>
 			</result>
 		</action>
+		<action name="showuncheckblog" class="ShowBlogListAction" method="showUNCheckBlog">
+			<result name="success">/authors.jsp</result>
+			<result name="error">/404.html</result>
+		</action>
 		<action name="sendMessage" class="SendMessageAction" method="execute">
 			<result name="success">./index_rt.jsp</result>
 			<result name="fail">/404.html</result>
@@ -84,6 +95,21 @@
 		</action>
 		<action name="showMailList" class="showMailListAction" method="execute">
 			<result name="success">/mailList.jsp</result>
+		</action>
+		<action name="findBlogByTagAction" class="FindBlogByTagAction" method="findBlogs">
+			<result name="success">./blogAndTags.jsp</result>
+		</action>
+		<action name="logout" class="com.whiteblog.action.logoutAction" method="execute">
+			<result name="success">/index_rt.jsp</result>
+		</action>
+		<action name="modify" class="modifyAction" method="execute">			
+			<result name="success" type="redirectAction">
+			 	<param name="actionName">content</param>
+                <param name="id">${id}</param>			
+			</result>
+		</action>
+		<action name="showBlogToModify" class="showBlogToModifyAciton" method="execute">
+			<result name="success">/modify.jsp</result>
 		</action>
 	</package>
 
