@@ -78,7 +78,7 @@
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
 					</div>
 								
 					<c:choose>
@@ -118,7 +118,7 @@
 
 			<div class="head-author">
 				<h1 class="author-h1">管理员面板</h1>
-				<p class="lead about-lead">Welcome to my blog, take your time give it a read and browse around.</p>
+				<p class="lead about-lead">待审核文章.</p>
 			</div>
 
 		</div>
@@ -126,8 +126,8 @@
 
 		<div class="post-fluid">
 			<div class="container-fluid">
-			<form action="deleteuser.action">
-				<c:forEach items="${sessionScope.allUser}" var="user">
+			<form action="uncheckcontent.action">
+				<c:forEach items="${sessionScope.uncheckblog}" var="blog">
 					<article class="row laread-authors">
 						<div class="author-item">
 							<div class="author-picture">
@@ -135,14 +135,14 @@
 							</div>
 							<div class="author-subdetail">
 								<h2><a href="#"></a></h2>
-								<p class="info-small">Graphic Designer<span><i class="fa fa-map-marker"></i>Toronto, Canada</span></p>
+								<p class="info-small">${blog.time}<span><i class="fa fa-map-marker"></i></p>
 								<div class="author-connection">
 									<a href="#"><i class="fa fa-twitter"></i></a>
 									<a href="#"><i class="fa fa-google-plus"></i></a>
 									<a href="#"><i class="fa fa-envelope"></i></a>
 								</div>
-								<p class="author-bio">userName:${user.username} </p>							
-								<button type="submit" class="btn btn-grey btn-outline btn-rounded" name="selectUser" value="${user.userId}">Delete</button>											
+								<p class="author-bio">${blog.title}</p>							
+								<button type="submit" class="btn btn-grey btn-outline btn-rounded" name="id" value="${blog.blogId}">查看文章</button>													
 							</div>
 						</div>
 					</article>	

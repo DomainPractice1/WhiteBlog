@@ -60,7 +60,7 @@ public class blogContentAction extends ActionSupport{
 		Blog ins = blogContentManage.findById(id);
 		if(ins == null)
 			return FAIL;
-		String username = userManager.findUsernameById(id);
+		String username = ins.getUsername();
 		System.out.println(username + " and " + ins.getContent() + " BlogContent");		
 		
 		BlogContentForm blogContentForm = new BlogContentForm(ins, username); 		
@@ -74,7 +74,43 @@ public class blogContentAction extends ActionSupport{
 		ActionContext.getContext().put("re", btl);
 		//ActionContext.getContext().getSession().put("req", blogContentForm);
 		ActionContext.getContext().getSession().put("blogId",id);
+		
+		/*标签的部分*/
+		System.out.println("添加标签，载入标签");
+		int bti = b.getBlog().getTypeId();
+		System.out.println("Tag type 是 " + bti);
+		Blogtype bt = blogtypeService.getBlogtype(bti);
+		ActionContext.getContext().put("bt", bt);
 		return SUCCESS;
 	}
 	
+	public String uncheck(){
+		Blog ins = blogContentManage.findById(id);
+		if(ins == null)
+			return FAIL;
+		String username = ins.getUsername();
+		System.out.println(username + " and " + ins.getContent() + " BlogContent");		
+		
+		BlogContentForm blogContentForm = new BlogContentForm(ins, username); 		
+		System.out.println(blogContentForm.getUsername() + "blogcontentform");
+		Map<String, Object> map = ActionContext.getContext().getSession();
+		map.put("req", blogContentForm);
+		BlogContentForm b = (BlogContentForm)map.get("req");
+		System.out.println(b.getUsername() + " is from map of blogcontentAction");
+		ActionContext.getContext().put("req", b);
+		btl = blogtypeService.getBlogtypeDAO().findByUserId(ins.getUserId());
+		ActionContext.getContext().put("re", btl);
+		//ActionContext.getContext().getSession().put("req", blogContentForm);
+		ActionContext.getContext().getSession().put("blogId",id);
+		return SUCCESS;		
+	}
+	
+	public String review(){		
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		Integer blogID = (Integer)session.get("blogId");
+		Blog blog = blogContentManage.findById(blogID);
+		blog.setFilterwords(1);
+		blogContentManage.setupdateBlog(blog);
+		return SUCCESS;
+	}
 }

@@ -26,6 +26,7 @@ public class CommentDAO extends HibernateDaoSupport {
 	public static final String USER_ID = "userId";
 	public static final String CONTENT = "content";
 	public static final String TIME = "time";
+	public static final String USERNAME = "username";
 
 	protected void initDao() {
 		// do nothing
@@ -108,6 +109,10 @@ public class CommentDAO extends HibernateDaoSupport {
 		return findByProperty(TIME, time);
 	}
 
+	public List<Comment> findByUsername(Object username) {
+		return findByProperty(USERNAME, username);
+	}
+	
 	public List findAll() {
 		log.debug("finding all Comment instances");
 		try {

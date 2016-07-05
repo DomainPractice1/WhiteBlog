@@ -211,8 +211,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</ul>
 
 						<ul class="laread-list">
-							<li class="title">TAGS</li>
+							<li class="title">ALL TAGS</li>
 							<li class="bar-tags">
+								<s:iterator value="#session.allTags" var="tag">
+									<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename" /></a>
+								</s:iterator>
 								<a href="#">fashion</a>
 								<a href="#">culture</a>
 								<a href="#">art</a>
