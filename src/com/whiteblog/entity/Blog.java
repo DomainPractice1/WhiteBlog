@@ -24,6 +24,10 @@ public class Blog implements java.io.Serializable {
 	private String time;
 	private String username;
 	private Integer filterwords;
+	private Integer likenumber;
+	private Integer forwardnumber;
+	private Integer viewnumber;
+	private Integer commentnumber;
 
 	// Constructors
 
@@ -40,7 +44,9 @@ public class Blog implements java.io.Serializable {
 
 	/** full constructor */
 	public Blog(Integer userId, Integer typeId, String title, String content,
-			String time, String username, Integer filterwords) {
+			String time, String username, Integer filterwords,
+			Integer likenumber, Integer forwardnumber, Integer viewnumber,
+			Integer commentnumber) {
 		this.userId = userId;
 		this.typeId = typeId;
 		this.title = title;
@@ -48,6 +54,10 @@ public class Blog implements java.io.Serializable {
 		this.time = time;
 		this.username = username;
 		this.filterwords = filterwords;
+		this.likenumber = likenumber;
+		this.forwardnumber = forwardnumber;
+		this.viewnumber = viewnumber;
+		this.commentnumber = commentnumber;
 	}
 
 	// Property accessors
@@ -123,6 +133,42 @@ public class Blog implements java.io.Serializable {
 
 	public void setFilterwords(Integer filterwords) {
 		this.filterwords = filterwords;
+	}
+
+	@Column(name = "likenumber")
+	public Integer getLikenumber() {
+		return this.likenumber;
+	}
+
+	public void setLikenumber(Integer likenumber) {
+		this.likenumber = likenumber;
+	}
+
+	@Column(name = "forwardnumber")
+	public Integer getForwardnumber() {
+		return this.forwardnumber;
+	}
+
+	public void setForwardnumber(Integer forwardnumber) {
+		this.forwardnumber = forwardnumber;
+	}
+
+	@Column(name = "viewnumber")
+	public Integer getViewnumber() {
+		return this.viewnumber;
+	}
+
+	public void setViewnumber(Integer viewnumber) {
+		this.viewnumber = viewnumber;
+	}
+
+	@Column(name = "commentnumber")
+	public Integer getCommentnumber() {
+		return this.commentnumber;
+	}
+
+	public void setCommentnumber(Integer commentnumber) {
+		this.commentnumber = commentnumber;
 	}
 
 }

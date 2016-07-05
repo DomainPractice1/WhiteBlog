@@ -31,7 +31,11 @@ public class BlogDAO extends HibernateDaoSupport {
 	public static final String TIME = "time";
 	public static final String USERNAME = "username";
 	public static final String FILTERWORDS = "filterwords";
-
+	public static final String LIKENUMBER = "likenumber";
+	public static final String FORWARDNUMBER = "forwardnumber";
+	public static final String VIEWNUMBER = "viewnumber";
+	public static final String COMMENTNUMBER = "commentnumber";
+	
 	protected void initDao() {
 		// do nothing
 	}
@@ -149,6 +153,22 @@ public class BlogDAO extends HibernateDaoSupport {
 
 	public List<Blog> findByFilterwords(Object filterwords) {
 		return findByProperty(FILTERWORDS, filterwords);
+	}
+	
+	public List<Blog> findByLikenumber(Object likenumber) {
+		return findByProperty(LIKENUMBER, likenumber);
+	}
+
+	public List<Blog> findByForwardnumber(Object forwardnumber) {
+		return findByProperty(FORWARDNUMBER, forwardnumber);
+	}
+
+	public List<Blog> findByViewnumber(Object viewnumber) {
+		return findByProperty(VIEWNUMBER, viewnumber);
+	}
+
+	public List<Blog> findByCommentnumber(Object commentnumber) {
+		return findByProperty(COMMENTNUMBER, commentnumber);
 	}
 
 	public List findAll() {

@@ -20,6 +20,8 @@ public class User implements java.io.Serializable {
 	private String username;
 	private String password;
 	private String identity;
+	private String hobby;
+	private String image;
 
 	// Constructors
 
@@ -34,10 +36,13 @@ public class User implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public User(String username, String password, String identity) {
+	public User(String username, String password, String identity,
+			String hobby, String image) {
 		this.username = username;
 		this.password = password;
 		this.identity = identity;
+		this.hobby = hobby;
+		this.image = image;
 	}
 
 	// Property accessors
@@ -77,6 +82,24 @@ public class User implements java.io.Serializable {
 
 	public void setIdentity(String identity) {
 		this.identity = identity;
+	}
+
+	@Column(name = "hobby", length = 45)
+	public String getHobby() {
+		return this.hobby;
+	}
+
+	public void setHobby(String hobby) {
+		this.hobby = hobby;
+	}
+
+	@Column(name = "image", length = 65535)
+	public String getImage() {
+		return this.image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 }
