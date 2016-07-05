@@ -10320,30 +10320,16 @@ only screen and (                min-resolution: 2dppx){
 	.navbar-brand img {
 		opacity: 0;
 	}
-	
 }
-	.mails{
-		background: url(../img/mail.png) no-repeat 0 0;	
-		background-size:18px 18px;
-		width:18px;
-		height:18px; 
-	}
-	.mails:hover{
-		background: url(../img/mailHover.png) no-repeat 0 0;	
-		background-size:18px 18px;
-		width:18px;
-		height:18px;	
-	}	
-	
-	.tag{
-		background: url(../img/tag.png) no-repeat 0 0;	
-		background-size:18px 18px;
-		width:18px;
-		height:18px; 
-	}
-	.tag:hover{
-		background: url(../img/tagHover.png) no-repeat 0 0;	
-		background-size:18px 18px;
-		width:18px;
-		height:18px;	
-	}	
+.modify{	
+	background: url(../img/modify.png) no-repeat 0 0;	
+	background-size:18px 18px;
+	width:18px;
+	height:18px;
+}
+.modify:hover{
+	background: url(../img/modifyHover.png) no-repeat 0 0;	
+	background-size:18px 18px;
+	width:18px;
+	height:18px;	
+}

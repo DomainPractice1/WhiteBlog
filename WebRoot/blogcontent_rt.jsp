@@ -95,7 +95,7 @@
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
 					</div>
 								
 					<c:choose>
@@ -141,32 +141,22 @@
 							<div class="post-item-short">
 								<span class="small-text">${req.blog.time}</span>
 							</div>
-							<br>
-							 
-								<ul id="tags" class="laread-list">
-									<li class="title">Tags</li>
-									<li class="bar-tags">
-										<s:iterator value="bt" var="tag">
-											<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename"/></a>
-										</s:iterator>
-										
-									</li>
-								</ul>
-						 
 						</div>
 						<div class="col-md-10 ">
 							<div class="post-item">
 								<div class="post-item-paragraph">
-									<h2><a href="#" class="quick-read"><i class="fa fa-envelop"></i></a>${req.blog.title}</h2>
+									<h2><a href="#" class="quick-read"><i class="fa fa-eye"></i></a>${req.blog.title}</h2>
 									<p class="post-item-two-column">																		
 									${req.blog.content}	
 									</p>
 								</div>
 								<div class="post-item-info no-border clearfix">
+																																	
 									
-									<div class="post-item-social">
-									
-								<!-- <a data-toggle="modal" data-placement="top"	data-target="#myModal" style="float:right" ><i class="fa fa-eye"></i></a> -->
+								<button class="btn btn-link btn-xs" data-toggle="modal" data-placement="top"
+															data-target="#myModal" name="id" value="${req.blog.blogId}" >
+															<i class="fa fa-eye"></i>
+														</button>
 										
 									<s:form class="form-horizontal" role="form" action="sendMessage" method="post"> 
 													
@@ -212,8 +202,12 @@
            																		  });
   																 $(function() {$('#myModal2').modal('hide')});
 															</script>	
-
-													<!-- <a style="float:right;" 	data-toggle="modal" data-placement="top" data-target="#myModal2"> <i class="fa fa-facebook"></i>  </a>	 -->
+										
+										
+													<button class="btn btn-link btn-xs" style="float:left;" data-toggle="modal" data-placement="top"
+															data-target="#myModal2"   value="${req.blog.blogId}" >
+															<i class="fa fa-facebook"></i>
+													</button>				
 												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
 													
 															<!-- 模态框（Modal） -->
@@ -259,15 +253,7 @@
 																<!-- /.modal-dialog -->
 															</div>
 															<!-- /.modal 模态框结束-->
-												</s:form> 														
-										
-									<!-- <div class="post-item-info clearfix"> -->
-										<div class="pull-right post-item-social" >
-											<a  data-toggle="modal" data-placement="top"	data-target="#myModal"><div class="mails"> </div></a>
-											<a  tabindex="0"  data-toggle="modal" data-placement="top" data-target="#myModal2"> <div class="tag" ></div>  </a>
-											<a href="#" class="post-like qr-like"><i class="fa fa-heart"></i><span>18</span></a>
-										</div>
-									<!-- </div> -->	 
+												</s:form> 																																																		
 									</div>
 								</div>
 							</div>
@@ -277,7 +263,8 @@
 								<div class="author">
 									<a class="author-photo" href="#"><img src="assets/img/profil_photo-04.png" alt=""></a>
 									<div class="author-body">
-										<h4 class="author-name">作者：${req.username}</h4>
+										<h4 class="author-name">${sessionScope.loginUser.username}</h4>
+										<a href="#">view all post</a>
 									</div>
 									<div class="author-connection">
 										<a href="#"><i class="fa fa-twitter"></i></a>

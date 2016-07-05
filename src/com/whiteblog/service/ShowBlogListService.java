@@ -12,14 +12,12 @@ public class ShowBlogListService {
 		return blogDAO.findByUserId(userId);
 	}
 	public List<Blog> getAllBlog(){
-		return blogDAO.findByFilterwords(1);
+		return blogDAO.findAll();
 	}
 	public BlogDAO getBlogDAO() {
 		return blogDAO;
 	}
-	public List<Blog> getuncheckBlog(){
-		return blogDAO.findByFilterwords(0);
-	}
+	
 	public void setBlogDAO(BlogDAO blogDAO) {
 		this.blogDAO = blogDAO;
 	}

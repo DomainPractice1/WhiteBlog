@@ -97,32 +97,7 @@ public class BlogDAO extends HibernateDaoSupport {
 			throw re;
 		}
 	}
-	
-	public List findByPartMatch(String propertyName, Object value){
-		log.debug("finding Blog instance with property: " + propertyName
-				+ ", value: " + value);
-		try {
-			String queryString = "from Blog as model where model."
-					+ propertyName + " like ?";
-			return getHibernateTemplate().find(queryString, "%"+value+"%");
-		} catch (RuntimeException re) {
-			log.error("find by property name failed", re);
-			throw re;
-		}
-	}
-	
-	public List<Blog> findByPartTitle(Object title) {
-		return findByPartMatch(TITLE, title);
-	}
 
-	public List<Blog> findByPartContent(Object content) {
-		return findByPartMatch(CONTENT, content);
-	}
-
-	public List<Blog> findByPartUsername(Object username) {
-		return findByPartMatch(USERNAME, username);
-	}
-	
 	public List<Blog> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
 	}
@@ -198,5 +173,29 @@ public class BlogDAO extends HibernateDaoSupport {
 
 	public static BlogDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (BlogDAO) ctx.getBean("BlogDAO");
+	}
+	public List findByPartMatch(String propertyName, Object value){
+		log.debug("finding Blog instance with property: " + propertyName
+				+ ", value: " + value);
+		try {
+			String queryString = "from Blog as model where model."
+					+ propertyName + " like ?";
+			return getHibernateTemplate().find(queryString, "%"+value+"%");
+		} catch (RuntimeException re) {
+			log.error("find by property name failed", re);
+			throw re;
+		}
+	}
+
+	public List<Blog> findByPartTitle(Object title) {
+		return findByPartMatch(TITLE, title);
+	}
+
+	public List<Blog> findByPartContent(Object content) {
+		return findByPartMatch(CONTENT, content);
+	}
+
+	public List<Blog> findByPartUsername(Object username) {
+		return findByPartMatch(USERNAME, username);
 	}
 }
