@@ -32,8 +32,7 @@ public class FindBlogByTagAction {
 		this.blogManager = blogManager;
 	}
 	
-	public String findBlogs(){
-		System.out.println("FindBlogByTags 找到的id " + id);
+	public String findBlogs(){ 
 		Blogtype bt = blogtypeService.getBlogtype(id);
 		String typeName = bt.getTypename();
 		List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findByTypename(typeName);
@@ -43,6 +42,15 @@ public class FindBlogByTagAction {
 		return "success";
 	}
 	
-	
+	public String findBySuperTag(){
+		System.out.println("super tag is " + id);
+		Blogtype bt = blogtypeService.getBlogtype(id);
+		String superTypename = bt.getSuperTypename();
+		List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findBySuperTypename(superTypename); 
+		ActionContext.getContext().put("TagName", superTypename);
+		List<Blog> bl = blogManager.findByBlogTypeName(btl);
+		ActionContext.getContext().put("resBlog", bl);
+		return "success";		
+	}
 	
 }	

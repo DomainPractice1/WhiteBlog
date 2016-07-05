@@ -145,6 +145,7 @@
 									<li class="title">Tags</li>
 									<li class="bar-tags">
 										<s:iterator value="bt" var="tag">
+											<a href="findBlogByTagSuperAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.superTypename"/></a>
 											<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename"/></a>
 										</s:iterator>
 										
@@ -203,7 +204,7 @@
 											<c:when test="${sessionScope.loginUser != null}">
 												<div class="pull-right post-item-social" >
 													<a  data-toggle="modal" 	data-target="#myModal"><div class="mails"> </div></a>
-													<a  tabindex="0"   data-toggle="modal" data-placement="top" data-target="#myModal2"> <div class="tag" ></div>  </a>
+													<a  tabindex="0"   data-toggle="modal"  data-target="#myModal2"> <div class="tag" ></div>  </a>
 													<a href="#" class="post-like qr-like"><i class="fa fa-heart"></i><span>18</span></a>
 												</div>
 											</c:when>	
@@ -220,7 +221,7 @@
 												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
 													
 															<!-- 模态框（Modal） -->
-															<div class="modal form-horizontal fade" id="myModal2" tabindex="-1"
+															<div class="modal  form-horizontal fade" id="myModal2" tabindex="-1"
 																role="dialog" aria-labelledby="myModalLabel" 
 																aria-hidden="true">
 																<div class="modal-dialog">
@@ -229,8 +230,18 @@
 																			<button type="button" class="close"
 																				data-dismiss="modal" aria-hidden="true">×</button>
 																			<!-- 模态框的标题部分 -->
-																			 
-																			<h4  class="modal-title" id="myModalLabel2" >已有标签</h4>
+																			
+																			 <div class="tag"></div>
+																			<div><h4  class="modal-title" id="myModalLabel2" >更改标签</h4></div>
+																		
+																		<div class="modal-header">
+																			<select name="superTypename">
+																				<option style="width:100px" value="IT/互联网">IT/互联网</option>
+																				<option style="width:100px" value="美图">美图</option>
+																				<option style="width:100px" value="生活">生活/游戏</option>
+																				<option style="width:100px" value="其他">其他</option>
+																			</select>
+																		</div>
 																			<textarea class="form-control" id="mesContent2" name="mesContent2"  
 																				placeholder="新建标签,在这写上新的标签吧"></textarea>																		 
 
@@ -239,13 +250,12 @@
 																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.userId}" name="id" class="modal-title" id="id" />
 																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="bid" class="modal-title" id="bid" />  
 																		</div>
+																		
 																		<!-- 模态框的内容部分 -->
 																		<div class="modal-header">
-																			<c:forEach var="tag" items="${btl}" > 
-																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p>  
-																			</c:forEach>		
-																		 																
-																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
+																			<c:forEach var="tag" items="${btl }">
+																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p> 
+																			</c:forEach>
 																		</div>
 																	
 																		<div class="modal-footer">

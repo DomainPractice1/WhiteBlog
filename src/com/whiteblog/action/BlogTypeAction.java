@@ -16,9 +16,16 @@ public class BlogTypeAction {
 	private Integer bid;
 	private BlogTypeServiceImp blogtypeService;
 	private BlogManagerImpl blogManager;
+	private String superTypename;
 	static public final  String SUCCESS = "success";
 	static public final  String ERROR = "error";
 	
+	public String getSuperTypename() {
+		return superTypename;
+	}
+	public void setSuperTypename(String superTypename) {
+		this.superTypename = superTypename;
+	}
 	public Integer getBid() {
 		return bid;
 	}
@@ -52,15 +59,14 @@ public class BlogTypeAction {
 	public String addTags(){
 		String str = mesContent2;  
 		
-		System.out.println(id);
-		
 			List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findByTypename(str);
 			if(btl.size() < 1) {
 				Blogtype bt = new Blogtype();
 				bt.setUserId(id);
 				bt.setTypename(str);
+				bt.setSuperTypename(superTypename);
 				blogtypeService.getBlogtypeDAO().save(bt);
-				Blog b = blogManager.getBlogDao().findById(id);
+				Blog b = blogManager.getBlogDao().findById(bid);
 				List<Blogtype> list = blogtypeService.getBlogtypeDAO().findByTypename(str);
 				bt = list.get(list.size() - 1);
 				b.setTypeId(bt.getTypeId());
@@ -72,8 +78,9 @@ public class BlogTypeAction {
 						Blogtype bt = new Blogtype();
 						bt.setUserId(id);
 						bt.setTypename(str);
-						blogtypeService.getBlogtypeDAO().save(bt);
-						Blog b = blogManager.getBlogDao().findById(id);
+						bt.setSuperTypename(this.superTypename);
+						blogtypeService.getBlogtypeDAO().attachDirty(bt);
+						Blog b = blogManager.getBlogDao().findById(bid);
 						List<Blogtype> list = blogtypeService.getBlogtypeDAO().findByTypename(str);
 						bt = list.get(list.size() - 1);
 						b.setTypeId(bt.getTypeId());

@@ -1,5 +1,6 @@
 package com.whiteblog.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -75,11 +76,10 @@ public class blogContentAction extends ActionSupport{
 		//ActionContext.getContext().getSession().put("req", blogContentForm);
 		ActionContext.getContext().getSession().put("blogId",id);
 		
-		/*标签的部分*/
-		System.out.println("添加标签，载入标签");
+		/*标签的部分*/ 
 		int bti = b.getBlog().getTypeId();
-		System.out.println("Tag type 是 " + bti);
 		Blogtype bt = blogtypeService.getBlogtype(bti);
+		System.out.println("添加标签，载入标签 " + bt.getSuperTypename());
 		ActionContext.getContext().put("bt", bt);
 		return SUCCESS;
 	}
