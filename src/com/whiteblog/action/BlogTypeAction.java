@@ -2,6 +2,7 @@ package com.whiteblog.action;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.whiteblog.entity.Blog;
@@ -102,4 +103,31 @@ public class BlogTypeAction {
 			ActionContext.getContext().put("allTags", tmpList);		
 		return SUCCESS;
 	}
+	
+	
+	public String preparationAction(){
+		/*增加了一部分工能，显示所有的Tags*/
+		List<Blogtype> abtl = (List<Blogtype>)blogtypeService.getBlogtypeDAO().findAll();
+		
+		List<Blogtype> tmpList = new ArrayList<Blogtype>();
+		
+		for(Blogtype bt: abtl){
+			boolean flag = false;
+			for(Blogtype tmp: tmpList){
+				if(tmp.getTypename().compareTo(bt.getTypename())== 0){
+					flag = true;
+					break;
+				}
+			}
+			if(!flag)
+				tmpList.add(bt);
+		}
+		System.out.println("[Preparation Action ON] : " + tmpList.size());
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		session.put("allTags", tmpList);
+		
+		
+		return SUCCESS;
+	}
+	
 }

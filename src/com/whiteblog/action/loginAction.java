@@ -57,24 +57,6 @@ public class loginAction extends ActionSupport{
 			
 			session.put("loginUser",loginUser);
 			
-			/*增加了一部分工能，显示所有的Tags*/
-			List<Blogtype> abtl = (List<Blogtype>)blogtypeService.getBlogtypeDAO().findAll();
-			
-			List<Blogtype> tmpList = new ArrayList<Blogtype>();
-			
-			for(Blogtype bt: abtl){
-				boolean flag = false;
-				for(Blogtype tmp: tmpList){
-					if(tmp.getTypename().compareTo(bt.getTypename())== 0){
-						flag = true;
-						break;
-					}
-				}
-				if(!flag)
-					tmpList.add(bt);
-			}
-			
-			session.put("allTags", tmpList);
 
 			String p = org.apache.struts2.ServletActionContext.getServletContext().getRealPath("/");
 			

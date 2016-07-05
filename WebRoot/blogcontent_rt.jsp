@@ -136,6 +136,7 @@
 					<div class="row post-items">
 						<div class="col-md-2">
 							<div class="post-item-short">
+								<span class="small-text">Publish at</span>
 								<span class="small-text">${req.blog.time}</span>
 							</div>
 							<br>
@@ -167,7 +168,7 @@
 									<s:form class="form-horizontal" role="form" action="sendMessage" method="post"> 
 													
 															<!-- 模态框（Modal） -->
-															<div class="modal form-horizontal fade" id="myModal" tabindex="-1"
+															<div class="modal leread-modal form-horizontal fade" id="myModal" tabindex="-1"
 																role="dialog" aria-labelledby="myModalLabel" 
 																aria-hidden="true">
 																<div class="modal-dialog">
@@ -176,8 +177,8 @@
 																			<button type="button" class="close"
 																				data-dismiss="modal" aria-hidden="true">×</button>
 																			<!-- 模态框的标题部分 -->
-																			 
-																			<h4  class="modal-title" id="myModalLabel" >私信我吧</h4>
+																			
+																			<h4  class="modal-title" id="myModalLabel" ><i class="fa fa-envelope"></i>私信我吧</h4>
 																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="id" class="modal-title" id="id" /> 
 																		</div>
 																		<!-- 模态框的内容部分 -->
@@ -187,9 +188,7 @@
 																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
 																		</div>
 																		<div class="modal-footer">
-																			<button type="button" class="btn btn-default btn-grey btn-outline" 
-																				data-dismiss="modal">关闭</button>
-																			<button type="submit" class="btn btn-primary btn-grey btn-outline">
+																			<button type="submit" class="btn btn-golden  btn-signin">
 																				发送 </button>
 												                     <!--  	</a>  -->
 																		</div>
@@ -200,11 +199,15 @@
 															</div>
 															<!-- /.modal 模态框结束-->															
 															</s:form> 
-										<div class="pull-right post-item-social" >
-											<a  data-toggle="modal" data-placement="top"	data-target="#myModal"><div class="mails"> </div></a>
-											<a  tabindex="0"  data-toggle="modal" data-placement="top" data-target="#myModal2"> <div class="tag" ></div>  </a>
-											<a href="#" class="post-like qr-like"><i class="fa fa-heart"></i><span>18</span></a>
-										</div>
+										<c:choose>
+											<c:when test="${sessionScope.loginUser != null}">
+												<div class="pull-right post-item-social" >
+													<a  data-toggle="modal" 	data-target="#myModal"><div class="mails"> </div></a>
+													<a  tabindex="0"   data-toggle="modal" data-placement="top" data-target="#myModal2"> <div class="tag" ></div>  </a>
+													<a href="#" class="post-like qr-like"><i class="fa fa-heart"></i><span>18</span></a>
+												</div>
+											</c:when>	
+										</c:choose>
 															<script>
   																 $(function () { $('#myModal').modal('hide')});
   																 $("#myModal").modal().css({
@@ -273,10 +276,14 @@
 										<h4 class="author-name">${sessionScope.loginUser.username}</h4>
 										<a href="#">view all post</a>
 									</div>
-									<div class="author-connection">
-										<a href="#"><i class="fa fa-twitter"></i></a>
-										<a href="#"><i class="fa fa-envelope"></i></a>
-									</div>
+									<c:choose>
+										<c:when test="${sessionScope.loginUser!=null }">
+											<div class="author-connection">
+												<a href="#"><i class="fa fa-twitter"></i></a>
+												<a href="#"><i class="fa fa-envelope"></i></a>
+											</div>
+										</c:when>
+									</c:choose>		
 								</div>
 							</div>
 
@@ -323,11 +330,11 @@
 			<div class="container text-center">
 				<div class="footer-logo"><img src="assets/img/logo-black.png" alt=""></div>
 				<p class="laread-motto">Designed for Read.</p>
-				<div class="laread-social">
+<!-- 				<div class="laread-social">
 					<a href="#" class="fa fa-twitter"></a>
 					<a href="#" class="fa fa-facebook"></a>
 					<a href="#" class="fa fa-pinterest"></a>
-				</div>
+				</div> -->
 			</div>
 		</footer>
 	</div>

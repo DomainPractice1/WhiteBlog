@@ -39,6 +39,7 @@ n.css" rel="stylesheet">
 </head>
 <body onload="timedCount()">
 	<s:action name="ShowBlogList"/>
+	<s:action name="preparationAction" />
 	<div class="page-loader">
 		<div class="loader-in">Loading...</div>
 		<div class="loader-out">Loading...</div>
@@ -160,10 +161,15 @@ n.css" rel="stylesheet">
 														<c:when test="${sessionScope.loginUser!=null && sessionScope.loginUser.username==blog.username}">
 															<a href="showBlogToModify.action?blogId=${blog.blogId}"><div class="modify"></div></a>
 														</c:when>
-													</c:choose>													
-													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
-													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
+													</c:choose>
+													<!-- 游客是不能点赞和分享的 -->	
+													<c:choose>	
+														<c:when test="${sessionScope.loginUser != null}">										
+											
+															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+															<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
+														</c:when>
+													</c:choose>
 												</div>
 											</div>
 										</div>
@@ -217,20 +223,6 @@ n.css" rel="stylesheet">
 								<s:iterator value="#session.allTags" var="tag">
 									<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename" /></a>
 								</s:iterator>
-								<a href="#">fashion</a>
-								<a href="#">culture</a>
-								<a href="#">art</a>
-								<a href="#">concept</a>
-								<a href="#">style</a>
-								<a href="#">advert</a>
-								<a href="#">movie</a>
-								<a href="#">color</a>
-								<a href="#">branding</a>
-								<a href="#">technology</a>
-								<a href="#">fashion</a>
-								<a href="#">culture</a>
-								<a href="#">art</a>
-								<a href="#">concept</a>
 							</li>
 						</ul>
 
