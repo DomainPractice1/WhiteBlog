@@ -20,6 +20,9 @@
 			<result name="success" >/uncheckcontent.jsp</result>
 			<result name="fail">/404.html</result>
 		</action>
+		<action name="review" class="BlogContent" method="review">
+			<result name="success" type="redirectAction">showuncheckblog</result>
+		</action>
 		<action name="searchArticle" class="SearchArticleAction" method="execute">
  			<result name="success">/articleListTest.jsp</result>
 			<result name="error">/404.html</result>
@@ -95,6 +98,9 @@
 		</action>
 		<action name="findBlogByTagAction" class="FindBlogByTagAction" method="findBlogs">
 			<result name="success">./blogAndTags.jsp</result>
+		</action>
+		<action name="logout" class="com.whiteblog.action.logoutAction" method="execute">
+			<result name="success">/index_rt.jsp</result>
 		</action>
 	</package>
 

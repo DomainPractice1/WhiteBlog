@@ -106,4 +106,13 @@ public class blogContentAction extends ActionSupport{
 		return SUCCESS;
 		
 	}
+	
+	public String review(){		
+		Map<String,Object> session = ActionContext.getContext().getSession();
+		Integer blogID = (Integer)session.get("blogId");
+		Blog blog = blogContentManage.findById(blogID);
+		blog.setFilterwords(1);
+		blogContentManage.setupdateBlog(blog);
+		return SUCCESS;
+	}
 }

@@ -156,7 +156,9 @@
 										<a href="#"><i class="fa fa-heart"></i> 18</a>
 									</div>
 								</div>
-								<button class="btn btn-grey btn-outline btn-rounded">审核通过</button>
+								<form action="review.action">
+									<button type="submit" class="btn btn-grey btn-outline btn-rounded">审核通过</button>
+								</form>
 								<button class="btn btn-grey btn-outline btn-rounded">审核未通过</button>
 							</div>
 
