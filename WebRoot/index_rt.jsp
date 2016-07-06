@@ -164,10 +164,9 @@ n.css" rel="stylesheet">
 													</c:choose>
 													<!-- 游客是不能点赞和分享的 -->	
 													<c:choose>	
-														<c:when test="${sessionScope.loginUser != null}">										
-											
+														<c:when test="${sessionScope.loginUser != null}">
 															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-															<a href="#" class="post-like" onclick="location.href=logout"><i class="fa fa-heart"></i><span>${blog.likenumber}</span></a>
+															<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
 														</c:when>
 													</c:choose>
 												</div>
@@ -442,6 +441,26 @@ n.css" rel="stylesheet">
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">
+		var strId = "";
+		function myF(t)
+		{
+			strId = t.id.substring(4, t.id.length);
+			var actionName = "clickLike.action?id=";
+			actionName += strId;
+			$.ajax({
+				url:actionName,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == "success")
+						alert("点赞成功");
+					else
+						alert("取消点赞");
+				}
+			});
+		}
+	</script>
 	<script type="text/javascript">		
 		$("#notice").click(function(){
 			$("#slideform").empty();

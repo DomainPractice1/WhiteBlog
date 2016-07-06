@@ -118,7 +118,14 @@
 		<action name="findBlogByTagSuperAction" class="FindBlogByTagAction" method="findBySuperTag">
 			<result name="success">./blogAndTags.jsp</result>
 		</action>
-		
+		<action name="clickLike" class="LikeAction" method="clickAction">
+			<result name="success" type="json">
+				<param name="root">res</param>
+			</result>
+			<result name="error" type="json">
+				<param name="root">res</param>
+			</result>			
+		</action>
 		
 		
 	</package>
