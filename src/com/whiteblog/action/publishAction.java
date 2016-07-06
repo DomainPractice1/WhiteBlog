@@ -1,4 +1,3 @@
-
 package com.whiteblog.action;
 
 import java.util.List;

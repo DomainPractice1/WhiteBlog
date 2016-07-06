@@ -446,7 +446,6 @@ n.css" rel="stylesheet">
 		function shareTwitter(t)
 		{
 			strId = t.id.substring(7, t.id.length);
-			
 			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/white' + strId);
 		}
 	</script>
