@@ -147,11 +147,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<div class="pull-left">
 													<span>${blog.time}</span> By <a href="#">${blog.username}</a>
 												</div>
-												<div class="pull-right post-item-social">
-													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
-													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
-												</div>
+												<c:choose>
+													<c:when test="${sessionScope.loginUser != null}">
+														<div class="pull-right post-item-social">
+															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+															<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i class="fa fa-heart"></i><span>${blog.likenumber}</span></a>
+														</div>
+													</c:when>
+												</c:choose>
 											</div>
 										</div>
 									</div>
@@ -406,6 +409,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">
+		var strId = "";
+		function myF(t)
+		{
+			strId = t.id.substring(4, t.id.length);
+			var actionName = "clickLike.action?id=";
+			actionName += strId;
+			$.ajax({
+				url:actionName,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == "success")
+						alert("点赞成功");
+					else
+						alert("取消点赞");
+				}
+			});
+		}
+	</script>
 	<script type="text/javascript">		
 		$("#notice").click(function(){
 			$("#slideform").empty();

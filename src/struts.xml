@@ -111,6 +111,23 @@
 		<action name="showBlogToModify" class="showBlogToModifyAciton" method="execute">
 			<result name="success">/modify.jsp</result>
 		</action>
+		<action name="preparationAction" class="addTagsAction" method="preparationAction">
+			<result name="success">/success.jsp</result>
+			<result name="error">/404.html</result>		
+		</action>
+		<action name="findBlogByTagSuperAction" class="FindBlogByTagAction" method="findBySuperTag">
+			<result name="success">./blogAndTags.jsp</result>
+		</action>
+		<action name="clickLike" class="LikeAction" method="clickAction">
+			<result name="success" type="json">
+				<param name="root">res</param>
+			</result>
+			<result name="error" type="json">
+				<param name="root">res</param>
+			</result>			
+		</action>
+		
+		
 	</package>
 
 

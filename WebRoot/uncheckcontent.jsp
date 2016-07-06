@@ -150,12 +150,7 @@
 									${req.blog.content}	
 									</p>
 								</div>
-								<div class="post-item-info no-border clearfix">									
-									<div class="post-item-social">		 												
-										<a href="#"><i class="fa fa-google-plus"></i></a>
-										<a href="#"><i class="fa fa-heart"></i> 18</a>
-									</div>
-								</div>
+
 								<form action="review.action">
 									<button type="submit" class="btn btn-grey btn-outline btn-rounded">审核通过</button>
 								</form>

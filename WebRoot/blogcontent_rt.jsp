@@ -136,6 +136,7 @@
 					<div class="row post-items">
 						<div class="col-md-2">
 							<div class="post-item-short">
+								<span class="small-text">Publish at</span>
 								<span class="small-text">${req.blog.time}</span>
 							</div>
 							<br>
@@ -146,7 +147,9 @@
 										<s:iterator value="bt" var="tag">
 											<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename"/></a>
 										</s:iterator>
-										
+										<s:iterator value="sbt" var="stag">
+											<a href="findBlogByTagSuperAction.action?id=<s:property value="#stag.supertypeId" />"><s:property value="#stag.supertypeName"/></a>
+										</s:iterator>
 									</li>
 								</ul>
 						</div>
@@ -167,7 +170,7 @@
 									<s:form class="form-horizontal" role="form" action="sendMessage" method="post"> 
 													
 															<!-- 模态框（Modal） -->
-															<div class="modal form-horizontal fade" id="myModal" tabindex="-1"
+															<div class="modal leread-modal form-horizontal fade" id="myModal" tabindex="-1"
 																role="dialog" aria-labelledby="myModalLabel" 
 																aria-hidden="true">
 																<div class="modal-dialog">
@@ -176,8 +179,8 @@
 																			<button type="button" class="close"
 																				data-dismiss="modal" aria-hidden="true">×</button>
 																			<!-- 模态框的标题部分 -->
-																			 
-																			<h4  class="modal-title" id="myModalLabel" >私信我吧</h4>
+																			
+																			<h4  class="modal-title" id="myModalLabel" ><i class="fa fa-envelope"></i>私信我吧</h4>
 																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="id" class="modal-title" id="id" /> 
 																		</div>
 																		<!-- 模态框的内容部分 -->
@@ -187,9 +190,7 @@
 																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
 																		</div>
 																		<div class="modal-footer">
-																			<button type="button" class="btn btn-default btn-grey btn-outline" 
-																				data-dismiss="modal">关闭</button>
-																			<button type="submit" class="btn btn-primary btn-grey btn-outline">
+																			<button type="submit" class="btn btn-golden  btn-signin">
 																				发送 </button>
 												                     <!--  	</a>  -->
 																		</div>
@@ -200,11 +201,15 @@
 															</div>
 															<!-- /.modal 模态框结束-->															
 															</s:form> 
-										<div class="pull-right post-item-social" >
-											<a  data-toggle="modal" data-placement="top"	data-target="#myModal"><div class="mails"> </div></a>
-											<a  tabindex="0"  data-toggle="modal" data-placement="top" data-target="#myModal2"> <div class="tag" ></div>  </a>
-											<a href="#" class="post-like qr-like"><i class="fa fa-heart"></i><span>18</span></a>
-										</div>
+										<c:choose>
+											<c:when test="${sessionScope.loginUser != null}">
+												<div class="pull-right post-item-social" >
+													<a  data-toggle="modal" 	data-target="#myModal"><div class="mails"> </div></a>
+													<a  tabindex="0"   data-toggle="modal"  data-target="#myModal2"> <div class="tag" ></div>  </a>
+													<a href="#" id="like${req.blog.blogId}" onclick="myF(this)" class="post-like qr-like"><i class="fa fa-heart"></i><span>${req.blog.likenumber}</span></a>
+												</div>
+											</c:when>	
+										</c:choose>
 															<script>
   																 $(function () { $('#myModal').modal('hide')});
   																 $("#myModal").modal().css({
@@ -217,7 +222,7 @@
 												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
 													
 															<!-- 模态框（Modal） -->
-															<div class="modal form-horizontal fade" id="myModal2" tabindex="-1"
+															<div class="modal  form-horizontal fade" id="myModal2" tabindex="-1"
 																role="dialog" aria-labelledby="myModalLabel" 
 																aria-hidden="true">
 																<div class="modal-dialog">
@@ -226,8 +231,18 @@
 																			<button type="button" class="close"
 																				data-dismiss="modal" aria-hidden="true">×</button>
 																			<!-- 模态框的标题部分 -->
-																			 
-																			<h4  class="modal-title" id="myModalLabel2" >已有标签</h4>
+																			
+																			 <div class="tag"></div>
+																			<div><h4  class="modal-title" id="myModalLabel2" >更改标签</h4></div>
+																		
+																		<div class="modal-header">
+																			<select name="superTypename">
+																				<option style="width:100px" value="IT/互联网">IT/互联网</option>
+																				<option style="width:100px" value="美图">美图</option>
+																				<option style="width:100px" value="生活">生活/游戏</option>
+																				<option style="width:100px" value="其他">其他</option>
+																			</select>
+																		</div>
 																			<textarea class="form-control" id="mesContent2" name="mesContent2"  
 																				placeholder="新建标签,在这写上新的标签吧"></textarea>																		 
 
@@ -236,13 +251,12 @@
 																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.userId}" name="id" class="modal-title" id="id" />
 																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="bid" class="modal-title" id="bid" />  
 																		</div>
+																		
 																		<!-- 模态框的内容部分 -->
 																		<div class="modal-header">
-																			<c:forEach var="tag" items="${btl}" > 
-																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p>  
-																			</c:forEach>		
-																		 																
-																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
+																			<c:forEach var="tag" items="${btl }">
+																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p> 
+																			</c:forEach>
 																		</div>
 																	
 																		<div class="modal-footer">
@@ -273,10 +287,14 @@
 										<h4 class="author-name">${sessionScope.loginUser.username}</h4>
 										<a href="#">view all post</a>
 									</div>
-									<div class="author-connection">
-										<a href="#"><i class="fa fa-twitter"></i></a>
-										<a href="#"><i class="fa fa-envelope"></i></a>
-									</div>
+									<c:choose>
+										<c:when test="${sessionScope.loginUser!=null }">
+											<div class="author-connection">
+												<a href="#"><i class="fa fa-twitter"></i></a>
+												<a href="#"><i class="fa fa-envelope"></i></a>
+											</div>
+										</c:when>
+									</c:choose>		
 								</div>
 							</div>
 
@@ -323,11 +341,11 @@
 			<div class="container text-center">
 				<div class="footer-logo"><img src="assets/img/logo-black.png" alt=""></div>
 				<p class="laread-motto">Designed for Read.</p>
-				<div class="laread-social">
+<!-- 				<div class="laread-social">
 					<a href="#" class="fa fa-twitter"></a>
 					<a href="#" class="fa fa-facebook"></a>
 					<a href="#" class="fa fa-pinterest"></a>
-				</div>
+				</div> -->
 			</div>
 		</footer>
 	</div>
@@ -449,6 +467,26 @@
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">
+		var strId = "";
+		function myF(t)
+		{
+			strId = t.id.substring(4, t.id.length);
+			var actionName = "clickLike.action?id=";
+			actionName += strId;
+			$.ajax({
+				url:actionName,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == "success")
+						alert("点赞成功");
+					else
+						alert("取消点赞");
+				}
+			});
+		}
+	</script>
 	<script type="text/javascript">		
 		$("#notice").click(function(){
 			$("#slideform").empty();
