@@ -210,14 +210,7 @@
 												</div>
 											</c:when>	
 										</c:choose>
-															<script>
-  																 $(function () { $('#myModal').modal('hide')});
-  																 $("#myModal").modal().css({
-               																  "margin-top": function () {
-                  															   return - ($(this).height() / 2);}
-           																		  });
-  																 $(function() {$('#myModal2').modal('hide')});
-															</script>	
+
 																																		
 												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
 													
@@ -526,7 +519,14 @@
 			t=setTimeout("timedCount()",10000)
 		}
 	</script>
-
+	<script>
+  		$(function () { $('#myModal').modal('hide')});
+  		$("#myModal").modal().css({
+        "margin-top": function () {
+        	return - ($(this).height() / 2);}
+        });
+  		$(function() {$('#myModal2').modal('hide')});
+	</script>	
 	<script type ="text/javascript">
 	function delete_row(delete_id){
 		if(confirm("确定要删除？")){
@@ -592,25 +592,12 @@
 		})
 	</script>
 	
+ 	<script type="text/javascript">  
+		var i = "df"; var t = "";
+        function getTypename(id){
+	    	i = document.getElementById(id).innerText;
+	    } 
+	</script>	
 </body>
- 																				<script type="text/javascript">  
-																				    var i = "df"; var t = "";
-                                                                                   function getTypename(id){
-	                                                                                  i = document.getElementById(id).innerText; 
-	                                                                                  //var tmp = document.getElementById("mesContent2").value.replace(/(^[\s\t\xa0\u3000]+)|([\u3000\xa0\s\t]+$)/g, "");
-	                                                                                  document.getElementById("mesContent2").value = i;
-	                                                                            /*       if(tmp == "")
-	                                                                                  	document.getElementById("mesContent2").value = i;
-	                                                                                  else{
-	                                                                                     t = tmp;
-	                                                                                   // var pp = "/.";
-	                                                                                   // pp = pp.concat(i, "/");
-	                                                                                   // var isExist = t.match(i);
-	                                                                                    if(t.indexOf(i) < 0){ 
-	                                                                                    	t=t.concat(",", i);
-	                                                                                    	document.getElementById("mesContent2").value = t;
-	                                                                                    } 
-	                                                                                  } */
-	                                                                             } 
-	                                                                       </script>	
+	
 </html>

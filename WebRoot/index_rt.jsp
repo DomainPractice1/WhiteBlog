@@ -165,7 +165,7 @@ n.css" rel="stylesheet">
 													<!-- 游客是不能点赞和分享的 -->	
 													<c:choose>	
 														<c:when test="${sessionScope.loginUser != null}">
-															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id="facebook${blog.blogId}" onclick="shareFacebook(this)"><i class='fa fa-facebook'></i></a><a href='#' id="twitter${blog.blogId}" onclick="shareTwitter(this)"><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
 															<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
 														</c:when>
 													</c:choose>
@@ -447,7 +447,7 @@ n.css" rel="stylesheet">
 		{
 			strId = t.id.substring(7, t.id.length);
 			
-			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/white' + strId);
+			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId);
 		}
 	</script>
 	<script type="text/javascript">
