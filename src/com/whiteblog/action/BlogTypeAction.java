@@ -7,8 +7,10 @@ import java.util.Map;
 import com.opensymphony.xwork2.ActionContext;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Blogtype;
+import com.whiteblog.entity.Supertype;
 import com.whiteblog.service.BlogManagerImpl;
 import com.whiteblog.service.BlogTypeServiceImp;
+import com.whiteblog.service.SuperTypeService;
 
 public class BlogTypeAction {
 	private String mesContent2;
@@ -16,6 +18,7 @@ public class BlogTypeAction {
 	private Integer bid;
 	private BlogTypeServiceImp blogtypeService;
 	private BlogManagerImpl blogManager;
+	private SuperTypeService superTypeService;
 	private String superTypename;
 	static public final  String SUCCESS = "success";
 	static public final  String ERROR = "error";
@@ -23,8 +26,17 @@ public class BlogTypeAction {
 	public String getSuperTypename() {
 		return superTypename;
 	}
+	
 	public void setSuperTypename(String superTypename) {
 		this.superTypename = superTypename;
+	}
+	
+	public SuperTypeService getSuperTypeService() {
+		return superTypeService;
+	}
+	
+	public void setSuperTypeService(SuperTypeService superTypeService) {
+		this.superTypeService = superTypeService;
 	}
 	public Integer getBid() {
 		return bid;
@@ -64,7 +76,8 @@ public class BlogTypeAction {
 				Blogtype bt = new Blogtype();
 				bt.setUserId(id);
 				bt.setTypename(str);
-				bt.setSuperTypename(superTypename);
+				Supertype st = superTypeService.getSupertypeDAO().findBySupertypeName(superTypename).get(0);
+				bt.setSupertypeId(st.getSupertypeId());
 				blogtypeService.getBlogtypeDAO().save(bt);
 				Blog b = blogManager.getBlogDao().findById(bid);
 				List<Blogtype> list = blogtypeService.getBlogtypeDAO().findByTypename(str);
@@ -78,7 +91,8 @@ public class BlogTypeAction {
 						Blogtype bt = new Blogtype();
 						bt.setUserId(id);
 						bt.setTypename(str);
-						bt.setSuperTypename(this.superTypename);
+						Supertype st = superTypeService.getSupertypeDAO().findBySupertypeName(superTypename).get(0);
+						bt.setSupertypeId(st.getSupertypeId());
 						blogtypeService.getBlogtypeDAO().attachDirty(bt);
 						Blog b = blogManager.getBlogDao().findById(bid);
 						List<Blogtype> list = blogtypeService.getBlogtypeDAO().findByTypename(str);

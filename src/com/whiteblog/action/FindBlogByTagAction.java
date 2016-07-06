@@ -7,10 +7,12 @@ import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Blogtype;
 import com.whiteblog.service.BlogManagerImpl;
 import com.whiteblog.service.BlogTypeServiceImp;
+import com.whiteblog.service.SuperTypeService;
 
 public class FindBlogByTagAction {
 	private BlogTypeServiceImp blogtypeService;
 	private BlogManagerImpl blogManager;
+	private SuperTypeService superTypeService;
 	private int id;
 	
 	public int getId() {
@@ -18,6 +20,13 @@ public class FindBlogByTagAction {
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public SuperTypeService getSuperTypeService() {
+		return superTypeService;
+	}
+	public void setSuperTypeService(SuperTypeService superTypeService) {
+		this.superTypeService = superTypeService;
 	}
 	public BlogTypeServiceImp getBlogtypeService() {
 		return blogtypeService;
@@ -45,8 +54,8 @@ public class FindBlogByTagAction {
 	public String findBySuperTag(){
 		System.out.println("super tag is " + id);
 		Blogtype bt = blogtypeService.getBlogtype(id);
-		String superTypename = bt.getSuperTypename();
-		List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findBySuperTypename(superTypename); 
+		String superTypename = superTypeService.getSupertypeDAO().findById(bt.getSupertypeId()).getSupertypeName();
+		List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findBySupertypeId(bt.getSupertypeId());
 		ActionContext.getContext().put("TagName", superTypename);
 		List<Blog> bl = blogManager.findByBlogTypeName(btl);
 		ActionContext.getContext().put("resBlog", bl);

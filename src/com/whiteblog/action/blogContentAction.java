@@ -10,6 +10,7 @@ import com.whiteblog.entity.Blog;
 import com.whiteblog.form.BlogContentForm;
 import com.whiteblog.service.BlogContentManageImpl;
 import com.whiteblog.service.BlogTypeServiceImp;
+import com.whiteblog.service.SuperTypeService;
 import com.whiteblog.service.UserManagerImpl;
 import com.whiteblog.entity.*;
 public class blogContentAction extends ActionSupport{
@@ -23,7 +24,15 @@ public class blogContentAction extends ActionSupport{
 	public final String FAIL = "fail";
 	private UserManagerImpl userManager;
 	private BlogTypeServiceImp blogtypeService;
+	private SuperTypeService superTypeService;
 	private List<Blogtype> btl ;
+	
+	public SuperTypeService getSuperTypeService() {
+		return superTypeService;
+	}
+	public void setSuperTypeService(SuperTypeService superTypeService) {
+		this.superTypeService = superTypeService;
+	}
 	public List<Blogtype> getBtl() {
 		return btl;
 	}
@@ -79,8 +88,12 @@ public class blogContentAction extends ActionSupport{
 		/*标签的部分*/ 
 		int bti = b.getBlog().getTypeId();
 		Blogtype bt = blogtypeService.getBlogtype(bti);
-		System.out.println("添加标签，载入标签 " + bt.getSuperTypename());
 		ActionContext.getContext().put("bt", bt);
+		
+		/*SuperType类的标签哎*/
+		Supertype st = superTypeService.getSupertypeDAO().findById(bt.getSupertypeId());
+		ActionContext.getContext().put("sbt", st);
+		
 		return SUCCESS;
 	}
 	
@@ -102,6 +115,8 @@ public class blogContentAction extends ActionSupport{
 		ActionContext.getContext().put("re", btl);
 		//ActionContext.getContext().getSession().put("req", blogContentForm);
 		ActionContext.getContext().getSession().put("blogId",id);
+		
+		
 		return SUCCESS;		
 	}
 	

@@ -52,15 +52,16 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>com.whiteblog.entity.Admin</value>
-				<value>com.whiteblog.entity.Blog</value>
-				<value>com.whiteblog.entity.Blogtype</value>
+				<value>com.whiteblog.entity.Blog</value> 
 				<value>com.whiteblog.entity.Comment</value>
 				<value>com.whiteblog.entity.Mail</value>
 				<value>com.whiteblog.entity.Notice</value>
 				<value>com.whiteblog.entity.User</value>
 				<value>com.whiteblog.entity.Inform</value>
-				<value>com.whiteblog.entity.Likeit</value>
-			</list>
+				<value>com.whiteblog.entity.Likeit</value> 
+				<value>com.whiteblog.entity.Supertype</value>
+				<value>com.whiteblog.entity.Blogtype</value>
+				</list>
 		</property>
 	</bean>
 
@@ -216,6 +217,9 @@
 		<property name="blogtypeService">
 			<ref bean="BlogtypeService" />
 		</property>
+		<property name="superTypeService">
+			<ref bean="SuperTypeService" />
+		</property>
 	</bean>
 
 
@@ -312,6 +316,9 @@
 		<property name="blogManager">
 			<ref bean="BlogManager" />
 		</property>
+		<property name="superTypeService">
+			<ref bean="SuperTypeService" />
+		</property>
 	</bean>
 
 	<bean id="SendMessageManage" class="com.whiteblog.service.SendMessageManage">
@@ -369,6 +376,9 @@
 		<property name="blogtypeService">
 			<ref bean="BlogtypeService" />
 		</property>
+		<property name="superTypeService">
+			<ref bean="SuperTypeService" />
+		</property>
 	</bean>
 
 
@@ -393,9 +403,22 @@
 		</property>
 	</bean>
 
+	<bean id="SupertypeDAO" class="com.whiteblog.dao.SupertypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	<bean id="SuperTypeService" class="com.whiteblog.service.SuperTypeService">
+		<property name="supertypeDAO">
+			<ref bean="SupertypeDAO" />
+		</property>
+	</bean>
+		
+
 </beans>
-	
-	
+
 	
 	
 	
