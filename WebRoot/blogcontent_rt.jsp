@@ -205,7 +205,7 @@
 												<div class="pull-right post-item-social" >
 													<a  data-toggle="modal" 	data-target="#myModal"><div class="mails"> </div></a>
 													<a  tabindex="0"   data-toggle="modal"  data-target="#myModal2"> <div class="tag" ></div>  </a>
-													<a href="#" class="post-like qr-like"><i class="fa fa-heart"></i><span>18</span></a>
+													<a href="#" id="like${req.blog.blogId}" onclick="myF(this)" class="post-like qr-like"><i class="fa fa-heart"></i><span>${req.blog.likenumber}</span></a>
 												</div>
 											</c:when>	
 										</c:choose>
@@ -466,6 +466,26 @@
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">
+		var strId = "";
+		function myF(t)
+		{
+			strId = t.id.substring(4, t.id.length);
+			var actionName = "clickLike.action?id=";
+			actionName += strId;
+			$.ajax({
+				url:actionName,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == "success")
+						alert("点赞成功");
+					else
+						alert("取消点赞");
+				}
+			});
+		}
+	</script>
 	<script type="text/javascript">		
 		$("#notice").click(function(){
 			$("#slideform").empty();
