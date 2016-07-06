@@ -202,19 +202,18 @@
 															</div>
 															<!-- /.modal 模态框结束-->															
 															</s:form> 
-										<div class="pull-right post-item-social" >
-											<a  data-toggle="modal" data-placement="top"	data-target="#myModal"><div class="mails"> </div></a>
-											<a  tabindex="0"  data-toggle="modal" data-placement="top" data-target="#myModal2"> <div class="tag" ></div>  </a>
-											<a href="#" class="post-like qr-like"><i class="fa fa-heart"></i><span>18</span></a>
-										</div>
-															<script>
-  																 $(function () { $('#myModal').modal('hide')});
-  																 $("#myModal").modal().css({
-               																  "margin-top": function () {
-                  															   return - ($(this).height() / 2);}
-           																		  });
-  																 $(function() {$('#myModal2').modal('hide')});
-															</script>	
+
+										<c:choose>
+											<c:when test="${sessionScope.loginUser != null}">
+												<div class="pull-right post-item-social" >
+													<a  data-toggle="modal" 	data-target="#myModal"><div class="mails"> </div></a>
+													<a  tabindex="0"   data-toggle="modal"  data-target="#myModal2"> <div class="tag" ></div>  </a>
+													<a href="#" id="like${req.blog.blogId}" onclick="myF(this)" class="post-like qr-like"><i class="fa fa-heart"></i><span>${req.blog.likenumber}</span></a>
+												</div>
+											</c:when>	
+										</c:choose>
+
+
 																																		
 												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
 													
@@ -490,7 +489,14 @@
 			t=setTimeout("timedCount()",10000)
 		}
 	</script>
-
+	<script>
+  		$(function () { $('#myModal').modal('hide')});
+  		$("#myModal").modal().css({
+        "margin-top": function () {
+        	return - ($(this).height() / 2);}
+        });
+  		$(function() {$('#myModal2').modal('hide')});
+	</script>	
 	<script type ="text/javascript">
 	function delete_row(delete_id){
 		if(confirm("确定要删除？")){
@@ -556,7 +562,14 @@
 		})
 	</script>
 	
+ 	<script type="text/javascript">  
+		var i = "df"; var t = "";
+        function getTypename(id){
+	    	i = document.getElementById(id).innerText;
+	    } 
+	</script>	
 </body>
+
  	<script type="text/javascript">  
 		var i = "df"; var t = "";
         function getTypename(id)

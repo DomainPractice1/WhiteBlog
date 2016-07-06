@@ -15,7 +15,7 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="jdbcUrl">
-			<value>jdbc:mysql://10.125.103.139:3306/whiteblog</value>
+			<value>jdbc:mysql://10.125.103.139:3306/whiteblog</value> 
 		</property>
 		<property name="user">
 			<value>qwe</value>
