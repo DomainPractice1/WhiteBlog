@@ -217,14 +217,21 @@ n.css" rel="stylesheet">
 						</ul>
 
 						<ul class="laread-list">
-							<li class="title">All TAGS</li>
+							<li class="title">Super-TAGS</li>
+							<li class="bar-tags">
+								<s:iterator value="#session.allSuperTags" var="stag">
+									<a href="findBlogByTagSuperAction.action?id=<s:property value="#stag.supertypeId" />"><s:property value="#stag.supertypeName"/></a>
+								</s:iterator>
+							</li>
+						</ul>
+						<ul class="laread-list">
+							<li class="title">Sub-TAGS</li>
 							<li class="bar-tags">
 								<s:iterator value="#session.allTags" var="tag">
 									<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename" /></a>
 								</s:iterator>
 							</li>
 						</ul>
-
 					</div>
 
 				</aside>
@@ -446,7 +453,7 @@ n.css" rel="stylesheet">
 		function shareTwitter(t)
 		{
 			strId = t.id.substring(7, t.id.length);
-			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId,"_blank","width=400px;height=400px;");
+			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId,"_blank","width=500px;height=500px;");
 		}
 	</script>
 	<script type="text/javascript">

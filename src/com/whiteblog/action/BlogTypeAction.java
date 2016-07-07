@@ -143,11 +143,10 @@ public class BlogTypeAction {
 			if(!flag)
 				tmpList.add(bt);
 		}
-		System.out.println("[Preparation Action ON] : " + tmpList.size());
+		List<Supertype> sl = superTypeService.getSupertypeDAO().findAll();
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		session.put("allTags", tmpList);
-		
-		
+		session.put("allSuperTags", sl);
 		return SUCCESS;
 	}
 	

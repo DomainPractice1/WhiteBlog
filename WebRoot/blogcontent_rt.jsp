@@ -596,6 +596,7 @@
 		var i = "df"; var t = "";
         function getTypename(id){
 	    	i = document.getElementById(id).innerText;
+	    	document.getElementById("mesContent2").value = i;
 	    } 
 	</script>	
 </body>

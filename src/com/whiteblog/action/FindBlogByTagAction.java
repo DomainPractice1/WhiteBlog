@@ -52,10 +52,8 @@ public class FindBlogByTagAction {
 	}
 	
 	public String findBySuperTag(){
-		Blogtype bt = blogtypeService.getBlogtype(id);
-		System.out.println("[findBySuperTag] " + bt.getTypename());
-		String superTypename = superTypeService.getSupertypeDAO().findById(bt.getSupertypeId()).getSupertypeName();
-		List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findBySupertypeId(bt.getSupertypeId());
+		String superTypename = superTypeService.getSupertypeDAO().findById(id).getSupertypeName();
+		List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findBySupertypeId(id);
 		ActionContext.getContext().put("TagName", superTypename);
 		List<Blog> bl = blogManager.findByBlogTypeName(btl);
 		ActionContext.getContext().put("resBlog", bl);
