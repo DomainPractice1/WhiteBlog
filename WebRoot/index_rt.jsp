@@ -84,8 +84,7 @@ n.css" rel="stylesheet">
 				<div class="container">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>
-								
+					</div>								
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
@@ -109,12 +108,6 @@ n.css" rel="stylesheet">
 								</button>						
 							</div>
 							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
-							
-								<!-- <div class="get-post-titles" style="margin-right:10px">					
-								<button type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
-									<i class="fa fa-power-off"></i>
-								</button>						
-								</div> -->
 								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
 								<i class="fa fa-power-off"></i>
 							</a>
@@ -149,7 +142,7 @@ n.css" rel="stylesheet">
 												<div>
 													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
 												</div>
-												<h3><a href="content.action?id=${blog.blogList.blogId}">${blog.title}</a></h3>
+												<h3><a href="content.action?id=${blog.blogId}">${blog.title}</a></h3>
 												<p>${blog.content}<a href="#" class="more">[...]</a></p>
 											</div>
 											<div class="post-item-info clearfix">
@@ -209,22 +202,23 @@ n.css" rel="stylesheet">
 						</form>
 
 						<ul class="laread-list">
-							<li class="title">CATEGORY</li>
-							<li><a href="#">Branding</a><i class="line"></i></li>
-							<li><a href="#">Design (48)</a><i class="line"></i></li>
-							<li><a href="#">Photography</a><i class="line"></i></li>
-							<li><a href="#">Inspiration</a><i class="line"></i></li>
-							<li><a href="#">Life</a><i class="line"></i></li>
-							<li><a href="#">City</a><i class="line"></i></li>
+							<li class="title">热门文章</li>
+ 							<s:iterator value="#session.topblog" var="blog">
+ 								<li>
+ 								<a href="content.action?id=${blog.blogId}">${blog.title}</a>
+ 								<i class="line"></i>
+ 								</li>
+ 							</s:iterator>				
 						</ul>
 
 						<ul class="laread-list">
-							<li class="title">RECENT POSTS</li>
-							<li><a href="#">The Nature of My Inspiration</a><i class="date">28 June</i></li>
-							<li><a href="#">Sam Feldt - Show Me Love</a><i class="date">27 June</i></li>
-							<li><a href="#">Do You Love Coffee?</a><i class="date">25 June</i></li>
-							<li><a href="#">The Game Before The Game</a><i class="date">23 June</i></li>
-							<li><a href="#">Long Live The Kings</a><i class="date">22 June</i></li>
+							<li class="title">热门用户</li>
+							<s:iterator value="#session.topuser" var="user">
+ 								<li>
+ 								<a href="#">${user.username}</a>
+ 								<i class="line"></i>
+ 								</li>
+ 							</s:iterator>
 						</ul>
 
 						<ul class="laread-list">

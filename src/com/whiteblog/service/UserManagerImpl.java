@@ -21,6 +21,10 @@ public class UserManagerImpl {
 		this.userdao = userdao;
 	}
 	
+	public List<User> getAlluser(){
+		return this.userdao.findAll();
+	}
+
 	public String checklogin(UserForm userform){
 		
 		List<User> result = userdao.findByUsername(userform.getUsername());

@@ -190,6 +190,9 @@
 		<property name="likeService">
 			<ref bean="LikeService" />
 		</property>
+		<property name="userManager">
+			<ref bean="UserManager"/>
+		</property>
 	</bean>
 
 	<bean id="BlogManager" class="com.whiteblog.service.BlogManagerImpl">
