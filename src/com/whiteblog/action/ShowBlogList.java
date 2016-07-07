@@ -20,12 +20,14 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.User;
 import com.whiteblog.service.ShowBlogListService;
+import com.whiteblog.service.UserManagerImpl;
 
 public class ShowBlogList extends ActionSupport{
 	private List<Blog> blogList;
 	private List<Blog> unCheckBlog;
 	private ShowBlogListService showBlogListService;
-
+	private UserManagerImpl userManager;
+	
 	public String execute() throws ParseException{
 		System.out.println("[At ShowBlogList]");
 		Map<String,Object> session = ActionContext.getContext().getSession();		
@@ -45,7 +47,9 @@ public class ShowBlogList extends ActionSupport{
 			ActionContext.getContext().getSession().put("blogList", blogList);
 		}
 		
-		Map<Object,Double> blogrank = new HashMap<Object,Double>();		
+		Map<Object,Double> blogrank = new HashMap<Object,Double>();
+		Map<String,Double> userrank = new HashMap<String,Double>();
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Calendar calendar = Calendar.getInstance();
 		long nowDate = calendar.getTime().getTime();
@@ -55,10 +59,22 @@ public class ShowBlogList extends ActionSupport{
 			int viewnumber = blogList.get(i).getViewnumber();			
 			long publishDate = sdf.parse(blogList.get(i).getTime()).getTime();
 			long betweenHour = (nowDate - publishDate)/(1000 * 60 * 60);
-			System.out.println("[betweenHour]:"+betweenHour);				
-			double rankvalue = (Math.log10(viewnumber)*4 + likenumber)/Math.pow((betweenHour + 2), 1.8);
-			System.out.println("[rankvalue]"+ rankvalue);
-			blogrank.put(blogList.get(i), rankvalue); 	
+			//System.out.println("[betweenHour]:"+betweenHour);				
+			double rankvalue = (Math.log10(viewnumber+1)*4 + likenumber)/Math.pow((betweenHour + 2), 1.8);
+			//System.out.println("[rankvalue]"+ rankvalue);
+			blogrank.put(blogList.get(i), rankvalue);
+			
+			String userName = blogList.get(i).getUsername();
+			
+			if(userrank.containsKey(userName)){
+				double uservalue = userrank.get(userName);
+				uservalue += rankvalue;
+				System.out.println("["+userName+"]"+uservalue);
+			}else{
+				userrank.put(userName, rankvalue);
+				System.out.println("["+userName+"]"+rankvalue);
+			}
+			
 		}
 		
 		List<Map.Entry<Object,Double>> mappingList = new ArrayList<Map.Entry<Object,Double>>(blogrank.entrySet());
@@ -88,21 +104,42 @@ public class ShowBlogList extends ActionSupport{
 		}	
 		session.put("topblog", topblog);
 		
+		List<Map.Entry<String,Double>> urList = new ArrayList<Map.Entry<String,Double>>(userrank.entrySet());
 		
+		Collections.sort(urList, new Comparator<Map.Entry<String,Double>>(){ 
+		public int compare(Map.Entry<String,Double> mapping1,Map.Entry<String,Double> mapping2){ 
+			
+			if((mapping2.getValue() - mapping1.getValue())>0){
+				return 1;
+			}else if((mapping2.getValue() - mapping1.getValue())==0){
+				return 0;
+			}else{
+				return -1;
+			}
+		} 
+		}); 
 		
+		for(Map.Entry<String,Double> mapping:urList){ 
+			   System.out.println(mapping.getKey()+":"+mapping.getValue()); 
+		} 
 		
-		
-		
-		
-		
-		
+		List<User> topuser = new ArrayList<User>();	
+		if(urList.size()<6){
+			for(int i=0;i<urList.size();i++){
+				User entry = userManager.findUser(urList.get(i).getKey());
+				topuser.add(entry);
+			}
+		}else{
+			for(int i=0;i<6;i++){
+				User entry = userManager.findUser(urList.get(i).getKey());
+				topuser.add(entry);
+			}
+		}
+		session.put("topuser", topuser);
+			
 		return SUCCESS;
 	}
 
-	
-	
-	
-	
 	
 	public String changeBlogList(){
 //		Map<String,Object> session = ActionContext.getContext().getSession();
@@ -133,6 +170,16 @@ public class ShowBlogList extends ActionSupport{
 		this.showBlogListService = showBlogListService;
 	}
 	
+	
+	public UserManagerImpl getUserManager() {
+		return userManager;
+	}
+
+
+	public void setUserManager(UserManagerImpl userManager) {
+		this.userManager = userManager;
+	}
+
 	public String showUNCheckBlog(){
 		
 		Map<String,Object> session = ActionContext.getContext().getSession();	
