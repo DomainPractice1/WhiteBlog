@@ -90,9 +90,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>
-								
+						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+					</div>								
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
@@ -115,7 +114,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<i class="fa fa-envelope"></i>
 								</button>						
 							</div>
-							<a class="modal-form">${sessionScope.loginUser.username}</a>
+							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
+								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
+								<i class="fa fa-power-off"></i>
+							</a>
 						</c:otherwise>
 					</c:choose>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">

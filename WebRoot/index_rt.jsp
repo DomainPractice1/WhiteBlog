@@ -84,8 +84,7 @@ n.css" rel="stylesheet">
 				<div class="container">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>
-								
+					</div>								
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
@@ -109,12 +108,6 @@ n.css" rel="stylesheet">
 								</button>						
 							</div>
 							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
-							
-								<!-- <div class="get-post-titles" style="margin-right:10px">					
-								<button type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
-									<i class="fa fa-power-off"></i>
-								</button>						
-								</div> -->
 								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
 								<i class="fa fa-power-off"></i>
 							</a>

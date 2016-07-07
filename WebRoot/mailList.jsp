@@ -81,8 +81,7 @@
 				<div class="container">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>
-								
+					</div>								
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
@@ -105,7 +104,10 @@
 									<i class="fa fa-envelope"></i>
 								</button>						
 							</div>
-							<a class="modal-form">${sessionScope.loginUser.username}</a>
+							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
+								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
+								<i class="fa fa-power-off"></i>
+							</a>
 						</c:otherwise>
 					</c:choose>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
@@ -167,6 +169,91 @@
 		</footer>
 	</div>
 
+<!-- Login Modal -->
+	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
+				</div>
+				<div class="modal-body">
+					<form action="login.action" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Username" name="userform.username">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" placeholder="Password" name="userform.password">
+						</div>
+						<div class="linkbox">
+							<a href="#">Forgot password ?</a>
+							<span>No account ? <a href="#" id="register-btn" data-toggle="modal" data-target="#register-form">Sign Up.</a></span>
+							<!-- <span class="form-warning"><i class="fa fa-exclamation"></i>Fill the require.</span> -->
+						</div>
+						<div class="linkbox">
+							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN IN</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div class="provider">
+						<span>Sign In With</span>
+						<a href="#"><i class="fa fa-facebook"></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-content" id="register-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
+				</div>
+				<div class="modal-body">
+					<form action="register.action" method="post">
+						<!-- <div class="form-group">
+							<input class="form-control" placeholder="Name">
+						</div> -->
+						<div class="form-group">
+							<input class="form-control" placeholder="Username" name="userform.username">
+						</div>
+						<!-- <div class="form-group">
+							<input class="form-control" placeholder="Email">
+						</div> -->
+						<div class="form-group">
+							<input class="form-control" type="password" placeholder="Password" name="userform.password">
+						</div>
+						<div class="linkbox">
+							<span>Already got account? <a href="#" id="login-btn" data-target="#login-form">Sign In.</a></span>
+						</div>
+						<div class="linkbox">
+							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN UP</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- logout -->
+	<div class="modal leread-modal fade" id="logout-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-body">
+					<form action="logout.action" method="post">					
+						<div class="modal-body">
+							确认登出当前账户么？
+         				</div>
+						<div class="modal-footer">
+            				<button type="button" class="btn btn-default" data-dismiss="modal">关闭 </button>
+            				<button type="submit" class="btn btn-primary">确定</button>
+        				</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
