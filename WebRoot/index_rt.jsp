@@ -18,8 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <title>White Blog</title>
 
 <!-- Bootstrap core CSS -->
-<link href="assets/css/bootstrap.mi
-n.css" rel="stylesheet">
+<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome CSS -->
 <link href="assets/css/font-awesome.min.css" rel="stylesheet">
 <!-- Jasny CSS -->
@@ -33,13 +32,14 @@ n.css" rel="stylesheet">
 <!-- ColorBox CSS -->
 <link href="assets/css/colorbox.css" rel="stylesheet">
 <!-- Custom font -->
+<link href='assets/css/googleFont.css' rel='stylesheet' type='text/css'>
+<link href='assets/css/googleFont2.css' rel='stylesheet' type='text/css'>
 <!-- Custom styles for this template -->
 <link href="assets/css/style.css" rel="stylesheet">
 
 </head>
 <body onload="timedCount()">
 	<s:action name="ShowBlogList"/>
-	<s:action name="preparationAction" />
 	<div class="page-loader">
 		<div class="loader-in">Loading...</div>
 		<div class="loader-out">Loading...</div>
@@ -161,14 +161,10 @@ n.css" rel="stylesheet">
 														<c:when test="${sessionScope.loginUser!=null && sessionScope.loginUser.username==blog.username}">
 															<a href="showBlogToModify.action?blogId=${blog.blogId}"><div class="modify"></div></a>
 														</c:when>
-													</c:choose>
-													<!-- 游客是不能点赞和分享的 -->	
-													<c:choose>	
-														<c:when test="${sessionScope.loginUser != null}">
-															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-															<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
-														</c:when>
-													</c:choose>
+													</c:choose>													
+													<a href="#" class="quick-read qr-not-phone"><i class="fa fa-eye"></i></a>
+													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+													<a href="#" class="post-like"><i class="fa fa-heart"></i><span>28</span></a>
 												</div>
 											</div>
 										</div>
@@ -198,17 +194,17 @@ n.css" rel="stylesheet">
 						</form>
 
 						<ul class="laread-list">
-							<li class="title">CATEGORY</li>
-							<li><a href="#">Branding</a><i class="line"></i></li>
-							<li><a href="#">Design (48)</a><i class="line"></i></li>
-							<li><a href="#">Photography</a><i class="line"></i></li>
-							<li><a href="#">Inspiration</a><i class="line"></i></li>
-							<li><a href="#">Life</a><i class="line"></i></li>
-							<li><a href="#">City</a><i class="line"></i></li>
+							<li class="title">热门文章</li>
+							<s:iterator value="#session.topblog" var="blog">
+								<li>
+								<a href="content.action?id=${blog.blogId}">${blog.title}</a>
+								<i class="line"></i>
+								</li>
+							</s:iterator>				
 						</ul>
 
 						<ul class="laread-list">
-							<li class="title">RECENT POSTS</li>
+							<li class="title">热门用户</li>
 							<li><a href="#">The Nature of My Inspiration</a><i class="date">28 June</i></li>
 							<li><a href="#">Sam Feldt - Show Me Love</a><i class="date">27 June</i></li>
 							<li><a href="#">Do You Love Coffee?</a><i class="date">25 June</i></li>
@@ -217,21 +213,28 @@ n.css" rel="stylesheet">
 						</ul>
 
 						<ul class="laread-list">
-							<li class="title">Super-TAGS</li>
-							<li class="bar-tags">
-								<s:iterator value="#session.allSuperTags" var="stag">
-									<a href="findBlogByTagSuperAction.action?id=<s:property value="#stag.supertypeId" />"><s:property value="#stag.supertypeName"/></a>
-								</s:iterator>
-							</li>
-						</ul>
-						<ul class="laread-list">
-							<li class="title">Sub-TAGS</li>
+							<li class="title">All TAGS</li>
 							<li class="bar-tags">
 								<s:iterator value="#session.allTags" var="tag">
 									<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename" /></a>
 								</s:iterator>
+								<a href="#">fashion</a>
+								<a href="#">culture</a>
+								<a href="#">art</a>
+								<a href="#">concept</a>
+								<a href="#">style</a>
+								<a href="#">advert</a>
+								<a href="#">movie</a>
+								<a href="#">color</a>
+								<a href="#">branding</a>
+								<a href="#">technology</a>
+								<a href="#">fashion</a>
+								<a href="#">culture</a>
+								<a href="#">art</a>
+								<a href="#">concept</a>
 							</li>
 						</ul>
+
 					</div>
 
 				</aside>
@@ -448,34 +451,6 @@ n.css" rel="stylesheet">
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
-	<script type="text/javascript">
-		var strId = "";
-		function shareTwitter(t)
-		{
-			strId = t.id.substring(7, t.id.length);
-			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId,"_blank","width=500px;height=500px;");
-		}
-	</script>
-	<script type="text/javascript">
-		var strId = "";
-		function myF(t)
-		{
-			strId = t.id.substring(4, t.id.length);
-			var actionName = "clickLike.action?id=";
-			actionName += strId;
-			$.ajax({
-				url:actionName,
-				type:"POST",
-				dataType:"json",
-				success:function(data){
-					if(data == "success")
-						alert("点赞成功");
-					else
-						alert("取消点赞");
-				}
-			});
-		}
-	</script>
 	<script type="text/javascript">		
 		$("#notice").click(function(){
 			$("#slideform").empty();
