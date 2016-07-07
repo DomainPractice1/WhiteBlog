@@ -35,7 +35,8 @@ public class BlogDAO extends HibernateDaoSupport {
 	public static final String FORWARDNUMBER = "forwardnumber";
 	public static final String VIEWNUMBER = "viewnumber";
 	public static final String COMMENTNUMBER = "commentnumber";
-	
+	public static final String STATUS = "status";
+
 	protected void initDao() {
 		// do nothing
 	}
@@ -59,8 +60,9 @@ public class BlogDAO extends HibernateDaoSupport {
 			return "success";
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
-			throw re;
-		}
+			return "error";
+			//throw re;
+		} 
 	}
 
 	public Blog findById(java.lang.Integer id) {
@@ -101,7 +103,6 @@ public class BlogDAO extends HibernateDaoSupport {
 			throw re;
 		}
 	}
-
 	public List findByPartMatch(String propertyName, Object value){
 		log.debug("finding Blog instance with property: " + propertyName
 				+ ", value: " + value);
@@ -154,7 +155,7 @@ public class BlogDAO extends HibernateDaoSupport {
 	public List<Blog> findByFilterwords(Object filterwords) {
 		return findByProperty(FILTERWORDS, filterwords);
 	}
-	
+
 	public List<Blog> findByLikenumber(Object likenumber) {
 		return findByProperty(LIKENUMBER, likenumber);
 	}
@@ -169,6 +170,10 @@ public class BlogDAO extends HibernateDaoSupport {
 
 	public List<Blog> findByCommentnumber(Object commentnumber) {
 		return findByProperty(COMMENTNUMBER, commentnumber);
+	}
+
+	public List<Blog> findByStatus(Object status) {
+		return findByProperty(STATUS, status);
 	}
 
 	public List findAll() {
@@ -218,5 +223,5 @@ public class BlogDAO extends HibernateDaoSupport {
 
 	public static BlogDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (BlogDAO) ctx.getBean("BlogDAO");
-	}	
+	}
 }

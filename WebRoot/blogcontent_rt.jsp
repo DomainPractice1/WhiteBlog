@@ -204,9 +204,9 @@
 										<c:choose>
 											<c:when test="${sessionScope.loginUser != null}">
 												<div class="pull-right post-item-social" >
-													<a  data-toggle="modal" 	data-target="#myModal"><div class="mails"> </div></a>
 													<a  tabindex="0"   data-toggle="modal"  data-target="#myModal2"> <div class="tag" ></div>  </a>
-													<a href="#" id="like${req.blog.blogId}" onclick="myF(this)" class="post-like qr-like"><i class="fa fa-heart"></i><span>${req.blog.likenumber}</span></a>
+													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${req.blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${req.blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+													<a data-toggle="tooltip" title="like" href="#" id="like${req.blog.blogId}" onclick="myF(this)" class="post-like qr-like"><i class="fa fa-heart"></i><span>${req.blog.likenumber}</span></a>
 												</div>
 											</c:when>	
 										</c:choose>
@@ -229,11 +229,10 @@
 																			<div><h4  class="modal-title" id="myModalLabel2" >更改标签</h4></div>
 																		
 																		<div class="modal-header">
-																			<select name="superTypename">
-																				<option style="width:100px" value="IT/互联网">IT/互联网</option>
-																				<option style="width:100px" value="美图">美图</option>
-																				<option style="width:100px" value="生活">生活/游戏</option>
-																				<option style="width:100px" value="其他">其他</option>
+																			<select class="dropdwon-menu" name="supertypeId">
+																				<c:forEach var="stags" items="${ast}">
+																					<option style="width:160px" value="${stags.supertypeId}">${stags.supertypeName}</option>
+																				</c:forEach>
 																			</select>
 																		</div>
 																			<textarea class="form-control" id="mesContent2" name="mesContent2"  
@@ -247,7 +246,7 @@
 																		
 																		<!-- 模态框的内容部分 -->
 																		<div class="modal-header">
-																			<c:forEach var="tag" items="${btl }">
+																			<c:forEach var="tag" items="${btl}">
 																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p> 
 																			</c:forEach>
 																		</div>
@@ -283,8 +282,7 @@
 									<c:choose>
 										<c:when test="${sessionScope.loginUser!=null }">
 											<div class="author-connection">
-												<a href="#"><i class="fa fa-twitter"></i></a>
-												<a href="#"><i class="fa fa-envelope"></i></a>
+												<a  data-toggle="modal"	data-target="#myModal"><div class="mails"> </div></a> 
 											</div>
 										</c:when>
 									</c:choose>		
@@ -460,6 +458,14 @@
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">
+		var strId = "";
+		function shareTwitter(t)
+		{
+			strId = t.id.substring(7, t.id.length);
+			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId,"_blank","width=500px;height=500px;");
+		}
+	</script>
 	<script type="text/javascript">
 		var strId = "";
 		function myF(t)

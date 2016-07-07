@@ -149,7 +149,7 @@ n.css" rel="stylesheet">
 												<div>
 													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
 												</div>
-												<h3><a href="content.action?id=${blog.blogId}">${blog.title}</a></h3>
+												<h3><a href="content.action?id=${blog.blogList.blogId}">${blog.title}</a></h3>
 												<p>${blog.content}<a href="#" class="more">[...]</a></p>
 											</div>
 											<div class="post-item-info clearfix">
@@ -166,8 +166,19 @@ n.css" rel="stylesheet">
 													<c:choose>	
 														<c:when test="${sessionScope.loginUser != null}">
 															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-															<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
+															<%-- <a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a> --%>
 														</c:when>
+													</c:choose>
+													<!-- 检查点赞的列表的 -->
+													<c:choose>
+														<c:when test="${sessionScope.loginUser!=null}">
+															<c:if test="${likeitList.isLike=='1'}">
+																<a href="#" id="like${blog.blogId}" class="post-liked" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
+															</c:if>
+															<c:if test="${likeitLike.isLike!='1' }">
+																<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
+															</c:if> 
+														</c:when> 
 													</c:choose>
 												</div>
 											</div>

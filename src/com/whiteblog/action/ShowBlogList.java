@@ -1,5 +1,7 @@
 package com.whiteblog.action;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,16 +13,20 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.entity.Blog;
+import com.whiteblog.entity.Likeit;
 import com.whiteblog.entity.User;
+import com.whiteblog.form.checkLikeForm;
+import com.whiteblog.service.LikeService;
 import com.whiteblog.service.ShowBlogListService;
 
 public class ShowBlogList extends ActionSupport{
 	private List<Blog> blogList;
 	private List<Blog> unCheckBlog;
 	private ShowBlogListService showBlogListService;
+	private LikeService likeService;
 
 	public String execute(){
-		System.out.println("[At ShowBlogList]");
+		System.out.println("[At ShowBlogList] + [Load likelist]");
 		Map<String,Object> session = ActionContext.getContext().getSession();		
 		if(!session.containsKey("loginUser")){
 			blogList=showBlogListService.getAllBlog();
@@ -44,7 +50,27 @@ public class ShowBlogList extends ActionSupport{
 //			System.out.println("!!!!!!!!!!!!fuck2");
 //>>>>>>> func-deleteBlog
 			ActionContext.getContext().getSession().put("blogList", blogList);
+			
+
+			
 		}
+		/*载入点赞列表进行检查*/
+		User u = (User)session.get("loginUser");
+		int userId = u.getUserId();
+		List<checkLikeForm> list = new ArrayList<checkLikeForm>();
+		List<Likeit> ll = likeService.getLikeitDAO().findAll();
+		for(Blog b : blogList){
+			String res = "0";
+			for(Likeit i : ll){
+				if(b.getBlogId().equals(i.getBlogId() )&& b.getUserId().equals(u.getUserId()))
+					res = new String("1");
+			} 
+			checkLikeForm f = new checkLikeForm(b.getBlogId(), res);
+			System.out.println("res: " + res);
+			list.add(f);
+		} 
+		ActionContext.getContext().put("one", "1");
+		ActionContext.getContext().put("likeitList", list);
 		return SUCCESS;
 	}
 
@@ -60,6 +86,14 @@ public class ShowBlogList extends ActionSupport{
 	}
 	public List<Blog> getBlogList() {
 		return blogList;
+	}
+
+	public LikeService getLikeService() {
+		return likeService;
+	}
+
+	public void setLikeService(LikeService likeService) {
+		this.likeService = likeService;
 	}
 
 	public void setBlogList(List<Blog> blogList) {

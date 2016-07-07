@@ -35,14 +35,14 @@ public class LikeAction {
 	public String clickAction(){
 		Map<String, Object> session = (Map<String, Object>)ActionContext.getContext().getSession();
 		User loginUser = (User)session.get("loginUser");
+		res = ERROR;
 		/*如果返回SUCCESS说明在点赞记录里面找到了此用户点赞的记录*/
 		if(this.likeService.checkClickLike(id, loginUser.getUserId()).equals(SUCCESS)){
 			this.likeService.deleteLike(id, loginUser.getUserId());
-			System.out.println("{ClickAction id delete}");
 			return ERROR;
 		}
 		this.likeService.saveLike(id, loginUser.getUserId());
-		System.out.println("{ClickAction id save like}");
+		res = SUCCESS;
 		return SUCCESS;
 	}
 	

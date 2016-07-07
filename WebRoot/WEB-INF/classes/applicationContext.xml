@@ -187,6 +187,9 @@
 		<property name="showBlogListService">
 			<ref bean="ShowBlogListService" />
 		</property>
+		<property name="likeService">
+			<ref bean="LikeService" />
+		</property>
 	</bean>
 
 	<bean id="BlogManager" class="com.whiteblog.service.BlogManagerImpl">

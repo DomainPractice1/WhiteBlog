@@ -204,16 +204,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<ul class="laread-list">
 							<li class="title">Super-TAGS</li>
 							<li class="bar-tags">
-								<s:iterator value="#session.allSuperTags" var="stag">
-									<a href="findBlogByTagSuperAction.action?id=<s:property value="#stag.supertypeId" />"><s:property value="#stag.supertypeName"/></a>
-								</s:iterator>
+								<a href="findBlogByTagSuperAction.action?id=${thisSupertype.supertypeId}">${thisSupertype.supertypeName}</a>
 							</li>
 						</ul>
 						
 						<ul class="laread-list">
 							<li class="title">Sub-TAGS</li>
 							<li class="bar-tags">
-								<s:iterator value="#session.allTags" var="tag">
+								<s:iterator value="#theseSubtype" var="tag">
 									<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename" /></a>
 								</s:iterator>
 							</li>
@@ -434,13 +432,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var actionName = "clickLike.action?id=";
 			actionName += strId;
 			$.ajax({
-				url:actionName,
-				type:"POST",
+				url:"clickLike.action?id="+strId,
+				type:"GET",
 				dataType:"json",
 				success:function(data){
+					alert(data);
 					if(data == "success")
 						alert("点赞成功");
-					else
+					else 
 						alert("取消点赞");
 				}
 			});
