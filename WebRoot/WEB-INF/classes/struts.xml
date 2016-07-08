@@ -124,7 +124,7 @@
 			</result>
 			<result name="error" type="json">
 				<param name="root">res</param>
-			</result>			
+			</result>
 		</action>
 		
 		
