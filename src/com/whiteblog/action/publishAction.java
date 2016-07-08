@@ -39,7 +39,7 @@ public class publishAction extends ActionSupport{
 	 	private String hint;
 	 	private int id;	
 		 
-		public String execute(){				
+		public String execute(){		
 			BlogDAO blogDAO=blogService.getBlogDAO();
 			BlogtypeDAO blogtypeDAO=blogtypeService.getBlogtypeDAO();
 			
@@ -72,7 +72,7 @@ public class publishAction extends ActionSupport{
 			blog.setForwardnumber(0);
 			blog.setLikenumber(0);
 			blog.setViewnumber(0);
-			
+
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 			blog.setTime(df.format(new Date()));// new Date()为获取当前系统时间
 			
@@ -123,6 +123,7 @@ public class publishAction extends ActionSupport{
 				addFieldError("tags","请添加个人分类，便于管理");
 			}			
 		}		
+
 		public BlogServiceImp getBlogService() {
 			return blogService;
 		}
@@ -234,6 +235,4 @@ public class publishAction extends ActionSupport{
 		public void setId(int id) {
 			this.id = id;
 		}
-	
-		
 }

@@ -60,7 +60,8 @@ public class BlogDAO extends HibernateDaoSupport {
 			return "success";
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
-			throw re;
+			return "error";
+			//throw re;
 		}
 	}
 

@@ -74,11 +74,9 @@ public class blogContentAction extends ActionSupport{
 		System.out.println(username + " and " + ins.getContent() + " BlogContent");		
 		
 		BlogContentForm blogContentForm = new BlogContentForm(ins, username); 		
-		System.out.println(blogContentForm.getUsername() + "blogcontentform");
 		Map<String, Object> map = ActionContext.getContext().getSession();
 		map.put("req", blogContentForm);
 		BlogContentForm b = (BlogContentForm)map.get("req");
-		System.out.println(b.getUsername() + " is from map of blogcontentAction");
 		ActionContext.getContext().put("req", b);
 		btl = blogtypeService.getBlogtypeDAO().findByUserId(ins.getUserId());
 		ActionContext.getContext().put("re", btl);
@@ -87,12 +85,17 @@ public class blogContentAction extends ActionSupport{
 		
 		/*标签的部分*/ 
 		int bti = b.getBlog().getTypeId();
+		System.out.println("bti");
 		Blogtype bt = blogtypeService.getBlogtype(bti);
 		ActionContext.getContext().put("bt", bt);
 		
 		/*SuperType类的标签哎*/
 		Supertype st = superTypeService.getSupertypeDAO().findById(bt.getSupertypeId());
 		ActionContext.getContext().put("sbt", st);
+		
+		/*所有的SuperType标签*/
+		List<Supertype> sl = superTypeService.getSupertypeDAO().findAll();
+		ActionContext.getContext().put("ast", sl);
 		
 		return SUCCESS;
 	}

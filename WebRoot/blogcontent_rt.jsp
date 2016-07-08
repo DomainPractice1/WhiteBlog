@@ -93,8 +93,7 @@
 				<div class="container">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>
-								
+					</div>								
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
@@ -117,7 +116,10 @@
 									<i class="fa fa-envelope"></i>
 								</button>						
 							</div>
-							<a class="modal-form">${sessionScope.loginUser.username}</a>
+							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
+								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
+								<i class="fa fa-power-off"></i>
+							</a>
 						</c:otherwise>
 					</c:choose>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
@@ -136,6 +138,7 @@
 					<div class="row post-items">
 						<div class="col-md-2">
 							<div class="post-item-short">
+								<span class="small-text">Publish at</span>
 								<span class="small-text">${req.blog.time}</span>
 							</div>
 							<br>
@@ -146,7 +149,9 @@
 										<s:iterator value="bt" var="tag">
 											<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename"/></a>
 										</s:iterator>
-										
+										<s:iterator value="sbt" var="stag">
+											<a href="findBlogByTagSuperAction.action?id=<s:property value="#stag.supertypeId" />"><s:property value="#stag.supertypeName"/></a>
+										</s:iterator>
 									</li>
 								</ul>
 						</div>
@@ -167,7 +172,7 @@
 									<s:form class="form-horizontal" role="form" action="sendMessage" method="post"> 
 													
 															<!-- 模态框（Modal） -->
-															<div class="modal form-horizontal fade" id="myModal" tabindex="-1"
+															<div class="modal leread-modal form-horizontal fade" id="myModal" tabindex="-1"
 																role="dialog" aria-labelledby="myModalLabel" 
 																aria-hidden="true">
 																<div class="modal-dialog">
@@ -176,8 +181,8 @@
 																			<button type="button" class="close"
 																				data-dismiss="modal" aria-hidden="true">×</button>
 																			<!-- 模态框的标题部分 -->
-																			 
-																			<h4  class="modal-title" id="myModalLabel" >私信我吧</h4>
+																			
+																			<h4  class="modal-title" id="myModalLabel" ><i class="fa fa-envelope"></i>私信我吧</h4>
 																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="id" class="modal-title" id="id" /> 
 																		</div>
 																		<!-- 模态框的内容部分 -->
@@ -187,9 +192,7 @@
 																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
 																		</div>
 																		<div class="modal-footer">
-																			<button type="button" class="btn btn-default btn-grey btn-outline" 
-																				data-dismiss="modal">关闭</button>
-																			<button type="submit" class="btn btn-primary btn-grey btn-outline">
+																			<button type="submit" class="btn btn-golden  btn-signin">
 																				发送 </button>
 												                     <!--  	</a>  -->
 																		</div>
@@ -200,24 +203,21 @@
 															</div>
 															<!-- /.modal 模态框结束-->															
 															</s:form> 
-										<div class="pull-right post-item-social" >
-											<a  data-toggle="modal" data-placement="top"	data-target="#myModal"><div class="mails"> </div></a>
-											<a  tabindex="0"  data-toggle="modal" data-placement="top" data-target="#myModal2"> <div class="tag" ></div>  </a>
-											<a href="#" class="post-like qr-like"><i class="fa fa-heart"></i><span>18</span></a>
-										</div>
-															<script>
-  																 $(function () { $('#myModal').modal('hide')});
-  																 $("#myModal").modal().css({
-               																  "margin-top": function () {
-                  															   return - ($(this).height() / 2);}
-           																		  });
-  																 $(function() {$('#myModal2').modal('hide')});
-															</script>	
+										<c:choose>
+											<c:when test="${sessionScope.loginUser != null}">
+												<div class="pull-right post-item-social" >
+													<a  tabindex="0"   data-toggle="modal"  data-target="#myModal2"> <div class="tag" ></div>  </a>
+													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${req.blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${req.blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+													<a data-toggle="tooltip" title="like" href="#" id="like${req.blog.blogId}" onclick="myF(this)" class="post-like qr-like"><i class="fa fa-heart"></i><span>${req.blog.likenumber}</span></a>
+												</div>
+											</c:when>	
+										</c:choose>
+
 																																		
 												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
 													
 															<!-- 模态框（Modal） -->
-															<div class="modal form-horizontal fade" id="myModal2" tabindex="-1"
+															<div class="modal  form-horizontal fade" id="myModal2" tabindex="-1"
 																role="dialog" aria-labelledby="myModalLabel" 
 																aria-hidden="true">
 																<div class="modal-dialog">
@@ -226,8 +226,17 @@
 																			<button type="button" class="close"
 																				data-dismiss="modal" aria-hidden="true">×</button>
 																			<!-- 模态框的标题部分 -->
-																			 
-																			<h4  class="modal-title" id="myModalLabel2" >已有标签</h4>
+																			
+																			 <div class="tag"></div>
+																			<div><h4  class="modal-title" id="myModalLabel2" >更改标签</h4></div>
+																		
+																		<div class="modal-header">
+																			<select class="dropdwon-menu" name="supertypeId">
+																				<c:forEach var="stags" items="${ast}">
+																					<option style="width:160px" value="${stags.supertypeId}">${stags.supertypeName}</option>
+																				</c:forEach>
+																			</select>
+																		</div>
 																			<textarea class="form-control" id="mesContent2" name="mesContent2"  
 																				placeholder="新建标签,在这写上新的标签吧"></textarea>																		 
 
@@ -236,13 +245,12 @@
 																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.userId}" name="id" class="modal-title" id="id" />
 																			<input style="display:none;" class="form-control" aria-hidden="true"  readonly="true" value="${req.blog.blogId}" name="bid" class="modal-title" id="bid" />  
 																		</div>
+																		
 																		<!-- 模态框的内容部分 -->
 																		<div class="modal-header">
-																			<c:forEach var="tag" items="${btl}" > 
-																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p>  
-																			</c:forEach>		
-																		 																
-																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
+																			<c:forEach var="tag" items="${btl}">
+																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p> 
+																			</c:forEach>
 																		</div>
 																	
 																		<div class="modal-footer">
@@ -250,7 +258,9 @@
 																				data-dismiss="modal">关闭</button>
 																			<button type="submit" class="btn btn-primary btn-grey btn-outline">添加</button>
 												                     <!--  	</a>  -->
-																		</div>																	
+																		</div>
+
+																		
 																	</div>
 																	<!-- /.modal-content -->
 																</div>
@@ -271,10 +281,13 @@
 										<h4 class="author-name">${sessionScope.loginUser.username}</h4>
 										<a href="#">view all post</a>
 									</div>
-									<div class="author-connection">
-										<a href="#"><i class="fa fa-twitter"></i></a>
-										<a href="#"><i class="fa fa-envelope"></i></a>
-									</div>
+									<c:choose>
+										<c:when test="${sessionScope.loginUser!=null }">
+											<div class="author-connection">
+												<a  data-toggle="modal"	data-target="#myModal"><div class="mails"> </div></a> 
+											</div>
+										</c:when>
+									</c:choose>		
 								</div>
 							</div>
 
@@ -309,6 +322,7 @@
 											</s:div>																				
 										</s:form>
 									</div>
+
 								</div>
 							</div>
 						</div>
@@ -321,11 +335,11 @@
 			<div class="container text-center">
 				<div class="footer-logo"><img src="assets/img/logo-black.png" alt=""></div>
 				<p class="laread-motto">Designed for Read.</p>
-				<div class="laread-social">
+<!-- 				<div class="laread-social">
 					<a href="#" class="fa fa-twitter"></a>
 					<a href="#" class="fa fa-facebook"></a>
 					<a href="#" class="fa fa-pinterest"></a>
-				</div>
+				</div> -->
 			</div>
 		</footer>
 	</div>
@@ -427,6 +441,91 @@
 		</div>
 	</div>
 
+<!-- Login Modal -->
+	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
+				</div>
+				<div class="modal-body">
+					<form action="login.action" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Username" name="userform.username">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" placeholder="Password" name="userform.password">
+						</div>
+						<div class="linkbox">
+							<a href="#">Forgot password ?</a>
+							<span>No account ? <a href="#" id="register-btn" data-toggle="modal" data-target="#register-form">Sign Up.</a></span>
+							<!-- <span class="form-warning"><i class="fa fa-exclamation"></i>Fill the require.</span> -->
+						</div>
+						<div class="linkbox">
+							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN IN</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div class="provider">
+						<span>Sign In With</span>
+						<a href="#"><i class="fa fa-facebook"></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-content" id="register-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
+				</div>
+				<div class="modal-body">
+					<form action="register.action" method="post">
+						<!-- <div class="form-group">
+							<input class="form-control" placeholder="Name">
+						</div> -->
+						<div class="form-group">
+							<input class="form-control" placeholder="Username" name="userform.username">
+						</div>
+						<!-- <div class="form-group">
+							<input class="form-control" placeholder="Email">
+						</div> -->
+						<div class="form-group">
+							<input class="form-control" type="password" placeholder="Password" name="userform.password">
+						</div>
+						<div class="linkbox">
+							<span>Already got account? <a href="#" id="login-btn" data-target="#login-form">Sign In.</a></span>
+						</div>
+						<div class="linkbox">
+							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN UP</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- logout -->
+	<div class="modal leread-modal fade" id="logout-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-body">
+					<form action="logout.action" method="post">					
+						<div class="modal-body">
+							确认登出当前账户么？
+         				</div>
+						<div class="modal-footer">
+            				<button type="button" class="btn btn-default" data-dismiss="modal">关闭 </button>
+            				<button type="submit" class="btn btn-primary">确定</button>
+        				</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -447,6 +546,34 @@
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">
+		var strId = "";
+		function shareTwitter(t)
+		{
+			strId = t.id.substring(7, t.id.length);
+			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId,"_blank","width=500px;height=500px;");
+		}
+	</script>
+	<script type="text/javascript">
+		var strId = "";
+		function myF(t)
+		{
+			strId = t.id.substring(4, t.id.length);
+			var actionName = "clickLike.action?id=";
+			actionName += strId;
+			$.ajax({
+				url:actionName,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == "success")
+						alert("点赞成功");
+					else
+						alert("取消点赞");
+				}
+			});
+		}
+	</script>
 	<script type="text/javascript">		
 		$("#notice").click(function(){
 			$("#slideform").empty();
@@ -464,9 +591,6 @@
 			})	
 		});
 	</script>
-	
-	
-	
 	<script type="text/javascript">
 		var t
 		function timedCount()
@@ -486,7 +610,14 @@
 			t=setTimeout("timedCount()",10000)
 		}
 	</script>
-
+	<script>
+  		$(function () { $('#myModal').modal('hide')});
+  		$("#myModal").modal().css({
+        "margin-top": function () {
+        	return - ($(this).height() / 2);}
+        });
+  		$(function() {$('#myModal2').modal('hide')});
+	</script>	
 	<script type ="text/javascript">
 	function delete_row(delete_id){
 		if(confirm("确定要删除？")){
@@ -552,25 +683,13 @@
 		})
 	</script>
 	
+ 	<script type="text/javascript">  
+		var i = "df"; var t = "";
+        function getTypename(id){
+	    	i = document.getElementById(id).innerText;
+	    	document.getElementById("mesContent2").value = i;
+	    } 
+	</script>	
 </body>
- 																				<script type="text/javascript">  
-																				    var i = "df"; var t = "";
-                                                                                   function getTypename(id){
-	                                                                                  i = document.getElementById(id).innerText; 
-	                                                                                  //var tmp = document.getElementById("mesContent2").value.replace(/(^[\s\t\xa0\u3000]+)|([\u3000\xa0\s\t]+$)/g, "");
-	                                                                                  document.getElementById("mesContent2").value = i;
-	                                                                            /*       if(tmp == "")
-	                                                                                  	document.getElementById("mesContent2").value = i;
-	                                                                                  else{
-	                                                                                     t = tmp;
-	                                                                                   // var pp = "/.";
-	                                                                                   // pp = pp.concat(i, "/");
-	                                                                                   // var isExist = t.match(i);
-	                                                                                    if(t.indexOf(i) < 0){ 
-	                                                                                    	t=t.concat(",", i);
-	                                                                                    	document.getElementById("mesContent2").value = t;
-	                                                                                    } 
-	                                                                                  } */
-	                                                                             } 
-	                                                                       </script>	
+	
 </html>

@@ -60,7 +60,7 @@ public class PostComment extends ActionSupport{
 		}				
 		return false;
 	}
-		
+
 	private boolean fetchFilterWords(){
 		try{			
 			filterWords=fileManagerImpl.getWords();
@@ -101,6 +101,4 @@ public class PostComment extends ActionSupport{
 	public void setBlogManager(BlogManagerImpl blogManager) {
 		this.blogManager = blogManager;
 	}
-
-	
 }

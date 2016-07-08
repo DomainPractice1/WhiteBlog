@@ -27,7 +27,7 @@ public class showBlogToModifyAciton extends ActionSupport{
 		else 
 			return ERROR;
 	}
-		
+
 	public BlogServiceImp getBlogService() {
 		return blogService;
 	}

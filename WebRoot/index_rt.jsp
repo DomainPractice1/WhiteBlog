@@ -84,8 +84,7 @@ n.css" rel="stylesheet">
 				<div class="container">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>
-								
+					</div>							
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
@@ -109,12 +108,6 @@ n.css" rel="stylesheet">
 								</button>						
 							</div>
 							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
-							
-								<!-- <div class="get-post-titles" style="margin-right:10px">					
-								<button type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
-									<i class="fa fa-power-off"></i>
-								</button>						
-								</div> -->
 								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
 								<i class="fa fa-power-off"></i>
 							</a>
@@ -171,9 +164,14 @@ n.css" rel="stylesheet">
 															</c:otherwise>													
 														</c:choose>																									
 														<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-														<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" title="赞"></i><span>${blog.likenumber}</span></a>
+														<c:if test="${likeitList.isLike=='1'}">
+																<a href="#" id="like${blog.blogId}" class="post-liked" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
+														</c:if>
+														<c:if test="${likeitLike.isLike!='1' }">
+																<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
+														</c:if> 
 														</c:when>														
-													</c:choose>
+												</c:choose>
 												</div>
 											</div>
 										</div>
@@ -182,6 +180,7 @@ n.css" rel="stylesheet">
 							</div>
 						</div>
 						</s:iterator>						
+
 
 						<div class="container-fluid post-video">
 							
@@ -218,15 +217,42 @@ n.css" rel="stylesheet">
 							<li><a href="#">Long Live The Kings</a><i class="date">22 June</i></li>
 						</ul>
 
+						<ul class="laread-list">							
+							<li class="title">热门文章</li>
+ 							<s:iterator value="#session.topblog" var="blog">
+ 								<li>
+ 								<a href="content.action?id=${blog.blogId}">${blog.title}</a>
+ 								<i class="line"></i>
+ 								</li>
+ 							</s:iterator>				
+						</ul>
+
 						<ul class="laread-list">
-							<li class="title">All TAGS</li>
+							<li class="title">热门用户</li>
+							<s:iterator value="#session.topuser" var="user">
+ 								<li>
+ 								<a href="#">${user.username}</a>
+ 								<i class="line"></i>
+ 								</li>
+ 							</s:iterator>
+						</ul>
+
+						<ul class="laread-list">
+							<li class="title">Super-TAGS</li>
+							<li class="bar-tags">
+								<s:iterator value="#session.allSuperTags" var="stag">
+									<a href="findBlogByTagSuperAction.action?id=<s:property value="#stag.supertypeId" />"><s:property value="#stag.supertypeName"/></a>
+								</s:iterator>
+							</li>
+						</ul>
+						<ul class="laread-list">
+							<li class="title">Sub-TAGS</li>
 							<li class="bar-tags">
 								<s:iterator value="#session.allTags" var="tag">
 									<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename" /></a>
 								</s:iterator>
 							</li>
 						</ul>
-
 					</div>
 
 				</aside>
@@ -479,13 +505,13 @@ n.css" rel="stylesheet">
 			$('#forward-form').modal('show');
 		}
 	</script>
+
 	<script type="text/javascript">
 		var strId = "";
 		function shareTwitter(t)
 		{
-			strId = t.id.substring(7, t.id.length);
-			
-			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId);
+			strId = t.id.substring(7, t.id.length);		
+			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId,"_blank","width=500px;height=500px;");
 		}
 	</script>
 	<script type="text/javascript">

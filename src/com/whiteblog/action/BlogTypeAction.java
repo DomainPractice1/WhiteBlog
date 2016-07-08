@@ -19,22 +19,22 @@ public class BlogTypeAction {
 	private BlogTypeServiceImp blogtypeService;
 	private BlogManagerImpl blogManager;
 	private SuperTypeService superTypeService;
-	private String superTypename;
+	private int supertypeId;
 	static public final  String SUCCESS = "success";
 	static public final  String ERROR = "error";
-	
-	public String getSuperTypename() {
-		return superTypename;
-	}
-	
-	public void setSuperTypename(String superTypename) {
-		this.superTypename = superTypename;
-	}
-	
+
 	public SuperTypeService getSuperTypeService() {
 		return superTypeService;
 	}
 	
+	public int getSupertypeId() {
+		return supertypeId;
+	}
+
+	public void setSupertypeId(int supertypeId) {
+		this.supertypeId = supertypeId;
+	}
+
 	public void setSuperTypeService(SuperTypeService superTypeService) {
 		this.superTypeService = superTypeService;
 	}
@@ -70,14 +70,13 @@ public class BlogTypeAction {
 	}
 	public String addTags(){
 		String str = mesContent2;  
-		
+		System.out.println("addTags SuperTag " + supertypeId);
 			List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findByTypename(str);
 			if(btl.size() < 1) {
 				Blogtype bt = new Blogtype();
 				bt.setUserId(id);
-				bt.setTypename(str);
-				Supertype st = superTypeService.getSupertypeDAO().findBySupertypeName(superTypename).get(0);
-				bt.setSupertypeId(st.getSupertypeId());
+				bt.setTypename(str); 
+				bt.setSupertypeId(supertypeId);
 				blogtypeService.getBlogtypeDAO().save(bt);
 				Blog b = blogManager.getBlogDao().findById(bid);
 				List<Blogtype> list = blogtypeService.getBlogtypeDAO().findByTypename(str);
@@ -90,9 +89,8 @@ public class BlogTypeAction {
 					if(btl.get(i).getTypename().compareTo(str) == 0){
 						Blogtype bt = new Blogtype();
 						bt.setUserId(id);
-						bt.setTypename(str);
-						Supertype st = superTypeService.getSupertypeDAO().findBySupertypeName(superTypename).get(0);
-						bt.setSupertypeId(st.getSupertypeId());
+						bt.setTypename(str); 
+						bt.setSupertypeId(supertypeId);
 						blogtypeService.getBlogtypeDAO().attachDirty(bt);
 						Blog b = blogManager.getBlogDao().findById(bid);
 						List<Blogtype> list = blogtypeService.getBlogtypeDAO().findByTypename(str);
@@ -143,9 +141,12 @@ public class BlogTypeAction {
 			if(!flag)
 				tmpList.add(bt);
 		}
-		System.out.println("[Preparation Action ON] : " + tmpList.size());
+		List<Supertype> sl = superTypeService.getSupertypeDAO().findAll();
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		session.put("allTags", tmpList);
+		session.put("allSuperTags", sl);
+		
+		
 		
 		
 		return SUCCESS;

@@ -1914,6 +1914,20 @@ body.is-push-bar-full {
 	transition: opacity .3s ease;
 	z-index: -1;
 }
+.post-item-social > a.post-liked span{
+	opacity: 1;
+	padding-left: 3px;
+	margin-right: -16px;
+	display: inline-block;
+	text-align: right;
+	-webkit-transition: opacity .3s ease;
+	-moz-transition: opacity .3s ease;
+	-ms-transition: opacity .3s ease;
+	-o-transition: opacity .3s ease;
+	transition: opacity .3s ease;
+	z-index: -1;
+	color:#703838
+}
 .post-item-social > a.post-like.active span {
 	opacity: 1;
 }
@@ -7725,7 +7739,6 @@ i.roman {
 	-webkit-box-shadow: none;
 	box-shadow: none;
 }
-
 .leread-modal .form-group + .form-group {
 	margin-top: 20px;
 	margin-bottom: 16px;

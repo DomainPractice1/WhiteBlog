@@ -42,8 +42,9 @@ public class modifyAction extends ActionSupport{
 			currentBlog.setForwardnumber(formerBlog.getForwardnumber());
 			currentBlog.setLikenumber(formerBlog.getLikenumber());
 			currentBlog.setViewnumber(formerBlog.getViewnumber());
-			currentBlog.setStatus(formerBlog.getStatus());
+			currentBlog.setStatus(formerBlog.getStatus());			
 			Blogtype formerType=blogtypeService.getBlogtype(formerBlog.getTypeId());
+			currentBlog.setTypeId(formerType.getTypeId());
 			
 			blogtype.setSupertypeId(Integer.parseInt(category));
 			blogtype.setTypeId(formerType.getTypeId());
@@ -77,6 +78,7 @@ public class modifyAction extends ActionSupport{
 			else
 				currentBlog.setTypeId(formerType.getTypeId());
 			
+			
 			//检查blog内容里是否有敏感词
 			if(isContainFilterWords())
 				currentBlog.setFilterwords(0);
@@ -86,7 +88,7 @@ public class modifyAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-		
+
 	private boolean isContainFilterWords(){
 		if(filterWords==null)		
 			fetchFilterWords();
@@ -171,6 +173,7 @@ public class modifyAction extends ActionSupport{
 	public void setHint(String hint) {
 		this.hint = hint;
 	}
+
 	public String getCategory() {
 		return category;
 	}
