@@ -34,5 +34,10 @@ public class BlogManagerImpl {
 		}
 		return res;
 	}
-	
+
+	public void addCommentNumber(int blogID){
+		Blog blog=blogDao.findById(blogID);
+		blog.setCommentnumber(blog.getCommentnumber()+1);
+		blogDao.attachDirty(blog);
+	}
 }

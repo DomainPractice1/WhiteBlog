@@ -23,8 +23,4 @@ public class ShowBlogListService {
 	public void setBlogDAO(BlogDAO blogDAO) {
 		this.blogDAO = blogDAO;
 	}
-	
-	
-	
-	
 }

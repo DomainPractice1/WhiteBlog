@@ -27,7 +27,7 @@ public class deleteBlogAction extends ActionSupport {
 	public String execute() throws Exception {
 		// TODO Auto-generated method stub
 		Blog thisBlog = blogManager.getBlogDao().findById(id);
-		String res = ""; 
+		String res = "";
 		if(blogManager.getBlogDao().delete(thisBlog).equals(SUCCESS)){
 			//成功删除
 			id = -1;

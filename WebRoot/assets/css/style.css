@@ -10372,3 +10372,15 @@ only screen and (                min-resolution: 2dppx){
 	width:18px;
 	height:18px;	
 }
+.forward{	
+	background: url(../img/forward.png) no-repeat 0 0;	
+	background-size:18px 18px;
+	width:18px;
+	height:18px;
+}
+.forward:hover{
+	background: url(../img/forwardHover.png) no-repeat 0 0;	
+	background-size:18px 18px;
+	width:18px;
+	height:18px;	
+}

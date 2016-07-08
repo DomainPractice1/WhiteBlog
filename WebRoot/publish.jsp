@@ -4,10 +4,17 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="icon" href="assets/img/favicon.ico">
 <base href="<%=basePath%>">
     
     <title>White Blog - 发表博文</title>
@@ -18,6 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page"> 
 	
+	<!-- Bootstrap core CSS -->
 	<link href="assets/css/bootstrap.min.css" rel="stylesheet">
 	<!-- Font Awesome CSS -->
 	<link href="assets/css/font-awesome.min.css" rel="stylesheet">
@@ -32,8 +40,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- ColorBox CSS -->
 	<link href="assets/css/colorbox.css" rel="stylesheet">
 	<!-- Custom font -->
-	<link href='assets/css/googleFont.css' rel='stylesheet' type='text/css'>
-	<link href='assets/css/googleFont2.css' rel='stylesheet' type='text/css'>
 	<!-- Custom styles for this template -->
 	<link href="assets/css/style.css" rel="stylesheet">
 	
@@ -105,42 +111,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div class="container">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>								
+					</div>
+					
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
 								<i class="fa fa-user"></i>
 							</a>									
 						</c:when>
-						<c:otherwise>
-							<div class="get-post-titles" style="margin-left:20px">
-								<button  type="button" class="close_qp navbar-toggle push-navbar-full" data-navbar-type="article">
-									<i class="fa fa-bars"></i>
-								</button>
-							</div>		
-							<div class="get-post-titles">					
-								<button id="notice" type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
-									<i id="checkicon" class="fa fa-bell-o"></i>
-								</button>						
-							</div>
-							<div class="get-post-titles" style="margin-right:10px">					
-								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.action'">
-									<i class="fa fa-envelope"></i>
-								</button>						
-							</div>
-							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
+						<c:otherwise>								
+					<div class="get-post-titles" style="margin-left:20px">
+						<button  type="button" class="close_qp navbar-toggle push-navbar-full" data-navbar-type="article">
+							<i class="fa fa-bars"></i>
+						</button>
+					</div>		
+					<div class="get-post-titles">					
+						<button id="notice" type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
+							<i id="checkicon" class="fa fa-bell-o"></i>
+						</button>						
+					</div>
+					<div class="get-post-titles" style="margin-right:10px">					
+						<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.action'">
+							<i class="fa fa-envelope"></i>
+						</button>						
+					</div>
+					<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
 								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
 								<i class="fa fa-power-off"></i>
 							</a>
 						</c:otherwise>
 					</c:choose>
+								
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-plus"></i>
 					</button>
 				</div>
 			</nav>
-		</header>
+		</header> 
 		  
 		<s:div cssClass="container">		
 			<s:form action="publish" method="POST" id="frmDemo" enctype="multipart/form-data" theme="simple">	
@@ -164,14 +172,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      	<s:div id="uploadList"></s:div>        		      	
 	      	<s:div>
 		       	<p>文章分类</p>
-		       	<s:radio list="#{'0':'移动开发','1':'Web前端','2':'架构设计','3':'编程语言','4':'互联网','5':'数据库','6':'系统运维','7':'云计算','8':'研发管理','9':'综合'}" name="category"/>		      		     
+		       	<s:radio list="#{'0':'生活','1':'教育','2':'医疗/社会福利','3':'艺术/娱乐','4':'IT/互联网','5':'金融/投资','6':'交通/物流','7':'农林牧渔','8':'机械/电子','9':'综合'}" name="category"/>		 
+		       	<s:fielderror cssStyle="color:red;font-size:8pt;list-style-type:none;"> 
+	    		  <s:param>category</s:param>    
+	   		   </s:fielderror>      		     
 	        </s:div>
 	      	<s:div>
-		       	<p>新建分类</p>
-		       	<s:textfield cssClass="form-control" name="tags" size="8"/><s:label>（多个分类之间用“,”分隔）</s:label>
+		       	<p>添加个人分类</p>
+		       	<s:textfield cssClass="form-control" name="tags" size="8"/><s:label>（基于文章分类的具体描述）</s:label>		
 		       	<s:fielderror cssStyle="color:red;font-size:8pt;list-style-type:none;"> 
 	    		  <s:param>tags</s:param>    
-	   		   </s:fielderror>                  
+	   		   </s:fielderror>        	           
 	        </s:div>        
 			<s:div> 
 			<s:div cssStyle="padding-top:1%;margin:0 auto;">
@@ -181,7 +192,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        </s:div>                   
 	   </s:form>		
 		</s:div>		
-	</s:div> 
+	</s:div> 		 	  
 	
 	<!-- Login Modal -->
 	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
@@ -286,9 +297,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			})	
 		});
 	</script>
-	
-	
-	
+		
 	<script type="text/javascript">
 		var t
 		function timedCount()

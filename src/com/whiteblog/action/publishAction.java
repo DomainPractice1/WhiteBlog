@@ -27,8 +27,7 @@ public class publishAction extends ActionSupport{
 	 */
 	private static final long serialVersionUID = 1L;
 		private BlogServiceImp blogService;    
-	 	private BlogTypeServiceImp blogtypeService;
-	 	private UserManagerImpl usermanager;
+	 	private BlogTypeServiceImp blogtypeService;	 
 	 	private Blog blog;
 	 	private Blogtype blogtype;
 	 	
@@ -38,55 +37,28 @@ public class publishAction extends ActionSupport{
 	 	private String category;
 	 	private String userName;
 	 	private String hint;
-	 	private int id;
-		//private 
+	 	private int id;	
+		 
 		public String execute(){		
-			UserDAO userDAO=usermanager.getUserdao();
 			BlogDAO blogDAO=blogService.getBlogDAO();
 			BlogtypeDAO blogtypeDAO=blogtypeService.getBlogtypeDAO();
 			
 			Map<String, Object> session = ActionContext.getContext().getSession();
 			User me=(User)session.get("loginUser");
+			int userID=me.getUserId();
 			userName=me.getUsername();
-			List<User> result = userDAO.findByUsername(userName);
-			int userID=0;
-			if(!result.isEmpty()){
-				userID=result.get(0).getUserId();
-			}
-			else{
-				hint="发布失败。请先登录再发布！";
-				return ERROR;
-			}
-						
-			int typeID=-1;
-			List<Blogtype> typesAlready = null;
-			if(!tags.trim().equals("")){//优先个人新建的分类
-				typesAlready=blogtypeDAO.findByTypename(tags);
-				if(!typesAlready.isEmpty()){
-					typeID=typesAlready.get(0).getTypeId();
-				}
-			}
-			else{
-				typeID=Integer.parseInt(category);
-			}
 			
-								
-			if(typeID==-1){
-				blogtype=new Blogtype();
-				blogtype.setTypename(tags);
-				blogtype.setUserId(userID);
-							
-				blogtypeDAO.save(blogtype);
-				
-				List<Blogtype> types = blogtypeDAO.findByTypename(tags);			
-				if(!types.isEmpty()){
-					typeID=types.get(0).getTypeId();				
-				}
-				else{
-					hint="发布失败。";
-					return ERROR;
-				}
-			}
+			int typeID=-1;
+			Blogtype newType=new Blogtype();
+			newType.setTypename(tags);
+			newType.setUserId(userID);
+			newType.setSupertypeId(Integer.parseInt(category));
+			blogtypeDAO.save(newType);
+			List<Blogtype> newAddType=blogtypeDAO.findByExample(newType);
+			if(newAddType!=null)
+				typeID=newAddType.get(0).getTypeId();
+			else 
+				return ERROR;//该分类未成功添加
 						
 			blog=new Blog();
 			blog.setContent(content);
@@ -94,6 +66,13 @@ public class publishAction extends ActionSupport{
 			blog.setTypeId(typeID);
 			blog.setUserId(userID);
 			blog.setUsername(userName);
+			blog.setStatus(0);//原创
+			//初始化
+			blog.setCommentnumber(0);
+			blog.setForwardnumber(0);
+			blog.setLikenumber(0);
+			blog.setViewnumber(0);
+
 			SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
 			blog.setTime(df.format(new Date()));// new Date()为获取当前系统时间
 			
@@ -137,11 +116,14 @@ public class publishAction extends ActionSupport{
 			{
 				addFieldError("content","文章内容为空");
 			}
-			if ((tags == null || tags.trim().equals(""))&&((category == null || category.trim().equals(""))))
-			{
-				addFieldError("tags","请选择文章分类或新建个人分类");
+			if((category == null || category.trim().equals(""))){
+				addFieldError("category","请选择文章分类");
 			}			
-		}
+			if((tags == null || tags.trim().equals(""))){
+				addFieldError("tags","请添加个人分类，便于管理");
+			}			
+		}		
+
 		public BlogServiceImp getBlogService() {
 			return blogService;
 		}
@@ -153,13 +135,7 @@ public class publishAction extends ActionSupport{
 		}
 		public void setBlogtypeService(BlogTypeServiceImp blogtypeService) {
 			this.blogtypeService = blogtypeService;
-		}
-		public UserManagerImpl getUsermanager() {
-			return usermanager;
-		}
-		public void setUsermanager(UserManagerImpl usermanager) {
-			this.usermanager = usermanager;
-		}
+		}	
 		public String getTitle() {
 			return title;
 		}
@@ -259,6 +235,4 @@ public class publishAction extends ActionSupport{
 		public void setId(int id) {
 			this.id = id;
 		}
-	
-		
 }

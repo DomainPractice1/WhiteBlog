@@ -314,12 +314,13 @@
 									</s:iterator>
 
 									<div class="comment-form main-comment-form">
-										<form action="PostComment.action" method="post">
-											<textarea class="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></textarea>
-											<div class="at-focus">
-												<button class="comment-submit">Post Comment</button>
-											</div>
-										</form>
+										<s:form action="PostComment.action" method="post" theme="simple">
+											<s:textarea cssClass="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></s:textarea>
+											<s:div cssClass="at-focus">
+												<button class="comment-submit">Post Comment</button>	
+												<s:actionerror cssStyle="color:red;font-size:8pt;list-style-type:none;margin-top:10px;"/>											
+											</s:div>																				
+										</s:form>
 									</div>
 
 								</div>

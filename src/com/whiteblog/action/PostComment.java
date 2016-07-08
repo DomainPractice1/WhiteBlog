@@ -24,36 +24,43 @@ public class PostComment extends ActionSupport{
 	private List<String> filterWords;
 	
 	public String execute(){
-		try{
-			boolean isSuccess=FilterWords();
-			postCommentService.post(commentform);
+		try{													
+			postCommentService.post(commentform);			
 			Map<String,Object> session = ActionContext.getContext().getSession();
 			Integer blogID = (Integer)session.get("blogId");	
-			noticeManager.savecommentNotice(blogManager.getUByBlogID(blogID));
-			if(isSuccess)
-				return SUCCESS;
-			else
-				return ERROR;
+			noticeManager.savecommentNotice(blogManager.getUByBlogID(blogID));		
+			blogManager.addCommentNumber(blogID);
+			return SUCCESS;
 		}catch(Exception e){
 			e.printStackTrace();
 			return ERROR;
 		}
 	}
 	
+	public void validate() {
+		this.clearErrorsAndMessages();
+		boolean isContainFilterWords=FilterWords();
+		if(isContainFilterWords)
+			this.addActionError("评论内容包含敏感词，请重新编辑！");		
+	}
+	
+	public boolean hasErrors(){
+	    return  (hasActionErrors()||hasFieldErrors());	    
+	}
+
 	private boolean FilterWords(){
 		if(filterWords==null)
 			if(!fetchFilterWords())
-				return false;
+				return true;//未成功获取敏感词，暂时不允许用户发布评论
 		String commentContent=commentform.getContent();
 		for(int i=0;i<filterWords.size();i++){
 			if(commentContent.contains(filterWords.get(i))){				
-				commentContent=commentContent.replaceAll(filterWords.get(i), "***");
+				return true;//包含敏感词
 			}
-		}		
-		commentform.setContent(commentContent);
-		return true;
+		}				
+		return false;
 	}
-	
+
 	private boolean fetchFilterWords(){
 		try{			
 			filterWords=fileManagerImpl.getWords();
@@ -94,6 +101,4 @@ public class PostComment extends ActionSupport{
 	public void setBlogManager(BlogManagerImpl blogManager) {
 		this.blogManager = blogManager;
 	}
-
-	
 }

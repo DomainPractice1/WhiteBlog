@@ -1,5 +1,9 @@
 #MyEclipse Hibernate Properties
+<<<<<<< HEAD
+#Thu Jul 07 11:03:36 CST 2016
+=======
 #Thu Jul 07 14:52:20 CST 2016
+>>>>>>> 8578fa70942236cb42ce51fc3b7b273ea7dac0d4
 genBasicCompId=true
 sessionFactoryName=
 profile=

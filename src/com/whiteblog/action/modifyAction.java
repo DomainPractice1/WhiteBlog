@@ -38,29 +38,46 @@ public class modifyAction extends ActionSupport{
 			currentBlog.setUserId(formerBlog.getUserId());
 			currentBlog.setUsername(formerBlog.getUsername());
 			currentBlog.setTime(formerBlog.getTime());
+			currentBlog.setCommentnumber(formerBlog.getCommentnumber());
+			currentBlog.setForwardnumber(formerBlog.getForwardnumber());
+			currentBlog.setLikenumber(formerBlog.getLikenumber());
+			currentBlog.setViewnumber(formerBlog.getViewnumber());
+			currentBlog.setStatus(formerBlog.getStatus());			
 			Blogtype formerType=blogtypeService.getBlogtype(formerBlog.getTypeId());
+			currentBlog.setTypeId(formerType.getTypeId());
 			
-			//设置blog的type
-			List<Blogtype> typesAlready = null;
-			if(blogtype.getTypename()==null || blogtype.getTypename().trim()==""){
-				currentBlog.setTypeId(Integer.parseInt(category));
-			}
-			else if(!formerType.getTypename().equals(blogtype.getTypename())){
-				typesAlready=blogtypeService.getBlogtype(blogtype.getTypename());
+			blogtype.setSupertypeId(Integer.parseInt(category));
+			blogtype.setTypeId(formerType.getTypeId());
+			blogtype.setUserId(formerType.getUserId());
+			
+			if(blogtype.getSupertypeId().intValue()!=formerType.getSupertypeId().intValue() || !blogtype.getTypename().equals(formerType.getTypename())){//和之前的类型不同
+				List<Blogtype> typesAlready = null;
+				typesAlready=blogtypeService.getBlogtypeDAO().findBySupertypeId(blogtype.getSupertypeId());
 				if(!typesAlready.isEmpty()){
-					currentBlog.setTypeId(typesAlready.get(0).getTypeId());
+					for(int i=0;i<typesAlready.size();i++){
+						if(typesAlready.get(i).getTypename().equals(blogtype.getTypename())){//查找是否有现存的type
+							currentBlog.setTypeId(typesAlready.get(i).getTypeId());
+							break;
+						}
+					}									
 				}
-				else{
-					blogtype.setUserId(formerBlog.getUserId());
-					blogtypeService.addBlogtype(blogtype);
-					List<Blogtype> types = blogtypeService.getBlogtype(blogtype.getTypename());			
+				if(currentBlog.getTypeId().intValue()==formerType.getTypeId().intValue()){	//没有现存的					
+					blogtype.setTypeId(null);
+					blogtypeService.getBlogtypeDAO().save(blogtype);
+					List<Blogtype> types = blogtypeService.getBlogtypeDAO().findBySupertypeId(blogtype.getSupertypeId());			
 					if(!types.isEmpty()){
-						currentBlog.setTypeId(types.get(0).getTypeId());				
+						for(int i=0;i<types.size();i++){
+							if(types.get(i).getTypename().equals(blogtype.getTypename())){
+								currentBlog.setTypeId(types.get(i).getTypeId());
+								break;
+							}
+						}		
 					}
-				}
-			}else{
-				currentBlog.setTypeId(formerBlog.getTypeId());
+				}				
 			}
+			else
+				currentBlog.setTypeId(formerType.getTypeId());
+			
 			
 			//检查blog内容里是否有敏感词
 			if(isContainFilterWords())
@@ -71,23 +88,7 @@ public class modifyAction extends ActionSupport{
 		}
 		return SUCCESS;
 	}
-	
-	public void validate() {
-		this.clearErrorsAndMessages();
-		if (currentBlog.getTitle() == null || currentBlog.getTitle().trim().equals(""))
-		{
-			addFieldError("title","请输入文章标题");
-		}
-		if (currentBlog.getContent() == null || currentBlog.getContent().trim().equals(""))
-		{
-			addFieldError("content","文章内容为空");
-		}
-		if ((blogtype.getTypename()== null || blogtype.getTypename().trim().equals(""))&&((category == null || category.trim().equals(""))))
-		{
-			addFieldError("tags","请选择文章分类或新建个人分类");
-		}			
-	}
-	
+
 	private boolean isContainFilterWords(){
 		if(filterWords==null)		
 			fetchFilterWords();
@@ -171,5 +172,12 @@ public class modifyAction extends ActionSupport{
 
 	public void setHint(String hint) {
 		this.hint = hint;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
 	}
 }

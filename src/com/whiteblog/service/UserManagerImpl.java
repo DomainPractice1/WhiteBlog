@@ -20,7 +20,7 @@ public class UserManagerImpl {
 	public void setUserdao(UserDAO userdao) {
 		this.userdao = userdao;
 	}
-	
+
 	public List<User> getAlluser(){
 		return this.userdao.findAll();
 	}
@@ -87,13 +87,4 @@ public class UserManagerImpl {
 			return "error";
 		}	
 	}
-	
-	public List<User> getAllUser(){
-		
-		List<User> result = userdao.findAll();
-	
-		return result;
-	}
-	
-
 }

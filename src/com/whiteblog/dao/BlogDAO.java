@@ -62,7 +62,7 @@ public class BlogDAO extends HibernateDaoSupport {
 			log.error("delete failed", re);
 			return "error";
 			//throw re;
-		} 
+		}
 	}
 
 	public Blog findById(java.lang.Integer id) {
@@ -103,6 +103,7 @@ public class BlogDAO extends HibernateDaoSupport {
 			throw re;
 		}
 	}
+
 	public List findByPartMatch(String propertyName, Object value){
 		log.debug("finding Blog instance with property: " + propertyName
 				+ ", value: " + value);
@@ -176,7 +177,7 @@ public class BlogDAO extends HibernateDaoSupport {
 		return findByProperty(STATUS, status);
 	}
 
-	public List findAll() {
+	public List<Blog> findAll() {
 		log.debug("finding all Blog instances");
 		try {
 			String queryString = "from Blog";

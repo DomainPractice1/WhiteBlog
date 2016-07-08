@@ -19,7 +19,7 @@ public class BlogServiceImp {
 	}
 	public String addBlog(Blog blog)throws IllegalAccessException, InvocationTargetException{
 		Blog newBlog = new Blog();		
-		BeanUtils.copyProperties(blog,newBlog);		
+		BeanUtils.copyProperties(newBlog,blog);		
 		blogDAO.save(newBlog);		
 		return "SUCCESS";
 	}

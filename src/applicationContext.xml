@@ -250,10 +250,7 @@
 	<bean id="PublishAction" class="com.whiteblog.action.publishAction">
 		<property name="blogService">
 			<ref bean="BlogService" />
-		</property>
-		<property name="usermanager">
-			<ref bean="UserManager" />
-		</property>
+		</property>	
 		<property name="blogtypeService">
 			<ref bean="BlogtypeService" />
 		</property>
@@ -414,15 +411,18 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	
-	
+
 	<bean id="SuperTypeService" class="com.whiteblog.service.SuperTypeService">
 		<property name="supertypeDAO">
 			<ref bean="SupertypeDAO" />
 		</property>
 	</bean>
 		
-
+	<bean id="forwardAction" class="com.whiteblog.action.forwardAction">
+		<property name="blogService">
+			<ref bean="BlogService" />
+		</property>		
+	</bean>	
 </beans>
 
 	

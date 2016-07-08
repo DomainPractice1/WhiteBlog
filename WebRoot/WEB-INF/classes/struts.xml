@@ -63,6 +63,7 @@
 			<result name="error">/404.html</result>
 		</action>
 		<action name="PostComment" class="PostCommentAction" method="execute">
+			<result name="input">/blogcontent_rt.jsp</result>
 			<result name="success">/blogcontent_rt.jsp</result>
 			<result name="error">/404.html</result>
 		</action>
@@ -102,7 +103,8 @@
 		<action name="logout" class="com.whiteblog.action.logoutAction" method="execute">
 			<result name="success">/index_rt.jsp</result>
 		</action>
-		<action name="modify" class="modifyAction" method="execute">			
+		<action name="modify" class="modifyAction" method="execute">
+			<result name="error">/404.html</result>	
 			<result name="success" type="redirectAction">
 			 	<param name="actionName">content</param>
                 <param name="id">${id}</param>			
@@ -126,9 +128,11 @@
 				<param name="root">res</param>
 			</result>
 		</action>
-		
-		
+		<action name="forward" class="forwardAction" method="execute">
+			<result name="success" type="redirectAction">
+			 	<param name="actionName">content</param>
+                <param name="id">${id}</param>
+			</result>
+		</action>
 	</package>
-
-
 </struts>    
