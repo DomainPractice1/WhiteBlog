@@ -1,4 +1,4 @@
-package com.whiteblog.entity;
+package com.whiteblog.dao;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

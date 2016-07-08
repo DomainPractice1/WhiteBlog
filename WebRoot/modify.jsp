@@ -105,9 +105,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>
-								
+						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+					</div>								
+
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
@@ -130,7 +130,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<i class="fa fa-envelope"></i>
 								</button>						
 							</div>
-							<a class="modal-form">${sessionScope.loginUser.username}</a>
+							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
+								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
+								<i class="fa fa-power-off"></i>
+							</a>
 						</c:otherwise>
 					</c:choose>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
@@ -140,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</nav>
 		</header> 
-		  
+
 		<s:div cssClass="container">		
 			<s:form action="modify" method="POST" id="frmDemo" enctype="multipart/form-data" theme="simple">	
 				<s:div cssClass="head-text">				
@@ -149,30 +152,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</s:div>			
 	      	<s:div>		 	            		       	      
 	           <p>文章标题</p>                     
-	           <s:textfield  cssClass="form-control" name="currentBlog.title" size="8" value="%{blog.title}"/>
-	           <s:fielderror cssStyle="color:red;font-size:8pt;list-style-type:none;margin-left:0;"> 
-	    		  <s:param>title</s:param>    
-	   		   </s:fielderror>
+	           <s:textfield  cssClass="form-control" name="currentBlog.title" size="8" value="%{blog.title}"/>	           
 	        </s:div>   
 	        <s:div>                          
 	          	<p>文章内容</p>             	          	 
-	          	<s:textarea id="elm1" name="currentBlog.content" class="xheditor" rows="12" cols="80" style="width: 100%" value="%{blog.content}"></s:textarea>
-	          	<s:fielderror cssStyle="color:red;font-size:8pt;list-style-type:none;"> 
-	    		  <s:param>content</s:param>    
-	   		   </s:fielderror>                        
+	          	<s:textarea id="elm1" name="currentBlog.content" class="xheditor" rows="12" cols="80" style="width: 100%" value="%{blog.content}"></s:textarea>	          	                     
 	      	</s:div>	
 	      	<s:div id="uploadList"></s:div>        		      	
 	      	<s:div>
 		       	<p>文章分类</p>
-		       	<s:radio list="#{'0':'移动开发','1':'Web前端','2':'架构设计','3':'编程语言','4':'互联网','5':'数据库','6':'系统运维','7':'云计算','8':'研发管理','9':'综合'}" name="category" value="%{blogtype.typeId}"/>		      		     
+		       	<s:radio list="#{'0':'生活','1':'教育','2':'医疗/社会福利','3':'艺术/娱乐','4':'IT/互联网','5':'金融/投资','6':'交通/物流','7':'农林牧渔','8':'机械/电子','9':'综合'}" name="category" value="%{blogtype.supertypeId}"/>		 		           				       		      		  
 	        </s:div>
 	      	<s:div>
-		       	<p>新建分类</p>		     
-		       	<s:textfield cssClass="form-control" name="blogtype.typename" size="8" value="%{blogtype.typename}" />		
-		       	<s:label>（多个分类之间用“,”分隔）</s:label>
-		       	<s:fielderror cssStyle="color:red;font-size:8pt;list-style-type:none;"> 
-	    		  <s:param>tags</s:param>    
-	   		   </s:fielderror>                  
+		       	<p>添加关键字</p>		     
+		       	<s:textfield cssClass="form-control" name="blogtype.typename" size="8" value="%{blogtype.typename}" />				      
+		       	<s:label>（基于文章分类的具体描述）</s:label>		                   
 	        </s:div>        
 			<s:div> 
 			<s:div cssStyle="padding-top:1%;margin:0 auto;">
@@ -181,8 +175,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        <s:property value="hint"></s:property>
 	        </s:div>                   
 	   </s:form>		
-		</s:div>		
-	</s:div> 
+	</s:div>			
+	</s:div>
 	
 	<!-- Login Modal -->
 	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
@@ -249,7 +243,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</div>
-	</div> 	   
+	</div>
+
+	<!-- logout -->
+	<div class="modal leread-modal fade" id="logout-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-body">
+					<form action="logout.action" method="post">					
+						<div class="modal-body">
+							确认登出当前账户么？
+         				</div>
+						<div class="modal-footer">
+            				<button type="button" class="btn btn-default" data-dismiss="modal">关闭 </button>
+            				<button type="submit" class="btn btn-primary">确定</button>
+        				</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>   
+
   </body>
   <script type="text/javascript">		
 		$("#notice").click(function(){

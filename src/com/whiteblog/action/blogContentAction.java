@@ -82,7 +82,6 @@ public class blogContentAction extends ActionSupport{
 		
 		/*标签的部分*/ 
 		int bti = b.getBlog().getTypeId();
-		System.out.println("In blogcontent , bti is "  + bti);
 		Blogtype bt = blogtypeService.getBlogtype(bti);
 		ActionContext.getContext().put("bt", bt);
 		
@@ -90,6 +89,10 @@ public class blogContentAction extends ActionSupport{
 		System.out.println("blogContent blogtype " + bt.getSupertypeId());
 		Supertype st = superTypeService.getSupertypeDAO().findById(bt.getSupertypeId());
 		ActionContext.getContext().put("sbt", st);
+		
+		/*所有的SuperType标签*/
+		List<Supertype> sl = superTypeService.getSupertypeDAO().findAll();
+		ActionContext.getContext().put("ast", sl);
 		
 		return SUCCESS;
 	}

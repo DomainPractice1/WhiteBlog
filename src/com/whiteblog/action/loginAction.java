@@ -56,7 +56,6 @@ public class loginAction extends ActionSupport{
 			User loginUser = usermanager.findUser(userform.getUsername());
 			
 			session.put("loginUser",loginUser);
-			
 
 			String p = org.apache.struts2.ServletActionContext.getServletContext().getRealPath("/");
 			

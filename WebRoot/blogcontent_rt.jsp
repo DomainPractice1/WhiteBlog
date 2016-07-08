@@ -93,8 +93,7 @@
 				<div class="container">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>
-								
+					</div>								
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
@@ -117,7 +116,10 @@
 									<i class="fa fa-envelope"></i>
 								</button>						
 							</div>
-							<a class="modal-form">${sessionScope.loginUser.username}</a>
+							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
+								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
+								<i class="fa fa-power-off"></i>
+							</a>
 						</c:otherwise>
 					</c:choose>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
@@ -206,9 +208,9 @@
 										<c:choose>
 											<c:when test="${sessionScope.loginUser != null}">
 												<div class="pull-right post-item-social" >
-													<a  data-toggle="modal" 	data-target="#myModal"><div class="mails"> </div></a>
 													<a  tabindex="0"   data-toggle="modal"  data-target="#myModal2"> <div class="tag" ></div>  </a>
-													<a href="#" id="like${req.blog.blogId}" onclick="myF(this)" class="post-like qr-like"><i class="fa fa-heart"></i><span>${req.blog.likenumber}</span></a>
+													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${req.blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${req.blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+													<a data-toggle="tooltip" title="like" href="#" id="like${req.blog.blogId}" onclick="myF(this)" class="post-like qr-like"><i class="fa fa-heart"></i><span>${req.blog.likenumber}</span></a>
 												</div>
 											</c:when>	
 										</c:choose>
@@ -229,6 +231,17 @@
 																			<!-- 模态框的标题部分 -->
 																			 
 																			<h4  class="modal-title" id="myModalLabel2" >已有标签</h4>
+																			
+																			 <div class="tag"></div>
+																			<div><h4  class="modal-title" id="myModalLabel2" >更改标签</h4></div>
+																		
+																		<div class="modal-header">
+																			<select class="dropdwon-menu" name="supertypeId">
+																				<c:forEach var="stags" items="${ast}">
+																					<option style="width:160px" value="${stags.supertypeId}">${stags.supertypeName}</option>
+																				</c:forEach>
+																			</select>
+																		</div>
 																			<textarea class="form-control" id="mesContent2" name="mesContent2"  
 																				placeholder="新建标签,在这写上新的标签吧"></textarea>																		 
 
@@ -239,11 +252,11 @@
 																		</div>
 																		<!-- 模态框的内容部分 -->
 																		<div class="modal-header">
-																			<c:forEach var="tag" items="${btl}" > 
-																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p>  
-																			</c:forEach>		
-																		 																
-																			<!-- <div class="modal-body">按下 ESC 按钮退出。</div> -->
+
+																			<c:forEach var="tag" items="${btl}">
+																				<p class="btn btn-default btn-grey btn-outline" id="${tag.typename}" onclick="getTypename(id)">${tag.typename}</p> 
+																			</c:forEach>
+
 																		</div>
 																	
 																		<div class="modal-footer">
@@ -274,10 +287,13 @@
 										<h4 class="author-name">${sessionScope.loginUser.username}</h4>
 										<a href="#">view all post</a>
 									</div>
-									<div class="author-connection">
-										<a href="#"><i class="fa fa-twitter"></i></a>
-										<a href="#"><i class="fa fa-envelope"></i></a>
-									</div>
+									<c:choose>
+										<c:when test="${sessionScope.loginUser!=null }">
+											<div class="author-connection">
+												<a  data-toggle="modal"	data-target="#myModal"><div class="mails"> </div></a> 
+											</div>
+										</c:when>
+									</c:choose>		
 								</div>
 							</div>
 
@@ -304,12 +320,13 @@
 									</s:iterator>
 
 									<div class="comment-form main-comment-form">
-										<form action="PostComment.action" method="post">
-											<textarea class="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></textarea>
-											<div class="at-focus">
-												<button class="comment-submit">Post Comment</button>
-											</div>
-										</form>
+										<s:form action="PostComment.action" method="post" theme="simple">
+											<s:textarea cssClass="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></s:textarea>
+											<s:div cssClass="at-focus">
+												<button class="comment-submit">Post Comment</button>	
+												<s:actionerror cssStyle="color:red;font-size:8pt;list-style-type:none;margin-top:10px;"/>											
+											</s:div>																				
+										</s:form>
 									</div>
 
 								</div>
@@ -430,6 +447,91 @@
 		</div>
 	</div>
 
+<!-- Login Modal -->
+	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
+				</div>
+				<div class="modal-body">
+					<form action="login.action" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Username" name="userform.username">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" placeholder="Password" name="userform.password">
+						</div>
+						<div class="linkbox">
+							<a href="#">Forgot password ?</a>
+							<span>No account ? <a href="#" id="register-btn" data-toggle="modal" data-target="#register-form">Sign Up.</a></span>
+							<!-- <span class="form-warning"><i class="fa fa-exclamation"></i>Fill the require.</span> -->
+						</div>
+						<div class="linkbox">
+							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN IN</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div class="provider">
+						<span>Sign In With</span>
+						<a href="#"><i class="fa fa-facebook"></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-content" id="register-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
+				</div>
+				<div class="modal-body">
+					<form action="register.action" method="post">
+						<!-- <div class="form-group">
+							<input class="form-control" placeholder="Name">
+						</div> -->
+						<div class="form-group">
+							<input class="form-control" placeholder="Username" name="userform.username">
+						</div>
+						<!-- <div class="form-group">
+							<input class="form-control" placeholder="Email">
+						</div> -->
+						<div class="form-group">
+							<input class="form-control" type="password" placeholder="Password" name="userform.password">
+						</div>
+						<div class="linkbox">
+							<span>Already got account? <a href="#" id="login-btn" data-target="#login-form">Sign In.</a></span>
+						</div>
+						<div class="linkbox">
+							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN UP</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- logout -->
+	<div class="modal leread-modal fade" id="logout-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-body">
+					<form action="logout.action" method="post">					
+						<div class="modal-body">
+							确认登出当前账户么？
+         				</div>
+						<div class="modal-footer">
+            				<button type="button" class="btn btn-default" data-dismiss="modal">关闭 </button>
+            				<button type="submit" class="btn btn-primary">确定</button>
+        				</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -450,6 +552,34 @@
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">
+		var strId = "";
+		function shareTwitter(t)
+		{
+			strId = t.id.substring(7, t.id.length);
+			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId,"_blank","width=500px;height=500px;");
+		}
+	</script>
+	<script type="text/javascript">
+		var strId = "";
+		function myF(t)
+		{
+			strId = t.id.substring(4, t.id.length);
+			var actionName = "clickLike.action?id=";
+			actionName += strId;
+			$.ajax({
+				url:actionName,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == "success")
+						alert("点赞成功");
+					else
+						alert("取消点赞");
+				}
+			});
+		}
+	</script>
 	<script type="text/javascript">		
 		$("#notice").click(function(){
 			$("#slideform").empty();
@@ -467,9 +597,6 @@
 			})	
 		});
 	</script>
-	
-	
-	
 	<script type="text/javascript">
 		var t
 		function timedCount()
@@ -566,6 +693,7 @@
 		var i = "df"; var t = "";
         function getTypename(id){
 	    	i = document.getElementById(id).innerText;
+	    	document.getElementById("mesContent2").value = i;
 	    } 
 	</script>	
 </body>

@@ -84,8 +84,7 @@ n.css" rel="stylesheet">
 				<div class="container">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>
-								
+					</div>							
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
@@ -109,12 +108,6 @@ n.css" rel="stylesheet">
 								</button>						
 							</div>
 							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
-							
-								<!-- <div class="get-post-titles" style="margin-right:10px">					
-								<button type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
-									<i class="fa fa-power-off"></i>
-								</button>						
-								</div> -->
 								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
 								<i class="fa fa-power-off"></i>
 							</a>
@@ -157,18 +150,28 @@ n.css" rel="stylesheet">
 													<span>${blog.time}</span> By <a href="#">${blog.username}</a>
 												</div>
 												<div class="pull-right post-item-social">
-													<c:choose>
-														<c:when test="${sessionScope.loginUser!=null && sessionScope.loginUser.username==blog.username}">
-															<a href="showBlogToModify.action?blogId=${blog.blogId}"><div class="modify"></div></a>
-														</c:when>
-													</c:choose>
-													<!-- 游客是不能点赞和分享的 -->	
-													<c:choose>	
+												<!-- 游客是不能修改、转发、点赞和分享的 -->
+												<c:choose>													
 														<c:when test="${sessionScope.loginUser != null}">
-															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-															<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
-														</c:when>
-													</c:choose>
+														<c:choose>
+															<c:when test="${sessionScope.loginUser.username==blog.username}">
+																<a href="showBlogToModify.action?blogId=${blog.blogId}"><div class="modify" title="编辑博客"></div></a>
+															</c:when>
+															<c:otherwise>
+																<label style="display:none;">${blog.blogId}</label>
+																<label style="display:none;">${blog.title}</label>
+																<a href="javascript:void(0)" onclick="update(this);"><div class="forward" title="转发到自己的博客"></div></a>
+															</c:otherwise>													
+														</c:choose>																									
+														<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+														<c:if test="${likeitList.isLike=='1'}">
+																<a href="#" id="like${blog.blogId}" class="post-liked" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
+														</c:if>
+														<c:if test="${likeitLike.isLike!='1' }">
+																<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
+														</c:if> 
+														</c:when>														
+												</c:choose>
 												</div>
 											</div>
 										</div>
@@ -176,10 +179,8 @@ n.css" rel="stylesheet">
 								</div>
 							</div>
 						</div>
-						</s:iterator>
-						
+						</s:iterator>						
 
-						
 
 						<div class="container-fluid post-video">
 							
@@ -197,34 +198,42 @@ n.css" rel="stylesheet">
 							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
 						</form>
 
-						<ul class="laread-list">
-							<li class="title">CATEGORY</li>
-							<li><a href="#">Branding</a><i class="line"></i></li>
-							<li><a href="#">Design (48)</a><i class="line"></i></li>
-							<li><a href="#">Photography</a><i class="line"></i></li>
-							<li><a href="#">Inspiration</a><i class="line"></i></li>
-							<li><a href="#">Life</a><i class="line"></i></li>
-							<li><a href="#">City</a><i class="line"></i></li>
+						<ul class="laread-list">							
+							<li class="title">热门文章</li>
+ 							<s:iterator value="#session.topblog" var="blog">
+ 								<li>
+ 								<a href="content.action?id=${blog.blogId}">${blog.title}</a>
+ 								<i class="line"></i>
+ 								</li>
+ 							</s:iterator>				
 						</ul>
 
 						<ul class="laread-list">
-							<li class="title">RECENT POSTS</li>
-							<li><a href="#">The Nature of My Inspiration</a><i class="date">28 June</i></li>
-							<li><a href="#">Sam Feldt - Show Me Love</a><i class="date">27 June</i></li>
-							<li><a href="#">Do You Love Coffee?</a><i class="date">25 June</i></li>
-							<li><a href="#">The Game Before The Game</a><i class="date">23 June</i></li>
-							<li><a href="#">Long Live The Kings</a><i class="date">22 June</i></li>
+							<li class="title">热门用户</li>
+							<s:iterator value="#session.topuser" var="user">
+ 								<li>
+ 								<a href="#">${user.username}</a>
+ 								<i class="line"></i>
+ 								</li>
+ 							</s:iterator>
 						</ul>
 
 						<ul class="laread-list">
-							<li class="title">All TAGS</li>
+							<li class="title">Super-TAGS</li>
+							<li class="bar-tags">
+								<s:iterator value="#session.allSuperTags" var="stag">
+									<a href="findBlogByTagSuperAction.action?id=<s:property value="#stag.supertypeId" />"><s:property value="#stag.supertypeName"/></a>
+								</s:iterator>
+							</li>
+						</ul>
+						<ul class="laread-list">
+							<li class="title">Sub-TAGS</li>
 							<li class="bar-tags">
 								<s:iterator value="#session.allTags" var="tag">
 									<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename" /></a>
 								</s:iterator>
 							</li>
 						</ul>
-
 					</div>
 
 				</aside>
@@ -421,6 +430,33 @@ n.css" rel="stylesheet">
 			</div>
 		</div>
 	</div>
+	
+	<!-- forward-form -->
+	<div class="modal leread-modal fade" id="forward-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>转发到我的博客</h4>
+				</div>
+				<div class="modal-body">
+					<form action="forward.action" method="post">
+					<label style="margin-bottom:5px;">我的博客标题</label>						
+						<div class="form-group">								
+								<div style="display:inline">[转发]</div>
+								<div>
+								<input id="blog_id" type="hidden" name="blog.blogId"/>
+								<input id="blog_title" type="text" class="form-control" style="display:inline" name="blog.title" /></div>																					
+						</div>																
+						<div class="linkbox" style="float:right;padding-bottom:10px;padding-top:6px;">							
+							<button type="submit" class="btn btn-golden btn-signin">确认</button>
+						</div>
+					</form>
+				</div>				
+			</div>			
+		</div>
+	</div>
+	
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -441,6 +477,16 @@ n.css" rel="stylesheet">
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	
+	<script type="text/javascript">
+		function update(obj){
+			var labels=$(obj).parent().find('label');
+			$('#blog_id').val(labels.eq(0).text());
+			$('#blog_title').val(labels.eq(1).text());
+			$('#forward-form').modal('show');
+		}
+	</script>
+
 	<script type="text/javascript">
 		var strId = "";
 		function shareFacebook(t)
@@ -453,8 +499,8 @@ n.css" rel="stylesheet">
 		var strId = "";
 		function shareTwitter(t)
 		{
-			strId = t.id.substring(7, t.id.length);
-			window.open("https://twitter.com/intent/tweet?text=I\'m here at WhiteBlog!!Explore via  http://localhost:8080/whiteblog/content.action?id=" + strId, "_blank", "width=400, height=400");
+			strId = t.id.substring(7, t.id.length);		
+			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId,"_blank","width=500px;height=500px;");
 		}
 	</script>
 	<script type="text/javascript">

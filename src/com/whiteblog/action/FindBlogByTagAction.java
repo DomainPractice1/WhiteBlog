@@ -1,10 +1,12 @@
 package com.whiteblog.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Blogtype;
+import com.whiteblog.entity.Supertype;
 import com.whiteblog.service.BlogManagerImpl;
 import com.whiteblog.service.BlogTypeServiceImp;
 import com.whiteblog.service.SuperTypeService;
@@ -45,20 +47,23 @@ public class FindBlogByTagAction {
 		Blogtype bt = blogtypeService.getBlogtype(id);
 		String typeName = bt.getTypename();
 		List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findByTypename(typeName);
-		ActionContext.getContext().put("TagName", typeName);
 		List<Blog> bl = blogManager.findByBlogTypeName(btl);
+		Supertype s = superTypeService.getSupertypeDAO().findById(btl.get(0).getSupertypeId());
+		List<Blogtype> tmpBtl = new ArrayList<Blogtype>();
+		tmpBtl.add(btl.get(0));
 		ActionContext.getContext().put("resBlog", bl);
+		ActionContext.getContext().put("thisSupertype", s);
+		ActionContext.getContext().put("theseSubtype", tmpBtl);
 		return "success";
 	}
 	
 	public String findBySuperTag(){
-		Blogtype bt = blogtypeService.getBlogtype(id);
-		System.out.println("[findBySuperTag] " + bt.getTypename());
-		String superTypename = superTypeService.getSupertypeDAO().findById(bt.getSupertypeId()).getSupertypeName();
-		List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findBySupertypeId(bt.getSupertypeId());
-		ActionContext.getContext().put("TagName", superTypename);
+		List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findBySupertypeId(id);
 		List<Blog> bl = blogManager.findByBlogTypeName(btl);
 		ActionContext.getContext().put("resBlog", bl);
+		Supertype s = superTypeService.getSupertypeDAO().findById(id);
+		ActionContext.getContext().put("thisSupertype", s);
+		ActionContext.getContext().put("theseSubtype", btl);
 		return "success";		
 	}
 	

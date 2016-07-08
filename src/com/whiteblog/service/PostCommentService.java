@@ -20,7 +20,7 @@ public class PostCommentService {
 	public String post(CommentForm commentform) throws IllegalAccessException, InvocationTargetException{
 		Comment comment = new Comment();
 		BeanUtils.copyProperties(comment,commentform);
-		comment.setBlogId((Integer)ActionContext.getContext().getSession().get("blogId"));
+		comment.setBlogId((Integer)ActionContext.getContext().getSession().get("blogId"));		
 		if(ActionContext.getContext().getSession().containsKey("loginUser")){
 			comment.setUserId((Integer)((User) ActionContext.getContext().getSession().get("loginUser")).getUserId());
 			comment.setUsername((String)((User) ActionContext.getContext().getSession().get("loginUser")).getUsername());

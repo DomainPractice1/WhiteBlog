@@ -83,9 +83,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>
-								
+						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+					</div>								
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
@@ -108,7 +107,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<i class="fa fa-envelope"></i>
 								</button>						
 							</div>
-							<a class="modal-form">${sessionScope.loginUser.username}</a>
+							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
+								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
+								<i class="fa fa-power-off"></i>
+							</a>
 						</c:otherwise>
 					</c:choose>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
@@ -150,7 +152,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<c:choose>
 													<c:when test="${sessionScope.loginUser != null}">
 														<div class="pull-right post-item-social">
-															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
 															<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i class="fa fa-heart"></i><span>${blog.likenumber}</span></a>
 														</div>
 													</c:when>
@@ -182,31 +184,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
 						</form>
 
-						<ul class="laread-list">
-							<li class="title">CATEGORY</li>
-							<li><a href="#">Branding</a><i class="line"></i></li>
-							<li><a href="#">Design (48)</a><i class="line"></i></li>
-							<li><a href="#">Photography</a><i class="line"></i></li>
-							<li><a href="#">Inspiration</a><i class="line"></i></li>
-							<li><a href="#">Life</a><i class="line"></i></li>
-							<li><a href="#">City</a><i class="line"></i></li>
+						<ul class="laread-list">							
+							<li class="title">热门文章</li>
+ 							<s:iterator value="#session.topblog" var="blog">
+ 								<li>
+ 								<a href="content.action?id=${blog.blogId}">${blog.title}</a>
+ 								<i class="line"></i>
+ 								</li>
+ 							</s:iterator>				
 						</ul>
 
 						<ul class="laread-list">
-							<li class="title">RECENT POSTS</li>
-							<li><a href="#">The Nature of My Inspiration</a><i class="date">28 June</i></li>
-							<li><a href="#">Sam Feldt - Show Me Love</a><i class="date">27 June</i></li>
-							<li><a href="#">Do You Love Coffee?</a><i class="date">25 June</i></li>
-							<li><a href="#">The Game Before The Game</a><i class="date">23 June</i></li>
-							<li><a href="#">Long Live The Kings</a><i class="date">22 June</i></li>
+							<li class="title">热门用户</li>
+							<s:iterator value="#session.topuser" var="user">
+ 								<li>
+ 								<a href="#">${user.username}</a>
+ 								<i class="line"></i>
+ 								</li>
+ 							</s:iterator>
 						</ul>
 
 						<ul class="laread-list">
-							<li class="title">ALL TAGS</li>
+							<li class="title">Super-TAGS</li>
 							<li class="bar-tags">
-								<s:iterator value="#session.allTags" var="tag">
+								<a href="findBlogByTagSuperAction.action?id=${thisSupertype.supertypeId}">${thisSupertype.supertypeName}</a>
+							</li>
+						</ul>
+						
+						<ul class="laread-list">
+							<li class="title">Sub-TAGS</li>
+							<li class="bar-tags">
+								<s:iterator value="#theseSubtype" var="tag">
 									<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename" /></a>
-								</s:iterator>						 
+								</s:iterator>
 							</li>
 						</ul>
 
@@ -388,6 +398,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 
+	<!-- logout -->
+	<div class="modal leread-modal fade" id="logout-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-body">
+					<form action="logout.action" method="post">					
+						<div class="modal-body">
+							确认登出当前账户么？
+         				</div>
+						<div class="modal-footer">
+            				<button type="button" class="btn btn-default" data-dismiss="modal">关闭 </button>
+            				<button type="submit" class="btn btn-primary">确定</button>
+        				</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->
@@ -411,19 +440,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="assets/js/script.js"></script>
 	<script type="text/javascript">
 		var strId = "";
+		function shareTwitter(t)
+		{
+			strId = t.id.substring(7, t.id.length);
+			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId,"_blank","width=500px;height=500px;");
+		}
+	</script>
+	<script type="text/javascript">
+		var strId = "";
 		function myF(t)
 		{
 			strId = t.id.substring(4, t.id.length);
 			var actionName = "clickLike.action?id=";
 			actionName += strId;
 			$.ajax({
-				url:actionName,
-				type:"POST",
+				url:"clickLike.action?id="+strId,
+				type:"GET",
 				dataType:"json",
 				success:function(data){
+					alert(data);
 					if(data == "success")
 						alert("点赞成功");
-					else
+					else 
 						alert("取消点赞");
 				}
 			});

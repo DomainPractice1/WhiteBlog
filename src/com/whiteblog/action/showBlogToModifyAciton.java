@@ -16,16 +16,16 @@ public class showBlogToModifyAciton extends ActionSupport{
  	private BlogTypeServiceImp blogtypeService;
 	private Blog blog;
  	private Blogtype blogtype;
- 	private int blogId;
+ 	private int blogId; 	
  	
 	public String execute(){	
 		blog=blogService.getBlog(blogId);
 		int typeId=blog.getTypeId();
-		blogtype=blogtypeService.getBlogtype(typeId);
+		blogtype=blogtypeService.getBlogtype(typeId);	
 		if(blog!=null && blogtype!=null)
 			return SUCCESS;
 		else 
-			return "FAILURE";
+			return ERROR;
 	}
 
 	public BlogServiceImp getBlogService() {

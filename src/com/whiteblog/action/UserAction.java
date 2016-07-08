@@ -37,14 +37,14 @@ public class UserAction extends ActionSupport {
 		System.out.println(selectUser);
 		
 		userManager.deleteUserById(Integer.parseInt(selectUser));	
-		List<User> allUser = userManager.getAllUser();	
+		List<User> allUser = userManager.getAlluser();	
 		session.put("allUser",allUser);
 		return SUCCESS;
 	}
 	
 	public String getAllUser(){	
 		Map<String,Object> session = ActionContext.getContext().getSession();
-		List<User> allUser = userManager.getAllUser();
+		List<User> allUser = userManager.getAlluser();
 		session.put("allUser",allUser);
 		return SUCCESS;	
 	}
