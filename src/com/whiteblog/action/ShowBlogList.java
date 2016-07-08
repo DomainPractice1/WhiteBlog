@@ -45,25 +45,6 @@ public class ShowBlogList extends ActionSupport{
 		}
 		System.out.println("blogList size:"+blogList.size());		
 		ActionContext.getContext().getSession().put("blogList", blogList);		
-
-		/*载入点赞列表进行检查*/
-		User u = (User)session.get("loginUser");
-		int userId = u.getUserId();
-		List<checkLikeForm> list = new ArrayList<checkLikeForm>();
-		List<Likeit> ll = likeService.getLikeitDAO().findAll();
-		for(Blog b : blogList){
-			String res = "0";
-			for(Likeit i : ll){
-				if(b.getBlogId().equals(i.getBlogId() )&& b.getUserId().equals(u.getUserId()))
-					res = new String("1");
-			} 
-			checkLikeForm f = new checkLikeForm(b.getBlogId(), res);
-			System.out.println("res: " + res);
-			list.add(f);
-		} 
-		ActionContext.getContext().put("one", "1");
-		ActionContext.getContext().put("likeitList", list);
-
 		
 		Map<Object,Double> blogrank = new HashMap<Object,Double>();
 		Map<String,Double> userrank = new HashMap<String,Double>();
@@ -158,8 +139,30 @@ public class ShowBlogList extends ActionSupport{
 			}
 		}
 		session.put("topuser", topuser);
-			
-
+		
+		
+		/*载入点赞列表进行检查*/
+		if(!session.containsKey("loginUser")){
+			return SUCCESS;
+		}else{
+			User u = (User)session.get("loginUser");
+			int userId = u.getUserId();
+			List<checkLikeForm> list = new ArrayList<checkLikeForm>();
+			List<Likeit> ll = likeService.getLikeitDAO().findAll();
+			for(Blog b : blogList){
+				String res = "0";
+				for(Likeit i : ll){
+					if(b.getBlogId().equals(i.getBlogId() )&& b.getUserId().equals(u.getUserId()))
+						res = new String("1");
+				} 
+				checkLikeForm f = new checkLikeForm(b.getBlogId(), res);
+				System.out.println("res: " + res);
+				list.add(f);
+			} 
+			ActionContext.getContext().put("one", "1");
+			ActionContext.getContext().put("likeitList", list);
+		}
+				
 		return SUCCESS;
 	}
 	
