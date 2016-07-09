@@ -20,8 +20,10 @@ public class User implements java.io.Serializable {
 	private String username;
 	private String password;
 	private String identity;
-	private String hobby;
 	private String image;
+	private Integer countryId;
+	private Integer cityId;
+	private Integer jobId;
 
 	// Constructors
 
@@ -37,12 +39,14 @@ public class User implements java.io.Serializable {
 
 	/** full constructor */
 	public User(String username, String password, String identity,
-			String hobby, String image) {
+			String image, Integer countryId, Integer cityId, Integer jobId) {
 		this.username = username;
 		this.password = password;
 		this.identity = identity;
-		this.hobby = hobby;
 		this.image = image;
+		this.countryId = countryId;
+		this.cityId = cityId;
+		this.jobId = jobId;
 	}
 
 	// Property accessors
@@ -84,15 +88,6 @@ public class User implements java.io.Serializable {
 		this.identity = identity;
 	}
 
-	@Column(name = "hobby", length = 45)
-	public String getHobby() {
-		return this.hobby;
-	}
-
-	public void setHobby(String hobby) {
-		this.hobby = hobby;
-	}
-
 	@Column(name = "image", length = 65535)
 	public String getImage() {
 		return this.image;
@@ -100,6 +95,33 @@ public class User implements java.io.Serializable {
 
 	public void setImage(String image) {
 		this.image = image;
+	}
+
+	@Column(name = "countryID")
+	public Integer getCountryId() {
+		return this.countryId;
+	}
+
+	public void setCountryId(Integer countryId) {
+		this.countryId = countryId;
+	}
+
+	@Column(name = "cityID")
+	public Integer getCityId() {
+		return this.cityId;
+	}
+
+	public void setCityId(Integer cityId) {
+		this.cityId = cityId;
+	}
+
+	@Column(name = "jobID")
+	public Integer getJobId() {
+		return this.jobId;
+	}
+
+	public void setJobId(Integer jobId) {
+		this.jobId = jobId;
 	}
 
 }

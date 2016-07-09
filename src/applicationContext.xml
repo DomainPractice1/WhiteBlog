@@ -61,7 +61,13 @@
 				<value>com.whiteblog.entity.Likeit</value> 
 				<value>com.whiteblog.entity.Supertype</value>
 				<value>com.whiteblog.entity.Blogtype</value>
-				</list>
+				<value>com.whiteblog.entity.City</value>
+				<value>com.whiteblog.entity.Job</value>
+				<value>com.whiteblog.entity.Hobby</value>
+				<value>com.whiteblog.entity.Country</value>
+				<value>com.whiteblog.entity.Collection</value>
+				<value>com.whiteblog.entity.Province</value>
+				<value>com.whiteblog.entity.Attention</value></list>
 		</property>
 	</bean>
 
@@ -423,7 +429,41 @@
 			<ref bean="BlogService" />
 		</property>		
 	</bean>	
-</beans>
+	<bean id="HobbyDAO" class="com.whiteblog.dao.HobbyDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CountryDAO" class="com.whiteblog.dao.CountryDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CityDAO" class="com.whiteblog.dao.CityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="JobDAO" class="com.whiteblog.dao.JobDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="ProvinceDAO" class="com.whiteblog.dao.ProvinceDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="AttentionDAO" class="com.whiteblog.dao.AttentionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="CollectionDAO" class="com.whiteblog.dao.CollectionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean></beans>
 
 	
 	
