@@ -47,7 +47,9 @@ public class searchArticleAction extends ActionSupport {
 		
 		//List<Blog> articleList = blogManager.getBlogDao().findAll();
 		Map<String, Object> session = ActionContext.getContext().getSession();
-		session.put("searchList", articleList);
+		/*session.put("searchList", articleList);*/
+		ActionContext.getContext().put("resBlog", articleList);
+		session.put("resBlog", articleList);
 		return SUCCESS;
 	}
 }

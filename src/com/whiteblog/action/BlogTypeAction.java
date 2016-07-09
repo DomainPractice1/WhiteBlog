@@ -147,8 +147,6 @@ public class BlogTypeAction {
 		session.put("allSuperTags", sl);
 		
 		
-		
-		
 		return SUCCESS;
 	}
 	

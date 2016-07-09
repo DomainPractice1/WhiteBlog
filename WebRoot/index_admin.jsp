@@ -100,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</button>						
 							</div>
 							<div class="get-post-titles" style="margin-right:10px">					
-								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.action'">
+								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.php'">
 									<i class="fa fa-envelope"></i>
 								</button>						
 							</div>
@@ -178,7 +178,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 					<div class="laread-right">
 
-						<form action="searchArticle.action" class="laread-form search-form">
+						<form action="searchArticle.php" class="laread-form search-form">
 							<div class="input"><input type="text" class="form-control" placeholder="Search..." name="searchText"></div>
 							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
 						</form>
@@ -376,7 +376,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
 				</div>
 				<div class="modal-body">
-					<form action="login.action" method="post">
+					<form action="login.php" method="post">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Username" name="userform.username">
 						</div>
@@ -408,7 +408,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
 				</div>
 				<div class="modal-body">
-					<form action="register.action" method="post">
+					<form action="register.php" method="post">
 						<!-- <div class="form-group">
 							<input class="form-control" placeholder="Name">
 						</div> -->
@@ -439,7 +439,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="modal-dialog">
 			<div class="modal-content" id="login-content">
 				<div class="modal-body">
-					<form action="logout.action" method="post">					
+					<form action="logout.php" method="post">					
 						<div class="modal-body">
 							确认登出当前账户么？
          				</div>
@@ -478,7 +478,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#notice").click(function(){
 			$("#slideform").empty();
 			$.ajax({
-				url:"notice.action",
+				url:"notice.php",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -499,7 +499,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function timedCount()
 		{
 			$.ajax({
-				url:"checkNotice.action",
+				url:"checkNotice.php",
 				type:"POST",
 				datatype:"json",
 				success:function(data){
@@ -518,7 +518,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function delete_row(delete_id){
 		if(confirm("确定要删除？")){
 			$.ajax({
-				url:"deleteBlog.action?id="+delete_id,
+				url:"deleteBlog-id-"+delete_id+".html",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -551,7 +551,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	// 			onclick_str = "onclick=\"delete_row(this)\"";
 			}
 			$.ajax({
-				url:"changeDeleteList.action",
+				url:"changeDeleteList.php",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -559,7 +559,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					var color_str = ""
 					if(classes.indexOf("view-blog") >= 0) {
 						$(".Edit_qp").html("删除文章");
-						actionStr = "content.action?id="+list.blogId;
+						actionStr = "content-id-"+list.blogId+".html";
 						color_str="color:#ffffff";
 					}else {
 						$(".Edit_qp").html("返回");

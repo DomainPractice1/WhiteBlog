@@ -83,7 +83,8 @@ n.css" rel="stylesheet">
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+						<!-- <a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a> -->
+						<a class="navbar-brand" href="./index_rt.html"><img height="64" src="assets/img/logo-light.png" alt=""></a> 
 					</div>							
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
@@ -103,7 +104,7 @@ n.css" rel="stylesheet">
 								</button>						
 							</div>
 							<div class="get-post-titles" style="margin-right:10px">					
-								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.action'">
+								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.php'">
 									<i class="fa fa-envelope"></i>
 								</button>						
 							</div>
@@ -142,7 +143,7 @@ n.css" rel="stylesheet">
 												<div>
 													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
 												</div>
-												<h3><a href="content.action?id=${blog.blogId}">${blog.title}</a></h3>
+												<h3><a href="content-id-${blog.blogId}.html">${blog.title}</a></h3>
 												<p>${blog.content}<a href="#" class="more">[...]</a></p>
 											</div>
 											<div class="post-item-info clearfix">
@@ -155,7 +156,8 @@ n.css" rel="stylesheet">
 														<c:when test="${sessionScope.loginUser != null}">
 														<c:choose>
 															<c:when test="${sessionScope.loginUser.username==blog.username}">
-																<a href="showBlogToModify.action?blogId=${blog.blogId}"><div class="modify" title="编辑博客"></div></a>
+																<%-- <a href="showBlogToModify.action?blogId=${blog.blogId}"><div class="modify" title="编辑博客"></div></a> --%>
+																<a href="showBlogToModify-blogId-${blog.blogId}.html"><div class="modify" title="编辑博客"></div></a>
 															</c:when>
 															<c:otherwise>
 																<label style="display:none;">${blog.blogId}</label>
@@ -193,7 +195,7 @@ n.css" rel="stylesheet">
 
 					<div class="laread-right">
 
-						<form action="searchArticle.action" class="laread-form search-form">
+						<form action="searchArticle.php" class="laread-form search-form">
 							<div class="input"><input type="text" class="form-control" placeholder="Search..." name="searchText"></div>
 							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
 						</form>
@@ -202,7 +204,7 @@ n.css" rel="stylesheet">
 							<li class="title">热门文章</li>
  							<s:iterator value="#session.topblog" var="blog">
  								<li>
- 								<a href="content.action?id=${blog.blogId}">${blog.title}</a>
+ 								<a href="content-id-${blog.blogId}.html">${blog.title}</a>
  								<i class="line"></i>
  								</li>
  							</s:iterator>				
@@ -222,7 +224,7 @@ n.css" rel="stylesheet">
 							<li class="title">Super-TAGS</li>
 							<li class="bar-tags">
 								<s:iterator value="#session.allSuperTags" var="stag">
-									<a href="findBlogByTagSuperAction.action?id=<s:property value="#stag.supertypeId" />"><s:property value="#stag.supertypeName"/></a>
+									<a href="findBlogByTagSuperAction-id-<s:property value="#stag.supertypeId" />.html"><s:property value="#stag.supertypeName"/></a>
 								</s:iterator>
 							</li>
 						</ul>
@@ -230,7 +232,7 @@ n.css" rel="stylesheet">
 							<li class="title">Sub-TAGS</li>
 							<li class="bar-tags">
 								<s:iterator value="#session.allTags" var="tag">
-									<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename" /></a>
+									<a href="findBlogByTagAction.-id-<s:property value="#tag.typeId" />.html"><s:property value="#tag.typename" /></a>
 								</s:iterator>
 							</li>
 						</ul>
@@ -354,7 +356,7 @@ n.css" rel="stylesheet">
 					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
 				</div>
 				<div class="modal-body">
-					<form action="login.action" method="post">
+					<form action="login.php" method="post">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Username" name="userform.username">
 						</div>
@@ -386,7 +388,7 @@ n.css" rel="stylesheet">
 					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
 				</div>
 				<div class="modal-body">
-					<form action="register.action" method="post">
+					<form action="register.php" method="post">
 						<!-- <div class="form-group">
 							<input class="form-control" placeholder="Name">
 						</div> -->
@@ -417,7 +419,8 @@ n.css" rel="stylesheet">
 		<div class="modal-dialog">
 			<div class="modal-content" id="login-content">
 				<div class="modal-body">
-					<form action="logout.action" method="post">					
+					<!-- <form action="logout.action" method="post">		 -->
+					<form action="logout.php" method="post">				
 						<div class="modal-body">
 							确认登出当前账户么？
          				</div>
@@ -440,7 +443,7 @@ n.css" rel="stylesheet">
 					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>转发到我的博客</h4>
 				</div>
 				<div class="modal-body">
-					<form action="forward.action" method="post">
+					<form action="forward.php" method="post">
 					<label style="margin-bottom:5px;">我的博客标题</label>						
 						<div class="form-group">								
 								<div style="display:inline">[转发]</div>
@@ -492,7 +495,7 @@ n.css" rel="stylesheet">
 		function shareTwitter(t)
 		{
 			strId = t.id.substring(7, t.id.length);		
-			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId,"_blank","width=500px;height=500px;");
+			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.php-id=' + strId,"_blank","width=500px;height=500px;");
 		}
 	</script>
 	<script type="text/javascript">
@@ -500,8 +503,8 @@ n.css" rel="stylesheet">
 		function myF(t)
 		{
 			strId = t.id.substring(4, t.id.length);
-			var actionName = "clickLike.action?id=";
-			actionName += strId;
+			var actionName = "clickLike-id-";
+			actionName += strId+".html";
 			$.ajax({
 				url:actionName,
 				type:"POST",
@@ -519,7 +522,7 @@ n.css" rel="stylesheet">
 		$("#notice").click(function(){
 			$("#slideform").empty();
 			$.ajax({
-				url:"notice.action",
+				url:"notice.php",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -540,7 +543,7 @@ n.css" rel="stylesheet">
 		function timedCount()
 		{
 			$.ajax({
-				url:"checkNotice.action",
+				url:"checkNotice.php",
 				type:"POST",
 				datatype:"json",
 				success:function(data){
@@ -559,7 +562,7 @@ n.css" rel="stylesheet">
 	function delete_row(delete_id){
 		if(confirm("确定要删除？")){
 			$.ajax({
-				url:"deleteBlog.action?id="+delete_id,
+				url:"deleteBlog-id-"+delete_id+".html",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -592,7 +595,7 @@ n.css" rel="stylesheet">
 	// 			onclick_str = "onclick=\"delete_row(this)\"";
 			}
 			$.ajax({
-				url:"changeDeleteList.action",
+				url:"changeDeleteList.php",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -600,7 +603,7 @@ n.css" rel="stylesheet">
 					var color_str = ""
 					if(classes.indexOf("view-blog") >= 0) {
 						$(".Edit_qp").html("删除文章");
-						actionStr = "content.action?id="+list.blogId;
+						actionStr = "content-id-"+list.blogId+".html";
 						color_str="color:#ffffff";
 					}else {
 						$(".Edit_qp").html("返回");

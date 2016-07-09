@@ -24,7 +24,8 @@
 			<result name="success" type="redirectAction">showuncheckblog</result>
 		</action>
 		<action name="searchArticle" class="SearchArticleAction" method="execute">
- 			<result name="success">/articleListTest.jsp</result>
+ 			<!-- <result name="success">/articleListTest.jsp</result>  -->
+ 			<result name="success">./blogAndTags.jsp</result>
 			<result name="error">/404.html</result>
 		</action>
 		<action name="ShowBlogList" class="ShowBlogListAction" method="execute">
@@ -101,7 +102,7 @@
 			<result name="success">./blogAndTags.jsp</result>
 		</action>
 		<action name="logout" class="com.whiteblog.action.logoutAction" method="execute">
-			<result name="success">/index_rt.jsp</result>
+			<result name="success">./index_rt.jsp</result>
 		</action>
 		<action name="modify" class="modifyAction" method="execute">
 			<result name="error">/404.html</result>	
@@ -132,7 +133,7 @@
 			<result name="success" type="redirectAction">
 			 	<param name="actionName">content</param>
                 <param name="id">${id}</param>
-			</result>
+			</result>	
 		</action>
 	</package>
 </struts>    

@@ -115,7 +115,7 @@
 								</button>						
 							</div>
 							<div class="get-post-titles" style="margin-right:10px">					
-								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.action'">
+								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.php'">
 									<i class="fa fa-envelope"></i>
 								</button>						
 							</div>
@@ -153,7 +153,7 @@
 									</p>
 								</div>
 
-								<form action="review.action">
+								<form action="review.php" method="POST">
 									<button type="submit" class="btn btn-grey btn-outline btn-rounded">审核通过</button>
 								</form>
 								<button class="btn btn-grey btn-outline btn-rounded">审核未通过</button>
@@ -297,7 +297,7 @@
 					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
 				</div>
 				<div class="modal-body">
-					<form action="login.action" method="post">
+					<form action="login.php" method="post">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Username" name="userform.username">
 						</div>
@@ -329,7 +329,7 @@
 					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
 				</div>
 				<div class="modal-body">
-					<form action="register.action" method="post">
+					<form action="register.php" method="post">
 						<!-- <div class="form-group">
 							<input class="form-control" placeholder="Name">
 						</div> -->
@@ -360,7 +360,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content" id="login-content">
 				<div class="modal-body">
-					<form action="logout.action" method="post">					
+					<form action="logout.php" method="post">					
 						<div class="modal-body">
 							确认登出当前账户么？
          				</div>
@@ -397,7 +397,7 @@
 		$("#notice").click(function(){
 			$("#slideform").empty();
 			$.ajax({
-				url:"notice.action",
+				url:"notice.php",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -418,7 +418,7 @@
 		function timedCount()
 		{
 			$.ajax({
-				url:"checkNotice.action",
+				url:"checkNotice.php",
 				type:"POST",
 				datatype:"json",
 				success:function(data){
@@ -437,7 +437,7 @@
 	function delete_row(delete_id){
 		if(confirm("确定要删除？")){
 			$.ajax({
-				url:"deleteBlog.action?id="+delete_id,
+				url:"deleteBlog-id-"+delete_id,
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -470,7 +470,7 @@
 	// 			onclick_str = "onclick=\"delete_row(this)\"";
 			}
 			$.ajax({
-				url:"changeDeleteList.action",
+				url:"changeDeleteList.php",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -478,7 +478,7 @@
 					var color_str = ""
 					if(classes.indexOf("view-blog") >= 0) {
 						$(".Edit_qp").html("删除文章");
-						actionStr = "content.action?id="+list.blogId;
+						actionStr = "content-id-"+list.blogId;
 						color_str="color:#ffffff";
 					}else {
 						$(".Edit_qp").html("返回");

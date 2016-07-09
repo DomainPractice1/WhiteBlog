@@ -90,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+						<a class="navbar-brand" href="./index_rt.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
 					</div>								
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
@@ -110,7 +110,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</button>						
 							</div>
 							<div class="get-post-titles" style="margin-right:10px">					
-								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.action'">
+								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.php'">
 									<i class="fa fa-envelope"></i>
 								</button>						
 							</div>
@@ -131,7 +131,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="container">
 			<div class="head-text">
 				<h1>White Blog</h1>
-				<form action="getalluser.action">
+				<form action="getalluser.php">
 					<p class="lead-text">Blog. Designed for Read.</p>
 					<button type="submit" value="跳转"></button>
 				</form>
@@ -154,7 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
 													<a href="#" class="mute-text">DESIGN</a>
 												</div>
-												<h3><a href="content.action?id=${blog.blogId}">${blog.title}</a></h3>
+												<h3><a href="content-id-${blog.blogId}.html">${blog.title}</a></h3>
 												<p>${blog.content}<a href="#" class="more">[...]</a></p>
 											</div>
 											<div class="post-item-info clearfix">
@@ -188,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 					<div class="laread-right">
 
-						<form action="searchArticle.action" class="laread-form search-form">
+						<form action="searchArticle.php" class="laread-form search-form">
 							<div class="input"><input type="text" class="form-control" placeholder="Search..." name="searchText"></div>
 							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
 						</form>
@@ -216,22 +216,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<li class="title">ALL TAGS</li>
 							<li class="bar-tags">
 								<s:iterator value="#session.allTags" var="tag">
-									<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename" /></a>
+									<a href="findBlogByTagAction-id-<s:property value="#tag.typeId" />.html"><s:property value="#tag.typename" /></a>
 								</s:iterator>
-								<a href="#">fashion</a>
-								<a href="#">culture</a>
-								<a href="#">art</a>
-								<a href="#">concept</a>
-								<a href="#">style</a>
-								<a href="#">advert</a>
-								<a href="#">movie</a>
-								<a href="#">color</a>
-								<a href="#">branding</a>
-								<a href="#">technology</a>
-								<a href="#">fashion</a>
-								<a href="#">culture</a>
-								<a href="#">art</a>
-								<a href="#">concept</a>
 							</li>
 						</ul>
 
@@ -354,7 +340,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
 				</div>
 				<div class="modal-body">
-					<form action="login.action" method="post">
+					<form action="login.php" method="post">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Username" name="userform.username">
 						</div>
@@ -386,7 +372,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
 				</div>
 				<div class="modal-body">
-					<form action="register.action" method="post">
+					<form action="register.php" method="post">
 						<!-- <div class="form-group">
 							<input class="form-control" placeholder="Name">
 						</div> -->
@@ -437,7 +423,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$("#notice").click(function(){
 			$("#slideform").empty();
 			$.ajax({
-				url:"notice.action",
+				url:"notice.php",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -455,7 +441,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		function timedCount()
 		{
 			$.ajax({
-				url:"checkNotice.action",
+				url:"checkNotice.php",
 				type:"POST",
 				datatype:"json",
 				success:function(data){
@@ -474,7 +460,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	function delete_row(delete_id){
 		if(confirm("确定要删除？")){
 			$.ajax({
-				url:"deleteBlog.action?id="+delete_id,
+				url:"deleteBlog-id-"+delete_id+".html",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -507,14 +493,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	// 			onclick_str = "onclick=\"delete_row(this)\"";
 			}
 			$.ajax({
-				url:"changeDeleteList.action",
+				url:"changeDeleteList.php",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
 				$.each(data, function(i, list){
 					var color_str = ""
 					if(classes.indexOf("view-blog") >= 0) {
-						actionStr = "content.action?id="+list.blogId;
+						actionStr = "content-id-"+list.blogId+".html";
 						color_str="color:#ffffff";
 					}else {
 						onclick_str="onclick=\"delete_row("+list.blogId+")\"";
