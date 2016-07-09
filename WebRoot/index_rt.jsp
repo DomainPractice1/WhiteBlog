@@ -83,7 +83,6 @@ n.css" rel="stylesheet">
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<!-- <a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a> -->
 						<a class="navbar-brand" href="./index_rt.html"><img height="64" src="assets/img/logo-light.png" alt=""></a> 
 					</div>							
 					<c:choose>
@@ -232,7 +231,7 @@ n.css" rel="stylesheet">
 							<li class="title">Sub-TAGS</li>
 							<li class="bar-tags">
 								<s:iterator value="#session.allTags" var="tag">
-									<a href="findBlogByTagAction.-id-<s:property value="#tag.typeId" />.html"><s:property value="#tag.typename" /></a>
+									<a href="findBlogByTagAction-id-<s:property value="#tag.typeId" />.html"><s:property value="#tag.typename" /></a>
 								</s:iterator>
 							</li>
 						</ul>
@@ -500,8 +499,10 @@ n.css" rel="stylesheet">
 	</script>
 	<script type="text/javascript">
 		var strId = "";
+		var tmp = "";
 		function myF(t)
 		{
+			tmp = t.id;
 			strId = t.id.substring(4, t.id.length);
 			var actionName = "clickLike-id-";
 			actionName += strId+".html";
@@ -510,10 +511,16 @@ n.css" rel="stylesheet">
 				type:"POST",
 				dataType:"json",
 				success:function(data){
-					if(data == "success")
+					var lc = document.getElementById(tmp).lastChild;
+					var num = parseInt(lc.innerHTML); 
+					if(data == "success"){
+						lc.innerHTML = num + 1;
 						alert("点赞成功");
-					else
+					}	
+					else{
+						lc.innerHTML = num - 1;
 						alert("取消点赞");
+					}
 				}
 			});
 		}

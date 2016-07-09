@@ -92,7 +92,7 @@
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+						<a class="navbar-brand" href="./index_rt.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
 					</div>								
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
@@ -556,8 +556,10 @@
 	</script>
 	<script type="text/javascript">
 		var strId = "";
+		var tmp = "";
 		function myF(t)
 		{
+			tmp = t.id;
 			strId = t.id.substring(4, t.id.length);
 			var actionName = "clickLike-id-";
 			actionName += strId + ".html";
@@ -566,10 +568,16 @@
 				type:"POST",
 				dataType:"json",
 				success:function(data){
-					if(data == "success")
+					var lc = document.getElementById(tmp).lastChild;
+					var num = parseInt(lc.innerHTML); 				
+					if(data == "success"){
+						lc.innerHTML = num + 1;
 						alert("点赞成功");
-					else
+					}
+					else{
+						lc.innerHTML = num - 1; 
 						alert("取消点赞");
+					}
 				}
 			});
 		}
