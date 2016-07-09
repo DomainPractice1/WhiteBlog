@@ -1,11 +1,13 @@
 package com.whiteblog.dao;
 
 import java.util.List;
+
 import org.hibernate.LockMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
 import com.whiteblog.entity.Notice;
 
 /**
@@ -23,13 +25,14 @@ public class NoticeDAO extends HibernateDaoSupport {
 	private static final Logger log = LoggerFactory.getLogger(NoticeDAO.class);
 	// property constants
 	public static final String USER_ID = "userId";
+	public static final String BLOG_ID = "blogId";
 	public static final String ISREAD = "isread";
 	public static final String CONTENT = "content";
 
 	protected void initDao() {
 		// do nothing
 	}
-	
+
 	public void save(Notice transientInstance) {
 		log.debug("saving Notice instance");
 		try {
@@ -93,6 +96,10 @@ public class NoticeDAO extends HibernateDaoSupport {
 
 	public List<Notice> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
+	}
+
+	public List<Notice> findByBlogId(Object blogId) {
+		return findByProperty(BLOG_ID, blogId);
 	}
 
 	public List<Notice> findByIsread(Object isread) {
