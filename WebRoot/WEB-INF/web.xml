@@ -1,79 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
-  <display-name>WhiteBlog</display-name>
-  <listener>
-    <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
-  </listener>
-  <context-param>
-    <param-name>contextConfigLocation</param-name>
-    <param-value>classpath:applicationContext.xml</param-value>
-  </context-param>
-    <!-- URLRewriter 的配置项，调试的时候可以注释，别删了 ,要放在Servlet的顶部-->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>WhiteBlog</display-name>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	<!-- URLRewriter 的配置项，调试的时候可以注释，别删了 ,要放在Servlet的顶部 -->
 	<filter>
-    	<filter-name>UrlRewriteFilter</filter-name>
-    	<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
-    	   <init-param>
-        	<param-name>confReloadCheckInterval</param-name>
-        	<param-value>60</param-value>
-    	</init-param>
-    	<init-param>
-        	<param-name>logLevel</param-name>
-        	<param-value>DEBUG</param-value>
-    	</init-param>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+		<init-param>
+			<param-name>confReloadCheckInterval</param-name>
+			<param-value>60</param-value>
+		</init-param>
+		<init-param>
+			<param-name>logLevel</param-name>
+			<param-value>DEBUG</param-value>
+		</init-param>
 	</filter>
 
 	<filter-mapping>
-    	<filter-name>struts2</filter-name>
-    	<url-pattern>/*</url-pattern>
-    	<dispatcher>REQUEST</dispatcher>
-    	<dispatcher>FORWARD</dispatcher>
-	</filter-mapping>  
-  <!-- URLRewriter 结束  -->
-  <servlet>
-	    <servlet-name>UploadFileServlet</servlet-name>
-	    <servlet-class>com.whiteblog.servlet.UploadFileServlet</servlet-class>
-	    <init-param>
-	<param-name>baseDir</param-name>
-	<param-value>/ARTICLE_IMG/</param-value>
-	</init-param>
-	<init-param>
-		<param-name>fileExt</param-name>
-		<param-value>jpg,jpeg,gif,bmp,png</param-value>
-	</init-param>
-	<init-param>
-		<param-name>maxSize</param-name>
-		<param-value>1024000</param-value>
-	</init-param>
-	<init-param>
-		<param-name>dirType</param-name>
-		<param-value>1</param-value>
-	</init-param>
-	<load-on-startup>5</load-on-startup>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
+	<!-- URLRewriter 结束 -->
+	<servlet>
+		<servlet-name>UploadFileServlet</servlet-name>
+		<servlet-class>com.whiteblog.servlet.UploadFileServlet</servlet-class>
+		<init-param>
+			<param-name>baseDir</param-name>
+			<param-value>/ARTICLE_IMG/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>fileExt</param-name>
+			<param-value>jpg,jpeg,gif,bmp,png</param-value>
+		</init-param>
+		<init-param>
+			<param-name>maxSize</param-name>
+			<param-value>1024000</param-value>
+		</init-param>
+		<init-param>
+			<param-name>dirType</param-name>
+			<param-value>1</param-value>
+		</init-param>
+		<load-on-startup>5</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-	    <servlet-name>UploadFileServlet</servlet-name>
-	    <url-pattern>/UploadFileServlet</url-pattern>
+		<servlet-name>UploadFileServlet</servlet-name>
+		<url-pattern>/UploadFileServlet</url-pattern>
 	</servlet-mapping>
-	
-  <filter>
-    <filter-name>struts2</filter-name>
-    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>struts2</filter-name>
-    <url-pattern>*.action</url-pattern>
-  </filter-mapping>
-  
-  <filter>
-  <filter-name>struts3</filter-name>
-  <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>struts3</filter-name>
-    <url-pattern>*.jsp</url-pattern>
-   </filter-mapping>
-   
-  <!-- 编码设置 -->
+ 	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>struts3</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts3</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+	<!-- 编码设置 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
@@ -90,8 +92,8 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-  
-  <welcome-file-list>
-  	<welcome-file>/index_rt.jsp</welcome-file>
-  </welcome-file-list>
+
+	<welcome-file-list>
+		<welcome-file>/index_rt.jsp</welcome-file>
+	</welcome-file-list>
 </web-app>
