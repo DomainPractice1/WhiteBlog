@@ -8,36 +8,31 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import com.whiteblog.entity.User;
+import com.whiteblog.entity.City;
 
 /**
- * A data access object (DAO) providing persistence and search support for User
+ * A data access object (DAO) providing persistence and search support for City
  * entities. Transaction control of the save(), update() and delete() operations
  * can directly support Spring container-managed transactions or they can be
  * augmented to handle user-managed Spring transactions. Each of these methods
  * provides additional information for how to configure it for the desired type
  * of transaction control.
  * 
- * @see com.whiteblog.dao.User
+ * @see com.whiteblog.dao.City
  * @author MyEclipse Persistence Tools
  */
-public class UserDAO extends HibernateDaoSupport {
-	private static final Logger log = LoggerFactory.getLogger(UserDAO.class);
+public class CityDAO extends HibernateDaoSupport {
+	private static final Logger log = LoggerFactory.getLogger(CityDAO.class);
 	// property constants
-	public static final String USERNAME = "username";
-	public static final String PASSWORD = "password";
-	public static final String IDENTITY = "identity";
-	public static final String IMAGE = "image";
+	public static final String CITYNAME = "cityname";
 	public static final String COUNTRY_ID = "countryId";
-	public static final String CITY_ID = "cityId";
-	public static final String JOB_ID = "jobId";
 
 	protected void initDao() {
 		// do nothing
 	}
 
-	public void save(User transientInstance) {
-		log.debug("saving User instance");
+	public void save(City transientInstance) {
+		log.debug("saving City instance");
 		try {
 			getHibernateTemplate().save(transientInstance);
 			log.debug("save successful");
@@ -47,8 +42,8 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public void delete(User persistentInstance) {
-		log.debug("deleting User instance");
+	public void delete(City persistentInstance) {
+		log.debug("deleting City instance");
 		try {
 			getHibernateTemplate().delete(persistentInstance);
 			log.debug("delete successful");
@@ -58,11 +53,11 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public User findById(java.lang.Integer id) {
-		log.debug("getting User instance with id: " + id);
+	public City findById(java.lang.Integer id) {
+		log.debug("getting City instance with id: " + id);
 		try {
-			User instance = (User) getHibernateTemplate().get(
-					"com.whiteblog.dao.User", id);
+			City instance = (City) getHibernateTemplate().get(
+					"com.whiteblog.dao.City", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -70,10 +65,10 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public List<User> findByExample(User instance) {
-		log.debug("finding User instance by example");
+	public List<City> findByExample(City instance) {
+		log.debug("finding City instance by example");
 		try {
-			List<User> results = (List<User>) getHibernateTemplate()
+			List<City> results = (List<City>) getHibernateTemplate()
 					.findByExample(instance);
 			log.debug("find by example successful, result size: "
 					+ results.size());
@@ -85,10 +80,10 @@ public class UserDAO extends HibernateDaoSupport {
 	}
 
 	public List findByProperty(String propertyName, Object value) {
-		log.debug("finding User instance with property: " + propertyName
+		log.debug("finding City instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
-			String queryString = "from User as model where model."
+			String queryString = "from City as model where model."
 					+ propertyName + "= ?";
 			return getHibernateTemplate().find(queryString, value);
 		} catch (RuntimeException re) {
@@ -97,38 +92,18 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public List<User> findByUsername(Object username) {
-		return findByProperty(USERNAME, username);
+	public List<City> findByCityname(Object cityname) {
+		return findByProperty(CITYNAME, cityname);
 	}
 
-	public List<User> findByPassword(Object password) {
-		return findByProperty(PASSWORD, password);
-	}
-
-	public List<User> findByIdentity(Object identity) {
-		return findByProperty(IDENTITY, identity);
-	}
-
-	public List<User> findByImage(Object image) {
-		return findByProperty(IMAGE, image);
-	}
-
-	public List<User> findByCountryId(Object countryId) {
+	public List<City> findByCountryId(Object countryId) {
 		return findByProperty(COUNTRY_ID, countryId);
 	}
 
-	public List<User> findByCityId(Object cityId) {
-		return findByProperty(CITY_ID, cityId);
-	}
-
-	public List<User> findByJobId(Object jobId) {
-		return findByProperty(JOB_ID, jobId);
-	}
-
 	public List findAll() {
-		log.debug("finding all User instances");
+		log.debug("finding all City instances");
 		try {
-			String queryString = "from User";
+			String queryString = "from City";
 			return getHibernateTemplate().find(queryString);
 		} catch (RuntimeException re) {
 			log.error("find all failed", re);
@@ -136,10 +111,10 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public User merge(User detachedInstance) {
-		log.debug("merging User instance");
+	public City merge(City detachedInstance) {
+		log.debug("merging City instance");
 		try {
-			User result = (User) getHibernateTemplate().merge(detachedInstance);
+			City result = (City) getHibernateTemplate().merge(detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -148,8 +123,8 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public void attachDirty(User instance) {
-		log.debug("attaching dirty User instance");
+	public void attachDirty(City instance) {
+		log.debug("attaching dirty City instance");
 		try {
 			getHibernateTemplate().saveOrUpdate(instance);
 			log.debug("attach successful");
@@ -159,8 +134,8 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public void attachClean(User instance) {
-		log.debug("attaching clean User instance");
+	public void attachClean(City instance) {
+		log.debug("attaching clean City instance");
 		try {
 			getHibernateTemplate().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
@@ -170,7 +145,7 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public static UserDAO getFromApplicationContext(ApplicationContext ctx) {
-		return (UserDAO) ctx.getBean("UserDAO");
+	public static CityDAO getFromApplicationContext(ApplicationContext ctx) {
+		return (CityDAO) ctx.getBean("CityDAO");
 	}
 }
