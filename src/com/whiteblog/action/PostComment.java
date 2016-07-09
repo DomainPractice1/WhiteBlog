@@ -28,7 +28,7 @@ public class PostComment extends ActionSupport{
 			postCommentService.post(commentform);			
 			Map<String,Object> session = ActionContext.getContext().getSession();
 			Integer blogID = (Integer)session.get("blogId");	
-			noticeManager.savecommentNotice(blogManager.getUByBlogID(blogID));		
+			noticeManager.savecommentNotice(blogManager.getUByBlogID(blogID),blogID);		
 			blogManager.addCommentNumber(blogID);
 			return SUCCESS;
 		}catch(Exception e){

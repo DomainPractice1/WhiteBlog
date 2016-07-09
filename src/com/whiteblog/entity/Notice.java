@@ -18,6 +18,7 @@ public class Notice implements java.io.Serializable {
 
 	private Integer noticeId;
 	private Integer userId;
+	private Integer blogId;
 	private String isread;
 	private String content;
 
@@ -28,8 +29,9 @@ public class Notice implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Notice(Integer userId, String isread, String content) {
+	public Notice(Integer userId, Integer blogId, String isread, String content) {
 		this.userId = userId;
+		this.blogId = blogId;
 		this.isread = isread;
 		this.content = content;
 	}
@@ -53,6 +55,15 @@ public class Notice implements java.io.Serializable {
 
 	public void setUserId(Integer userId) {
 		this.userId = userId;
+	}
+
+	@Column(name = "blogID")
+	public Integer getBlogId() {
+		return this.blogId;
+	}
+
+	public void setBlogId(Integer blogId) {
+		this.blogId = blogId;
 	}
 
 	@Column(name = "isread", length = 45)
