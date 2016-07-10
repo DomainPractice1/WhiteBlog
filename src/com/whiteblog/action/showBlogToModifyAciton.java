@@ -19,6 +19,7 @@ public class showBlogToModifyAciton extends ActionSupport{
  	private int blogId; 	
  	
 	public String execute(){	
+		setBlogId(blogId);
 		blog=blogService.getBlog(blogId);
 		int typeId=blog.getTypeId();
 		blogtype=blogtypeService.getBlogtype(typeId);	

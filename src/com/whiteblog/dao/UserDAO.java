@@ -30,7 +30,9 @@ public class UserDAO extends HibernateDaoSupport {
 	public static final String IMAGE = "image";
 	public static final String COUNTRY_ID = "countryId";
 	public static final String CITY_ID = "cityId";
+	public static final String PROVINCE_ID = "provinceId";
 	public static final String JOB_ID = "jobId";
+	public static final String SEX = "sex";
 
 	protected void initDao() {
 		// do nothing
@@ -121,8 +123,16 @@ public class UserDAO extends HibernateDaoSupport {
 		return findByProperty(CITY_ID, cityId);
 	}
 
+	public List<User> findByProvinceId(Object provinceId) {
+		return findByProperty(PROVINCE_ID, provinceId);
+	}
+
 	public List<User> findByJobId(Object jobId) {
 		return findByProperty(JOB_ID, jobId);
+	}
+
+	public List<User> findBySex(Object sex) {
+		return findByProperty(SEX, sex);
 	}
 
 	public List findAll() {

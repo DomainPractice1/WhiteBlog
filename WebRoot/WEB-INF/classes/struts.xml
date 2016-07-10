@@ -113,6 +113,7 @@
 		</action>
 		<action name="showBlogToModify" class="showBlogToModifyAciton" method="execute">
 			<result name="success">/modify.jsp</result>
+			<result name="error" >./error.jsp</result>
 		</action>
 		<action name="preparationAction" class="addTagsAction" method="preparationAction">
 			<result name="success">/success.jsp</result>

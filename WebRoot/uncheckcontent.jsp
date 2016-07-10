@@ -147,7 +147,7 @@
 						<div class="col-md-10 ">
 							<div class="post-item">
 								<div class="post-item-paragraph">
-									<h2><a href="#" class="quick-read"><i class="fa fa-eye"></i></a>${req.blog.title}</h2>
+									<h2><a  class="quick-read"><i class="fa fa-eye"></i></a>${req.blog.title}</h2>
 									<p class="post-item-two-column">																		
 									${req.blog.content}	
 									</p>
@@ -437,7 +437,7 @@
 	function delete_row(delete_id){
 		if(confirm("确定要删除？")){
 			$.ajax({
-				url:"deleteBlog-id-"+delete_id,
+				url:"deleteBlog-id-"+delete_id+".html",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
