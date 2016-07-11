@@ -1,8 +1,10 @@
 package com.whiteblog.action;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.ArrayList;
 import java.util.List;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.entity.Blogtype;
@@ -24,6 +26,10 @@ public class loginAction extends ActionSupport{
 	
 	private BlogTypeServiceImp blogtypeService;
 		
+	/*存放经session的加密用的函数*/
+	public Map<Integer, String> encryptMap = new HashMap<Integer, String>();
+	public Map<String, Integer> decryptMap = new HashMap<String, Integer>();
+	
 	public BlogTypeServiceImp getBlogtypeService() {
 		return blogtypeService;
 	}
@@ -56,7 +62,7 @@ public class loginAction extends ActionSupport{
 			User loginUser = usermanager.findUser(userform.getUsername());
 			
 			session.put("loginUser",loginUser);
-
+			
 			String p = org.apache.struts2.ServletActionContext.getServletContext().getRealPath("/");
 			
 			fileManagerImpl.readTxtFile(p+"/WEB-INF/classes/words.txt");

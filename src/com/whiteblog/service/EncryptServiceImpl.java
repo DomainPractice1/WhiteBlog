@@ -2,11 +2,15 @@ package com.whiteblog.service;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class EncryptServiceImpl {
 	private final static String[] hexDigits = { "0", "1", "2", "3", "4",
 		   "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" }; 
+	public static Map<Integer, String> encrypteMap = new HashMap<Integer, String>();
+	public static Map<String, Integer> decrypteMap = new HashMap<String, Integer>();
 	public EncryptServiceImpl() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -91,6 +95,12 @@ public class EncryptServiceImpl {
 	   int d2 = n % 16;
 	   return hexDigits[d1] + hexDigits[d2];
 	}
-	 
+	//判断是否是数字
+	public final static boolean isNumeric(String s) {  
+        if (s != null && !"".equals(s.trim()))  
+            return s.matches("^[0-9]*$");  
+        else  
+            return false;  
+    }  
 
 }

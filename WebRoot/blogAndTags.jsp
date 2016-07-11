@@ -142,7 +142,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<div>
 													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
 												</div>
-												<h3><a href="content-id-${blog.blogId}.html">${blog.title}</a></h3>
+												<h3><a href="content-strBlogId-${blog.blogId}.html">${blog.title}</a></h3>
 												<p>${blog.content}<a href="#" class="more">[...]</a></p>
 											</div>
 											<div class="post-item-info clearfix">
@@ -188,7 +188,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<li class="title">热门文章</li>
  							<s:iterator value="#session.topblog" var="blog">
  								<li>
- 								<a href="content-id-${blog.blogId}.html">${blog.title}</a>
+ 								<a href="content-strBlogId-${blog.blogId}.html">${blog.title}</a>
  								<i class="line"></i>
  								</li>
  							</s:iterator>				
@@ -560,7 +560,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					var color_str = ""
 					if(classes.indexOf("view-blog") >= 0) {
 						$(".Edit_qp").html("删除文章");
-						actionStr = "content-id-"+list.blogId+".html";
+						actionStr = "content-strBlogId-"+list.blogId+".html";
 						color_str="color:#ffffff";
 					}else {
 						$(".Edit_qp").html("返回");

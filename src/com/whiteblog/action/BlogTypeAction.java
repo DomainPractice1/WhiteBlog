@@ -8,6 +8,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Blogtype;
 import com.whiteblog.entity.Supertype;
+import com.whiteblog.entity.User;
 import com.whiteblog.service.BlogManagerImpl;
 import com.whiteblog.service.BlogTypeServiceImp;
 import com.whiteblog.service.SuperTypeService;
@@ -77,8 +78,12 @@ public class BlogTypeAction {
 				bt.setUserId(id);
 				bt.setTypename(str); 
 				bt.setSupertypeId(supertypeId);
-				blogtypeService.getBlogtypeDAO().save(bt);
 				Blog b = blogManager.getBlogDao().findById(bid);
+				Map<String, Object>session = (Map<String, Object>)ActionContext.getContext().getSession();
+				User u = (User)session.get("loginUser");
+				if(!u.getUserId().equals(b.getUserId()))
+					return ERROR;
+				blogtypeService.getBlogtypeDAO().save(bt);  
 				List<Blogtype> list = blogtypeService.getBlogtypeDAO().findByTypename(str);
 				bt = list.get(list.size() - 1);
 				b.setTypeId(bt.getTypeId());
@@ -91,8 +96,12 @@ public class BlogTypeAction {
 						bt.setUserId(id);
 						bt.setTypename(str); 
 						bt.setSupertypeId(supertypeId);
-						blogtypeService.getBlogtypeDAO().attachDirty(bt);
 						Blog b = blogManager.getBlogDao().findById(bid);
+						Map<String, Object>session = (Map<String, Object>)ActionContext.getContext().getSession();
+						User u = (User)session.get("loginUser");
+						if(!u.getUserId().equals(b.getUserId()))
+							return ERROR;
+						blogtypeService.getBlogtypeDAO().attachDirty(bt);
 						List<Blogtype> list = blogtypeService.getBlogtypeDAO().findByTypename(str);
 						bt = list.get(list.size() - 1);
 						b.setTypeId(bt.getTypeId());
@@ -122,7 +131,7 @@ public class BlogTypeAction {
 			ActionContext.getContext().put("allTags", tmpList);		
 		return SUCCESS;
 	}
-	
+//	
 	
 	public String preparationAction(){
 		/*增加了一部分工能，显示所有的Tags*/

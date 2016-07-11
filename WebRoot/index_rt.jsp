@@ -138,19 +138,8 @@ n.css" rel="stylesheet">
 								<div class="row post-items">
 									<div class="col-md-12">
 										<div class="post-item">
-											<div class="post-item-paragraph">
-												<div>
-													<a href="#" class="quick-read qr-only-phone"><i class="fa fa-eye"></i></a>
-												</div>
-												<div >
-													<h3>
-														<a href="#" onclick="contentAction(${blog.blogId})">${blog.title}</a>
-													</h3>
-												</div>
-												<form name="contentForm" method="POST" action="content.php">
-													<input type="hidden" name="blogId" id="blogId${blog.blogId}" value=""></input>
-												</form>
-												<%-- <div onclick="contentAction(${blog.blogId})"><h3><a href="#" >${blog.title}</a></h3></div> --%> 
+											<div class="post-item-paragraph"> 
+												<h3><a href="content-strBlogId-${blog.blogId}.html">${blog.title}</a></h3>
 												<p>${blog.content}<a href="#" class="more">[...]</a></p>
 											</div>
 											<div class="post-item-info clearfix">
@@ -164,20 +153,7 @@ n.css" rel="stylesheet">
 														<c:choose>
 															<c:when test="${sessionScope.loginUser.username==blog.username}">
 																<%-- <a href="showBlogToModify.action?blogId=${blog.blogId}"><div class="modify" title="编辑博客"></div></a> --%>
-																<%-- <a href="showBlogToModify-blogId-${blog.blogId}.html"><div class="modify" title="编辑博客"></div></a> --%>
-																<a href="#"  onclick="modifyBlog(${blog.blogId})"><div class="modify" title="编辑博客"></div></a>
-																<form name="modifyForm" action="showBlogToModify.php"  style ="display: none;">
-																	<input name="blogId" type="hidden" style ="display: none;" id="modified${blog.blogId}"  value="${blog.blogId}"></input>
-																</form>
-																<script type="text/javascript">
-																	function modifyBlog(blogId){
-																		var id = "modified" + blogId;
-																		var tag = document.getElementById(id);
-																		tag.value = blogId;
-																		alert(blogId);
-																		window.location.href="showBlogToModify.php";
-																	}
-																</script>
+																<a href="showBlogToModify-strBlogId-${blog.blogId}.html"><div class="modify" title="编辑博客"></div></a>
 															</c:when>
 															<c:otherwise>
 																<label style="display:none;">${blog.blogId}</label>
@@ -187,7 +163,7 @@ n.css" rel="stylesheet">
 														</c:choose>																									
 														<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
 														<c:if test="${likeitList.isLike=='1'}">
-																<a href="#" id="like${blog.blogId}" class="post-liked" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
+																<a href="#" id="like${blog.blogId}" class="post-liked" onclick="myF(this)"><i  class="fa fa-heart" title="点赞"></i><span>${blog.likenumber}</span></a>
 														</c:if>
 														<c:if test="${likeitLike.isLike!='1' }">
 																<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
@@ -224,8 +200,7 @@ n.css" rel="stylesheet">
 							<li class="title">热门文章</li>
  							<s:iterator value="#session.topblog" var="blog">
  								<li>
- 								<%-- <a href="content-id-${blog.blogId}.html">${blog.title}</a> --%>
- 								<a href="#" onclick="contentAction(${blog.blogId})">${blog.title}</a>
+ 								<a href="content-strBlogId-${blog.blogId}.html">${blog.title}</a>
  								<i class="line"></i>
  								</li>
  							</s:iterator>				
@@ -235,7 +210,7 @@ n.css" rel="stylesheet">
 							<li class="title">热门用户</li>
 							<s:iterator value="#session.topuser" var="user">
  								<li>
- 								<a>${user.username}</a>
+ 								<a href="#">${user.username}</a>
  								<i class="line"></i>
  								</li>
  							</s:iterator>
@@ -245,15 +220,15 @@ n.css" rel="stylesheet">
 							<li class="title">Super-TAGS</li>
 							<li class="bar-tags">
 								<s:iterator value="#session.allSuperTags" var="stag">
-									<a href="findBlogByTagSuperAction-id-<s:property value="#stag.supertypeId" />.html"><s:property value="#stag.supertypeName"/></a>
+									<a href="findBlogByTagSuperAction-strBlogId-<s:property value="#stag.supertypeId" />.html"><s:property value="#stag.supertypeName"/></a>
 								</s:iterator>
 							</li>
 						</ul>
 						<ul class="laread-list">
 							<li class="title">Sub-TAGS</li>
-							<li class="bar-tags">
+							<li class="bar-tags"> 
 								<s:iterator value="#session.allTags" var="tag">
-									<a href="findBlogByTagAction-id-<s:property value="#tag.typeId" />.html"><s:property value="#tag.typename" /></a>
+									<a href="findBlogByTagAction-strBlogId-<s:property value="#tag.typeId" />.html"><s:property value="#tag.typename" /></a>
 								</s:iterator>
 							</li>
 						</ul>
@@ -271,7 +246,102 @@ n.css" rel="stylesheet">
 			</div>
 		</footer>
 	</div>
- 
+
+	<div id="quick-read" class="qr-white-theme">
+		<div class="quick-read-head">
+			<div class="container">
+				<a href="#" class="qr-logo"></a>
+				<div class="qr-tops">
+					<a href="#" class="qr-search-close"><i class="fa fa-times"></i></a>
+					<a href="#" class="qr-search"><i class="fa fa-search"></i></a>
+					<a href="#" class="qr-change"><i class="fa fa-adjust"></i></a>
+					<a href="#" class="qr-close"><i class="fa fa-times"></i></a>
+				</div>
+				<form class="qr-search-form">
+					<input type="text" placeholder="Search LaRead">
+				</form>
+			</div>
+		</div>
+		<div class="quick-dialog">
+			<div class="quick-body">
+				<div class="container">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="qr-content post-item-paragraph">
+
+							<article>
+								<h2>A Nice Street Cafe in London</h2>
+
+								<p>Consectetur adipiscing elit. Vivamus nec mauris pulvinar leo dignissim sollicitudin eleifend eget velit. Nunc sed dolor enim, vitae sodales diam. Mauris fermentum fringilla lorem, in rutrum massa sodales et. Praesent mollis sodales est, eget fringilla libero sagittis eget. Nunc gravida varius risus ac luctus. Mauris ornare eros sed libero euismod ornare. Nulla id sem a mauris egestas pulvinar vitae non dui. Cras odio tortor, feugiat nec sagittis sed, laoreet ut mauris. In hac habitasse platea dictumst.</p>
+
+								<p>What if instead your website used machine learning to build itself, and then rebuilt as necessary, based on data it was gathering about how it was being used? That's what The Grid is aiming to do. After you add content such as pictures, text, the stuff everyone enjoys interacting with your obligation to design...</p>
+
+								<h4>The Truth about Teens and Privacy</h4>
+
+								<p>Social media has introduced a new dimension to the well-worn fights over private space and personal expression. Teens do not want their parents to view their online profiles or look over their shoulder when theyâre chatting with friends. Parents are no longer simply worried about what their children wear out of the house but what they photograph themselves wearing in their bedroom to post online. Interactions that were previously invisible to adults suddenly have traces, prompting parents to fret over.</p>
+
+								<h4>Here are some of the ways you may be already being hacked:</h4>
+
+								<ul class="in-list">
+									<li>Everyone makes mistakes</li>
+									<li>You can control only your behavior</li>
+									<li>Good habits create discipline</li>
+									<li>Remember the <u>big picture</u></li>
+									<li>Everyone learns differently</li>
+									<li>Focus on the Benefits, Not the Difficulties</li>
+									<li>Traditions are bonding opportunities</li>
+								</ul>
+
+								<p>This is not a comprehensive list. Rather, it is a snapshot in time of real-life events that are happening right now. In the future, we will likely read this list and laugh at all the things I failed to envision.</p>
+								<p class="with-img">
+									<a href="assets/img/banner-85-1.jpg" data-fluidbox-qr><img src="assets/img/banner-85.jpg" alt=""></a>
+									<span class="img-caption">Walk through the Forest</span>
+								</p>
+								<p>Elit try-hard consectetur, dolore voluptate minim distillery. Bespoke Cosby sweater pug street art et keytar. Nihil fish whatever trust fund, dreamcatcher in fingerstache squid seitan accusamus. Organic Wes Anderson High Life setruhe authentic iPhone, aute art party hashtag fixie church-key art veniam Tumblr polaroid. DIY polaroid vinyl, sustainable hella scenester accusamus fanny pack. Ut Neutra enim pariatur cornhole actually Banksy, tote bag fugiat ad accusamus. Incididunt fixie normcore fingerstache. Freegan proident literally brunch before they sold out.
+								</p>
+
+								<p>Readymade fugiat narwhal, typewriter VHS aute stumptown hoodie irure put a bird on it. Fashion axe raw denim brunch put a bird on it voluptate Truffaut. Bitters PBR&amp;B nulla Odd Future swag leggings. Banh mi Wes Anderson butcher letterpress skateboard quis. Chambray hella retro viral Cosby sweater photo booth. Schlitz elit Cosby sweater, Blue Bottle non chambray chia. Single-origin coffee pickled.</p>
+
+								<h5>Blockquote</h5>
+
+								<p>Do officia aliqua, pop-up ut et occupy sriracha. YOLO meggings PBR sartorial mollit, Schlitz assumenda vero kitsch plaid post-ironic PBR&amp;B keffiyeh. Cosby sweater wolf YOLO Austin bespoke, American Apparel crucifix paleo flexitarian. Aliquip bitters food truck, incididunt tofu accusamus magna nesciunt typewriter drinking vinegar Shoreditch try-hard you probably havenât heard of them labore. </p>
+
+								<blockquote>
+									<p><i>âThe Muppets Take Manhattanâ</i><br />
+									This movie was a disappointment. The Muppets do not take Manhattan at all. They merely visit it.<br />
+									<span>âÂ No stars.</span></p>
+								</blockquote>
+
+								<p>Do officia aliqua, pop-up ut et occupy sriracha. YOLO meggings PBR sartorial mollit, Schlitz assumenda vero kitsch plaid post-ironic PBR&amp;B keffiyeh. Cosby sweater wolf YOLO Austin bespoke, American Apparel crucifix paleo flexitarian. Aliquip bitters food truck, incididunt tofu accusamus.</p>
+							</article>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="quick-read-bottom">
+			<p class="qr-info">By <a href="#">Daniele Zedda</a>Â Â Â â¢Â Â Â 18 February</p>
+			<div class="qr-nav">
+				<a href="#" class="qr-prev">â PREV POST</a>
+				<a href="#" class="qr-share" tabindex="0" role="button" data-toggle="popover" data-placement="top" data-trigger="focus" data-content="<a href='#'><i class='fa fa-facebook'></i></a><a href='#'><i class='fa fa-twitter'></i></a>"><i class="fa fa-share-alt"></i></a>
+				<a href="#" class="qr-comment"><i class="fa fa-comment"></i></a>
+				<a href="#" class="qr-like"><i class="fa fa-heart"></i> 34</a>
+				<a href="#" class="qr-next">NEXT POST â</a>
+			</div>
+		</div>
+		<div class="quick-read-bottom qr-bottom-2 hide">
+			<div class="qr-nav">
+				<a href="#" class="qr-prev">â PREV POST</a>
+				<p class="qr-info">By <a href="#">Daniele Zedda</a>   â¢   18 February</p>
+				<a href="#" class="qr-next">NEXT POST â</a>
+				<a href="#" class="qr-like"><i class="fa fa-heart"></i> 34</a>
+				<div class="qr-sharebox">
+					<span>Share on</span>
+					<a href='#'><i class='fa fa-facebook'></i></a>
+					<a href='#'><i class='fa fa-twitter'></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	<!-- Login Modal -->
 	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
@@ -279,7 +349,7 @@ n.css" rel="stylesheet">
 			<div class="modal-content" id="login-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>Sign In</h4>
+					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
 				</div>
 				<div class="modal-body">
 					<form action="login.php" method="post">
@@ -406,15 +476,7 @@ n.css" rel="stylesheet">
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
-	<script type="text/javascript">
-		function contentAction(id){
-			var ids = "blogId" + id;
-			var input = document.getElementById(ids);
-			input.value = id;
-			contentForm.submit();
-			window.location.href="content.php";
-		}
-	</script>
+	
 	<script type="text/javascript">
 		function update(obj){
 			var labels=$(obj).parent().find('label');
@@ -552,7 +614,7 @@ n.css" rel="stylesheet">
 					var color_str = ""
 					if(classes.indexOf("view-blog") >= 0) {
 						$(".Edit_qp").html("删除文章");
-						actionStr = "content-id-"+list.blogId+".html";
+						actionStr = "content-strBlogId-"+list.blogId+".html";
 						color_str="color:#ffffff";
 					}else {
 						$(".Edit_qp").html("返回");

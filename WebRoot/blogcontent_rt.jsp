@@ -147,10 +147,10 @@
 									<li class="title">Tags</li>
 									<li class="bar-tags">
 										<s:iterator value="bt" var="tag">
-											<a href="findBlogByTagAction-id-<s:property value="#tag.typeId" />.html"><s:property value="#tag.typename"/></a>
+											<a href="findBlogByTagAction-strBlogId-<s:property value="#tag.typeId" />.html"><s:property value="#tag.typename"/></a>
 										</s:iterator>
 										<s:iterator value="sbt" var="stag">
-											<a href="findBlogByTagSuperAction-id-<s:property value="#stag.supertypeId" />.html"><s:property value="#stag.supertypeName"/></a>
+											<a href="findBlogByTagSuperAction-strBlogId-<s:property value="#stag.supertypeId" />.html"><s:property value="#stag.supertypeName"/></a>
 										</s:iterator>
 									</li>
 								</ul>
