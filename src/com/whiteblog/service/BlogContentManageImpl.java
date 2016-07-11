@@ -17,4 +17,7 @@ public class BlogContentManageImpl {
 	public void setupdateBlog(Blog blog){
 		blogDAO.attachDirty(blog);
 	}
+	public void deleteBlog(Blog blog){
+		blogDAO.delete(blog);
+	}
 }

@@ -5,11 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * Hobby entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "hobby", catalog = "whiteblog")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Hobby implements java.io.Serializable {
 
 	// Fields

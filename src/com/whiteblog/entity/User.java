@@ -3,15 +3,21 @@ package com.whiteblog.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * User entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "user", catalog = "whiteblog")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class User implements java.io.Serializable {
 
 	// Fields
@@ -23,7 +29,9 @@ public class User implements java.io.Serializable {
 	private String image;
 	private Integer countryId;
 	private Integer cityId;
+	private Integer provinceId;
 	private Integer jobId;
+	private Integer sex;
 
 	// Constructors
 
@@ -39,14 +47,17 @@ public class User implements java.io.Serializable {
 
 	/** full constructor */
 	public User(String username, String password, String identity,
-			String image, Integer countryId, Integer cityId, Integer jobId) {
+			String image, Integer countryId, Integer cityId,
+			Integer provinceId, Integer jobId, Integer sex) {
 		this.username = username;
 		this.password = password;
 		this.identity = identity;
 		this.image = image;
 		this.countryId = countryId;
 		this.cityId = cityId;
+		this.provinceId = provinceId;
 		this.jobId = jobId;
+		this.sex = sex;
 	}
 
 	// Property accessors
@@ -115,6 +126,15 @@ public class User implements java.io.Serializable {
 		this.cityId = cityId;
 	}
 
+	@Column(name = "provinceID")
+	public Integer getProvinceId() {
+		return this.provinceId;
+	}
+
+	public void setProvinceId(Integer provinceId) {
+		this.provinceId = provinceId;
+	}
+
 	@Column(name = "jobID")
 	public Integer getJobId() {
 		return this.jobId;
@@ -122,6 +142,15 @@ public class User implements java.io.Serializable {
 
 	public void setJobId(Integer jobId) {
 		this.jobId = jobId;
+	}
+
+	@Column(name = "sex")
+	public Integer getSex() {
+		return this.sex;
+	}
+
+	public void setSex(Integer sex) {
+		this.sex = sex;
 	}
 
 }

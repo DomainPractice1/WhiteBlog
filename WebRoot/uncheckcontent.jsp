@@ -5,6 +5,11 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<style>
+   markp{
+      background-color:#FF2D2D; font-weight:bold;
+   }
+</style>
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
@@ -152,11 +157,8 @@
 									${req.blog.content}	
 									</p>
 								</div>
-
-								<form action="review.action">
-									<button type="submit" class="btn btn-grey btn-outline btn-rounded">审核通过</button>
-								</form>
-								<button class="btn btn-grey btn-outline btn-rounded">审核未通过</button>
+								<a href="#" data-toggle="modal" data-target="#verifyP-form" class="btn btn-grey btn-outline btn-rounded">审核通过</a>
+								<a href="#" data-toggle="modal" data-target="#verifyNP-form" class="btn btn-grey btn-outline btn-rounded">审核未通过</a>
 							</div>
 
 							
@@ -373,6 +375,44 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- verify pass -->
+	<div class="modal leread-modal fade" id="verifyP-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" >
+				<div class="modal-body">
+					<form action="review.action" method="post">					
+						<div class="modal-body">
+							确认审核通过么？
+         				</div>
+						<div class="modal-footer">
+            				<button type="button" class="btn btn-default" data-dismiss="modal">关闭 </button>
+            				<button type="submit" class="btn btn-primary">确定</button>
+        				</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<!-- verify not pass -->
+	<div class="modal leread-modal fade" id="verifyNP-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" >
+				<div class="modal-body">
+					<form action="deletereview.action" method="post">					
+						<div class="modal-body">
+							确认删除文章么？
+         				</div>
+						<div class="modal-footer">
+            				<button type="button" class="btn btn-default" data-dismiss="modal">关闭 </button>
+            				<button type="submit" class="btn btn-primary">确定</button>
+        				</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -401,18 +441,22 @@
 				type:"POST",
 				dataType:"json",
 				success:function(data){
-				$.each(data,function(i,list){  
-                       		var _tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a>' + list.content + '</a>' +
-						'</h5><div class="post-subinfo"></div></div></li>'
+				$.each(data,function(i,list){
+							var _tr;
+							if(list.blogId == 0){
+								_tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a href="showMailList.action">' + list.content + '</a>' +
+								'</h5><div class="post-subinfo"></div></div></li>'	
+							}else{
+								_tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a href="content.action?id=' + list.blogId + '">' + list.content + '</a>' +
+								'</h5><div class="post-subinfo"></div></div></li>'
+							}  
+                       		
                        		 $("#slideform").append(_tr);
                     })
 				}
 			})	
 		});
 	</script>
-	
-	
-	
 	<script type="text/javascript">
 		var t
 		function timedCount()

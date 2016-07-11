@@ -412,6 +412,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 
+	<!-- logout -->
+	<div class="modal leread-modal fade" id="logout-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-body">
+					<form action="logout.action" method="post">					
+						<div class="modal-body">
+							确认登出当前账户么？
+         				</div>
+						<div class="modal-footer">
+            				<button type="button" class="btn btn-default" data-dismiss="modal">关闭 </button>
+            				<button type="submit" class="btn btn-primary">确定</button>
+        				</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->
@@ -441,9 +460,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				type:"POST",
 				dataType:"json",
 				success:function(data){
-				$.each(data,function(i,list){  
-                       		var _tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a>' + list.content + '</a>' +
-						'</h5><div class="post-subinfo"></div></div></li>'
+				$.each(data,function(i,list){
+							var _tr;
+							if(list.blogId == 0){
+								_tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a href="showMailList.action">' + list.content + '</a>' +
+								'</h5><div class="post-subinfo"></div></div></li>'	
+							}else{
+								_tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a href="content.action?id=' + list.blogId + '">' + list.content + '</a>' +
+								'</h5><div class="post-subinfo"></div></div></li>'
+							}  
+                       		
                        		 $("#slideform").append(_tr);
                     })
 				}

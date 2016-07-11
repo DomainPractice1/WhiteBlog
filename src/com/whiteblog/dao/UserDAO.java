@@ -18,7 +18,7 @@ import com.whiteblog.entity.User;
  * provides additional information for how to configure it for the desired type
  * of transaction control.
  * 
- * @see com.whiteblog.dao.User
+ * @see com.whiteblog.entity.User
  * @author MyEclipse Persistence Tools
  */
 public class UserDAO extends HibernateDaoSupport {
@@ -30,7 +30,9 @@ public class UserDAO extends HibernateDaoSupport {
 	public static final String IMAGE = "image";
 	public static final String COUNTRY_ID = "countryId";
 	public static final String CITY_ID = "cityId";
+	public static final String PROVINCE_ID = "provinceId";
 	public static final String JOB_ID = "jobId";
+	public static final String SEX = "sex";
 
 	protected void initDao() {
 		// do nothing
@@ -62,7 +64,7 @@ public class UserDAO extends HibernateDaoSupport {
 		log.debug("getting User instance with id: " + id);
 		try {
 			User instance = (User) getHibernateTemplate().get(
-					"com.whiteblog.dao.User", id);
+					"com.whiteblog.entity.User", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -121,8 +123,16 @@ public class UserDAO extends HibernateDaoSupport {
 		return findByProperty(CITY_ID, cityId);
 	}
 
+	public List<User> findByProvinceId(Object provinceId) {
+		return findByProperty(PROVINCE_ID, provinceId);
+	}
+
 	public List<User> findByJobId(Object jobId) {
 		return findByProperty(JOB_ID, jobId);
+	}
+
+	public List<User> findBySex(Object sex) {
+		return findByProperty(SEX, sex);
 	}
 
 	public List findAll() {

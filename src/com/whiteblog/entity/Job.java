@@ -5,11 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 /**
  * Job entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "job", catalog = "whiteblog")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Job implements java.io.Serializable {
 
 	// Fields
