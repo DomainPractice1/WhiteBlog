@@ -21,6 +21,7 @@ import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Likeit;
 import com.whiteblog.entity.User;
 import com.whiteblog.form.checkLikeForm;
+import com.whiteblog.service.EncryptServiceImpl;
 import com.whiteblog.service.LikeService;
 import com.whiteblog.service.ShowBlogListService;
 import com.whiteblog.service.UserManagerImpl;
@@ -43,6 +44,7 @@ public class ShowBlogList extends ActionSupport{
 				i--;
 			}
 		}
+		
 		System.out.println("blogList size:"+blogList.size());		
 		ActionContext.getContext().getSession().put("blogList", blogList);		
 		

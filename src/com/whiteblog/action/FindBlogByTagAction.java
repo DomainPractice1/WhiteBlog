@@ -9,6 +9,7 @@ import com.whiteblog.entity.Blogtype;
 import com.whiteblog.entity.Supertype;
 import com.whiteblog.service.BlogManagerImpl;
 import com.whiteblog.service.BlogTypeServiceImp;
+import com.whiteblog.service.EncryptServiceImpl;
 import com.whiteblog.service.SuperTypeService;
 
 public class FindBlogByTagAction {
@@ -16,7 +17,15 @@ public class FindBlogByTagAction {
 	private BlogManagerImpl blogManager;
 	private SuperTypeService superTypeService;
 	private int id;
+	private String strBlogId;
 	
+	
+	public String getStrBlogId() {
+		return strBlogId;
+	}
+	public void setStrBlogId(String strBlogId) {
+		this.strBlogId = strBlogId;
+	}
 	public int getId() {
 		return id;
 	}
@@ -44,6 +53,9 @@ public class FindBlogByTagAction {
 	}
 	
 	public String findBlogs(){ 
+		if(!EncryptServiceImpl.isNumeric(strBlogId))
+			return "error";
+		id = Integer.parseInt(strBlogId);
 		Blogtype bt = blogtypeService.getBlogtype(id);
 		String typeName = bt.getTypename();
 		List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findByTypename(typeName);
@@ -58,6 +70,9 @@ public class FindBlogByTagAction {
 	}
 	
 	public String findBySuperTag(){
+		if(!EncryptServiceImpl.isNumeric(strBlogId))
+			return "error";
+		id = Integer.parseInt(strBlogId);
 		List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findBySupertypeId(id);
 		List<Blog> bl = blogManager.findByBlogTypeName(btl);
 		ActionContext.getContext().put("resBlog", bl);

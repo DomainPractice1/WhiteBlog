@@ -92,7 +92,7 @@
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+						<a class="navbar-brand" href="./index_rt.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
 					</div>								
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
@@ -112,7 +112,7 @@
 								</button>						
 							</div>
 							<div class="get-post-titles" style="margin-right:10px">					
-								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.action'">
+								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.php'">
 									<i class="fa fa-envelope"></i>
 								</button>						
 							</div>
@@ -147,10 +147,10 @@
 									<li class="title">Tags</li>
 									<li class="bar-tags">
 										<s:iterator value="bt" var="tag">
-											<a href="findBlogByTagAction.action?id=<s:property value="#tag.typeId" />"><s:property value="#tag.typename"/></a>
+											<a href="findBlogByTagAction-strBlogId-<s:property value="#tag.typeId" />.html"><s:property value="#tag.typename"/></a>
 										</s:iterator>
 										<s:iterator value="sbt" var="stag">
-											<a href="findBlogByTagSuperAction.action?id=<s:property value="#stag.supertypeId" />"><s:property value="#stag.supertypeName"/></a>
+											<a href="findBlogByTagSuperAction-strBlogId-<s:property value="#stag.supertypeId" />.html"><s:property value="#stag.supertypeName"/></a>
 										</s:iterator>
 									</li>
 								</ul>
@@ -169,7 +169,7 @@
 								<div class="post-item-social">
 								
 										
-									<s:form class="form-horizontal" role="form" action="sendMessage" method="post"> 
+									<s:form class="form-horizontal" role="form" action="sendMessage.php" method="post"> 
 													
 															<!-- 模态框（Modal） -->
 															<div class="modal leread-modal form-horizontal fade" id="myModal" tabindex="-1"
@@ -214,7 +214,7 @@
 										</c:choose>
 
 																																		
-												 <s:form class="form-horizontal" role="form" action="addTags" method="post"> 
+												 <s:form class="form-horizontal" role="form" action="addTags.php" method="post"> 
 													
 															<!-- 模态框（Modal） -->
 															<div class="modal  form-horizontal fade" id="myModal2" tabindex="-1"
@@ -314,7 +314,7 @@
 									</s:iterator>
 
 									<div class="comment-form main-comment-form">
-										<s:form action="PostComment.action" method="post" theme="simple">
+										<s:form action="PostComment.php" method="post" theme="simple">
 											<s:textarea cssClass="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></s:textarea>
 											<s:div cssClass="at-focus">
 												<button class="comment-submit">Post Comment</button>	
@@ -450,7 +450,7 @@
 					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
 				</div>
 				<div class="modal-body">
-					<form action="login.action" method="post">
+					<form action="login.php" method="post">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Username" name="userform.username">
 						</div>
@@ -482,7 +482,7 @@
 					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
 				</div>
 				<div class="modal-body">
-					<form action="register.action" method="post">
+					<form action="register.php" method="post">
 						<!-- <div class="form-group">
 							<input class="form-control" placeholder="Name">
 						</div> -->
@@ -513,7 +513,7 @@
 		<div class="modal-dialog">
 			<div class="modal-content" id="login-content">
 				<div class="modal-body">
-					<form action="logout.action" method="post">					
+					<form action="logout.php" method="post">					
 						<div class="modal-body">
 							确认登出当前账户么？
          				</div>
@@ -551,25 +551,33 @@
 		function shareTwitter(t)
 		{
 			strId = t.id.substring(7, t.id.length);
-			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId,"_blank","width=500px;height=500px;");
+			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content-id-' + strId,"_blank","width=500px;height=500px;");
 		}
 	</script>
 	<script type="text/javascript">
 		var strId = "";
+		var tmp = "";
 		function myF(t)
 		{
+			tmp = t.id;
 			strId = t.id.substring(4, t.id.length);
-			var actionName = "clickLike.action?id=";
-			actionName += strId;
+			var actionName = "clickLike-id-";
+			actionName += strId + ".html";
 			$.ajax({
 				url:actionName,
 				type:"POST",
 				dataType:"json",
 				success:function(data){
-					if(data == "success")
+					var lc = document.getElementById(tmp).lastChild;
+					var num = parseInt(lc.innerHTML); 				
+					if(data == "success"){
+						lc.innerHTML = num + 1;
 						alert("点赞成功");
-					else
+					}
+					else{
+						lc.innerHTML = num - 1; 
 						alert("取消点赞");
+					}
 				}
 			});
 		}
@@ -578,7 +586,7 @@
 		$("#notice").click(function(){
 			$("#slideform").empty();
 			$.ajax({
-				url:"notice.action",
+				url:"notice.php",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -603,7 +611,7 @@
 		function timedCount()
 		{
 			$.ajax({
-				url:"checkNotice.action",
+				url:"checkNotice.php",
 				type:"POST",
 				datatype:"json",
 				success:function(data){
@@ -629,7 +637,7 @@
 	function delete_row(delete_id){
 		if(confirm("确定要删除？")){
 			$.ajax({
-				url:"deleteBlog.action?id="+delete_id,
+				url:"deleteBlog-id-"+delete_id+".html",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -662,7 +670,7 @@
 	// 			onclick_str = "onclick=\"delete_row(this)\"";
 			}
 			$.ajax({
-				url:"changeDeleteList.action",
+				url:"changeDeleteList.php",
 				type:"POST",
 				dataType:"json",
 				success:function(data){
@@ -670,7 +678,7 @@
 					var color_str = ""
 					if(classes.indexOf("view-blog") >= 0) {
 						$(".Edit_qp").html("删除文章");
-						actionStr = "content.action?id="+list.blogId;
+						actionStr = "content-id-"+list.blogId+".html";
 						color_str="color:#ffffff";
 					}else {
 						$(".Edit_qp").html("返回");

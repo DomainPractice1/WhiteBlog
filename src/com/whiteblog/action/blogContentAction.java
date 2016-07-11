@@ -10,6 +10,7 @@ import com.whiteblog.entity.Blog;
 import com.whiteblog.form.BlogContentForm;
 import com.whiteblog.service.BlogContentManageImpl;
 import com.whiteblog.service.BlogTypeServiceImp;
+import com.whiteblog.service.EncryptServiceImpl;
 import com.whiteblog.service.SuperTypeService;
 import com.whiteblog.service.UserManagerImpl;
 import com.whiteblog.entity.*;
@@ -26,6 +27,8 @@ public class blogContentAction extends ActionSupport{
 	private BlogTypeServiceImp blogtypeService;
 	private SuperTypeService superTypeService;
 	private List<Blogtype> btl ;
+	private Integer blogId;
+	private String strBlogId;
 	
 	public SuperTypeService getSuperTypeService() {
 		return superTypeService;
@@ -48,6 +51,19 @@ public class blogContentAction extends ActionSupport{
 	public UserManagerImpl getUserManager() {
 		return userManager;
 	}
+	
+	public String getStrBlogId() {
+		return strBlogId;
+	}
+	public void setStrBlogId(String strBlogId) {
+		this.strBlogId = strBlogId;
+	}
+	public Integer getBlogId() {
+		return blogId;
+	}
+	public void setBlogId(Integer blogId) {
+		this.blogId = blogId;
+	}
 	public void setUserManager(UserManagerImpl userManager) {
 		this.userManager = userManager;
 	}
@@ -67,6 +83,10 @@ public class blogContentAction extends ActionSupport{
 	 * @return 
 	 */
 	public String execute(){
+		setStrBlogId(strBlogId);
+		if(!EncryptServiceImpl.isNumeric(strBlogId))
+			return FAIL;
+		id = Integer.parseInt(strBlogId);
 		Blog ins = blogContentManage.findById(id);
 		if(ins == null)
 			return FAIL;
