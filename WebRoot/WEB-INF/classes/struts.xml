@@ -29,14 +29,10 @@
 			<result name="error">/404.jsp</result>
 		</action>
 		<action name="searchArticle" class="SearchArticleAction" method="execute">
-<<<<<<< HEAD
- 			<result name="success">/articleListTest.jsp</result>
-			<result name="error">/404.jsp</result>
-=======
+
  			<!-- <result name="success">/articleListTest.jsp</result>  -->
  			<result name="success">./blogAndTags.jsp</result>
 			<result name="error">/404.html</result>
->>>>>>> 8f46b5bd902881449fdf9af027304db0247f9f5b
 		</action>
 		<action name="ShowBlogList" class="ShowBlogListAction" method="execute">
 			<result name="success">/success.jsp</result>
@@ -113,19 +109,13 @@
 		</action>
 		<action name="findBlogByTagAction" class="FindBlogByTagAction" method="findBlogs">
 			<result name="success">./blogAndTags.jsp</result>
-<<<<<<< HEAD
-			<result name="error">/404.jsp</result>
+			<result name="error">/404.html</result>
 		</action>
 		<action name="logout" class="com.whiteblog.action.logoutAction" method="execute">
 			<result name="success">/index_rt.jsp</result>
-			<result name="error">/404.jsp</result>
-=======
-			<result name="error">./404.html</result>
+			<result name="error">/404.html</result>
 		</action>
-		<action name="logout" class="com.whiteblog.action.logoutAction" method="execute">
-			<result name="success">./index_rt.jsp</result>
->>>>>>> 8f46b5bd902881449fdf9af027304db0247f9f5b
-		</action>
+		
 		<action name="modify" class="modifyAction" method="execute">
 			<result name="error">/404.jsp</result>
 			<result name="success" type="redirectAction">
@@ -135,11 +125,8 @@
 		</action>
 		<action name="showBlogToModify" class="showBlogToModifyAciton" method="execute">
 			<result name="success">/modify.jsp</result>
-<<<<<<< HEAD
-			<result name="error">/404.jsp</result>
-=======
-			<result name="error" >./error.jsp</result>
->>>>>>> 8f46b5bd902881449fdf9af027304db0247f9f5b
+			<result name="error">/404.html</result>
+
 		</action>
 		<action name="preparationAction" class="addTagsAction" method="preparationAction">
 			<result name="success">/success.jsp</result>
@@ -147,11 +134,7 @@
 		</action>
 		<action name="findBlogByTagSuperAction" class="FindBlogByTagAction" method="findBySuperTag">
 			<result name="success">./blogAndTags.jsp</result>
-<<<<<<< HEAD
-			<result name="error">/404.jsp</result>
-=======
 			<result name="error" >./404.html</result>
->>>>>>> 8f46b5bd902881449fdf9af027304db0247f9f5b
 		</action>
 		<action name="clickLike" class="LikeAction" method="clickAction">
 			<result name="success" type="json">
@@ -164,14 +147,9 @@
 		<action name="forward" class="forwardAction" method="execute">
 			<result name="success" type="redirectAction">
 			 	<param name="actionName">content</param>
-<<<<<<< HEAD
-                <param name="id">${id}</param>
-			</result>
-			<result name="error">/404.jsp</result>
-=======
                 <param name="strBlogId">${id}</param>
 			</result>	
->>>>>>> 8f46b5bd902881449fdf9af027304db0247f9f5b
+			<result name="error">/404.html</result>
 		</action>
 	</package>
 </struts>    

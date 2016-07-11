@@ -1,11 +1,7 @@
 package com.whiteblog.service;
 
 import java.security.MessageDigest;
-<<<<<<< HEAD
 
-public class EncryptServiceImpl {
-	
-=======
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,16 +16,12 @@ public class EncryptServiceImpl {
 		super();
 		// TODO Auto-generated constructor stub
 	}
->>>>>>> 8f46b5bd902881449fdf9af027304db0247f9f5b
 	/**
 	 * 参数加密，对于int类型
 	 * @param parm
 	 * @return
 	 */
-<<<<<<< HEAD
-	static int parmEnrypt(int parm){
-		return 1;
-=======
+
 	public static int parmIntEnrypt(int parm){
 		String t = Integer.toString(parm);
 		System.out.println(t);
@@ -39,61 +31,39 @@ public class EncryptServiceImpl {
 		i = Integer.parseInt(convertInt(t));
 		System.out.println(i);
 		return i;
->>>>>>> 8f46b5bd902881449fdf9af027304db0247f9f5b
 	}
 	/**
 	 * 参数加密，对于String 类型
 	 * @param parm
 	 * @return
-	 */
-<<<<<<< HEAD
-	static String parmEncypt(String parm){
-		String res = "";
-		return res;
-=======
+	 */ 
 	public static String parmStringEncypt(String parm){
 		return convert(parm);
->>>>>>> 8f46b5bd902881449fdf9af027304db0247f9f5b
 	}
 	/**
 	 * 参数解密对于int类型
 	 * @param parm
 	 * @return
 	 */
-<<<<<<< HEAD
-	static int parmDecrypt(int parm){
-		
-		return 1;
-=======
+
 	public static int parmIntDecrypt(String parm){
 		String tmp = convert(parm);
 		int res = Integer.parseInt(tmp);
 		return res;
->>>>>>> 8f46b5bd902881449fdf9af027304db0247f9f5b
 	}
 	/**
 	 * 参数解密，对于String类型
 	 * @param parm
 	 * @return
-	 */
-<<<<<<< HEAD
-	static String parmDecrypt(String parm){
-		String res = "";
-		return res;
-=======
+	 */ 
 	public static String parmStringDecrypt(String parm){
 		return convert(parm);
->>>>>>> 8f46b5bd902881449fdf9af027304db0247f9f5b
 	}
 	
 	/**
 	 * 加密解密算法 执行一次加密，两次解密
 	 */ 
-<<<<<<< HEAD
 	public static String convert(String inStr){
-=======
-	private static String convert(String inStr){
->>>>>>> 8f46b5bd902881449fdf9af027304db0247f9f5b
 
 		char[] a = inStr.toCharArray();
 		for (int i = 0; i < a.length; i++){
@@ -102,17 +72,7 @@ public class EncryptServiceImpl {
 		String s = new String(a);
 		return s;
 	}
-<<<<<<< HEAD
 
-	// 测试主函数
-	public static void main(String[] args) {
-		String s = new String("123");
-		System.out.println("原始：" + s);
-		System.out.println("加密的：" + convert(s));
-		System.out.println("解密的：" + convert(convert(s)));
-
-	}
-=======
 	
 	private static String convertInt(String inStr){
 		char [] a = inStr.toCharArray();
@@ -147,5 +107,4 @@ public class EncryptServiceImpl {
             return false;  
     }  
 
->>>>>>> 8f46b5bd902881449fdf9af027304db0247f9f5b
 }
