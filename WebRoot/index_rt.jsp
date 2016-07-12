@@ -353,6 +353,7 @@ n.css" rel="stylesheet">
 				</div>
 				<div class="modal-body">
 					<form action="login.php" method="post">
+						<s:token></s:token>
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Username" name="userform.username">
 						</div>

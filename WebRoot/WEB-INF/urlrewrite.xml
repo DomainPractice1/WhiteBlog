@@ -45,21 +45,21 @@ PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         </rule>  
          <rule>
         	<note>
-        		这条规则是把所有的html页面全部重定向为jsp页面的
+        		这条规则是把部分的html页面全部重定向为jsp页面的
         	</note>
-        	<from>^/index_rt.html</from>
-        	<to >/index_rt.jsp</to>
+        	<from>^/index_([a-z]+).html</from>
+        	<to >/index_$1.jsp</to>
         </rule>
-        <rule>
+        <rule> 
         	<from>^/([0-9]+).html</from>
         	<to>/$1.jsp</to>
+		<rule> 
+		<rule>
+        	<from>^/authors.html</from>
+        	<to>/authors.jsp</to>
         </rule>
-        
-        
-        
-        
-        
-        
+    	
+        </rule>
         
         <!--
 

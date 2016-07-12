@@ -8,7 +8,8 @@
    			<result name="success">/404.jsp</result>
   		</action>
 		<action name="login" class="LoginAction" method="execute">
-			<result name="user">/index_rt.jsp</result>
+			<!-- 通过设置redirect类型防止登陆的时候提示表单重新提交，影响性能和用户体验 -->
+			<result name="user" type="redirect">/index_rt.html</result>
 			<result name="admin" type="redirectAction">showuncheckblog</result>
 			<result name="error">/404.jsp</result>
 		</action>
