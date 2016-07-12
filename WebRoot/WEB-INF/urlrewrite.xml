@@ -51,8 +51,8 @@ PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         	<to >/index_rt.jsp</to>
         </rule>
         <rule>
-        	<from>^/404.html</from>
-        	<to>/404.jsp</to>
+        	<from>^/([0-9]+).html</from>
+        	<to>/$1.jsp</to>
         </rule>
         
         

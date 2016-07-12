@@ -3,6 +3,10 @@
 <struts>
 	<constant name="struts.devMode" value="true"/>
 	<package name="whiteblog" extends="struts-default,json-default" namespace="/">
+		<default-action-ref name="notFound" />
+		<action name="notFound" class="com.whiteblog.action.NotFoundErrorAction">
+   			<result name="success">/404.jsp</result>
+  		</action>
 		<action name="login" class="LoginAction" method="execute">
 			<result name="user">/index_rt.jsp</result>
 			<result name="admin" type="redirectAction">showuncheckblog</result>
