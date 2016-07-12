@@ -90,4 +90,15 @@ public class UserManagerImpl {
 			return "error";
 		}	
 	}
+	
+	public User matchUserByUsername(String name){
+		User res = null;
+		List<User> ul = this.userdao.findAll();
+		for(User u: ul){
+			if(u.getUsername().equals(name))
+				res = u;
+		}
+		return res;
+	}
+	
 }

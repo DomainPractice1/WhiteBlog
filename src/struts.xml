@@ -152,5 +152,9 @@
 			</result>	
 			<result name="error">/404.html</result>
 		</action>
+		<action name="cookieLogin" class="com.whiteblog.action.loginAction" method="cookieDetection">
+			<result name="success">/index.html</result>
+			<result name="login">/index.html</result>
+		</action>
 	</package>
 </struts>    
