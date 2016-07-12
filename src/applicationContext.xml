@@ -15,7 +15,7 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="jdbcUrl">
-			<value>jdbc:mysql://10.125.103.139:3306/whiteblog</value> 
+			<value>jdbc:mysql://10.125.103.139:3306/whiteblog</value>
 		</property>
 		<property name="user">
 			<value>qwe</value>
@@ -47,18 +47,22 @@
 				<prop key="hibernate.dialect">
 					org.hibernate.dialect.MySQLDialect
 				</prop>
+				<prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+				<prop key="hibernate.cache.use_query_cache">true</prop>
+				<prop key="hibernate.cache.use_second_level_cache">true</prop>
+				<prop key="hibernate.cache.configurationResourceName">ehcache.xml</prop>
 			</props>
 		</property>
 		<property name="annotatedClasses">
 			<list>
 				<value>com.whiteblog.entity.Admin</value>
-				<value>com.whiteblog.entity.Blog</value> 
+				<value>com.whiteblog.entity.Blog</value>
 				<value>com.whiteblog.entity.Comment</value>
 				<value>com.whiteblog.entity.Mail</value>
 				<value>com.whiteblog.entity.Notice</value>
 				<value>com.whiteblog.entity.User</value>
 				<value>com.whiteblog.entity.Inform</value>
-				<value>com.whiteblog.entity.Likeit</value> 
+				<value>com.whiteblog.entity.Likeit</value>
 				<value>com.whiteblog.entity.Supertype</value>
 				<value>com.whiteblog.entity.Blogtype</value>
 				<value>com.whiteblog.entity.City</value>
@@ -67,7 +71,8 @@
 				<value>com.whiteblog.entity.Country</value>
 				<value>com.whiteblog.entity.Collection</value>
 				<value>com.whiteblog.entity.Province</value>
-				<value>com.whiteblog.entity.Attention</value></list>
+				<value>com.whiteblog.entity.Attention</value>
+			</list>
 		</property>
 	</bean>
 
@@ -197,7 +202,7 @@
 			<ref bean="LikeService" />
 		</property>
 		<property name="userManager">
-			<ref bean="UserManager"/>
+			<ref bean="UserManager" />
 		</property>
 	</bean>
 
@@ -256,7 +261,7 @@
 	<bean id="PublishAction" class="com.whiteblog.action.publishAction">
 		<property name="blogService">
 			<ref bean="BlogService" />
-		</property>	
+		</property>
 		<property name="blogtypeService">
 			<ref bean="BlogtypeService" />
 		</property>
@@ -405,7 +410,7 @@
 			<ref bean="BlogDAO" />
 		</property>
 	</bean>
-	
+
 	<bean id="LikeAction" class="com.whiteblog.action.LikeAction">
 		<property name="likeService">
 			<ref bean="LikeService" />
@@ -423,12 +428,12 @@
 			<ref bean="SupertypeDAO" />
 		</property>
 	</bean>
-		
+
 	<bean id="forwardAction" class="com.whiteblog.action.forwardAction">
 		<property name="blogService">
 			<ref bean="BlogService" />
-		</property>		
-	</bean>	
+		</property>
+	</bean>
 	<bean id="HobbyDAO" class="com.whiteblog.dao.HobbyDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -463,7 +468,8 @@
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
 		</property>
-	</bean></beans>
+	</bean>
+</beans>
 
 	
 	

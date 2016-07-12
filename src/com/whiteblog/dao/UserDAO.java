@@ -18,7 +18,7 @@ import com.whiteblog.entity.User;
  * provides additional information for how to configure it for the desired type
  * of transaction control.
  * 
- * @see com.whiteblog.dao.User
+ * @see com.whiteblog.entity.User
  * @author MyEclipse Persistence Tools
  */
 public class UserDAO extends HibernateDaoSupport {
@@ -64,7 +64,7 @@ public class UserDAO extends HibernateDaoSupport {
 		log.debug("getting User instance with id: " + id);
 		try {
 			User instance = (User) getHibernateTemplate().get(
-					"com.whiteblog.dao.User", id);
+					"com.whiteblog.entity.User", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);

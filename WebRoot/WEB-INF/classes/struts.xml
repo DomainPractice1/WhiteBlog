@@ -7,31 +7,37 @@
 			<!-- 通过设置redirect类型防止登陆的时候提示表单重新提交，影响性能和用户体验 -->
 			<result name="user" type="redirect">/index_rt.html</result>
 			<result name="admin" type="redirectAction">showuncheckblog</result>
-			<result name="error">/error.jsp</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<action name="register" class="RegisterAction" method="execute">
 			<result name="success">/success.jsp</result>
-			<result name="error">/error.jsp</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<action name="content" class="BlogContent" method="execute">
 			<result name="success" >/blogcontent_rt.jsp</result>
-			<result name="fail">/404.html</result>
+			<result name="fail">/404.jsp</result>
 		</action>
 		<action name="uncheckcontent" class="BlogContent" method="uncheck">
 			<result name="success" >/uncheckcontent.jsp</result>
-			<result name="fail">/404.html</result>
+			<result name="fail">/404.jsp</result>
 		</action>
 		<action name="review" class="BlogContent" method="review">
 			<result name="success" type="redirectAction">showuncheckblog</result>
+			<result name="error">/404.jsp</result>
+		</action>
+		<action name="deletereview" class="BlogContent" method="deleteBlog">
+			<result name="success" type="redirectAction">showuncheckblog</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<action name="searchArticle" class="SearchArticleAction" method="execute">
+
  			<!-- <result name="success">/articleListTest.jsp</result>  -->
  			<result name="success">./blogAndTags.jsp</result>
 			<result name="error">/404.html</result>
 		</action>
 		<action name="ShowBlogList" class="ShowBlogListAction" method="execute">
 			<result name="success">/success.jsp</result>
-			<result name="error">/404.html</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<action name="publish" class="PublishAction" method="execute">
 			<result name="input">/publish.jsp</result>
@@ -39,7 +45,7 @@
 			 	<param name="actionName">content</param>
                 <param name="id">${id}</param>
 			</result>
-			<result name="error">/error.jsp</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<action name="notice" class="NoticeAction" method="execute">
 			<result name="success" type="json">
@@ -54,30 +60,32 @@
 		
 		<action name="getalluser" class="UserAction" method="getAllUser">
 			<result name="success">/authors.jsp</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		
 		<action name="deleteuser" class="UserAction" method="deleteUser">
 			<result name="success">/authors.jsp</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		
 		<action name="ShowCommentList" class="ShowCommentListAction" method="execute">
 			<result name="success">/blogcontent_rt.jsp</result>
-			<result name="error">/404.html</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<action name="PostComment" class="PostCommentAction" method="execute">
 			<result name="input">/blogcontent_rt.jsp</result>
 			<result name="success">/blogcontent_rt.jsp</result>
-			<result name="error">/404.html</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<action name="ShowInformedBlogList" class="ShowInformedBlogListAction" method="execute">
 			<result name="success">/index_admin.jsp</result>
-			<result name="error">/404.html</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<action name="deleteBlog" class="DeleteBlogAction" method="execute">
  			<result name="success" type="json">
  				<param name="root">id</param>
  			</result>
- 			<result name="error">/error.jsp</result>
+ 			<result name="error">/404.jsp</result>
 		</action>
 		<action name="changeDeleteList" class="ShowBlogListAction" method="changeBlogList">
 			<result name="success" type="json">
@@ -86,28 +94,31 @@
 		</action>
 		<action name="showuncheckblog" class="ShowBlogListAction" method="showUNCheckBlog">
 			<result name="success">/authors.jsp</result>
-			<result name="error">/404.html</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<action name="sendMessage" class="SendMessageAction" method="execute">
 			<result name="success">./index_rt.jsp</result>
-			<result name="fail">/404.html</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<action name="addTags" class="addTagsAction" method="addTags">
 			<result name="success">./index_rt.jsp</result>
-			<result name="error">/404.html</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<action name="showMailList" class="showMailListAction" method="execute">
 			<result name="success">/mailList.jsp</result>
+			<result name="error">/404.jsp</result>
 		</action>
 		<action name="findBlogByTagAction" class="FindBlogByTagAction" method="findBlogs">
 			<result name="success">./blogAndTags.jsp</result>
-			<result name="error">./404.html</result>
+			<result name="error">/404.html</result>
 		</action>
 		<action name="logout" class="com.whiteblog.action.logoutAction" method="execute">
-			<result name="success">./index_rt.jsp</result>
+			<result name="success">/index_rt.jsp</result>
+			<result name="error">/404.html</result>
 		</action>
+		
 		<action name="modify" class="modifyAction" method="execute">
-			<result name="error">/404.html</result>	
+			<result name="error">/404.jsp</result>
 			<result name="success" type="redirectAction">
 			 	<param name="actionName">content</param>
                 <param name="id">${id}</param>			
@@ -115,11 +126,12 @@
 		</action>
 		<action name="showBlogToModify" class="showBlogToModifyAciton" method="execute">
 			<result name="success">/modify.jsp</result>
-			<result name="error" >./error.jsp</result>
+			<result name="error">/404.html</result>
+
 		</action>
 		<action name="preparationAction" class="addTagsAction" method="preparationAction">
 			<result name="success">/success.jsp</result>
-			<result name="error">/404.html</result>		
+			<result name="error">/404.jsp</result>	
 		</action>
 		<action name="findBlogByTagSuperAction" class="FindBlogByTagAction" method="findBySuperTag">
 			<result name="success">./blogAndTags.jsp</result>
@@ -138,6 +150,7 @@
 			 	<param name="actionName">content</param>
                 <param name="strBlogId">${id}</param>
 			</result>	
+			<result name="error">/404.html</result>
 		</action>
 	</package>
 </struts>    

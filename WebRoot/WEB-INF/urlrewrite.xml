@@ -54,12 +54,10 @@ PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         	<from>^/authors.html</from>
         	<to>/authors.jsp</to>
         </rule>
-    
-        
-        
-        
-        
-        
+    	<rule>
+        	<from>^/404.html</from>
+        	<to>/404.jsp</to>
+        </rule>
         
         <!--
 

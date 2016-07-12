@@ -89,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="medium-image-v1-2.html"><img height="64" src="assets/img/logo-light.png" alt=""></a>
+						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
 					</div>
 								
 					<c:choose>
@@ -131,18 +131,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<p class="text-404">That page can’t be found. It looks like
 							nothing was found at this location. Try the search below to find
 							matching pages:</p>
-						<form>
-							<div class="form-group archive-search">
-								<input type="search" class="form-control"
-									placeholder="LaRead search...">
-								<button type="submit" class="btn btn-link">
-									<i class="fa fa-search"></i>
-								</button>
-							</div>
-						</form>
-						<button type="button" class="btn btn-golden">HOME PAGE</button>
-						<button type="button" class="btn btn-grey btn-outline">PREVIOUS
-							PAGE</button>
+						
+						<a class="btn btn-golden" href="index_rt.jsp">HOME PAGE</a>
 					</div>
 				</div>
 			</div>
@@ -160,6 +150,91 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</div>
 		</footer>
+	</div>
+	<!-- Login Modal -->
+	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
+				</div>
+				<div class="modal-body">
+					<form action="login.action" method="post">
+						<div class="form-group">
+							<input type="text" class="form-control" placeholder="Username" name="userform.username">
+						</div>
+						<div class="form-group">
+							<input type="password" class="form-control" placeholder="Password" name="userform.password">
+						</div>
+						<div class="linkbox">
+							<a href="#">Forgot password ?</a>
+							<span>No account ? <a href="#" id="register-btn" data-toggle="modal" data-target="#register-form">Sign Up.</a></span>
+							<!-- <span class="form-warning"><i class="fa fa-exclamation"></i>Fill the require.</span> -->
+						</div>
+						<div class="linkbox">
+							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN IN</button>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<div class="provider">
+						<span>Sign In With</span>
+						<a href="#"><i class="fa fa-facebook"></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+					</div>
+				</div>
+			</div>
+			<div class="modal-content" id="register-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
+				</div>
+				<div class="modal-body">
+					<form action="register.action" method="post">
+						<!-- <div class="form-group">
+							<input class="form-control" placeholder="Name">
+						</div> -->
+						<div class="form-group">
+							<input class="form-control" placeholder="Username" name="userform.username">
+						</div>
+						<!-- <div class="form-group">
+							<input class="form-control" placeholder="Email">
+						</div> -->
+						<div class="form-group">
+							<input class="form-control" type="password" placeholder="Password" name="userform.password">
+						</div>
+						<div class="linkbox">
+							<span>Already got account? <a href="#" id="login-btn" data-target="#login-form">Sign In.</a></span>
+						</div>
+						<div class="linkbox">
+							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<button type="submit" class="btn btn-golden btn-signin">SIGN UP</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- logout -->
+	<div class="modal leread-modal fade" id="logout-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-body">
+					<form action="logout.action" method="post">					
+						<div class="modal-body">
+							确认登出当前账户么？
+         				</div>
+						<div class="modal-footer">
+            				<button type="button" class="btn btn-default" data-dismiss="modal">关闭 </button>
+            				<button type="submit" class="btn btn-primary">确定</button>
+        				</div>
+					</form>
+				</div>
+			</div>
+		</div>
 	</div>
 
 	<!-- Bootstrap core JavaScript
@@ -182,17 +257,150 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
-	<script>
-		!function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/
-					.test(d.location) ? 'http' : 'https';
-			if (!d.getElementById(id)) {
-				js = d.createElement(s);
-				js.id = id;
-				js.src = p + '://platform.twitter.com/widgets.js';
-				fjs.parentNode.insertBefore(js, fjs);
+	<script type="text/javascript">
+		function update(obj){
+			var labels=$(obj).parent().find('label');
+			$('#blog_id').val(labels.eq(0).text());
+			$('#blog_title').val(labels.eq(1).text());
+			$('#forward-form').modal('show');
+		}
+	</script>
+
+	<script type="text/javascript">
+		var strId = "";
+		function shareTwitter(t)
+		{
+			strId = t.id.substring(7, t.id.length);		
+			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.action?id=' + strId,"_blank","width=500px;height=500px;");
+		}
+	</script>
+	<script type="text/javascript">
+		var strId = "";
+		function myF(t)
+		{
+			strId = t.id.substring(4, t.id.length);
+			var actionName = "clickLike.action?id=";
+			actionName += strId;
+			$.ajax({
+				url:actionName,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == "success")
+						alert("点赞成功");
+					else
+						alert("取消点赞");
+				}
+			});
+		}
+	</script>
+	<script type="text/javascript">		
+		$("#notice").click(function(){
+			$("#slideform").empty();
+			$.ajax({
+				url:"notice.action",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data,function(i,list){
+							var _tr;
+							if(list.blogId == 0){
+								_tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a href="showMailList.action">' + list.content + '</a>' +
+								'</h5><div class="post-subinfo"></div></div></li>'	
+							}else{
+								_tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a href="content.action?id=' + list.blogId + '">' + list.content + '</a>' +
+								'</h5><div class="post-subinfo"></div></div></li>'
+							}  
+                       		
+                       		 $("#slideform").append(_tr);
+                    })
+				}
+			})	
+		});
+	</script>
+	<script type="text/javascript">
+		var t
+		function timedCount()
+		{
+			$.ajax({
+				url:"checkNotice.action",
+				type:"POST",
+				datatype:"json",
+				success:function(data){
+					if(data == "new"){
+						$("#checkicon").attr("class","fa fa-bell fa-spin");
+					}else{
+						$("#checkicon").attr("class","fa fa-bell-o")
+					}
+				}
+			})
+			t=setTimeout("timedCount()",10000)
+		}
+	</script>
+
+	<script type ="text/javascript">
+	function delete_row(delete_id){
+		if(confirm("确定要删除？")){
+			$.ajax({
+				url:"deleteBlog.action?id="+delete_id,
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == -1){
+						$("li").remove("#blog-"+delete_id);
+						//$(delete_id).parent().parent().parent().remove();
+						window.alert("删除成功");
+					}else{
+						window.alert("删除失败");
+					}
+				}
+			})
+			//$("li").remove("#"+delete_id);
+		}
+	}
+	</script>
+	<script type ="text/javascript">
+		$(".Edit_qp").click(function(){
+			$("#delete_vision").empty();
+			$("#delete_vision").toggleClass("delete-blog");
+			$("#delete_vision").toggleClass("view-blog");
+			var classes = $("#delete_vision").attr("class");
+			var actionStr = "#";
+			var delete_icon = "";
+			var onclick_str = "";
+			if(classes.indexOf("view-blog") >= 0) {
+				delete_icon = "delete_icon fa fa-file-text-o";
+			}else{
+				delete_icon = "delete_icon fa fa-times";
+	// 			onclick_str = "onclick=\"delete_row(this)\"";
 			}
-		}(document, 'script', 'twitter-wjs');
+			$.ajax({
+				url:"changeDeleteList.action",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data, function(i, list){
+					var color_str = ""
+					if(classes.indexOf("view-blog") >= 0) {
+						$(".Edit_qp").html("删除文章");
+						actionStr = "content.action?id="+list.blogId;
+						color_str="color:#ffffff";
+					}else {
+						$(".Edit_qp").html("返回");
+						onclick_str="onclick=\"delete_row("+list.blogId+")\"";
+						color_str="color:#FF4500";
+					}
+					var _tr = '<li class="pt-fashion pt-culture" id="blog-'+list.blogId+'"><div class="container"><h5><i class="'+delete_icon+'" style='+color_str+'></i>'+
+					'<a class="delete_qp" href="'+actionStr+'"'+onclick_str+'>'+list.title+'</a></h5><div class="post-subinfo">'+
+					'<span>'+list.time+'</span>   •   <span>2 Comments</span></div></div></li>';
+					$("#delete_vision").append(_tr);				
+				})
+				}
+			})
+			var canvasHeight = $('.canvas').outerHeight();
+			$('.navmenu-quan').height(canvasHeight);
+			$('.post-title-list > li > div').toggleClass('container');
+		})
 	</script>
 </body>
 </html>

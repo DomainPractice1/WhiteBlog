@@ -61,7 +61,7 @@ public class publishAction extends ActionSupport{
 				return ERROR;//该分类未成功添加
 						
 			blog=new Blog();
-			blog.setContent(content);
+			
 			blog.setTitle(title);
 			blog.setTypeId(typeID);
 			blog.setUserId(userID);
@@ -79,16 +79,18 @@ public class publishAction extends ActionSupport{
 			List<String> filterWords = fileManagerImpl.getWords();
 			System.out.println("[filterWords size]"+filterWords.size());
 			blog.setFilterwords(1);
+			String blogcontent = content;
+			
 			for(int i=0;i<filterWords.size();i++){
-				if(content.contains(filterWords.get(i))){
+				if(blogcontent.contains(filterWords.get(i))){
+					blogcontent = blogcontent.replace(filterWords.get(i),"<markp>"+filterWords.get(i)+"</markp>");	
+					System.out.println("["+i+"]"+content);
 					hint="文章中包含敏感词！";
 					blog.setFilterwords(0);
-					break;
-				}else{
-					continue;
 				}
-			}
+			}			
 			
+			blog.setContent(blogcontent);
 			
 			blogDAO.save(blog);
 			hint="成功发布！";

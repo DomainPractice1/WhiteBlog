@@ -29,7 +29,10 @@ public class UserManagerImpl {
 		
 		List<User> result = userdao.findByUsername(userform.getUsername());
 		if(!result.isEmpty()){
-			if(result.get(0).getPassword().equals(userform.getPassword())){
+			
+			String password = EncryptServiceImpl.convert(result.get(0).getPassword());
+
+			if(password.equals(userform.getPassword())){
 				if(result.get(0).getIdentity().equals("user")){
 					return "user";
 				}else{
@@ -49,8 +52,8 @@ public class UserManagerImpl {
 		
 		BeanUtils.copyProperties(newuser,userform);
 		newuser.setIdentity("user");
-		userdao.save(newuser);
-		
+		newuser.setPassword(EncryptServiceImpl.convert(newuser.getPassword()));//加密存储
+		userdao.save(newuser);		
 		return "SUCCESS";
 		
 	}

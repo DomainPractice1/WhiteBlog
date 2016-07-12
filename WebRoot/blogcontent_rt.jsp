@@ -590,9 +590,16 @@
 				type:"POST",
 				dataType:"json",
 				success:function(data){
-				$.each(data,function(i,list){  
-                       		var _tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a>' + list.content + '</a>' +
-						'</h5><div class="post-subinfo"></div></div></li>'
+				$.each(data,function(i,list){
+							var _tr;
+							if(list.blogId == 0){
+								_tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a href="showMailList.action">' + list.content + '</a>' +
+								'</h5><div class="post-subinfo"></div></div></li>'	
+							}else{
+								_tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a href="content.action?id=' + list.blogId + '">' + list.content + '</a>' +
+								'</h5><div class="post-subinfo"></div></div></li>'
+							}  
+                       		
                        		 $("#slideform").append(_tr);
                     })
 				}

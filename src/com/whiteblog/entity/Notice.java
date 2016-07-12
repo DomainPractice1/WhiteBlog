@@ -3,15 +3,21 @@ package com.whiteblog.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+
 import static javax.persistence.GenerationType.IDENTITY;
+
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * Notice entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "notice", catalog = "whiteblog")
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Notice implements java.io.Serializable {
 
 	// Fields

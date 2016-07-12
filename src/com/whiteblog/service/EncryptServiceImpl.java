@@ -1,6 +1,7 @@
 package com.whiteblog.service;
 
 import java.security.MessageDigest;
+
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,6 +21,7 @@ public class EncryptServiceImpl {
 	 * @param parm
 	 * @return
 	 */
+
 	public static int parmIntEnrypt(int parm){
 		String t = Integer.toString(parm);
 		System.out.println(t);
@@ -34,7 +36,7 @@ public class EncryptServiceImpl {
 	 * 参数加密，对于String 类型
 	 * @param parm
 	 * @return
-	 */
+	 */ 
 	public static String parmStringEncypt(String parm){
 		return convert(parm);
 	}
@@ -43,6 +45,7 @@ public class EncryptServiceImpl {
 	 * @param parm
 	 * @return
 	 */
+
 	public static int parmIntDecrypt(String parm){
 		String tmp = convert(parm);
 		int res = Integer.parseInt(tmp);
@@ -52,7 +55,7 @@ public class EncryptServiceImpl {
 	 * 参数解密，对于String类型
 	 * @param parm
 	 * @return
-	 */
+	 */ 
 	public static String parmStringDecrypt(String parm){
 		return convert(parm);
 	}
@@ -60,7 +63,7 @@ public class EncryptServiceImpl {
 	/**
 	 * 加密解密算法 执行一次加密，两次解密
 	 */ 
-	private static String convert(String inStr){
+	public static String convert(String inStr){
 
 		char[] a = inStr.toCharArray();
 		for (int i = 0; i < a.length; i++){
@@ -69,6 +72,7 @@ public class EncryptServiceImpl {
 		String s = new String(a);
 		return s;
 	}
+
 	
 	private static String convertInt(String inStr){
 		char [] a = inStr.toCharArray();

@@ -154,8 +154,7 @@ public class BlogTypeAction {
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		session.put("allTags", tmpList);
 		session.put("allSuperTags", sl);
-		
-		
+
 		return SUCCESS;
 	}
 	
