@@ -177,7 +177,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   </s:form>		
 	</s:div>			
 	</s:div>
-	
+	<footer class="container-fluid footer">
+			<div class="container text-center">
+				<div class="footer-logo"><img src="assets/img/logo-black.png" alt=""></div>
+				<p class="laread-motto">Designed for Read.</p>
+				<div class="laread-social">
+					<a href="#" class="fa fa-twitter"></a>
+					<a href="#" class="fa fa-facebook"></a>
+					<a href="#" class="fa fa-pinterest"></a>
+				</div>
+			</div>
+	</footer>
 	<!-- Login Modal -->
 	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
