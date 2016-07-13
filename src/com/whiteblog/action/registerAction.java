@@ -6,6 +6,11 @@ import com.whiteblog.service.UserManagerImpl;
 
 public class registerAction extends ActionSupport{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4056598133762253475L;
+
 	private UserManagerImpl usermanager;
 	
 	private UserForm userform;

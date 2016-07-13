@@ -18,6 +18,10 @@ public class Province implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3898105385598761584L;
 	private Integer provinceId;
 	private String provinceName;
 

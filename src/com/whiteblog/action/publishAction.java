@@ -7,14 +7,12 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.service.BlogServiceImp;
 import com.whiteblog.service.BlogTypeServiceImp;
-import com.whiteblog.service.UserManagerImpl;
 import com.whiteblog.service.fileManagerImpl;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Blogtype;
 import com.whiteblog.entity.User;
 import com.whiteblog.dao.BlogDAO;
 import com.whiteblog.dao.BlogtypeDAO;
-import com.whiteblog.dao.UserDAO;
 
 import java.util.Date;
 import java.text.SimpleDateFormat;

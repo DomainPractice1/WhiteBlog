@@ -21,6 +21,7 @@ public class UserManagerImpl{
 		this.userdao = userdao;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> getAlluser(){
 		return this.userdao.findAll();
 	}
@@ -89,17 +90,6 @@ public class UserManagerImpl{
 		}else{
 			return "error";
 		}	
-	}
-	
-	public User matchUserByUsername(String name){
-		User res = null;
-		List<User> ul = this.userdao.findAll();
-		for(User u: ul){
-			System.out.println("matchUserByUsername " + u.getUsername());
-			if(u.getUsername().equals(name))
-				res = u;
-		}
-		return res;
 	}
 	
 }

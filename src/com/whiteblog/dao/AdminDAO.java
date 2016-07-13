@@ -1,11 +1,13 @@
 package com.whiteblog.dao;
 
 import java.util.List;
+
 import org.hibernate.LockMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
 import com.whiteblog.entity.Admin;
 
 /**
@@ -66,6 +68,7 @@ public class AdminDAO extends HibernateDaoSupport {
 	public List<Admin> findByExample(Admin instance) {
 		log.debug("finding Admin instance by example");
 		try {
+			@SuppressWarnings("unchecked")
 			List<Admin> results = (List<Admin>) getHibernateTemplate()
 					.findByExample(instance);
 			log.debug("find by example successful, result size: "
@@ -77,7 +80,8 @@ public class AdminDAO extends HibernateDaoSupport {
 		}
 	}
 
-	public List findByProperty(String propertyName, Object value) {
+	@SuppressWarnings("unchecked")
+	public List<Admin> findByProperty(String propertyName, Object value) {
 		log.debug("finding Admin instance with property: " + propertyName
 				+ ", value: " + value);
 		try {
@@ -98,7 +102,8 @@ public class AdminDAO extends HibernateDaoSupport {
 		return findByProperty(PASSWORD, password);
 	}
 
-	public List findAll() {
+	@SuppressWarnings("unchecked")
+	public List<Admin> findAll() {
 		log.debug("finding all Admin instances");
 		try {
 			String queryString = "from Admin";

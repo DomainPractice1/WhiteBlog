@@ -12,7 +12,6 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.whiteblog.dao.CookieDAO;
 import com.whiteblog.entity.User;
 import com.whiteblog.form.UserForm;
 import com.whiteblog.service.BlogTypeServiceImp;

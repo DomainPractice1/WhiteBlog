@@ -22,6 +22,10 @@ public class Blogtype implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5054779561874909648L;
 	private Integer typeId;
 	private String typename;
 	private Integer userId;

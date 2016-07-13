@@ -1,9 +1,5 @@
 package com.whiteblog.action;
 
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,10 +9,13 @@ import com.whiteblog.form.CommentForm;
 import com.whiteblog.service.BlogManagerImpl;
 import com.whiteblog.service.NoticeManagerImpl;
 import com.whiteblog.service.PostCommentService;
-import com.whiteblog.service.UserManagerImpl;
 import com.whiteblog.service.fileManagerImpl;
 
 public class PostComment extends ActionSupport{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3290905083821601818L;
 	private PostCommentService postCommentService;
 	private CommentForm commentform;
 	private NoticeManagerImpl noticeManager;

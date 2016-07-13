@@ -1,6 +1,5 @@
 package com.whiteblog.action;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -114,6 +113,7 @@ public class blogContentAction extends ActionSupport{
 		ActionContext.getContext().put("sbt", st);
 		
 		/*所有的SuperType标签*/
+		@SuppressWarnings("unchecked")
 		List<Supertype> sl = superTypeService.getSupertypeDAO().findAll();
 		ActionContext.getContext().put("ast", sl);
 		

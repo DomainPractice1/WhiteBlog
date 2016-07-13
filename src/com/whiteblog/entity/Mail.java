@@ -9,19 +9,21 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * Mail entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "mail", catalog = "whiteblog")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+
 public class Mail implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5611308771562994707L;
 	private Integer mailId;
 	private Integer fromuserId;
 	private Integer touserId;

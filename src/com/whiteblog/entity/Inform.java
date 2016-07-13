@@ -18,6 +18,10 @@ public class Inform implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6762675631347965650L;
 	private Integer id;
 	private String blogid;
 

@@ -5,19 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 /**
  * Collection entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "collection", catalog = "whiteblog")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class Collection implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8392979968925300721L;
 	private Integer collectionId;
 	private Integer userId;
 	private Integer blogId;

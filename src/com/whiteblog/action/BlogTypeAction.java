@@ -113,6 +113,7 @@ public class BlogTypeAction {
 			}
 			
 			/*增加了一部分工能，显示所有的Tags*/
+			@SuppressWarnings("unchecked")
 			List<Blogtype> abtl = (List<Blogtype>)blogtypeService.getBlogtypeDAO().findAll();
 			
 			List<Blogtype> tmpList = new ArrayList<Blogtype>();
@@ -136,6 +137,7 @@ public class BlogTypeAction {
 	
 	public String preparationAction(){
 		/*增加了一部分工能，显示所有的Tags*/
+		@SuppressWarnings("unchecked")
 		List<Blogtype> abtl = (List<Blogtype>)blogtypeService.getBlogtypeDAO().findAll();
 		
 		List<Blogtype> tmpList = new ArrayList<Blogtype>();
@@ -151,6 +153,7 @@ public class BlogTypeAction {
 			if(!flag)
 				tmpList.add(bt);
 		}
+		@SuppressWarnings("unchecked")
 		List<Supertype> sl = superTypeService.getSupertypeDAO().findAll();
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		session.put("allTags", tmpList);

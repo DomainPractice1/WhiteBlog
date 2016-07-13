@@ -14,14 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.whiteblog.dao.CookieDAO;
-import com.whiteblog.dao.UserDAO;
 import com.whiteblog.entity.User;
-import com.whiteblog.service.EncryptServiceImpl;
-import com.whiteblog.service.UserManagerImpl;
 
 public class cookieFilter implements Filter{
 
-	private static final String SUCCESS = "success";
 	protected FilterConfig config;
 	private CookieDAO cookieDao = new CookieDAO();
 	

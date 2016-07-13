@@ -11,6 +11,10 @@ import com.whiteblog.service.MailManagerImpl;
 
 public class mailAction extends ActionSupport{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8744475453102835483L;
 	private MailManagerImpl mailManager;
 		
 	public MailManagerImpl getMailManager() {
