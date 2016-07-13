@@ -89,9 +89,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
 				<div class="container">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="index_rt.jsp"><img height="64" src="assets/img/logo-light.png" alt=""></a>
-					</div>
-								
+						<a class="navbar-brand" href="./index_rt.html"><img height="64" src="assets/img/logo-light.png" alt=""></a> 
+					</div>							
 					<c:choose>
 						<c:when test="${sessionScope.loginUser == null}">
 							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
@@ -109,7 +108,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 									<i id="checkicon" class="fa fa-bell-o"></i>
 								</button>						
 							</div>
-							<a class="modal-form">${sessionScope.loginUser.username}</a>
+							<div class="get-post-titles" style="margin-right:10px">					
+								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.php'">
+									<i class="fa fa-envelope"></i>
+								</button>						
+							</div>
+							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
+								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
+								<i class="fa fa-power-off"></i>
+							</a>
 						</c:otherwise>
 					</c:choose>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
@@ -160,7 +167,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
 				</div>
 				<div class="modal-body">
-					<form action="login.action" method="post">
+					<form action="login.php" method="post">
 						<div class="form-group">
 							<input type="text" class="form-control" placeholder="Username" name="userform.username">
 						</div>
@@ -192,7 +199,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
 				</div>
 				<div class="modal-body">
-					<form action="register.action" method="post">
+					<form action="register.php" method="post">
 						<!-- <div class="form-group">
 							<input class="form-control" placeholder="Name">
 						</div> -->
@@ -223,7 +230,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<div class="modal-dialog">
 			<div class="modal-content" id="login-content">
 				<div class="modal-body">
-					<form action="logout.action" method="post">					
+					<!-- <form action="logout.action" method="post">		 -->
+					<form action="logout.php" method="post">				
 						<div class="modal-body">
 							确认登出当前账户么？
          				</div>
@@ -236,7 +244,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</div>
-
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->

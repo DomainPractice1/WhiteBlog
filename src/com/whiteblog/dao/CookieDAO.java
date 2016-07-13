@@ -33,8 +33,10 @@ public class CookieDAO {
 	public static void disconnectDB(){
 		try{
 			con.close();
-			stat.close();
-			rs.close();
+			if(!stat.isClosed())
+				stat.close(); 
+			if(!rs.isClosed())
+				rs.close();
 		}catch(Exception e){
 			System.out.println(e);
 		}finally{
@@ -62,11 +64,13 @@ public class CookieDAO {
 					res.setSex(rs.getInt(10));
 				} 
 			}
+			stat.close();
+			rs.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			//e.printStackTrace();
 		}catch (Exception ex){
-			ex.printStackTrace();
+			//ex.printStackTrace();
 		}
 		
 		return res; 

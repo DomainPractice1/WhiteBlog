@@ -57,7 +57,7 @@ public class cookieFilter implements Filter{
 							request.getSession().setAttribute("loginUser", u);
 						}//if
 					}catch(Exception e){
-						System.out.println(e);
+						//System.out.println(e);
 						continue;
 					}  //catch
 						
