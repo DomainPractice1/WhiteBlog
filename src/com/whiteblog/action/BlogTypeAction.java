@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.whiteblog.dao.CookieDAO;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Blogtype;
 import com.whiteblog.entity.Supertype;
@@ -155,6 +156,9 @@ public class BlogTypeAction {
 		session.put("allTags", tmpList);
 		session.put("allSuperTags", sl);
 
+		/*拦截器使用的数据库连接*/
+		CookieDAO.connectDB();
+		
 		return SUCCESS;
 	}
 	

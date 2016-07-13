@@ -12,6 +12,7 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.whiteblog.dao.CookieDAO;
 import com.whiteblog.entity.User;
 import com.whiteblog.form.UserForm;
 import com.whiteblog.service.BlogTypeServiceImp;
@@ -111,9 +112,6 @@ public class loginAction extends ActionSupport{
 				
 			response.addCookie(cookie);
 				
-			System.out.println("Cookies");
-				
-			
 			return "user";
 			
 		}else if(usermanager.checklogin(userform).equals("admin")){
@@ -121,6 +119,16 @@ public class loginAction extends ActionSupport{
 			Map<String,Object> session = ActionContext.getContext().getSession();
 			
 			User loginUser = usermanager.findUser(userform.getUsername());
+			
+			String password = EncryptServiceImpl.convert(userform.getPassword());
+			
+			String s = new String (userform.getUsername() + "@" + password); 
+			
+			Cookie cookie = new Cookie("userCookie", s);
+			
+			cookie.setMaxAge(7*24*60*60); /*存活时间1一个星期*/
+				
+			response.addCookie(cookie);
 			
 			session.put("loginUser",loginUser);
 			

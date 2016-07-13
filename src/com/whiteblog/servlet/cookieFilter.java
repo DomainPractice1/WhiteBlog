@@ -13,13 +13,17 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.whiteblog.dao.CookieDAO;
+import com.whiteblog.dao.UserDAO;
 import com.whiteblog.entity.User;
 import com.whiteblog.service.EncryptServiceImpl;
 import com.whiteblog.service.UserManagerImpl;
 
 public class cookieFilter implements Filter{
 
+	private static final String SUCCESS = "success";
 	protected FilterConfig config;
+	private CookieDAO cookieDao = new CookieDAO();
 	
 	public void init(FilterConfig config){
 		this.config = config;
@@ -35,8 +39,7 @@ public class cookieFilter implements Filter{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 		Cookie [] cookies = request.getCookies();
-		String [] info = null;
-		UserManagerImpl userManager = new UserManagerImpl();
+		String [] info = null; 
 		if(cookies != null){
 			for(Cookie c: cookies){
 				/*URLDecoder.decode(c.getName(), "utf-8");*/
@@ -44,26 +47,25 @@ public class cookieFilter implements Filter{
 				info = cookieValue.split("@");
 				if(info.length == 2){
 					String username = info[0];
-					String password = info[1];
-					System.out.println(username);
-					System.out.println(password);
+					String password = info[1]; 
 					User u = new User ();
 					try{
-						u = userManager.getUserdao().findByUsername(username).get(0);
+						/*cookieDao.connectDB();*/
+						if((u = cookieDao.findAll(username, password)) != null){
+							u.setUsername(username);
+							u.setPassword(password);
+							request.getSession().setAttribute("loginUser", u);
+						}//if
 					}catch(Exception e){
 						System.out.println(e);
 						continue;
-					} 
-					if(u != null && u.getPassword().equals(password)){
-						request.getSession().setAttribute("loginUser", u);
-						System.out.println("loginUser");
-					}
+					}  //catch
 						
-				}
-			}
-		} 
+				}//if
+			}//for
+		} //if
 		chain.doFilter(request, response);
-	}
+	}//doFilter
 	
 	
 	

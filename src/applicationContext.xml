@@ -88,13 +88,13 @@
 			<tx:method name="get*" propagation="REQUIRED" />
 			<tx:method name="find*" propagation="REQUIRED" />
 			<tx:method name="delete*" propagation="REQUIRED" />
-			<tx:method name="checkNew" propagation="REQUIRED" />
 			<tx:method name="save*" propagation="REQUIRED" />
 			<tx:method name="add*" propagation="REQUIRED" />
-			<tx:method name="post" propagation="REQUIRED" />
+			<tx:method name="post*" propagation="REQUIRED" />
 			<tx:method name="sendMessage" propagation="REQUIRED" />
-			<tx:method name="checklogin" propagation="REQUIRED" />
-			<tx:method name="register" propagation="REQUIRED" />
+			<tx:method name="check*" propagation="REQUIRED" />
+			<tx:method name="regist*" propagation="REQUIRED" />
+			<tx:method name="match*" propagation="REQUIRED" />
 		</tx:attributes>
 	</tx:advice>
 
@@ -469,6 +469,7 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
+	
 </beans>
 
 	

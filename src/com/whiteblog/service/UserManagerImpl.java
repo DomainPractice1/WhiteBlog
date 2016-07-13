@@ -9,7 +9,7 @@ import com.whiteblog.dao.UserDAO;
 import com.whiteblog.entity.User;
 import com.whiteblog.form.UserForm;
 
-public class UserManagerImpl {
+public class UserManagerImpl{
 	
 	private UserDAO userdao;
 
@@ -95,6 +95,7 @@ public class UserManagerImpl {
 		User res = null;
 		List<User> ul = this.userdao.findAll();
 		for(User u: ul){
+			System.out.println("matchUserByUsername " + u.getUsername());
 			if(u.getUsername().equals(name))
 				res = u;
 		}
