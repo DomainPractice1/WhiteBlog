@@ -56,7 +56,7 @@ public class CountryDAO extends HibernateDaoSupport {
 		log.debug("getting Country instance with id: " + id);
 		try {
 			Country instance = (Country) getHibernateTemplate().get(
-					"com.whiteblog.dao.Country", id);
+					"com.whiteblog.entity.Country", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -64,7 +64,6 @@ public class CountryDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Country> findByExample(Country instance) {
 		log.debug("finding Country instance by example");
 		try {
@@ -79,7 +78,6 @@ public class CountryDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding Country instance with property: " + propertyName
 				+ ", value: " + value);
@@ -93,12 +91,10 @@ public class CountryDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Country> findByCountryname(Object countryname) {
 		return findByProperty(COUNTRYNAME, countryname);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all Country instances");
 		try {

@@ -5,26 +5,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 /**
  * City entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "city", catalog = "whiteblog")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 public class City implements java.io.Serializable {
 
 	// Fields
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -848517768423091033L;
 	private Integer cityId;
 	private String cityname;
-	private Integer countryId;
+	private Integer provinceId;
 
 	// Constructors
 
@@ -38,10 +30,10 @@ public class City implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public City(Integer cityId, String cityname, Integer countryId) {
+	public City(Integer cityId, String cityname, Integer provinceId) {
 		this.cityId = cityId;
 		this.cityname = cityname;
-		this.countryId = countryId;
+		this.provinceId = provinceId;
 	}
 
 	// Property accessors
@@ -64,13 +56,13 @@ public class City implements java.io.Serializable {
 		this.cityname = cityname;
 	}
 
-	@Column(name = "countryID")
-	public Integer getCountryId() {
-		return this.countryId;
+	@Column(name = "provinceID")
+	public Integer getProvinceId() {
+		return this.provinceId;
 	}
 
-	public void setCountryId(Integer countryId) {
-		this.countryId = countryId;
+	public void setProvinceId(Integer provinceId) {
+		this.provinceId = provinceId;
 	}
 
 }

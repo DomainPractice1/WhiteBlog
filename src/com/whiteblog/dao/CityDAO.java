@@ -18,14 +18,14 @@ import com.whiteblog.entity.City;
  * provides additional information for how to configure it for the desired type
  * of transaction control.
  * 
- * @see com.whiteblog.dao.City
+ * @see com.whiteblog.entity.City
  * @author MyEclipse Persistence Tools
  */
 public class CityDAO extends HibernateDaoSupport {
 	private static final Logger log = LoggerFactory.getLogger(CityDAO.class);
 	// property constants
 	public static final String CITYNAME = "cityname";
-	public static final String COUNTRY_ID = "countryId";
+	public static final String PROVINCE_ID = "provinceId";
 
 	protected void initDao() {
 		// do nothing
@@ -57,7 +57,7 @@ public class CityDAO extends HibernateDaoSupport {
 		log.debug("getting City instance with id: " + id);
 		try {
 			City instance = (City) getHibernateTemplate().get(
-					"com.whiteblog.dao.City", id);
+					"com.whiteblog.entity.City", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -65,7 +65,6 @@ public class CityDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<City> findByExample(City instance) {
 		log.debug("finding City instance by example");
 		try {
@@ -80,7 +79,6 @@ public class CityDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding City instance with property: " + propertyName
 				+ ", value: " + value);
@@ -94,17 +92,14 @@ public class CityDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<City> findByCityname(Object cityname) {
 		return findByProperty(CITYNAME, cityname);
 	}
 
-	@SuppressWarnings("unchecked")
-	public List<City> findByCountryId(Object countryId) {
-		return findByProperty(COUNTRY_ID, countryId);
+	public List<City> findByProvinceId(Object provinceId) {
+		return findByProperty(PROVINCE_ID, provinceId);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all City instances");
 		try {

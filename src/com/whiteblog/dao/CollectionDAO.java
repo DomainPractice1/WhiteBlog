@@ -58,7 +58,7 @@ public class CollectionDAO extends HibernateDaoSupport {
 		log.debug("getting Collection instance with id: " + id);
 		try {
 			Collection instance = (Collection) getHibernateTemplate().get(
-					"com.whiteblog.dao.Collection", id);
+					"com.whiteblog.entity.Collection", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -66,7 +66,6 @@ public class CollectionDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Collection> findByExample(Collection instance) {
 		log.debug("finding Collection instance by example");
 		try {
@@ -94,12 +93,10 @@ public class CollectionDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Collection> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Collection> findByBlogId(Object blogId) {
 		return findByProperty(BLOG_ID, blogId);
 	}

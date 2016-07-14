@@ -67,7 +67,6 @@ public class BlogtypeDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blogtype> findByExample(Blogtype instance) {
 		log.debug("finding Blogtype instance by example");
 		try {
@@ -82,7 +81,6 @@ public class BlogtypeDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding Blogtype instance with property: " + propertyName
 				+ ", value: " + value);
@@ -96,22 +94,18 @@ public class BlogtypeDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blogtype> findByTypename(Object typename) {
 		return findByProperty(TYPENAME, typename);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blogtype> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blogtype> findBySupertypeId(Object supertypeId) {
 		return findByProperty(SUPERTYPE_ID, supertypeId);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all Blogtype instances");
 		try {

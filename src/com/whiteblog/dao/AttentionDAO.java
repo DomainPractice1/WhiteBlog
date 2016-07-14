@@ -58,7 +58,7 @@ public class AttentionDAO extends HibernateDaoSupport {
 		log.debug("getting Attention instance with id: " + id);
 		try {
 			Attention instance = (Attention) getHibernateTemplate().get(
-					"com.whiteblog.dao.Attention", id);
+					"com.whiteblog.entity.Attention", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -69,7 +69,6 @@ public class AttentionDAO extends HibernateDaoSupport {
 	public List<Attention> findByExample(Attention instance) {
 		log.debug("finding Attention instance by example");
 		try {
-			@SuppressWarnings("unchecked")
 			List<Attention> results = (List<Attention>) getHibernateTemplate()
 					.findByExample(instance);
 			log.debug("find by example successful, result size: "
@@ -81,7 +80,6 @@ public class AttentionDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding Attention instance with property: " + propertyName
 				+ ", value: " + value);
@@ -95,17 +93,14 @@ public class AttentionDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Attention> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Attention> findByPassivesideId(Object passivesideId) {
 		return findByProperty(PASSIVESIDE_ID, passivesideId);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all Attention instances");
 		try {

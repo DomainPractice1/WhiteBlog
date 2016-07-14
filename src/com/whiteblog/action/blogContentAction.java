@@ -3,8 +3,13 @@ package com.whiteblog.action;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
+
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.whiteblog.dao.UserDAO;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.form.BlogContentForm;
 import com.whiteblog.service.BlogContentManageImpl;
@@ -28,6 +33,15 @@ public class blogContentAction extends ActionSupport{
 	private List<Blogtype> btl ;
 	private Integer blogId;
 	private String strBlogId;
+private UserDAO userDAO;
+
+	
+	public UserDAO getUserDAO() {
+		return userDAO;
+	}
+	public void setUserDAO(UserDAO userDAO) {
+		this.userDAO = userDAO;
+	}
 	
 	public SuperTypeService getSuperTypeService() {
 		return superTypeService;
@@ -90,7 +104,11 @@ public class blogContentAction extends ActionSupport{
 		if(ins == null)
 			return FAIL;
 		String username = ins.getUsername();
-		//System.out.println(username + " and " + ins.getContent() + " BlogContent");		
+		System.out.println(username + " and " + ins.getContent() + " BlogContent");		
+		//统计点击数量
+		ins.setViewnumber(ins.getViewnumber()+1);
+		blogContentManage.setupdateviewcount(ins);
+		System.out.println(ins.getUsername() + ins.getViewnumber());
 		
 		BlogContentForm blogContentForm = new BlogContentForm(ins, username); 		
 		Map<String, Object> map = ActionContext.getContext().getSession();
@@ -101,10 +119,13 @@ public class blogContentAction extends ActionSupport{
 		ActionContext.getContext().put("re", btl);
 		//ActionContext.getContext().getSession().put("req", blogContentForm);
 		ActionContext.getContext().getSession().put("blogId",id);
+		int theuserID=userDAO.findByUsername(b.getUsername()).get(0).getUserId();
+		ActionContext.getContext().getSession().put("theuserID",theuserID);
+	
 		
 		/*标签的部分*/ 
 		int bti = b.getBlog().getTypeId();
-		//System.out.println("bti");
+		System.out.println("bti");
 		Blogtype bt = blogtypeService.getBlogtype(bti);
 		ActionContext.getContext().put("bt", bt);
 		
@@ -116,6 +137,16 @@ public class blogContentAction extends ActionSupport{
 		@SuppressWarnings("unchecked")
 		List<Supertype> sl = superTypeService.getSupertypeDAO().findAll();
 		ActionContext.getContext().put("ast", sl);
+		//判断是不是收藏过
+		System.out.println("我在判断文章是否被收藏过");
+		System.out.println(id);
+		//Map<String, Object> session = ActionContext.getContext().getSession();
+		HttpServletRequest request = ServletActionContext.getRequest();
+		User user = (User) map.get("loginUser");
+		int  print=blogContentManage.ifcollect(user,id);
+		System.out.println(print);
+		request.setAttribute("print",print);
+		
 		
 		return SUCCESS;
 	}
@@ -125,14 +156,14 @@ public class blogContentAction extends ActionSupport{
 		if(ins == null)
 			return FAIL;
 		String username = ins.getUsername();
-		//System.out.println(username + " and " + ins.getContent() + " BlogContent");		
+		System.out.println(username + " and " + ins.getContent() + " BlogContent");		
 		
 		BlogContentForm blogContentForm = new BlogContentForm(ins, username); 		
-		//System.out.println(blogContentForm.getUsername() + "blogcontentform");
+		System.out.println(blogContentForm.getUsername() + "blogcontentform");
 		Map<String, Object> map = ActionContext.getContext().getSession();
 		map.put("req", blogContentForm);
 		BlogContentForm b = (BlogContentForm)map.get("req");
-		//System.out.println(b.getUsername() + " is from map of blogcontentAction");
+		System.out.println(b.getUsername() + " is from map of blogcontentAction");
 		ActionContext.getContext().put("req", b);
 		btl = blogtypeService.getBlogtypeDAO().findByUserId(ins.getUserId());
 		ActionContext.getContext().put("re", btl);

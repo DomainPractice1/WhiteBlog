@@ -57,7 +57,7 @@ public class ProvinceDAO extends HibernateDaoSupport {
 		log.debug("getting Province instance with id: " + id);
 		try {
 			Province instance = (Province) getHibernateTemplate().get(
-					"com.whiteblog.dao.Province", id);
+					"com.whiteblog.entity.Province", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -65,7 +65,6 @@ public class ProvinceDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Province> findByExample(Province instance) {
 		log.debug("finding Province instance by example");
 		try {
@@ -93,12 +92,10 @@ public class ProvinceDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Province> findByProvinceName(Object provinceName) {
 		return findByProperty(PROVINCE_NAME, provinceName);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all Province instances");
 		try {

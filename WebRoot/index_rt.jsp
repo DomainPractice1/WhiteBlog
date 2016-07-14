@@ -5,6 +5,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.opensymphony.com/oscache" prefix="cache" %>  
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <!-- <html lang="en"> -->
 <html>
@@ -35,8 +36,6 @@ n.css" rel="stylesheet">
 <!-- Custom font -->
 <!-- Custom styles for this template -->
 <link href="assets/css/style.css" rel="stylesheet">
-
-
 
 </head>
 <body onload="timedCount()">
@@ -109,7 +108,8 @@ n.css" rel="stylesheet">
 									<i class="fa fa-envelope"></i>
 								</button>						
 							</div>
-							<a class="modal-form" style="margin-right:10px">${sessionScope.loginUser.username}</a>
+							<a class="modal-form" style="margin-right:10px"
+						href="showcreat-Username-${sessionScope.loginUser.username}.html">${sessionScope.loginUser.username}</a>
 								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
 								<i class="fa fa-power-off"></i>
 							</a>
@@ -135,6 +135,7 @@ n.css" rel="stylesheet">
 				<div class="col-md-8">
 					<div class="post-fluid post-medium-vertical">
 					<s:iterator value = "#session.blogList" var = "blog">
+					<cache:cache key="cacheBlog${blog.blogId}" scope="session" time="15"> 
 						<div class="container-fluid post-default">
 							<div class="container-medium">
 								<div class="row post-items">
@@ -179,6 +180,7 @@ n.css" rel="stylesheet">
 								</div>
 							</div>
 						</div>
+						</cache:cache>
 						</s:iterator>						
 
 
@@ -194,7 +196,7 @@ n.css" rel="stylesheet">
 					<div class="laread-right">
 
 						<form action="searchArticle.php" class="laread-form search-form">
-							<div class="input"><input type="text" class="form-control" placeholder="Search..." name="searchText"></div>
+							<div class="input"><input type="text" class="form-control" placeholder="Search..." name="searchText" /></div>
 							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
 						</form>
 
@@ -212,7 +214,8 @@ n.css" rel="stylesheet">
 							<li class="title">热门用户</li>
 							<s:iterator value="#session.topuser" var="user">
  								<li>
- 								<a href="#">${user.username}</a>
+ 								<a
+								href="showUserdetailAction.action?attentionUserid=${user.userId}">${user.username}</a>
  								<i class="line"></i>
  								</li>
  							</s:iterator>
@@ -256,6 +259,7 @@ n.css" rel="stylesheet">
 	
 
 	<!-- Login Modal -->
+	<cache:cache key="cacheLoginModal" scope="session" time="15"> 
 	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content" id="login-content">
@@ -264,13 +268,17 @@ n.css" rel="stylesheet">
 					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
 				</div>
 				<div class="modal-body">
-					<form action="login.php" method="post">
+					<form action="login.php" method="post"  id="login_request">
 						<s:token></s:token>
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Username" name="userform.username">
+							<input id="userName" type="text" class="form-control" placeholder="Username" name="userform.username">
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" placeholder="Password" name="userform.password">
+							<input id="password" type="password" class="form-control" placeholder="Password" name="userform.password">
+						</div>
+						<div class="form-group">							
+							<input id="code" type="text" class="form-control" placeholder="请输入图片中的字符" name="code" style="width:250px;float:left"/>													
+							<span><img id="code_img" style="position:relative;top:8px;height:25px;width:100px;padding-left:5px;"></span><br>
 						</div>
 						<div class="linkbox">
 							<a href="#">Forgot password ?</a>
@@ -279,7 +287,7 @@ n.css" rel="stylesheet">
 						</div>
 						<div class="linkbox">
 							<label><input name="useCookie" type="checkbox"><span>Remember me</span><i class="fa"></i></label>
-							<button type="submit" class="btn btn-golden btn-signin">SIGN IN</button>
+							<button id="btn" type="button" class="btn btn-golden btn-signin">SIGN IN</button>
 						</div>
 					</form>
 				</div>
@@ -297,7 +305,7 @@ n.css" rel="stylesheet">
 					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
 				</div>
 				<div class="modal-body">
-					<form action="register.php" method="post">
+					<s:form action="register.php" method="post" theme="simple">
 						<!-- <div class="form-group">
 							<input class="form-control" placeholder="Name">
 						</div> -->
@@ -310,6 +318,10 @@ n.css" rel="stylesheet">
 						<div class="form-group">
 							<input class="form-control" type="password" placeholder="Password" name="userform.password">
 						</div>
+						<div class="form-group">							
+							<input id="code" type="text" class="form-control" placeholder="请输入图片中的字符" name="code" style="width:250px;float:left"/>													
+							<span><img id="code_img" style="position:relative;top:8px;height:25px;width:100px;padding-left:5px;"></span><br>
+						</div>
 						<div class="linkbox">
 							<span>Already got account? <a href="#" id="login-btn" data-target="#login-form">Sign In.</a></span>
 						</div>
@@ -320,13 +332,15 @@ n.css" rel="stylesheet">
 							</label>
 							<button type="submit" class="btn btn-golden btn-signin">SIGN UP</button>
 						</div>
-					</form>
+					</s:form>
 				</div>
 			</div>
 		</div>
 	</div>
-
+	</cache:cache>
+	
 	<!-- logout -->
+	<cache:cache key="cacheLogoutModal" scope="session" time="15">
 	<div class="modal leread-modal fade" id="logout-form" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content" id="login-content">
@@ -345,8 +359,9 @@ n.css" rel="stylesheet">
 			</div>
 		</div>
 	</div>
-	
+	</cache:cache>
 	<!-- forward-form -->
+	<cache:cache key="cacheForwardModal" scope="session" time="15">
 	<div class="modal leread-modal fade" id="forward-form" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content" id="login-content">
@@ -371,7 +386,7 @@ n.css" rel="stylesheet">
 			</div>			
 		</div>
 	</div>
-	
+	</cache:cache>
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -392,6 +407,7 @@ n.css" rel="stylesheet">
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<script src="assets/js/verification.js"></script>	
 	
 	<script type="text/javascript">
 		function update(obj){

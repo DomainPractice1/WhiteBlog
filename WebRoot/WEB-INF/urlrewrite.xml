@@ -30,6 +30,10 @@ PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         	<to>/test/status/</to>
         </outbound-rule> -->
         <rule>
+        	<from>/UploadFileServlet</from>
+        	<to>UploadFileServlet</to>
+        </rule>
+        <rule>
         	<note>
         	重定向配置在struts.xml里面的action，带一个参数的,
         	</note>

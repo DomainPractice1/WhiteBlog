@@ -18,7 +18,7 @@ public class logoutAction extends ActionSupport{
 		/*拦截器用的数据库连接*/
 		CookieDAO.disconnectDB();
 		session.remove("loginUser");
-		//System.out.println("Logout Action on");		
+		System.out.println("Logout Action on");		
 		return SUCCESS;
 	}
 

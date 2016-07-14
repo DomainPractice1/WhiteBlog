@@ -101,7 +101,7 @@ public class modifyAction extends ActionSupport{
 			filterWords=fileManagerImpl.getWords();			
 		}
 		catch(Exception e){
-			//System.out.println("读取过滤词异常");
+			System.out.println("读取过滤词异常");
 			e.printStackTrace();
 		}
 	}

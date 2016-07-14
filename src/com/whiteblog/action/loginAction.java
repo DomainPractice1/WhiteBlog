@@ -1,6 +1,5 @@
 package com.whiteblog.action;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +17,9 @@ import com.whiteblog.service.BlogTypeServiceImp;
 import com.whiteblog.service.EncryptServiceImpl;
 import com.whiteblog.service.UserManagerImpl;
 import com.whiteblog.service.fileManagerImpl;
+import java.io.*;
+import javax.servlet.http.HttpServletRequest;
+
 
 public class loginAction extends ActionSupport{
 	/**
@@ -32,6 +34,10 @@ public class loginAction extends ActionSupport{
 	private boolean useCookie;
 	
 	private BlogTypeServiceImp blogtypeService;
+	
+	private String code;//验证码
+    
+	private InputStream result;	
 		
 	/*存放经session的加密用的函数*/
 	public Map<Integer, String> encryptMap = new HashMap<Integer, String>();
@@ -72,7 +78,20 @@ public class loginAction extends ActionSupport{
 	public void setUsermanager(UserManagerImpl usermanager) {
 		this.usermanager = usermanager;
 	}
-	
+	public String testVerification() throws Exception{
+		String randomStr=(String) ActionContext.getContext().getSession().get("randomStr");
+		HttpServletRequest request = ServletActionContext.getRequest();        
+		code = request.getParameter("code");
+		  if(code.trim().equalsIgnoreCase(randomStr)){		  
+			    result=new ByteArrayInputStream("1".getBytes("UTF-8"));	
+			    //return SUCCESS;
+		  }else{
+			   //验证码错误
+			   result=new ByteArrayInputStream("0".getBytes("UTF-8"));
+			   //return ERROR;	
+		  }
+		  return "result";
+	}
 	public String execute(){		
 		
 		HttpServletResponse response = ServletActionContext.getResponse();
@@ -109,7 +128,7 @@ public class loginAction extends ActionSupport{
 				
 			cookie.setMaxAge(7*24*60*60); /*存活时间1一个星期*/
 				
-			response.addCookie(cookie);
+			response.addCookie(cookie);			
 				
 			return "user";
 			
@@ -134,6 +153,30 @@ public class loginAction extends ActionSupport{
 			return "admin";
 			
 		}else{
+			Map<String,Object> session = ActionContext.getContext().getSession();
+			Map<String,Integer> logFailUserList=(HashMap<String,Integer>) session.get("failUserList");
+			if(logFailUserList==null){
+				logFailUserList=new HashMap<String,Integer>();
+				logFailUserList.put(userform.getUsername(), 1);							
+			}
+			else{
+				boolean isWrongBefore=false;
+				for(Map.Entry<String, Integer> entry:logFailUserList.entrySet()){    
+					if(userform.getUsername().equals((entry.getKey()))){
+						isWrongBefore=true;
+						if(entry.getValue()<3){
+							entry.setValue(entry.getValue()+1);							
+						}
+						else{
+							//今天禁止该用户登录,调用cookie														
+						}
+					}				       					
+				}   
+				if(!isWrongBefore){
+					logFailUserList.put(userform.getUsername(), 1);					
+				}
+			}
+			session.put("failUserList", logFailUserList);
 			return ERROR;
 		}
 	
@@ -146,5 +189,11 @@ public class loginAction extends ActionSupport{
 			return SUCCESS;
 		return LOGIN; 
 	}
-	
+	public InputStream getResult() {
+		return result;
+	}
+
+	public void setResult(InputStream result) {
+		this.result = result;
+	}
 }

@@ -65,7 +65,6 @@ public class LikeitDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Likeit> findByExample(Likeit instance) {
 		log.debug("finding Likeit instance by example");
 		try {
@@ -80,7 +79,6 @@ public class LikeitDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding Likeit instance with property: " + propertyName
 				+ ", value: " + value);
@@ -94,17 +92,14 @@ public class LikeitDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Likeit> findByBlogId(Object blogId) {
 		return findByProperty(BLOG_ID, blogId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Likeit> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all Likeit instances");
 		try {

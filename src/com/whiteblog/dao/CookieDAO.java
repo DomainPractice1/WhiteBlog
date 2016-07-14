@@ -62,6 +62,7 @@ public class CookieDAO {
 					res.setProvinceId(rs.getInt(8));
 					res.setJobId(rs.getInt(9));
 					res.setSex(rs.getInt(10));
+					break;
 				} 
 			}
 			stat.close();

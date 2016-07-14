@@ -57,7 +57,7 @@ public class HobbyDAO extends HibernateDaoSupport {
 		log.debug("getting Hobby instance with id: " + id);
 		try {
 			Hobby instance = (Hobby) getHibernateTemplate().get(
-					"com.whiteblog.dao.Hobby", id);
+					"com.whiteblog.entity.Hobby", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -65,7 +65,6 @@ public class HobbyDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Hobby> findByExample(Hobby instance) {
 		log.debug("finding Hobby instance by example");
 		try {
@@ -93,17 +92,14 @@ public class HobbyDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Hobby> findBySupertypeId(Object supertypeId) {
 		return findByProperty(SUPERTYPE_ID, supertypeId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Hobby> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all Hobby instances");
 		try {

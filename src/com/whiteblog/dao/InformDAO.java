@@ -64,7 +64,6 @@ public class InformDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Inform> findByExample(Inform instance) {
 		log.debug("finding Inform instance by example");
 		try {
@@ -92,12 +91,10 @@ public class InformDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Inform> findByBlogid(Object blogid) {
 		return findByProperty(BLOGID, blogid);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all Inform instances");
 		try {

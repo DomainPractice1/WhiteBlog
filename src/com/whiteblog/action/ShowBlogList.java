@@ -32,10 +32,10 @@ public class ShowBlogList extends ActionSupport{
 	private LikeService likeService;
 
 	public String execute(){
-		//System.out.println("[At ShowBlogList] + [Load likelist]"); 	
+		System.out.println("[At ShowBlogList] + [Load likelist]"); 	
 		Map<String,Object> session = ActionContext.getContext().getSession();	
 		blogList=showBlogListService.getAllBlog();
-		//System.out.println("blogList size:"+blogList.size());				
+		System.out.println("blogList size:"+blogList.size());				
 		for(int i=0;i<blogList.size();i++){
 			if(blogList.get(i).getFilterwords()==0){
 				blogList.remove(i);
@@ -43,7 +43,7 @@ public class ShowBlogList extends ActionSupport{
 			}
 		}
 		
-		//System.out.println("blogList size:"+blogList.size());		
+		System.out.println("blogList size:"+blogList.size());		
 		ActionContext.getContext().getSession().put("blogList", blogList);		
 		
 		Map<Object,Double> blogrank = new HashMap<Object,Double>();
@@ -60,7 +60,7 @@ public class ShowBlogList extends ActionSupport{
 			try {
 				publishDate = sdf.parse(blogList.get(i).getTime()).getTime();
 			} catch (ParseException e) {
-				//System.out.println("publishDate Error");
+				System.out.println("publishDate Error");
 				e.printStackTrace();
 			}
 			long betweenHour = (nowDate - publishDate)/(1000 * 60 * 60);
@@ -72,10 +72,10 @@ public class ShowBlogList extends ActionSupport{
 			if(userrank.containsKey(userName)){
 				double uservalue = userrank.get(userName);
 				uservalue += rankvalue;
-				//System.out.println("["+userName+"]"+uservalue);
+				System.out.println("["+userName+"]"+uservalue);
 			}else{
 				userrank.put(userName, rankvalue);
-				//System.out.println("["+userName+"]"+rankvalue);
+				System.out.println("["+userName+"]"+rankvalue);
 			}
 			
 		}
@@ -96,7 +96,7 @@ public class ShowBlogList extends ActionSupport{
 		}); 
 		
 		for(Map.Entry<Object,Double> mapping:mappingList){ 
-			   //System.out.println(mapping.getKey()+":"+mapping.getValue()); 
+			   System.out.println(mapping.getKey()+":"+mapping.getValue()); 
 		} 
 		blogrank.clear();
 		
@@ -123,7 +123,7 @@ public class ShowBlogList extends ActionSupport{
 		}); 
 		
 		for(Map.Entry<String,Double> mapping:urList){ 
-			   //System.out.println(mapping.getKey()+":"+mapping.getValue()); 
+			   System.out.println(mapping.getKey()+":"+mapping.getValue()); 
 		} 
 		
 		List<User> topuser = new ArrayList<User>();	
@@ -156,7 +156,7 @@ public class ShowBlogList extends ActionSupport{
 						res = new String("1");
 				} 
 				checkLikeForm f = new checkLikeForm(b.getBlogId(), res);
-				//System.out.println("res: " + res);
+				System.out.println("res: " + res);
 				list.add(f);
 			} 
 			ActionContext.getContext().put("one", "1");
@@ -213,7 +213,7 @@ public class ShowBlogList extends ActionSupport{
 		
 		Map<String,Object> session = ActionContext.getContext().getSession();	
 		unCheckBlog = showBlogListService.getuncheckBlog();
-		//System.out.println("[uncheckblog size]:"+unCheckBlog.size());
+		System.out.println("[uncheckblog size]:"+unCheckBlog.size());
 		session.put("uncheckblog",unCheckBlog);
 		
 		return SUCCESS;

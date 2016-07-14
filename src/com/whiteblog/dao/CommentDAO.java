@@ -1,13 +1,11 @@
 package com.whiteblog.dao;
 
 import java.util.List;
-
 import org.hibernate.LockMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
-
 import com.whiteblog.entity.Comment;
 
 /**
@@ -68,7 +66,6 @@ public class CommentDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Comment> findByExample(Comment instance) {
 		log.debug("finding Comment instance by example");
 		try {
@@ -83,7 +80,6 @@ public class CommentDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding Comment instance with property: " + propertyName
 				+ ", value: " + value);
@@ -97,32 +93,26 @@ public class CommentDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Comment> findByBlogId(Object blogId) {
 		return findByProperty(BLOG_ID, blogId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Comment> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Comment> findByContent(Object content) {
 		return findByProperty(CONTENT, content);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Comment> findByTime(Object time) {
 		return findByProperty(TIME, time);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Comment> findByUsername(Object username) {
 		return findByProperty(USERNAME, username);
 	}
 	
-	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all Comment instances");
 		try {

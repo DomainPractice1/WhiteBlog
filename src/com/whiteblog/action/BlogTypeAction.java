@@ -72,7 +72,7 @@ public class BlogTypeAction {
 	}
 	public String addTags(){
 		String str = mesContent2;  
-		//System.out.println("addTags SuperTag " + supertypeId);
+		System.out.println("addTags SuperTag " + supertypeId);
 			List<Blogtype> btl = blogtypeService.getBlogtypeDAO().findByTypename(str);
 			if(btl.size() < 1) {
 				Blogtype bt = new Blogtype();

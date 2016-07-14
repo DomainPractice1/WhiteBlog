@@ -11,6 +11,8 @@ public class EncryptServiceImpl {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
+	
 	/**
 	 * 加密解密算法 执行一次加密，两次解密
 	 */ 

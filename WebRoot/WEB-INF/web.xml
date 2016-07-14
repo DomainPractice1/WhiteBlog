@@ -29,6 +29,25 @@
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 	<!-- URLRewriter 结束 -->
+	
+	<!-- 页面缓存oscache -->
+	<filter>
+		<filter-name>CacheFilter</filter-name>
+		<filter-class>com.opensymphony.oscache.web.filter.CacheFilter</filter-class>
+		<init-param>
+		<param-name>time</param-name>
+		<param-value>600</param-value>
+		</init-param>
+		<init-param>
+		<param-name>scope</param-name>
+		<param-value>session</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CacheFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
 	<servlet>
 		<servlet-name>UploadFileServlet</servlet-name>
 		<servlet-class>com.whiteblog.servlet.UploadFileServlet</servlet-class>
@@ -54,6 +73,36 @@
 		<servlet-name>UploadFileServlet</servlet-name>
 		<url-pattern>/UploadFileServlet</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+	    <servlet-name>RandomImageServlet</servlet-name>
+	    <servlet-class>com.whiteblog.servlet.RandomImageServlet</servlet-class>
+	    <!-- 初始化图片宽度 -->
+	    <init-param>
+		     <param-name>width</param-name>
+		     <param-value>130</param-value>
+	    </init-param>
+	    <!-- 初始化图片高度 -->
+	    <init-param>
+		     <param-name>height</param-name>
+		     <param-value>40</param-value>
+	    </init-param>
+	    <!-- 初始化图片随机数个数 -->
+	    <init-param>
+		     <param-name>num</param-name>
+		     <param-value>4</param-value>
+	    </init-param>
+    </servlet>
+    
+    <servlet-mapping>
+		<servlet-name>UploadFileServlet</servlet-name>
+		<url-pattern>/UploadFileServlet.do</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+	    <servlet-name>RandomImageServlet</servlet-name>
+	    <url-pattern>/verification.do</url-pattern>
+    </servlet-mapping>
+    
  	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>

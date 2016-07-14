@@ -3,16 +3,13 @@ package com.whiteblog.dao;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-
 import static javax.persistence.GenerationType.IDENTITY;
-
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
  * Blogtype entity. @author MyEclipse Persistence Tools
  */
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "blogtype", catalog = "whiteblog")
 public class Blogtype implements java.io.Serializable {

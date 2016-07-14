@@ -152,8 +152,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 												<c:choose>
 													<c:when test="${sessionScope.loginUser != null}">
 														<div class="pull-right post-item-social">
-															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-															<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i class="fa fa-heart"></i><span>${blog.likenumber}</span></a>
+															<!-- 游客是不能修改、转发、点赞和分享的 -->
+														<c:choose>													
+																<c:when test="${sessionScope.loginUser != null}">
+																<c:choose>
+																	<c:when test="${sessionScope.loginUser.username==blog.username}">
+																		<%-- <a href="showBlogToModify.action?blogId=${blog.blogId}"><div class="modify" title="编辑博客"></div></a> --%>
+																		<a href="showBlogToModify-strBlogId-${blog.blogId}.html"><div class="modify" title="编辑博客"></div></a>
+																	</c:when>
+																	<c:otherwise>
+																		<label style="display:none;">${blog.blogId}</label>
+																		<label style="display:none;">${blog.title}</label>
+																		<a href="javascript:void(0)" onclick="update(this);"><div class="forward" title="转发到自己的博客"></div></a>
+																	</c:otherwise>													
+																</c:choose>																									
+																<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+																<c:if test="${likeitList.isLike=='1'}">
+																		<a href="#" id="like${blog.blogId}" class="post-liked" onclick="myF(this)"><i  class="fa fa-heart" title="点赞"></i><span>${blog.likenumber}</span></a>
+																</c:if>
+																<c:if test="${likeitLike.isLike!='1' }">
+																		<a href="#" id="like${blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${blog.likenumber}</span></a>
+																</c:if> 
+																</c:when>														
+														</c:choose>
 														</div>
 													</c:when>
 												</c:choose>
@@ -170,11 +191,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 				</div>
 				<aside class="col-md-4">
+
 					<div class="laread-right">
+
 						<form action="searchArticle.php" class="laread-form search-form">
 							<div class="input"><input type="text" class="form-control" placeholder="Search..." name="searchText"></div>
 							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
 						</form>
+
 						<ul class="laread-list">							
 							<li class="title">热门文章</li>
  							<s:iterator value="#session.topblog" var="blog">
@@ -184,6 +208,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  								</li>
  							</s:iterator>				
 						</ul>
+
 						<ul class="laread-list">
 							<li class="title">热门用户</li>
 							<s:iterator value="#session.topuser" var="user">
@@ -193,12 +218,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  								</li>
  							</s:iterator>
 						</ul>
+
 						<ul class="laread-list">
 							<li class="title">Super-TAGS</li>
 							<li class="bar-tags">
 								<a href="findBlogByTagSuperAction-id-${thisSupertype.supertypeId}.html">${thisSupertype.supertypeName}</a>
 							</li>
-						</ul>						
+						</ul>
+						
 						<ul class="laread-list">
 							<li class="title">Sub-TAGS</li>
 							<li class="bar-tags">
@@ -207,7 +234,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</s:iterator>
 							</li>
 						</ul>
+
 					</div>
+
 				</aside>
 			</div>
 		</div>
@@ -310,7 +339,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 		</div>
 	</div>
-
+	
+	<div class="modal leread-modal fade" id="forward-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>转发到我的博客</h4>
+				</div>
+				<div class="modal-body">
+					<form action="forward.php" method="post">
+					<label style="margin-bottom:5px;">我的博客标题</label>						
+						<div class="form-group">								
+								<div style="display:inline">[转发]</div>
+								<div>
+								<input id="blog_id" type="hidden" name="blog.blogId"/>
+								<input id="blog_title" type="text" class="form-control" style="display:inline" name="blog.title" /></div>																					
+						</div>																
+						<div class="linkbox" style="float:right;padding-bottom:10px;padding-top:6px;">							
+							<button type="submit" class="btn btn-golden btn-signin">确认</button>
+						</div>
+					</form>
+				</div>				
+			</div>			
+		</div>
+	</div>
 
 	<!-- Bootstrap core JavaScript
 	================================================== -->
@@ -332,6 +385,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	
+	<script type="text/javascript">
+		function update(obj){
+			var labels=$(obj).parent().find('label');
+			$('#blog_id').val(labels.eq(0).text());
+			$('#blog_title').val(labels.eq(1).text());
+			$('#forward-form').modal('show');
+		}
+	</script>
 	<script type="text/javascript">
 		var strId = "";
 		function shareTwitter(t)
@@ -393,6 +455,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			})	
 		});
 	</script>
+	
+	
+	
 	<script type="text/javascript">
 		var t
 		function timedCount()

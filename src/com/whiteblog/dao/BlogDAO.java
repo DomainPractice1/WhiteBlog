@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.whiteblog.entity.Blog;
+import com.whiteblog.entity.User;
 
 /**
  * A data access object (DAO) providing persistence and search support for Blog
@@ -80,7 +81,6 @@ public class BlogDAO extends HibernateDaoSupport {
 	public List<Blog> findByExample(Blog instance) {
 		log.debug("finding Blog instance by example");
 		try {
-			@SuppressWarnings("unchecked")
 			List<Blog> results = (List<Blog>) getHibernateTemplate()
 					.findByExample(instance);
 			log.debug("find by example successful, result size: "
@@ -92,7 +92,6 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding Blog instance with property: " + propertyName
 				+ ", value: " + value);
@@ -106,7 +105,6 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findByPartMatch(String propertyName, Object value){
 		log.debug("finding Blog instance with property: " + propertyName
 				+ ", value: " + value);
@@ -120,82 +118,66 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByPartTitle(Object title) {
 		return findByPartMatch(TITLE, title);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByPartContent(Object content) {
 		return findByPartMatch(CONTENT, content);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByPartUsername(Object username) {
 		return findByPartMatch(USERNAME, username);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByTypeId(Object typeId) {
 		return findByProperty(TYPE_ID, typeId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByTitle(Object title) {
 		return findByProperty(TITLE, title);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByContent(Object content) {
 		return findByProperty(CONTENT, content);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByTime(Object time) {
 		return findByProperty(TIME, time);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByUsername(Object username) {
 		return findByProperty(USERNAME, username);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByFilterwords(Object filterwords) {
 		return findByProperty(FILTERWORDS, filterwords);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByLikenumber(Object likenumber) {
 		return findByProperty(LIKENUMBER, likenumber);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByForwardnumber(Object forwardnumber) {
 		return findByProperty(FORWARDNUMBER, forwardnumber);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByViewnumber(Object viewnumber) {
 		return findByProperty(VIEWNUMBER, viewnumber);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByCommentnumber(Object commentnumber) {
 		return findByProperty(COMMENTNUMBER, commentnumber);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findByStatus(Object status) {
 		return findByProperty(STATUS, status);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Blog> findAll() {
 		log.debug("finding all Blog instances");
 		try {
@@ -244,4 +226,47 @@ public class BlogDAO extends HibernateDaoSupport {
 	public static BlogDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (BlogDAO) ctx.getBean("BlogDAO");
 	}
+	public void updateView(Blog instance){
+		log.debug("find forward works");
+		try {
+			getHibernateTemplate().update(instance);;
+		} catch (RuntimeException re) {
+			log.error("failed", re);
+			throw re;
+		}
+	}
+	//查找原创的文章数
+	@SuppressWarnings("unused")
+	public int findCreat(String username) {
+		log.debug("find original works");
+		try {
+			 List<User> user=getHibernateTemplate().find("from User as model where model.username=? ", username);
+			int userID= user.get(0).getUserId();
+		    int Status=0;
+			List<Blog> blog=getHibernateTemplate().find("from Blog as b where b.userId=? and b.status= ? ",new Integer[]{userID,Status});
+			return blog.size();
+		} catch (RuntimeException re) {
+			log.error("failed", re);
+			throw re;
+		}
+		
+	}
+	//查找转发的文章数
+		@SuppressWarnings("unused")
+		public int findForward(String username) {
+			log.debug("find forward works");
+			try {
+				 List<User> user=getHibernateTemplate().find("from User as model where model.username=?", username);
+				int userID= user.get(0).getUserId();
+				List<Blog> blog=getHibernateTemplate().find("from Blog as b where b.userId=? ", userID);
+				if(blog.isEmpty()==true)
+					return 0;
+				else
+				    return blog.get(0).getForwardnumber();
+			} catch (RuntimeException re) {
+				log.error("failed", re);
+				throw re;
+			}
+			
+		}
 }

@@ -68,7 +68,6 @@ public class MailDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Mail> findByExample(Mail instance) {
 		log.debug("finding Mail instance by example");
 		try {
@@ -83,7 +82,6 @@ public class MailDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding Mail instance with property: " + propertyName
 				+ ", value: " + value);
@@ -97,32 +95,26 @@ public class MailDAO extends HibernateDaoSupport {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Mail> findByFromuserId(Object fromuserId) {
 		return findByProperty(FROMUSER_ID, fromuserId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Mail> findByTouserId(Object touserId) {
 		return findByProperty(TOUSER_ID, touserId);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Mail> findByContent(Object content) {
 		return findByProperty(CONTENT, content);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Mail> findByTime(Object time) {
 		return findByProperty(TIME, time);
 	}
 
-	@SuppressWarnings("unchecked")
 	public List<Mail> findByFromusername(Object fromusername) {
 		return findByProperty(FROMUSERNAME, fromusername);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all Mail instances");
 		try {
