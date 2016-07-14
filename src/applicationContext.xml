@@ -363,6 +363,15 @@
 		<property name="superTypeService">
 			<ref bean="SuperTypeService" />
 		</property>
+		<property name="cityDAO">
+			<ref bean="CityDAO" />
+		</property>
+		<property name="provinceDAO">
+			<ref bean="ProvinceDAO" />
+		</property>
+		<property name="hobbyDAO">
+			<ref bean="HobbyDAO" />
+		</property>
 	</bean>
 
 	<bean id="SendMessageManage" class="com.whiteblog.service.SendMessageManage">
@@ -586,7 +595,18 @@
 			<ref bean="ShowUserinfo" />
 
 		</property>
-
+		<property name="cityDAO">
+			<ref bean="CityDAO" />
+		</property>
+		<property name="hobbyDAO">
+			<ref bean="HobbyDAO"/>
+		</property>
+		<property name="provinceDAO">
+			<ref bean="ProvinceDAO" />
+		</property>
+		<property name="supertypeDAO">
+			<ref bean="SupertypeDAO" />
+		</property>
 	</bean>
 
 	<!-- 注入DeleteCollectService -->
@@ -836,6 +856,13 @@
 		</property>
 
 	</bean>
+	
+	<bean id="CityAction" class="com.whiteblog.action.CityAction">
+		<property name="cityDAO">
+			<ref bean="CityDAO" />
+		</property>
+	</bean>
+	
 </beans>
 
 	

@@ -6,6 +6,7 @@ import java.util.List;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Blogtype;
+import com.whiteblog.entity.User;
 import com.whiteblog.service.BlogServiceImp;
 import com.whiteblog.service.BlogTypeServiceImp;
 import com.whiteblog.service.UserManagerImpl;
@@ -25,6 +26,12 @@ public class modifyAction extends ActionSupport{
 	private Blogtype blogtype;	
 	private String category;
 	private String hint;
+	private String password;
+	private String username;
+	private String job;
+	private int provinceId;
+	private int cityId;
+	private int hobbyId;
 	private List<String> filterWords;
 
 	public String execute() throws IllegalAccessException, InvocationTargetException{
@@ -104,6 +111,56 @@ public class modifyAction extends ActionSupport{
 			System.out.println("读取过滤词异常");
 			e.printStackTrace();
 		}
+	}
+
+
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+	public int getProvinceId() {
+		return provinceId;
+	}
+
+	public void setProvinceId(int provinceId) {
+		this.provinceId = provinceId;
+	}
+
+	public int getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
+	}
+
+	public int getHobbyId() {
+		return hobbyId;
+	}
+
+	public void setHobbyId(int hobbyId) {
+		this.hobbyId = hobbyId;
 	}
 	
 	public BlogServiceImp getBlogService() {

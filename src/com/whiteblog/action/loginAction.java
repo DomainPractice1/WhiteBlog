@@ -17,7 +17,9 @@ import com.whiteblog.service.BlogTypeServiceImp;
 import com.whiteblog.service.EncryptServiceImpl;
 import com.whiteblog.service.UserManagerImpl;
 import com.whiteblog.service.fileManagerImpl;
+
 import java.io.*;
+
 import javax.servlet.http.HttpServletRequest;
 
 
@@ -38,11 +40,64 @@ public class loginAction extends ActionSupport{
 	private String code;//验证码
     
 	private InputStream result;	
-		
+	private String password;
+	private String username;
+	private String job;
+	private int provinceId;
+	private int cityId;
+	private int hobbyId;	
 	/*存放经session的加密用的函数*/
 	public Map<Integer, String> encryptMap = new HashMap<Integer, String>();
 	public Map<String, Integer> decryptMap = new HashMap<String, Integer>();
 	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getJob() {
+		return job;
+	}
+
+	public void setJob(String job) {
+		this.job = job;
+	}
+
+	public int getProvinceId() {
+		return provinceId;
+	}
+
+	public void setProvinceId(int provinceId) {
+		this.provinceId = provinceId;
+	}
+
+	public int getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
+	}
+
+	public int getHobbyId() {
+		return hobbyId;
+	}
+
+	public void setHobbyId(int hobbyId) {
+		this.hobbyId = hobbyId;
+	}
+
 	public boolean isUseCookie(){
 		return this.useCookie;
 	}
@@ -176,7 +231,17 @@ public class loginAction extends ActionSupport{
 		}
 	
 	}
-	
+	public String ModifyInformation(){
+		User u = usermanager.findUser(username);
+		if(u == null)
+			return ERROR;
+		u.setUsername(username);
+		u.setPassword(EncryptServiceImpl.convert(password));
+		u.setCityId(cityId);
+		u.setProvinceId(provinceId);
+		usermanager.getUserdao().attachDirty(u);
+		return SUCCESS; 
+	}	
 	public String cookieDetection(){
 		Map<String, Object>session = (Map<String, Object>)ActionContext.getContext().getSession();
 		User u = (User)session.get("loginUser");

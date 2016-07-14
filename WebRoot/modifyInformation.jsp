@@ -251,49 +251,10 @@ n.css" rel="stylesheet">
 						</div>
 					</form>
 				</div> 
-			</div>
-			<div class="modal-content" id="register-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title"><i class="fa fa-lock"></i>LaRead Sign Up</h4>
-				</div>
-				<div class="modal-body">
-					<form action="register.php" method="post">
-						<!-- <div class="form-group">
-							<input class="form-control" placeholder="Name">
-						</div> -->
-						<div class="form-group">
-							<input class="form-control" placeholder="Username" name="username">
-						</div>
-						<div class="form-group">
-							<input class="form-control" type="password" placeholder="Password" name="password">
-						</div> 
-						<div class="form-group">
-							<input class="form-control" type="password" placeholder="Password Again" name="rePassword"
-						</div>
-						<div class="form-group">
-							<select class="dropdwon-menu form-control" name="countryId">
-								<c:forEach var="stags" items="${ast}">
-									<option style="width:160px" value="${stags.supertypeId}">${stags.supertypeName}</option>
-								</c:forEach>
-							</select>
-						</div>
-						<div class="form-group">
-							<select class="dropdwon-menu form-control" name="provinceId">
-								
-							</select>
-						</div>
-						<div class="form-group">
-						
-						</div>
-						<div class="linkbox">
-							<button type="submit" class="btn btn-golden btn-signin">SIGN UP</button>
-						</div>
-					</form>
-				</div>
-			</div>
+			</div> 
 		</div>
 	</div>
+<!-- modifyInformation modal finish-->
 
 <!-- 	<!-- logout -->
 	<div class="modal leread-modal fade" id="logout-form" tabindex="-1" role="dialog" aria-hidden="true">

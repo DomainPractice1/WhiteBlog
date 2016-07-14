@@ -5,9 +5,15 @@ import java.util.List;
 import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
+import com.whiteblog.dao.CityDAO;
 import com.whiteblog.dao.CookieDAO;
+import com.whiteblog.dao.HobbyDAO;
+import com.whiteblog.dao.ProvinceDAO;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Blogtype;
+import com.whiteblog.entity.City;
+import com.whiteblog.entity.Hobby;
+import com.whiteblog.entity.Province;
 import com.whiteblog.entity.Supertype;
 import com.whiteblog.entity.User;
 import com.whiteblog.service.BlogManagerImpl;
@@ -22,9 +28,36 @@ public class BlogTypeAction {
 	private BlogTypeServiceImp blogtypeService;
 	private BlogManagerImpl blogManager;
 	private SuperTypeService superTypeService;
+	private CityDAO cityDAO;
+	private ProvinceDAO provinceDAO;
+	private HobbyDAO hobbyDAO;
 	private int supertypeId;
 	static public final  String SUCCESS = "success";
 	static public final  String ERROR = "error";
+
+	public HobbyDAO getHobbyDAO() {
+		return hobbyDAO;
+	}
+
+	public void setHobbyDAO(HobbyDAO hobbyDAO) {
+		this.hobbyDAO = hobbyDAO;
+	}
+
+	public CityDAO getCityDAO() {
+		return cityDAO;
+	}
+
+	public void setCityDAO(CityDAO cityDAO) {
+		this.cityDAO = cityDAO;
+	}
+
+	public ProvinceDAO getProvinceDAO() {
+		return provinceDAO;
+	}
+
+	public void setProvinceDAO(ProvinceDAO provinceDAO) {
+		this.provinceDAO = provinceDAO;
+	}
 
 	public SuperTypeService getSuperTypeService() {
 		return superTypeService;
@@ -165,6 +198,7 @@ public class BlogTypeAction {
 		
 		fileManagerImpl.readTxtFile(p+"/WEB-INF/classes/words.txt");
 		
+
 		/*拦截器使用的数据库连接*/
 		CookieDAO.connectDB();
 		

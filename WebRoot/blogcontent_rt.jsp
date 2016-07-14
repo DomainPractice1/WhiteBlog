@@ -160,6 +160,7 @@
 							<div class="post-item">
 								<div class="post-item-paragraph">
 									<h2><a href="#" class="quick-read"><i class="fa fa-envelop"></i></a>${req.blog.title}</h2>
+									<c:if test="${session.loginUser.username != null && session.loginUser.userId != req.blog.userId}">
 									<c:choose>
 										<c:when test="${print==0}">
 											<a
@@ -171,6 +172,7 @@
 												（取消收藏） </a>
 										</c:otherwise>
 									</c:choose>
+									</c:if>
 									<p class="post-item-two-column">																		
 									${req.blog.content}	
 									</p>
@@ -319,6 +321,7 @@
 									</c:choose>		
 								</div>
 							</div>
+
 
 							<div class="comment-box">
 								
@@ -597,6 +600,7 @@
         });
   		$(function() {$('#myModal2').modal('hide')});
 	</script>	
+
 	<script type ="text/javascript">
 	function delete_row(delete_id){
 		if(confirm("确定要删除？")){

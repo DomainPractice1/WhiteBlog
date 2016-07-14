@@ -185,5 +185,15 @@
 		<action name="collectAction" class="CollectAction" method="excute">
 			<result name="success" >/blogcontent_rt.jsp</result>
 		</action>
+		
+		<action name="loadCity" class="CityAction" method="onloadCity">
+			<result name="success" type="json">
+				<param name="root">cl</param>
+			</result>
+		</action>
+		<action name="modifyInformation" class="LoginAction" method="ModifyInformation">
+			<result name="success">./author_detail.jsp</result>
+			<result name="error">./404.html</result>
+		</action>
 	</package>
 </struts>    

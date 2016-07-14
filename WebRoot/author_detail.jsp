@@ -131,7 +131,7 @@
 							 <s:iterator
 								value="#session.supertype" var="tag">
 								<a
-									href="findBlogByTagAction-id-<s:property value="#tag.supertypeId" />"><s:property
+									href="findBlogByTagAction-id-<s:property value="#tag.supertypeId" />.html"><s:property
 										value="#tag.supertypeName" /></a>
 							</s:iterator>							 
 						</li>
@@ -145,8 +145,8 @@
 							${forwardcount}</span>
 					</p>
                   
-					<button type="button"
-						class="btn btn-golden btn-golden-hover btn-rounded" data-target="#">修改信息</button>
+					<a tabindex="0"   data-toggle="modal"  data-target="#modifyInformation"><button type="button"
+						class="btn btn-golden btn-golden-hover btn-rounded" >修改信息</button></a>
 				</div>
 			</div>
 
@@ -224,7 +224,61 @@
 		</div>
 		</section>
 
-
+	<!-- modifyInformation Modal -->
+	<div class="modal   fade" id="modifyInformation" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>修改个人信息</h4>
+				</div>
+				<div class="modal-header">
+					<form action="modifyInformation.php" method="post">
+						<div class="form-group">
+							<input class="form-control" onchange="checkPassword()" placeholder="Username" name="username" value="${sessionScope.loginUser.username }">
+						</div>
+						<div class="form-group">
+							<input id="p1" class="form-control" onchange="checkPassword()" type="password" placeholder="Password" name="password" value="${sessioinScope.loginUser.password }">
+						</div> 
+						<div class="form-group">
+							<input id="p2" class="form-control" onchange="checkPassword()" type="password" placeholder="Password Again" name="${sessioinScope.loginUser.password }" value="${sessioinScope.loginUser.password}">
+						</div>
+						<div class="form-group">
+							<input class="form-control" placeholder="Job Name" name="job" value="${job}"> 
+						</div>
+						<div class="form-group">
+							<select class="form-control " name="provinceId"  onchange="changeCity(this)">
+								<c:forEach var="province" items="${pl}">
+									<option class="form-control" value="${province.provinceId}" >${province.provinceName}</option>		
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<select id="cityList" class="form-control" name="cityId">
+								<%-- <c:forEach var="city" items="${cl }">
+									<option class="form-control" value="${city.cityId}">${cityname}</option>
+								</c:forEach> --%>
+							</select>
+						</div>
+						<div class="form-group">
+							<select class="form-control" name="hobbyId">
+								<c:forEach var="hobby" items="${hl}">
+									<option class="form-control" value="${hobby.supertypeId}">${hobby.supertypeName}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div id="warn" style="visibility:hidden;">
+							<font color="red">密码输入不一致</font>
+						</div>
+						<div class="linkbox" id="submit">
+							<button type="submit"  class="btn btn-golden btn-signin">确认修改</button>
+						</div>
+					</form>
+				</div> 
+			</div> 
+		</div>
+	</div>
+<!-- modifyInformation modal finish-->
 
 		<!-- /.container -->
 
@@ -263,5 +317,65 @@
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>	
+	
+	<script type="text/javascript">
+		function checkPassword(){
+			
+			var p1 = document.getElementById("p1");
+			var p2 = document.getElementById("p2");
+			if(p1.value != p2.value){
+				document.getElementById("submit").style.visibility = 'hidden';
+				document.getElementById("warn").style.visibility = 'visible';
+			} 
+			else {
+				document.getElementById("submit").style.visibility = 'visible';
+				document.getElementById("warn").style.visibility = 'hidden';
+			} 
+		}
+	</script>
+	
+	<script type="text/javascript">
+		$.ajax({
+			url:"loadCity.action?i=1",
+			type:"POST",
+			dataType:"json",
+			success:function(data){
+				$.each(data,function(i, list){
+				var tr;
+				tr = '<option class="form-control" value="' + list.cityId + ' ">' + list.cityname + '</option>';
+				$("#cityList").append(tr);
+			})
+			}
+		});
+	</script>
+	<script type="text/javascript">
+		function changeCity(t){
+			$("#cityList").empty(); 
+			$.ajax({
+				url: "loadCity.action?i=" + t.value,
+				method:"POST",
+				dataType:"json",
+				success:function(data){ 
+						$.each(data,function(i, list){
+						var tr;
+						tr = '<option class="form-control" value="' + list.cityId + '">' + list.cityname + '</option>';
+						$("#cityList").append(tr);
+					});
+				}
+			});
+		}
+	</script>
+	<script type="text/javacript">
+		 
+	</script>
+	<script>
+  		$(function () { $('#modifyInformation').modal('hide')});
+  		$("#myModal").modal().css({
+        "margin-top": function () {
+        	return - ($(this).height() / 2);}
+        });
+  		$(function() {$('#myModal2').modal('hide')});
+	</script>	
+	
 </body>
 </html>

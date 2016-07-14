@@ -37,6 +37,8 @@ public class BlogContentManageImpl {
 			blogDAO.updateView(instance);
 			}
 		 public  int ifcollect(User user,int blogID){
+			 	if(user == null)
+			 		return 0;
 		    	List<Collection> mycollection=collectionDAO.findByUserId(user.getUserId());
 		    	if(mycollection.isEmpty()==true){
 		    		return 0;
