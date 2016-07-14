@@ -103,6 +103,30 @@
 			pointcut="execution(* com.whiteblog.service..*(..))" />
 	</aop:config>
 
+	<!-- 自定义Advice -->
+	<bean id="myAspect" class="com.whiteblog.aspectJ.MyAspect" />
+	<!-- 对目标进行AOP代理 -->
+	<aop:config proxy-target-class="true">
+		<aop:aspect ref="myAspect">
+			<!-- 定义了一个单独切点 -->
+			<aop:pointcut expression="execution(* com.whiteblog..*(..))"
+				id="mypointcut" />
+			<!-- 前置通知 -->
+			<aop:before method="before" pointcut-ref="mypointcut" />
+			<!-- 后置通知 -->
+			<!--<aop:after-returning method="after1" pointcut-ref="mypointcut"/> -->
+			<aop:after-returning method="after" pointcut-ref="mypointcut"
+				returning="returnVal" />
+			<!-- 环绕通知 -->
+			<aop:around method="around" pointcut-ref="mypointcut" />
+			<!-- 异常通知 -->
+			<aop:after-throwing method="afterThrowing"
+				pointcut-ref="mypointcut" throwing="ex" />
+			<!-- 最终通知 -->
+			<aop:after method="finalMethod" pointcut-ref="mypointcut" />
+		</aop:aspect>
+	</aop:config>
+
 	<bean id="AdminDAO" class="com.whiteblog.dao.AdminDAO">
 		<property name="sessionFactory">
 			<ref bean="sessionFactory" />
@@ -187,7 +211,7 @@
 		</property>
 	</bean>
 
-	<bean id="RegisterAction" class="com.whiteblog.action.registerAction">
+	<bean id="registerAction" class="com.whiteblog.action.registerAction">
 		<property name="usermanager">
 			<ref bean="UserManager" />
 		</property>
@@ -222,6 +246,9 @@
 		<property name="blogDAO">
 			<ref bean="BlogDAO" />
 		</property>
+				<property name="collectionDAO">
+			<ref bean="CollectionDAO" />
+		</property>
 	</bean>
 
 	<bean id="BlogContent" class="com.whiteblog.action.blogContentAction">
@@ -236,6 +263,9 @@
 		</property>
 		<property name="superTypeService">
 			<ref bean="SuperTypeService" />
+		</property>
+		<property name="userDAO">
+			<ref bean="UserDAO" />
 		</property>
 	</bean>
 
@@ -469,7 +499,343 @@
 			<ref bean="sessionFactory" />
 		</property>
 	</bean>
-	
+	<bean id="UploadFileServlet" class="com.whiteblog.servlet.UploadFileServlet"></bean>
+	<!-- 注入ShowUserinfo.service -->
+	<bean class="com.whiteblog.service.ShowUserinfo" id="ShowUserinfo">
+		<property name="userDAO">
+			<ref bean="UserDAO" />
+		</property>
+		<property name="blogDAO">
+			<ref bean="BlogDAO" />
+		</property>
+		<property name="countryDAO">
+			<ref bean="CountryDAO" />
+	    </property>
+
+
+		
+		<property name="cityDAO">
+
+			<ref bean="CityDAO" />
+
+		</property>
+
+
+		
+		<property name="jobDAO">
+
+			<ref bean="JobDAO" />
+
+		</property>
+
+
+		
+		<property name="hobbyDAO">
+
+			<ref bean="HobbyDAO" />
+
+		</property>
+
+
+		<property name="provinceDAO">
+
+			<ref bean="ProvinceDAO" />
+
+		</property>
+
+
+		<property name="supertypeDAO">
+
+			<ref bean="SupertypeDAO" />
+
+		</property>
+
+
+		
+		<property name="collectionDAO">
+
+			<ref bean="CollectionDAO" />
+
+		</property>
+
+
+		<property name="attentionDAO">
+
+			<ref bean="AttentionDAO" />
+
+		</property>
+
+
+		<property name="blogtypeDAO">
+
+			<ref bean="BlogtypeDAO" />
+
+		</property>
+
+	</bean>
+
+	<!-- 注入showUserinfo.action -->
+
+
+
+	<bean class="com.whiteblog.action.ShowUserinfoAction" id="ShowUserinfoAction">
+
+
+		<property name="showUserinfo">
+
+			<ref bean="ShowUserinfo" />
+
+		</property>
+
+	</bean>
+
+	<!-- 注入DeleteCollectService -->
+
+
+
+	<bean class="com.whiteblog.service.DeleteCollectService" id="DeleteCollectService">
+
+
+		<property name="collectionDAO">
+
+			<ref bean="CollectionDAO" />
+
+		</property>
+
+	</bean>
+
+	<!-- 注入DeleteCollectAction -->
+
+
+
+	<bean class="com.whiteblog.action.DeleteCollectAction" id="DeleteCollectAction">
+
+
+		<property name="deleteCollectService">
+
+			<ref bean="DeleteCollectService" />
+
+		</property>
+
+
+		<property name="showUserinfo">
+
+			<ref bean="ShowUserinfo" />
+
+		</property>
+
+	</bean>
+
+	<!-- 注入ShowUserdetailService -->
+
+
+
+	<bean class="com.whiteblog.service.ShowUserdetailService" id="ShowUserdetailService">
+
+
+		<property name="userDAO">
+
+			<ref bean="UserDAO" />
+
+		</property>
+
+
+		<property name="blogDAO">
+
+			<ref bean="BlogDAO" />
+
+		</property>
+
+
+		<property name="countryDAO">
+
+			<ref bean="CountryDAO" />
+
+		</property>
+
+
+		<property name="cityDAO">
+
+			<ref bean="CityDAO" />
+
+		</property>
+
+
+		<property name="jobDAO">
+
+			<ref bean="JobDAO" />
+
+		</property>
+
+
+		<property name="hobbyDAO">
+
+			<ref bean="HobbyDAO" />
+
+		</property>
+
+
+		<property name="provinceDAO">
+
+			<ref bean="ProvinceDAO" />
+
+		</property>
+
+
+		<property name="supertypeDAO">
+
+			<ref bean="SupertypeDAO" />
+
+		</property>
+
+
+		<property name="collectionDAO">
+
+			<ref bean="CollectionDAO" />
+
+		</property>
+
+
+		<property name="attentionDAO">
+
+			<ref bean="AttentionDAO" />
+
+		</property>
+
+
+		<property name="blogtypeDAO">
+
+			<ref bean="BlogtypeDAO" />
+
+		</property>
+
+	</bean>
+
+	<!-- 注入ShowUserdetailAction -->
+
+
+
+	<bean class="com.whiteblog.action.ShowUserdetailAction" id="ShowUserdetailAction">
+
+
+		<property name="showUserdetailService">
+
+			<ref bean="ShowUserdetailService" />
+
+		</property>
+
+
+		<property name="userDAO">
+
+			<ref bean="UserDAO" />
+
+		</property>
+
+	</bean>
+
+	<!-- 注入DeleteAttentionAction -->
+
+
+
+	<bean class="com.whiteblog.action.DeleteAttentionAction" id="DeleteAttentionAction">
+
+
+		<property name="deleteAttentionService">
+
+			<ref bean="DeleteAttentionService" />
+
+		</property>
+
+	</bean>
+
+	<!-- 注入DeleteAttentionService -->
+
+
+
+	<bean class="com.whiteblog.service.DeleteAttentionService" id="DeleteAttentionService">
+
+
+		<property name="attentionDAO">
+
+			<ref bean="AttentionDAO" />
+
+		</property>
+
+	</bean>
+
+	<!-- 注入CollectAction -->
+
+
+
+	<bean class="com.whiteblog.action.CollectAction" id="CollectAction">
+
+
+		<property name="collectService">
+
+			<ref bean="CollectService" />
+
+		</property>
+
+	</bean>
+
+	<!-- 注入CollectService -->
+
+
+
+	<bean class="com.whiteblog.service.CollectService" id="CollectService">
+
+
+		<property name="collectionDAO">
+
+			<ref bean="CollectionDAO" />
+
+		</property>
+
+	</bean>
+
+	<!-- 注入PayAttentionAction -->
+
+
+
+	<bean class="com.whiteblog.action.PayAttentionAction" id="PayAttentionAction">
+
+
+		<property name="payAttentionService">
+
+			<ref bean="PayAttentionService" />
+
+		</property>
+
+
+		<property name="userDAO">
+
+			<ref bean="UserDAO" />
+
+		</property>
+
+
+		<property name="showUserdetailService">
+
+			<ref bean="ShowUserdetailService" />
+
+		</property>
+
+	</bean>
+
+	<!-- 注入PayAttentionService -->
+
+
+
+	<bean class="com.whiteblog.service.PayAttentionService" id="PayAttentionService">
+
+
+		<property name="attentionDAO">
+
+			<ref bean="AttentionDAO" />
+
+		</property>
+
+	</bean>
 </beans>
 
 	

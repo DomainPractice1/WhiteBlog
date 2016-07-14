@@ -57,7 +57,7 @@ public class HobbyDAO extends HibernateDaoSupport {
 		log.debug("getting Hobby instance with id: " + id);
 		try {
 			Hobby instance = (Hobby) getHibernateTemplate().get(
-					"com.whiteblog.dao.Hobby", id);
+					"com.whiteblog.entity.Hobby", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);

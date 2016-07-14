@@ -56,7 +56,7 @@ public class JobDAO extends HibernateDaoSupport {
 		log.debug("getting Job instance with id: " + id);
 		try {
 			Job instance = (Job) getHibernateTemplate().get(
-					"com.whiteblog.dao.Job", id);
+					"com.whiteblog.entity.Job", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);

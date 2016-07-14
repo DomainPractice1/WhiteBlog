@@ -58,7 +58,7 @@ public class CollectionDAO extends HibernateDaoSupport {
 		log.debug("getting Collection instance with id: " + id);
 		try {
 			Collection instance = (Collection) getHibernateTemplate().get(
-					"com.whiteblog.dao.Collection", id);
+					"com.whiteblog.entity.Collection", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);

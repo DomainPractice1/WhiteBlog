@@ -56,7 +56,7 @@ public class CountryDAO extends HibernateDaoSupport {
 		log.debug("getting Country instance with id: " + id);
 		try {
 			Country instance = (Country) getHibernateTemplate().get(
-					"com.whiteblog.dao.Country", id);
+					"com.whiteblog.entity.Country", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);

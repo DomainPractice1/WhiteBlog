@@ -18,14 +18,14 @@ import com.whiteblog.entity.City;
  * provides additional information for how to configure it for the desired type
  * of transaction control.
  * 
- * @see com.whiteblog.dao.City
+ * @see com.whiteblog.entity.City
  * @author MyEclipse Persistence Tools
  */
 public class CityDAO extends HibernateDaoSupport {
 	private static final Logger log = LoggerFactory.getLogger(CityDAO.class);
 	// property constants
 	public static final String CITYNAME = "cityname";
-	public static final String COUNTRY_ID = "countryId";
+	public static final String PROVINCE_ID = "provinceId";
 
 	protected void initDao() {
 		// do nothing
@@ -57,7 +57,7 @@ public class CityDAO extends HibernateDaoSupport {
 		log.debug("getting City instance with id: " + id);
 		try {
 			City instance = (City) getHibernateTemplate().get(
-					"com.whiteblog.dao.City", id);
+					"com.whiteblog.entity.City", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
@@ -96,8 +96,8 @@ public class CityDAO extends HibernateDaoSupport {
 		return findByProperty(CITYNAME, cityname);
 	}
 
-	public List<City> findByCountryId(Object countryId) {
-		return findByProperty(COUNTRY_ID, countryId);
+	public List<City> findByProvinceId(Object provinceId) {
+		return findByProperty(PROVINCE_ID, provinceId);
 	}
 
 	public List findAll() {

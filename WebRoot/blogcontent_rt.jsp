@@ -160,6 +160,17 @@
 							<div class="post-item">
 								<div class="post-item-paragraph">
 									<h2><a href="#" class="quick-read"><i class="fa fa-envelop"></i></a>${req.blog.title}</h2>
+									<c:choose>
+										<c:when test="${print==0}">
+											<a
+												href="collectAction.action?collectionblogID=${req.blog.blogId}">（我要收藏）
+											</a>
+										</c:when>
+										<c:otherwise>
+											<a href="deleteCollect.action?blogid=${req.blog.blogId}">
+												（取消收藏） </a>
+										</c:otherwise>
+									</c:choose>
 									<p class="post-item-two-column">																		
 									${req.blog.content}	
 									</p>
@@ -169,7 +180,7 @@
 								<div class="post-item-social">
 								
 										
-									<s:form class="form-horizontal" role="form" action="sendMessage.php" method="post"> 
+									<!--<s:form class="form-horizontal" role="form" action="sendMessage.php" method="post"> 
 													
 															<!-- 模态框（Modal） -->
 															<div class="modal leread-modal form-horizontal fade" id="myModal" tabindex="-1"
@@ -202,13 +213,32 @@
 																<!-- /.modal-dialog -->
 															</div>
 															<!-- /.modal 模态框结束-->															
-															</s:form> 
+															<!--</s:form> -->
 										<c:choose>
 											<c:when test="${sessionScope.loginUser != null}">
-												<div class="pull-right post-item-social" >
-													<a  tabindex="0"   data-toggle="modal"  data-target="#myModal2"> <div class="tag" ></div>  </a>
-													<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${req.blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${req.blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-													<a data-toggle="tooltip" title="like" href="#" id="like${req.blog.blogId}" onclick="myF(this)" class="post-like qr-like"><i class="fa fa-heart"></i><span>${req.blog.likenumber}</span></a>
+												<div class="pull-right post-item-social" >			
+												<p class="post-item-two-column"
+														style="color:grey;font-size:13px;">浏览次数
+														${req.blog.viewnumber}</p>										
+													<a  tabindex="0"   data-toggle="modal"  data-target="#myModal2"> <div class="tag" ></div>  </a>													
+															<c:choose>
+																<c:when test="${sessionScope.loginUser.username==req.blog.username}">
+																	<%-- <a href="showBlogToModify.action?blogId=${blog.blogId}"><div class="modify" title="编辑博客"></div></a> --%>
+																	<a href="showBlogToModify-strBlogId-${id}.html"><div class="modify" title="编辑博客"></div></a>
+																</c:when>
+																<c:otherwise>
+																	<label style="display:none;">${req.blog.blogId}</label>
+																	<label style="display:none;">${req.blog.title}</label>
+																	<a href="javascript:void(0)" onclick="update(this);"><div class="forward" title="转发到自己的博客"></div></a>
+																</c:otherwise>													
+															</c:choose>																									
+															<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${req.blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${req.blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+															<c:if test="${likeitList.isLike=='1'}">
+																	<a href="#" id="like${req.blog.blogId}" class="post-liked" onclick="myF(this)"><i  class="fa fa-heart" title="点赞"></i><span>${req.blog.likenumber}</span></a>
+															</c:if>
+															<c:if test="${likeitLike.isLike!='1' }">
+																	<a href="#" id="like${req.blog.blogId}" class="post-like" onclick="myF(this)"><i  class="fa fa-heart" ></i><span>${req.blog.likenumber}</span></a>
+															</c:if> 																
 												</div>
 											</c:when>	
 										</c:choose>
@@ -275,9 +305,10 @@
 								<div class="author">
 									<a class="author-photo" href="#"><img src="assets/img/profil_photo-04.png" alt=""></a>
 									<div class="author-body">
-										<h4 class="author-name">作者：${req.username}</h4>
-										<h4 class="author-name">${sessionScope.loginUser.username}</h4>
-										<a href="#">view all post</a>
+										<h4>
+											<i class="author-name"></i> <a
+												href="showUserdetailAction.action?attentionUserid=${theuserID}">${req.username}</a>
+										</h4>
 									</div>
 									<c:choose>
 										<c:when test="${sessionScope.loginUser!=null }">
@@ -427,6 +458,30 @@
 			</div>
 		</div>
 	</div>
+		<div class="modal leread-modal fade" id="forward-form" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content" id="login-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>转发到我的博客</h4>
+				</div>
+				<div class="modal-body">
+					<form action="forward.php" method="post">
+					<label style="margin-bottom:5px;">我的博客标题</label>						
+						<div class="form-group">								
+								<div style="display:inline">[转发]</div>
+								<div>
+								<input id="blog_id" type="hidden" name="blog.blogId"/>
+								<input id="blog_title" type="text" class="form-control" style="display:inline" name="blog.title" /></div>																					
+						</div>																
+						<div class="linkbox" style="float:right;padding-bottom:10px;padding-top:6px;">							
+							<button type="submit" class="btn btn-golden btn-signin">确认</button>
+						</div>
+					</form>
+				</div>				
+			</div>			
+		</div>
+	</div>
 	<!-- Bootstrap core JavaScript
 	================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -447,6 +502,14 @@
 	<script src="assets/js/calendar.js"></script>
 	<script src="assets/js/jquery.touchSwipe.min.js"></script>
 	<script src="assets/js/script.js"></script>
+	<script type="text/javascript">
+		function update(obj){
+			var labels=$(obj).parent().find('label');
+			$('#blog_id').val(labels.eq(0).text());
+			$('#blog_title').val(labels.eq(1).text());
+			$('#forward-form').modal('show');
+		}
+	</script>
 	<script type="text/javascript">
 		var strId = "";
 		function shareTwitter(t)

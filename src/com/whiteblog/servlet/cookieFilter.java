@@ -13,6 +13,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.whiteblog.dao.CookieDAO;
 import com.whiteblog.entity.User;
 
@@ -54,6 +55,7 @@ public class cookieFilter implements Filter{
 							u.setUsername(username);
 							u.setPassword(password);
 							request.getSession().setAttribute("loginUser", u);
+							ActionContext.getContext().getSession().put("loginUser", u);
 						}//if
 					}catch(Exception e){
 						//System.out.println(e);

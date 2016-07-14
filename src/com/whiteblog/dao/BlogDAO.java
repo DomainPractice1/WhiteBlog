@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.whiteblog.entity.Blog;
+import com.whiteblog.entity.User;
 
 /**
  * A data access object (DAO) providing persistence and search support for Blog
@@ -225,4 +226,47 @@ public class BlogDAO extends HibernateDaoSupport {
 	public static BlogDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (BlogDAO) ctx.getBean("BlogDAO");
 	}
+	public void updateView(Blog instance){
+		log.debug("find forward works");
+		try {
+			getHibernateTemplate().update(instance);;
+		} catch (RuntimeException re) {
+			log.error("failed", re);
+			throw re;
+		}
+	}
+	//查找原创的文章数
+	@SuppressWarnings("unused")
+	public int findCreat(String username) {
+		log.debug("find original works");
+		try {
+			 List<User> user=getHibernateTemplate().find("from User as model where model.username=? ", username);
+			int userID= user.get(0).getUserId();
+		    int Status=0;
+			List<Blog> blog=getHibernateTemplate().find("from Blog as b where b.userId=? and b.status= ? ",new Integer[]{userID,Status});
+			return blog.size();
+		} catch (RuntimeException re) {
+			log.error("failed", re);
+			throw re;
+		}
+		
+	}
+	//查找转发的文章数
+		@SuppressWarnings("unused")
+		public int findForward(String username) {
+			log.debug("find forward works");
+			try {
+				 List<User> user=getHibernateTemplate().find("from User as model where model.username=?", username);
+				int userID= user.get(0).getUserId();
+				List<Blog> blog=getHibernateTemplate().find("from Blog as b where b.userId=? ", userID);
+				if(blog.isEmpty()==true)
+					return 0;
+				else
+				    return blog.get(0).getForwardnumber();
+			} catch (RuntimeException re) {
+				log.error("failed", re);
+				throw re;
+			}
+			
+		}
 }

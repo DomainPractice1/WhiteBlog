@@ -58,7 +58,7 @@ public class AttentionDAO extends HibernateDaoSupport {
 		log.debug("getting Attention instance with id: " + id);
 		try {
 			Attention instance = (Attention) getHibernateTemplate().get(
-					"com.whiteblog.dao.Attention", id);
+					"com.whiteblog.entity.Attention", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);

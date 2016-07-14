@@ -57,7 +57,7 @@ public class ProvinceDAO extends HibernateDaoSupport {
 		log.debug("getting Province instance with id: " + id);
 		try {
 			Province instance = (Province) getHibernateTemplate().get(
-					"com.whiteblog.dao.Province", id);
+					"com.whiteblog.entity.Province", id);
 			return instance;
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
