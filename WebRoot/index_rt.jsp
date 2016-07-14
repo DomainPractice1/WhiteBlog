@@ -36,6 +36,8 @@ n.css" rel="stylesheet">
 <!-- Custom styles for this template -->
 <link href="assets/css/style.css" rel="stylesheet">
 
+
+
 </head>
 <body onload="timedCount()">
 	<s:action name="ShowBlogList"/>

@@ -65,6 +65,7 @@ public class CityDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<City> findByExample(City instance) {
 		log.debug("finding City instance by example");
 		try {
@@ -79,6 +80,7 @@ public class CityDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding City instance with property: " + propertyName
 				+ ", value: " + value);
@@ -92,14 +94,17 @@ public class CityDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<City> findByCityname(Object cityname) {
 		return findByProperty(CITYNAME, cityname);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<City> findByCountryId(Object countryId) {
 		return findByProperty(COUNTRY_ID, countryId);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all City instances");
 		try {

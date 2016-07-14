@@ -67,6 +67,7 @@ public class NoticeDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Notice> findByExample(Notice instance) {
 		log.debug("finding Notice instance by example");
 		try {
@@ -81,6 +82,7 @@ public class NoticeDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding Notice instance with property: " + propertyName
 				+ ", value: " + value);
@@ -94,22 +96,27 @@ public class NoticeDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Notice> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Notice> findByBlogId(Object blogId) {
 		return findByProperty(BLOG_ID, blogId);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Notice> findByIsread(Object isread) {
 		return findByProperty(ISREAD, isread);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Notice> findByContent(Object content) {
 		return findByProperty(CONTENT, content);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all Notice instances");
 		try {

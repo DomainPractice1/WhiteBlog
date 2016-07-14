@@ -27,17 +27,17 @@ public class ShowInformedBlogList extends ActionSupport{
 
 	public String execute(){
 		Map<String,Object> session = ActionContext.getContext().getSession();	
-		System.out.println("[here in ShowInformedBlogListAction]");
+		//System.out.println("[here in ShowInformedBlogListAction]");
 		List<Inform> list = showInformedBlogListService.getAll();
 		List<Blog> informedBlogList = new ArrayList<Blog>();
 		for(Inform inform : list){
 			String blogId = inform.getBlogid();
-			System.out.println("[ShowInformedBlogListAction] blogId:" + blogId);
+			//System.out.println("[ShowInformedBlogListAction] blogId:" + blogId);
 			Blog blog = blogDAO.findById(Integer.parseInt(blogId));
-			System.out.println("[ShowInformedBlogListAction] blogTitle:" + blog.getTitle());
+			//System.out.println("[ShowInformedBlogListAction] blogTitle:" + blog.getTitle());
 			informedBlogList.add(blog);
 		}
-		System.out.println("[ShowInformedBlogListAction] informedBlogList.size():" + informedBlogList.size());
+		//System.out.println("[ShowInformedBlogListAction] informedBlogList.size():" + informedBlogList.size());
 		session.put("informedBlogList", informedBlogList);
 		return SUCCESS;
 	}

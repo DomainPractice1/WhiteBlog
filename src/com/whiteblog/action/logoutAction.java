@@ -10,7 +10,7 @@ public class logoutAction extends ActionSupport{
 	public String execute(){
 		Map<String,Object> session = ActionContext.getContext().getSession();
 		session.remove("loginUser");
-		System.out.println("Logout Action on");		
+		//System.out.println("Logout Action on");		
 		return SUCCESS;
 	}
 

@@ -170,14 +170,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 				</div>
 				<aside class="col-md-4">
-
 					<div class="laread-right">
-
 						<form action="searchArticle.php" class="laread-form search-form">
 							<div class="input"><input type="text" class="form-control" placeholder="Search..." name="searchText"></div>
 							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
 						</form>
-
 						<ul class="laread-list">							
 							<li class="title">热门文章</li>
  							<s:iterator value="#session.topblog" var="blog">
@@ -187,7 +184,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  								</li>
  							</s:iterator>				
 						</ul>
-
 						<ul class="laread-list">
 							<li class="title">热门用户</li>
 							<s:iterator value="#session.topuser" var="user">
@@ -197,14 +193,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  								</li>
  							</s:iterator>
 						</ul>
-
 						<ul class="laread-list">
 							<li class="title">Super-TAGS</li>
 							<li class="bar-tags">
 								<a href="findBlogByTagSuperAction-id-${thisSupertype.supertypeId}.html">${thisSupertype.supertypeName}</a>
 							</li>
-						</ul>
-						
+						</ul>						
 						<ul class="laread-list">
 							<li class="title">Sub-TAGS</li>
 							<li class="bar-tags">
@@ -213,9 +207,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								</s:iterator>
 							</li>
 						</ul>
-
 					</div>
-
 				</aside>
 			</div>
 		</div>
@@ -401,9 +393,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			})	
 		});
 	</script>
-	
-	
-	
 	<script type="text/javascript">
 		var t
 		function timedCount()

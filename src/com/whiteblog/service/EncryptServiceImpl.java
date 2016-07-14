@@ -24,12 +24,12 @@ public class EncryptServiceImpl {
 
 	public static int parmIntEnrypt(int parm){
 		String t = Integer.toString(parm);
-		System.out.println(t);
+		//System.out.println(t);
 		int i = Integer.parseInt(convertInt(t));
-		System.out.println(i);
+		//System.out.println(i);
 		t = Integer.toString(i);
 		i = Integer.parseInt(convertInt(t));
-		System.out.println(i);
+		//System.out.println(i);
 		return i;
 	}
 	/**

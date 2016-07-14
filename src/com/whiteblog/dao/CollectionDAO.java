@@ -66,6 +66,7 @@ public class CollectionDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Collection> findByExample(Collection instance) {
 		log.debug("finding Collection instance by example");
 		try {
@@ -93,10 +94,12 @@ public class CollectionDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Collection> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Collection> findByBlogId(Object blogId) {
 		return findByProperty(BLOG_ID, blogId);
 	}

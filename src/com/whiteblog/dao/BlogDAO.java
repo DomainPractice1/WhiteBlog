@@ -80,6 +80,7 @@ public class BlogDAO extends HibernateDaoSupport {
 	public List<Blog> findByExample(Blog instance) {
 		log.debug("finding Blog instance by example");
 		try {
+			@SuppressWarnings("unchecked")
 			List<Blog> results = (List<Blog>) getHibernateTemplate()
 					.findByExample(instance);
 			log.debug("find by example successful, result size: "
@@ -91,6 +92,7 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding Blog instance with property: " + propertyName
 				+ ", value: " + value);
@@ -104,6 +106,7 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findByPartMatch(String propertyName, Object value){
 		log.debug("finding Blog instance with property: " + propertyName
 				+ ", value: " + value);
@@ -117,66 +120,82 @@ public class BlogDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByPartTitle(Object title) {
 		return findByPartMatch(TITLE, title);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByPartContent(Object content) {
 		return findByPartMatch(CONTENT, content);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByPartUsername(Object username) {
 		return findByPartMatch(USERNAME, username);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByUserId(Object userId) {
 		return findByProperty(USER_ID, userId);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByTypeId(Object typeId) {
 		return findByProperty(TYPE_ID, typeId);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByTitle(Object title) {
 		return findByProperty(TITLE, title);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByContent(Object content) {
 		return findByProperty(CONTENT, content);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByTime(Object time) {
 		return findByProperty(TIME, time);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByUsername(Object username) {
 		return findByProperty(USERNAME, username);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByFilterwords(Object filterwords) {
 		return findByProperty(FILTERWORDS, filterwords);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByLikenumber(Object likenumber) {
 		return findByProperty(LIKENUMBER, likenumber);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByForwardnumber(Object forwardnumber) {
 		return findByProperty(FORWARDNUMBER, forwardnumber);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByViewnumber(Object viewnumber) {
 		return findByProperty(VIEWNUMBER, viewnumber);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByCommentnumber(Object commentnumber) {
 		return findByProperty(COMMENTNUMBER, commentnumber);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findByStatus(Object status) {
 		return findByProperty(STATUS, status);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Blog> findAll() {
 		log.debug("finding all Blog instances");
 		try {

@@ -65,6 +65,7 @@ public class SupertypeDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Supertype> findByExample(Supertype instance) {
 		log.debug("finding Supertype instance by example");
 		try {
@@ -92,10 +93,12 @@ public class SupertypeDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Supertype> findBySupertypeName(Object supertypeName) {
 		return findByProperty(SUPERTYPE_NAME, supertypeName);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all Supertype instances");
 		try {

@@ -16,12 +16,12 @@ public class ShowCommentList extends ActionSupport{
 	
 	public String execute(){
 		Map<String,Object> session = ActionContext.getContext().getSession();	
-		System.out.println("Appear in ShowCommentListAction");
-		System.out.println("[ShowCommentListAction] session.contains(blogId)?:"+session.containsKey("blogId"));
+		//System.out.println("Appear in ShowCommentListAction");
+		//System.out.println("[ShowCommentListAction] session.contains(blogId)?:"+session.containsKey("blogId"));
 		int blogId = (Integer) session.get("blogId");
-		System.out.println("[ShowCommentListAction] blogId:"+blogId);
+		//System.out.println("[ShowCommentListAction] blogId:"+blogId);
 		commentList = showCommentListService.findByBlogId(blogId);
-		System.out.println("[ShowCommentListAction] commentList.size():"+commentList.size());
+		//System.out.println("[ShowCommentListAction] commentList.size():"+commentList.size());
 		session.put("commentList", commentList);
 		return SUCCESS;
 	}

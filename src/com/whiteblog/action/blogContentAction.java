@@ -91,7 +91,7 @@ public class blogContentAction extends ActionSupport{
 		if(ins == null)
 			return FAIL;
 		String username = ins.getUsername();
-		System.out.println(username + " and " + ins.getContent() + " BlogContent");		
+		//System.out.println(username + " and " + ins.getContent() + " BlogContent");		
 		
 		BlogContentForm blogContentForm = new BlogContentForm(ins, username); 		
 		Map<String, Object> map = ActionContext.getContext().getSession();
@@ -105,7 +105,7 @@ public class blogContentAction extends ActionSupport{
 		
 		/*标签的部分*/ 
 		int bti = b.getBlog().getTypeId();
-		System.out.println("bti");
+		//System.out.println("bti");
 		Blogtype bt = blogtypeService.getBlogtype(bti);
 		ActionContext.getContext().put("bt", bt);
 		
@@ -125,14 +125,14 @@ public class blogContentAction extends ActionSupport{
 		if(ins == null)
 			return FAIL;
 		String username = ins.getUsername();
-		System.out.println(username + " and " + ins.getContent() + " BlogContent");		
+		//System.out.println(username + " and " + ins.getContent() + " BlogContent");		
 		
 		BlogContentForm blogContentForm = new BlogContentForm(ins, username); 		
-		System.out.println(blogContentForm.getUsername() + "blogcontentform");
+		//System.out.println(blogContentForm.getUsername() + "blogcontentform");
 		Map<String, Object> map = ActionContext.getContext().getSession();
 		map.put("req", blogContentForm);
 		BlogContentForm b = (BlogContentForm)map.get("req");
-		System.out.println(b.getUsername() + " is from map of blogcontentAction");
+		//System.out.println(b.getUsername() + " is from map of blogcontentAction");
 		ActionContext.getContext().put("req", b);
 		btl = blogtypeService.getBlogtypeDAO().findByUserId(ins.getUserId());
 		ActionContext.getContext().put("re", btl);

@@ -301,10 +301,7 @@
 				}
 			})	
 		});
-	</script>
-	
-	
-	
+	</script>	
 	<script type="text/javascript">
 		var t
 		function timedCount()
@@ -324,7 +321,6 @@
 			t=setTimeout("timedCount()",10000)
 		}
 	</script>
-
 	<script type ="text/javascript">
 	function delete_row(delete_id){
 		if(confirm("确定要删除？")){

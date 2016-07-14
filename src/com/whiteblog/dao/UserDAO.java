@@ -72,6 +72,7 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> findByExample(User instance) {
 		log.debug("finding User instance by example");
 		try {
@@ -86,6 +87,7 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findByProperty(String propertyName, Object value) {
 		log.debug("finding User instance with property: " + propertyName
 				+ ", value: " + value);
@@ -99,42 +101,52 @@ public class UserDAO extends HibernateDaoSupport {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> findByUsername(Object username) {
 		return findByProperty(USERNAME, username);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> findByPassword(Object password) {
 		return findByProperty(PASSWORD, password);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> findByIdentity(Object identity) {
 		return findByProperty(IDENTITY, identity);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> findByImage(Object image) {
 		return findByProperty(IMAGE, image);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> findByCountryId(Object countryId) {
 		return findByProperty(COUNTRY_ID, countryId);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> findByCityId(Object cityId) {
 		return findByProperty(CITY_ID, cityId);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> findByProvinceId(Object provinceId) {
 		return findByProperty(PROVINCE_ID, provinceId);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> findByJobId(Object jobId) {
 		return findByProperty(JOB_ID, jobId);
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> findBySex(Object sex) {
 		return findByProperty(SEX, sex);
 	}
 
+	@SuppressWarnings("rawtypes")
 	public List findAll() {
 		log.debug("finding all User instances");
 		try {

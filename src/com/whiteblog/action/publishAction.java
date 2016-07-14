@@ -77,14 +77,14 @@ public class publishAction extends ActionSupport{
 			blog.setTime(df.format(new Date()));// new Date()为获取当前系统时间
 			
 			List<String> filterWords = fileManagerImpl.getWords();
-			System.out.println("[filterWords size]"+filterWords.size());
+			//System.out.println("[filterWords size]"+filterWords.size());
 			blog.setFilterwords(1);
 			String blogcontent = content;
 			
 			for(int i=0;i<filterWords.size();i++){
 				if(blogcontent.contains(filterWords.get(i))){
 					blogcontent = blogcontent.replace(filterWords.get(i),"<markp>"+filterWords.get(i)+"</markp>");	
-					System.out.println("["+i+"]"+content);
+					//System.out.println("["+i+"]"+content);
 					hint="文章中包含敏感词！";
 					blog.setFilterwords(0);
 				}
