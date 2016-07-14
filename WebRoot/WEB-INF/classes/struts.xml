@@ -192,7 +192,7 @@
 			</result>
 		</action>
 		<action name="modifyInformation" class="LoginAction" method="ModifyInformation">
-			<result name="success">./author_detail.jsp</result>
+			<result name="success">./index_rt.jsp</result>
 			<result name="error">./404.html</result>
 		</action>
 	</package>
