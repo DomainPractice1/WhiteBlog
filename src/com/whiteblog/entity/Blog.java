@@ -22,6 +22,10 @@ public class Blog implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8992868438735840466L;
 	private Integer blogId;
 	private Integer userId;
 	private Integer typeId;

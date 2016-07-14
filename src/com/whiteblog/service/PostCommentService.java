@@ -2,17 +2,13 @@ package com.whiteblog.service;
 
 import java.lang.reflect.InvocationTargetException;
 
-import javax.ws.rs.core.Application;
-
 import org.apache.commons.beanutils.BeanUtils;
-import org.jboss.weld.context.ApplicationContext;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.whiteblog.dao.CommentDAO;
 import com.whiteblog.entity.Comment;
 import com.whiteblog.entity.User;
 import com.whiteblog.form.CommentForm;
-import com.whiteblog.form.UserForm;
 
 public class PostCommentService {
 	private CommentDAO commentDAO;

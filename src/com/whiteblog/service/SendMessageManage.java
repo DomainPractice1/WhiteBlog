@@ -2,7 +2,6 @@ package com.whiteblog.service;
 import com.whiteblog.dao.MailDAO;
 import com.whiteblog.dao.UserDAO;
 import com.whiteblog.entity.Mail; 
-import com.whiteblog.entity.User;
 public class SendMessageManage {
 	private MailDAO mailDAO;
 	private UserDAO userDAO; 

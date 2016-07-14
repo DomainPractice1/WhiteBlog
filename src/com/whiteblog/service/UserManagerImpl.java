@@ -9,7 +9,7 @@ import com.whiteblog.dao.UserDAO;
 import com.whiteblog.entity.User;
 import com.whiteblog.form.UserForm;
 
-public class UserManagerImpl {
+public class UserManagerImpl{
 	
 	private UserDAO userdao;
 
@@ -21,6 +21,7 @@ public class UserManagerImpl {
 		this.userdao = userdao;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<User> getAlluser(){
 		return this.userdao.findAll();
 	}
@@ -90,4 +91,5 @@ public class UserManagerImpl {
 			return "error";
 		}	
 	}
+	
 }

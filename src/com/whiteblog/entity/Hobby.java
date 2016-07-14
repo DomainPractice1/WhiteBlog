@@ -18,6 +18,10 @@ public class Hobby implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3249174435758558782L;
 	private Integer hobbyId;
 	private String supertypeId;
 	private String userId;

@@ -9,10 +9,13 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.dao.BlogDAO;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Inform;
-import com.whiteblog.service.ShowBlogListService;
 import com.whiteblog.service.ShowInformedBlogListService;
 
 public class ShowInformedBlogList extends ActionSupport{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7163217265230953867L;
 	private List<Blog> blogList;
 	private BlogDAO blogDAO;
 	public BlogDAO getBlogDAO() {

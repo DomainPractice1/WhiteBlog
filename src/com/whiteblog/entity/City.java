@@ -18,6 +18,10 @@ public class City implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -848517768423091033L;
 	private Integer cityId;
 	private String cityname;
 	private Integer countryId;

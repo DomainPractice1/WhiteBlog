@@ -18,6 +18,10 @@ public class Supertype implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5797543994302068807L;
 	private Integer supertypeId;
 	private String supertypeName;
 

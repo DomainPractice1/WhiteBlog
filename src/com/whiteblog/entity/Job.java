@@ -18,6 +18,10 @@ public class Job implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3097886620568966713L;
 	private Integer jobId;
 	private String jobname;
 

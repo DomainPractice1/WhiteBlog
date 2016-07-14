@@ -18,6 +18,10 @@ public class Country implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2681758772926294937L;
 	private Integer countryId;
 	private String countryname;
 

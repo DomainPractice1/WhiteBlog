@@ -278,7 +278,7 @@ n.css" rel="stylesheet">
 							<!-- <span class="form-warning"><i class="fa fa-exclamation"></i>Fill the require.</span> -->
 						</div>
 						<div class="linkbox">
-							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+							<label><input name="useCookie" type="checkbox"><span>Remember me</span><i class="fa"></i></label>
 							<button type="submit" class="btn btn-golden btn-signin">SIGN IN</button>
 						</div>
 					</form>
@@ -314,7 +314,10 @@ n.css" rel="stylesheet">
 							<span>Already got account? <a href="#" id="login-btn" data-target="#login-form">Sign In.</a></span>
 						</div>
 						<div class="linkbox">
-							<label><input type="checkbox"><span>Remember me</span><i class="fa"></i></label>
+				<%-- 			<label><input name="useCookie" value="1" type="checkbox"><span >Remember me</span><i class="fa"></i></label>  --%>
+							<label>
+								<s:checkbox name="useCookie" value="1"><span>Remember me</span><i class="fa"></i></s:checkbox>
+							</label>
 							<button type="submit" class="btn btn-golden btn-signin">SIGN UP</button>
 						</div>
 					</form>

@@ -9,6 +9,10 @@ import com.whiteblog.entity.Blog;
 import com.whiteblog.service.BlogManagerImpl;
 
 public class searchArticleAction extends ActionSupport {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7660239714193484101L;
 	private String searchText;
 	private BlogManagerImpl blogManager;
 	public String getSearchText() {

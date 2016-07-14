@@ -5,12 +5,14 @@ import java.util.Map;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Comment;
-import com.whiteblog.service.ShowBlogListService;
 import com.whiteblog.service.ShowCommentListService;
 
 public class ShowCommentList extends ActionSupport{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2365125848209540412L;
 	private List<Comment> commentList;
 	private ShowCommentListService showCommentListService;
 	

@@ -9,19 +9,20 @@ import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
-
 /**
  * User entity. @author MyEclipse Persistence Tools
  */
 @Entity
 @Table(name = "user", catalog = "whiteblog")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+
 public class User implements java.io.Serializable {
 
 	// Fields
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6946041366824777659L;
 	private Integer userId;
 	private String username;
 	private String password;

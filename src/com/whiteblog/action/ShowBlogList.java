@@ -10,23 +10,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.ws.rs.core.Application;
-
-import org.apache.struts2.ServletActionContext;
-
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.whiteblog.entity.Blog;
 import com.whiteblog.entity.Likeit;
 import com.whiteblog.entity.User;
 import com.whiteblog.form.checkLikeForm;
-import com.whiteblog.service.EncryptServiceImpl;
 import com.whiteblog.service.LikeService;
 import com.whiteblog.service.ShowBlogListService;
 import com.whiteblog.service.UserManagerImpl;
 
 public class ShowBlogList extends ActionSupport{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1887117840696079201L;
 	private List<Blog> blogList;
 	private List<Blog> unCheckBlog;
 	private ShowBlogListService showBlogListService;
@@ -148,8 +146,8 @@ public class ShowBlogList extends ActionSupport{
 			return SUCCESS;
 		}else{
 			User u = (User)session.get("loginUser");
-			int userId = u.getUserId();
 			List<checkLikeForm> list = new ArrayList<checkLikeForm>();
+			@SuppressWarnings("unchecked")
 			List<Likeit> ll = likeService.getLikeitDAO().findAll();
 			for(Blog b : blogList){
 				String res = "0";

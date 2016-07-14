@@ -12,6 +12,11 @@ import com.whiteblog.service.NoticeManagerImpl;
 
 public class noticeAction extends ActionSupport {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -267568475064264387L;
+
 	private NoticeManagerImpl noticeManager;
 
 	private List<Notice> noticeList;
