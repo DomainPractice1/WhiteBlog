@@ -11,24 +11,7 @@
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
-	<!-- URLRewriter 的配置项，调试的时候可以注释，别删了 ,要放在Servlet的顶部 -->
-	<filter>
-		<filter-name>UrlRewriteFilter</filter-name>
-		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
- 		<init-param>
-			<param-name>confReloadCheckInterval</param-name>
-			<param-value>6000</param-value>
-		</init-param>
-<!--		<init-param>
-			<param-name>logLevel</param-name>
-			<param-value>ERROR</param-value>
-		</init-param> -->
-	</filter>
-  <filter-mapping>
-        <filter-name>UrlRewriteFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-	<!-- URLRewriter 结束 -->
+	<!-- UploadFileServlet 开始 -->
 	<servlet>
 		<servlet-name>UploadFileServlet</servlet-name>
 		<servlet-class>com.whiteblog.servlet.UploadFileServlet</servlet-class>
@@ -52,8 +35,30 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>UploadFileServlet</servlet-name>
-		<url-pattern>/UploadFileServlet</url-pattern>
+		<url-pattern>/UploadFileServlet.do</url-pattern>
 	</servlet-mapping>
+	<!-- UploadFileServlet 结束 -->
+	<!-- URLRewriter 的配置项，调试的时候可以注释，别删了 ,要放在Servlet的顶部 -->
+	<filter>
+		<filter-name>UrlRewriteFilter</filter-name>
+		<filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+ 		<init-param>
+			<param-name>confReloadCheckInterval</param-name>
+			<param-value>6000</param-value>
+		</init-param>
+<!--		<init-param>
+			<param-name>logLevel</param-name>
+			<param-value>ERROR</param-value>
+		</init-param> -->
+	</filter>
+  <filter-mapping>
+        <filter-name>UrlRewriteFilter</filter-name>
+        <url-pattern>*.php</url-pattern>
+        <url-pattern>*.html</url-pattern>
+        <!-- <url-pattern>*.jsp</url-pattern> -->
+    </filter-mapping>
+	<!-- URLRewriter 结束 -->
+
  	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>

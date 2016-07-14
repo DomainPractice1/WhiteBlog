@@ -85,13 +85,13 @@ n.css" rel="stylesheet">
 					<div class="navbar-header">
 						<a class="navbar-brand" href="./index_rt.html"><img height="64" src="assets/img/logo-light.png" alt=""></a> 
 					</div>							
-					<c:choose>
-						<c:when test="${sessionScope.loginUser == null}">
-							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
+					<%-- <c:choose> --%>
+						<%-- <c:when test="${sessionScope.loginUser == null}"> --%>
+							<a href="#" data-toggle="modal" data-target="#modify-form" class="modal-form">
 								<i class="fa fa-user"></i>
 							</a>									
-						</c:when>
-						<c:otherwise>
+						<%-- </c:when> --%>
+						<%-- <c:otherwise>
 							<div class="get-post-titles" style="margin-left:20px">
 								<button  type="button" class="close_qp navbar-toggle push-navbar-full" data-navbar-type="article">
 									<i class="fa fa-bars"></i>
@@ -111,8 +111,8 @@ n.css" rel="stylesheet">
 								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
 								<i class="fa fa-power-off"></i>
 							</a>
-						</c:otherwise>
-					</c:choose>
+						</c:otherwise> --%>
+					<%-- </c:choose> --%>
 					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
 						<span class="sr-only">Toggle navigation</span>
 						<i class="fa fa-plus"></i>
@@ -122,17 +122,17 @@ n.css" rel="stylesheet">
 		</header>
 
 		<div class="container">
-			<div class="head-text">
+		<!-- 	<div class="head-text">
 				<h1>White Blog</h1>
 				<p class="lead-text">Blog. Designed for Read.</p>
-			</div>
+			</div> -->
 		</div>
 
 		<div class="container">
 			<div class="row">
 				<div class="col-md-8">
 					<div class="post-fluid post-medium-vertical">
-					<s:iterator value = "#session.blogList" var = "blog">
+					<%-- <s:iterator value = "#session.blogList" var = "blog">
 						<div class="container-fluid post-default">
 							<div class="container-medium">
 								<div class="row post-items">
@@ -152,7 +152,7 @@ n.css" rel="stylesheet">
 														<c:when test="${sessionScope.loginUser != null}">
 														<c:choose>
 															<c:when test="${sessionScope.loginUser.username==blog.username}">
-																<%-- <a href="showBlogToModify.action?blogId=${blog.blogId}"><div class="modify" title="编辑博客"></div></a> --%>
+																<a href="showBlogToModify.action?blogId=${blog.blogId}"><div class="modify" title="编辑博客"></div></a>
 																<a href="showBlogToModify-strBlogId-${blog.blogId}.html"><div class="modify" title="编辑博客"></div></a>
 															</c:when>
 															<c:otherwise>
@@ -161,8 +161,7 @@ n.css" rel="stylesheet">
 																<a href="javascript:void(0)" onclick="update(this);"><div class="forward" title="转发到自己的博客"></div></a>
 															</c:otherwise>													
 														</c:choose>																									
-														<%-- <a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareWeibo(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
-													 --%>	<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareWeibo(this)'><img src='assets/img/weibo.png' style='width:18px;height:18px'></img></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><img src='assets/img/twitter.png' style='width:18px;height:18px'></img></div></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
+														<a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus" data-placement="top" data-content="<a href='#' id='facebook${blog.blogId}' onclick='shareFacebook(this)'><i class='fa fa-facebook'></i></a><a href='#' id='twitter${blog.blogId}' onclick='shareTwitter(this)'><i class='fa fa-twitter'></i></a>" class="pis-share"><i class="fa fa-share-alt"></i></a>
 														<c:if test="${likeitList.isLike=='1'}">
 																<a href="#" id="like${blog.blogId}" class="post-liked" onclick="myF(this)"><i  class="fa fa-heart" title="点赞"></i><span>${blog.likenumber}</span></a>
 														</c:if>
@@ -178,7 +177,7 @@ n.css" rel="stylesheet">
 								</div>
 							</div>
 						</div>
-						</s:iterator>						
+						</s:iterator>			 --%>			
 
 
 						<div class="container-fluid post-video">
@@ -188,74 +187,15 @@ n.css" rel="stylesheet">
 						</div>
 					</div>
 				</div>
-				<aside class="col-md-4">
-
-					<div class="laread-right">
-
-						<form action="searchArticle.php" class="laread-form search-form">
-							<div class="input"><input type="text" class="form-control" placeholder="Search..." name="searchText"></div>
-							<button type="submit" class="btn btn-link"><i class="fa fa-search"></i></button>
-						</form>
-
-						<ul class="laread-list">							
-							<li class="title">热门文章</li>
- 							<s:iterator value="#session.topblog" var="blog">
- 								<li>
- 								<a href="content-strBlogId-${blog.blogId}.html">${blog.title}</a>
- 								<i class="line"></i>
- 								</li>
- 							</s:iterator>				
-						</ul>
-
-						<ul class="laread-list">
-							<li class="title">热门用户</li>
-							<s:iterator value="#session.topuser" var="user">
- 								<li>
- 								<a href="#">${user.username}</a>
- 								<i class="line"></i>
- 								</li>
- 							</s:iterator>
-						</ul>
-
-						<ul class="laread-list">
-							<li class="title">Super-TAGS</li>
-							<li class="bar-tags">
-								<s:iterator value="#session.allSuperTags" var="stag">
-									<a href="findBlogByTagSuperAction-strBlogId-<s:property value="#stag.supertypeId" />.html"><s:property value="#stag.supertypeName"/></a>
-								</s:iterator>
-							</li>
-						</ul>
-						<ul class="laread-list">
-							<li class="title">Sub-TAGS</li>
-							<li class="bar-tags"> 
-								<s:iterator value="#session.allTags" var="tag">
-									<a href="findBlogByTagAction-strBlogId-<s:property value="#tag.typeId" />.html"><s:property value="#tag.typename" /></a>
-								</s:iterator>
-							</li>
-						</ul>
-					</div>
-
-				</aside>
 			</div>
 		</div>
-
-		<footer class="container-fluid footer">
-			<div class="container text-center">
-				<div class="footer-logo"><img src="assets/img/logo-black.png" alt=""></div>
-				<p class="laread-motto">Designed for Read.</p>
- 				<div class="laread-social">
-					<a href="#" class="fa fa-twitter"></a>
-					<a href="#" class="fa fa-facebook"></a>
-					<a href="#" class="fa fa-pinterest"></a>
-				</div>
-			</div>
-		</footer>
+ 
 	</div>
 
 	
 
-	<!-- Login Modal -->
-	<div class="modal leread-modal fade" id="login-form" tabindex="-1" role="dialog" aria-hidden="true">
+	<!-- modifyInformation Modal -->
+	<div class="modal leread-modal fade" id="modifyInformation-form" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content" id="login-content">
 				<div class="modal-header">
@@ -263,32 +203,54 @@ n.css" rel="stylesheet">
 					<h4 class="modal-title"><i class="fa fa-unlock-alt"></i>LaRead Sign In</h4>
 				</div>
 				<div class="modal-body">
-					<form action="login.php" method="post">
-						<s:token></s:token>
+					<form action="modifyInformation.php" method="post">
 						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Username" name="userform.username">
+							<input class="form-control" placeholder="Username" name="username">
 						</div>
 						<div class="form-group">
-							<input type="password" class="form-control" placeholder="Password" name="userform.password">
+							<input class="form-control" type="password" placeholder="Password" name="password">
+						</div> 
+						<div class="form-group">
+							<input class="form-control" type="password" placeholder="Password Again" name="rePassword">
 						</div>
-						<div class="linkbox">
-							<a href="#">Forgot password ?</a>
-							<span>No account ? <a href="#" id="register-btn" data-toggle="modal" data-target="#register-form">Sign Up.</a></span>
-							<!-- <span class="form-warning"><i class="fa fa-exclamation"></i>Fill the require.</span> -->
+						<div class="form-group">
+							<input class="form-control" placeholder="Job Name" name="job"> 
 						</div>
+						<div class="form-group">
+							<select class="dropdown-menu form-control" name="countryId">
+								<c:forEach var="country" items="${ast}">
+									<%-- <option style="width:160px" value="${stags.supertypeId}">${stags.supertypeName}</option> --%>
+									<option class="form-control"  value="${country.countryId}">${country.countryname}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<select class="dropdown-menu form-control" name="provinceId">
+								<c:forEach var="province" >
+									<option class="form-control" value="${province.provinceId}" >${province.provinceName}</option>		
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<select class="dropdown-menu form-control" name="cityId">
+								<c:forEach var="city">
+									<option class="form-control" value="${city.cityId}">${cityname}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<select class="dropdown-menu form-control" name="hobbyId">
+								<c:forEach var="hobby">
+									<option class="form-control" value="${hobby.hobbyId}">${hobby.hobbyName}</option>
+								</c:forEach>
+							</select>
+						</div>
+		
 						<div class="linkbox">
-							<label><input name="useCookie" type="checkbox"><span>Remember me</span><i class="fa"></i></label>
-							<button type="submit" class="btn btn-golden btn-signin">SIGN IN</button>
+							<button type="submit" class="btn btn-golden btn-signin">MODIFY IT</button>
 						</div>
 					</form>
-				</div>
-				<div class="modal-footer">
-					<div class="provider">
-						<span>Sign In With</span>
-						<a href="#"><i class="fa fa-facebook"></i></a>
-						<a href="#"><i class="fa fa-twitter"></i></a>
-					</div>
-				</div>
+				</div> 
 			</div>
 			<div class="modal-content" id="register-content">
 				<div class="modal-header">
@@ -301,22 +263,30 @@ n.css" rel="stylesheet">
 							<input class="form-control" placeholder="Name">
 						</div> -->
 						<div class="form-group">
-							<input class="form-control" placeholder="Username" name="userform.username">
+							<input class="form-control" placeholder="Username" name="username">
 						</div>
-						<!-- <div class="form-group">
-							<input class="form-control" placeholder="Email">
-						</div> -->
 						<div class="form-group">
-							<input class="form-control" type="password" placeholder="Password" name="userform.password">
+							<input class="form-control" type="password" placeholder="Password" name="password">
+						</div> 
+						<div class="form-group">
+							<input class="form-control" type="password" placeholder="Password Again" name="rePassword"
+						</div>
+						<div class="form-group">
+							<select class="dropdwon-menu form-control" name="countryId">
+								<c:forEach var="stags" items="${ast}">
+									<option style="width:160px" value="${stags.supertypeId}">${stags.supertypeName}</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group">
+							<select class="dropdwon-menu form-control" name="provinceId">
+								
+							</select>
+						</div>
+						<div class="form-group">
+						
 						</div>
 						<div class="linkbox">
-							<span>Already got account? <a href="#" id="login-btn" data-target="#login-form">Sign In.</a></span>
-						</div>
-						<div class="linkbox">
-				<%-- 			<label><input name="useCookie" value="1" type="checkbox"><span >Remember me</span><i class="fa"></i></label>  --%>
-							<label>
-								<s:checkbox name="useCookie" value="1"><span>Remember me</span><i class="fa"></i></s:checkbox>
-							</label>
 							<button type="submit" class="btn btn-golden btn-signin">SIGN UP</button>
 						</div>
 					</form>
@@ -325,12 +295,12 @@ n.css" rel="stylesheet">
 		</div>
 	</div>
 
-	<!-- logout -->
+<!-- 	<!-- logout -->
 	<div class="modal leread-modal fade" id="logout-form" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content" id="login-content">
 				<div class="modal-body">
-					<!-- <form action="logout.action" method="post">		 -->
+					<form action="logout.action" method="post">		
 					<form action="logout.php" method="post">				
 						<div class="modal-body">
 							确认登出当前账户么？
@@ -343,9 +313,9 @@ n.css" rel="stylesheet">
 				</div>
 			</div>
 		</div>
-	</div>
+	</div> -->
 	
-	<!-- forward-form -->
+<%-- 	<!-- forward-form -->
 	<div class="modal leread-modal fade" id="forward-form" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content" id="login-content">
@@ -369,7 +339,7 @@ n.css" rel="stylesheet">
 				</div>				
 			</div>			
 		</div>
-	</div>
+	</div> --%>
 	
 	<!-- Bootstrap core JavaScript
 	================================================== -->
@@ -393,14 +363,6 @@ n.css" rel="stylesheet">
 	<script src="assets/js/script.js"></script>
 	
 	<script type="text/javascript">
-		function shareWeibo(t){
-			var strId = t.id.substring(8, t.id.length);
-			var url = "http://v.t.sina.com.cn/share/share.php?title='Hello WhiteBlog via' http://localhost/WhiteBlog/content?id=";
-			window.open(url + strId, "_blank", "width=500px;height=500px;");
-		}
-	</script>
-	
-	<script type="text/javascript">
 		function update(obj){
 			var labels=$(obj).parent().find('label');
 			$('#blog_id').val(labels.eq(0).text());
@@ -414,7 +376,7 @@ n.css" rel="stylesheet">
 		function shareTwitter(t)
 		{
 			strId = t.id.substring(7, t.id.length);		
-			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost/whiteBlog/content.php-id=' + strId, "_blank", "width=500px;height=500px;");
+			window.open('https://twitter.com/intent/tweet?text=I\'m here at whiteblog http://localhost:8080/whiteBlog/content.php-id=' + strId,"_blank","width=500px;height=500px;");
 		}
 	</script>
 	<script type="text/javascript">
@@ -469,6 +431,8 @@ n.css" rel="stylesheet">
 			})	
 		});
 	</script>
+	
+	
 	
 	<script type="text/javascript">
 		var t

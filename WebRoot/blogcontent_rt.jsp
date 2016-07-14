@@ -312,7 +312,7 @@
 									</s:iterator>
 
 									<div class="comment-form main-comment-form">
-										<s:form action="PostComment.php" method="post" theme="simple">
+										<s:form action="PostComment" method="post" theme="simple">
 											<s:textarea cssClass="comment-textarea" placeholder="Leave a comment..." name = "commentform.content"></s:textarea>
 											<s:div cssClass="at-focus">
 												<button class="comment-submit">Post Comment</button>	

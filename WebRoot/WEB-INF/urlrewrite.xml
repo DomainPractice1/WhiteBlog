@@ -37,14 +37,18 @@ PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         	<to>/$1.action?$2=$3</to>
         </rule>
         <rule>
+        	<from>/([a-zA-Z]+).action</from>
+        	<to>$1.action</to>
+        </rule>
+        <rule>
         	<note>
         	重定向配置在struts.xml里面的action，无参数的
         	</note>
         	<from>/([a-zA-Z0-9_*]+).php</from>
         	<to>/$1.action</to>
-        </rule>  
+        </rule>   
         <rule>
-        	<note>
+        	<note>	
         		这条规则是把部分的html页面全部重定向为jsp页面的
         	</note>
         	<from>^/index_([a-z]+).html</from>
@@ -55,8 +59,8 @@ PUBLIC "-//tuckey.org//DTD UrlRewrite 4.0//EN"
         	<to>/$1.jsp</to>
 		</rule> 
 		<rule>
-        	<from>^/authors.html</from>
-        	<to>/authors.jsp</to>
+        	<from>^/([a-zA-Z]+).html</from>
+        	<to>/$1.jsp</to>
         </rule>
     	
         <!--

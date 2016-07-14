@@ -13,6 +13,7 @@ import com.whiteblog.entity.User;
 import com.whiteblog.service.BlogManagerImpl;
 import com.whiteblog.service.BlogTypeServiceImp;
 import com.whiteblog.service.SuperTypeService;
+import com.whiteblog.service.fileManagerImpl;
 
 public class BlogTypeAction {
 	private String mesContent2;
@@ -159,6 +160,11 @@ public class BlogTypeAction {
 		session.put("allTags", tmpList);
 		session.put("allSuperTags", sl);
 
+		
+		String p = org.apache.struts2.ServletActionContext.getServletContext().getRealPath("/");
+		
+		fileManagerImpl.readTxtFile(p+"/WEB-INF/classes/words.txt");
+		
 		/*拦截器使用的数据库连接*/
 		CookieDAO.connectDB();
 		

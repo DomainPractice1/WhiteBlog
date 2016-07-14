@@ -14,8 +14,6 @@ import com.whiteblog.entity.User;
  */
 public class CookieDAO {
 	static final String findAll = "select * from user";
-	private static final String ERROR = "error";
-	private static final String SUCCESS = "success";
 	public static  Connection con = null;
 	public static  Statement stat = null;
 	public static ResultSet rs = null;
@@ -62,6 +60,7 @@ public class CookieDAO {
 					res.setProvinceId(rs.getInt(8));
 					res.setJobId(rs.getInt(9));
 					res.setSex(rs.getInt(10));
+					break;
 				} 
 			}
 			stat.close();

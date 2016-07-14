@@ -10384,3 +10384,31 @@ only screen and (                min-resolution: 2dppx){
 	width:18px;
 	height:18px;	
 }
+.mytwitter{
+	backgroud: url(../img/twitter.png) no-repeat 0 0;
+	background-size:18px 18px;
+	width:18px;
+	height:18px;	
+}
+.mytwitter:hover{
+	backgroud: url(../img/twitter.png) no-repeat 0 0;
+	color:#990033;
+	background-size:18px 18px;
+	width:18px;
+	height:18px;	
+}
+.weibo{
+	backgroud: url(../img/weibo.png) no-repeat 0 0;
+	background-size:18px 18px;
+	width:18px;
+	height:18px;		
+}
+.weibo:hover{
+	backgroud: url(../img/weibo.png) no-repeat 0 0;
+	color:#990033;
+	background-size:18px 18px;
+	width:18px;
+	height:18px;
+}
+
+

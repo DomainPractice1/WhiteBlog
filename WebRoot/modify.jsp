@@ -145,7 +145,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</header> 
 
 		<s:div cssClass="container">		
-			<s:form action="modify.php" method="POST" id="frmDemo" enctype="multipart/form-data" theme="simple">	
+			<s:form action="modify" method="POST" id="frmDemo" enctype="multipart/form-data" theme="simple">	
 				<s:div cssClass="head-text">				
 					<h1>${sessionScope.loginUser.username}</h1>
 					<s:hidden name="id" value="%{blogId}"></s:hidden>

@@ -35,7 +35,7 @@ public class cookieFilter implements Filter{
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) resp;
 		Cookie [] cookies = request.getCookies();
-		String [] info = null; 
+		String [] info ; 
 		if(cookies != null){
 			for(Cookie c: cookies){
 				/*URLDecoder.decode(c.getName(), "utf-8");*/
@@ -44,10 +44,13 @@ public class cookieFilter implements Filter{
 				if(info.length == 2){
 					String username = info[0];
 					String password = info[1]; 
+					if(username.equals("Saygoodbye"))
+						break;
 					User u = new User ();
 					try{
 						/*cookieDao.connectDB();*/
-						if((u = cookieDao.findAll(username, password)) != null){
+						u = cookieDao.findAll(username, password);
+						if(u != null){
 							u.setUsername(username);
 							u.setPassword(password);
 							request.getSession().setAttribute("loginUser", u);

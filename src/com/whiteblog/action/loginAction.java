@@ -87,12 +87,7 @@ public class loginAction extends ActionSupport{
 			
 			session.put("loginUser",loginUser);
 			
-			String p = org.apache.struts2.ServletActionContext.getServletContext().getRealPath("/");
-			
-			fileManagerImpl.readTxtFile(p+"/WEB-INF/classes/words.txt");
-			
-			/*增加用户的Cookie,同时对Cookie加密MD5模式*/
-			
+			/*增加用户的Cookie,同时对Cookie加密MD5模式*/ 
 			
 			String password = EncryptServiceImpl.convert(userform.getPassword());
 			
