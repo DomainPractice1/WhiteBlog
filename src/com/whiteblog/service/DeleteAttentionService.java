@@ -15,13 +15,17 @@ public class DeleteAttentionService {
 	public void setAttentionDAO(AttentionDAO attentionDAO) {
 		this.attentionDAO = attentionDAO;
 	}
-	public void deleteAttention(int attentionID,User me){
-		List<Attention> attention=attentionDAO.findByUserId(me.getUserId());
-		for(int i=0;i<attention.size();i++){
-			if(attention.get(i).getPassivesideId()==attentionID)
-				attentionDAO.delete(attention.get(i));
-		}
-		
+	public String deleteAttention(int attentionID,User me){
+		try{
+			List<Attention> attention=attentionDAO.findByUserId(me.getUserId());
+			for(int i=0;i<attention.size();i++){
+				if(attention.get(i).getPassivesideId()==attentionID)
+					attentionDAO.delete(attention.get(i));
+			}
+			return "success";
+		}catch(Exception e){
+			return "error";
+		}	
 	}
 
 }

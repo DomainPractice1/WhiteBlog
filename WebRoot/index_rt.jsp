@@ -318,11 +318,7 @@ n.css" rel="stylesheet">
 						</div> -->
 						<div class="form-group">
 							<input class="form-control" type="password" placeholder="Password" name="userform.password">
-						</div>
-						<div class="form-group">							
-							<input id="code" type="text" class="form-control" placeholder="请输入图片中的字符" name="code" style="width:250px;float:left"/>													
-							<span><img id="code_img" style="position:relative;top:8px;height:25px;width:100px;padding-left:5px;"></span><br>
-						</div>
+						</div>		
 						<div class="linkbox">
 							<span>Already got account? <a href="#" id="login-btn" data-target="#login-form">Sign In.</a></span>
 						</div>
@@ -413,7 +409,7 @@ n.css" rel="stylesheet">
 	<script type="text/javascript">
 		function shareWeibo(t){
 			var strId = t.id.substring(8, t.id.length);
-			var url = "http://v.t.sina.com.cn/share/share.php?title='Hello WhiteBlog via' http://localhost/WhiteBlog/content?id=";
+			var url = "http://v.t.sina.com.cn/share/share.php?title='Hello WhiteBlog via' http://localhost/WhiteBlog/content-id-" + strId + ".html";
 			window.open(url + strId, "_blank", "width=500px;height=500px;");
 		}
 	</script>

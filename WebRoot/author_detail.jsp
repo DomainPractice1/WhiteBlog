@@ -48,75 +48,73 @@
 		<div class="tag-title">
 			<div class="container">
 				<p class="tags" id="post-titles">
-					<a data-filter=".pt-fashion" href="#">我关注的</a> <a
-						data-filter=".pt-culture" href="#">关注我的</a>
+					<a data-filter=".pt-fashion" href="#" id="att">我关注的</a> <a
+						data-filter=".pt-culture" href="#" id="fan">关注我的</a>
 				</p>
 			</div>
 		</div>
 		<button type="button" class="remove-navbar">
 			<i class="fa fa-times"></i>
 		</button>
-		<ul class="post-title-list clearfix">
-	
-		<s:iterator value="#session.attention" var="attentionTag">
-			<li class="pt-fashion">
-				<div>
-					<h5>
-					 <i class="fa fa-file-text-o"></i> <a href="showUserdetailAction-attentionUserid-${attentionTag.userId}.html">${attentionTag.username}</a>
-					  
-						<a href="deleteAttentionAction-userID-${attentionTag.userId}.html">&nbsp &nbsp &nbsp &nbsp取消关注</a>
-					</h5>
-				</div>
-			</li>
-			</s:iterator>
-			<s:iterator value="#session.fans" var="fansTag">
-			<li class="pt-culture">
-				<div>
-					<h5>
-					  <i class="fa fa-file-text-o"></i> <a href="showUserdetailAction-attentionUserid-${fansTag.userId}.html">
-						${fansTag.username}</a> 
-					</h5>
-				</div>
-			</li>
-			</s:iterator>
-			 
+		<ul id="slideform" class="post-title-list clearfix">		 
 		</ul>
 	</div>
 	</aside>
 
 	<div class="canvas">
 		<div class="canvas-overlay"></div>
-		<header> <nav
-			class="navbar navbar-fixed-top nav-down navbar-laread">
-		<div class="container">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="index_rt.jsp"><img height="64"
-					src="assets/img/logo-light.png" alt=""></a>
-			</div>
-			<div class="get-post-titles">
-				<button type="button" class="navbar-toggle push-navbar"
-					data-navbar-type="default">
-					<i class="fa fa-bars"></i>
-				</button>
-			</div>
-			<button type="button" class="navbar-toggle collapsed menu-collapse"
-				data-toggle="collapse" data-target="#main-nav">
-				<span class="sr-only">Toggle navigation</span> <i class="fa fa-plus"></i>
-			</button>
-			<div class="collapse navbar-collapse" id="main-nav">
-				<ul class="nav navbar-nav">
-					<li><a href="#" class="dropdown-toggle" data-toggle="dropdown"
-						role="button" aria-expanded="false">我的主页</a></li>
-				</ul>
-			</div>
-			<!--/.nav-collapse -->
-		</div>
-		</nav> </header>
+		<header>
+			<nav class="navbar navbar-fixed-top nav-down navbar-laread">
+				<div class="container">
+					<div class="navbar-header">
+						<a class="navbar-brand" href="./index_rt.html"><img height="64" src="assets/img/logo-light.png" alt=""></a> 
+					</div>							
+					<c:choose>
+						<c:when test="${sessionScope.loginUser == null}">
+							<a href="#" data-toggle="modal" data-target="#login-form" class="modal-form">
+								<i class="fa fa-user"></i>
+							</a>									
+						</c:when>
+						<c:otherwise>
+							<div class="get-post-titles" style="margin-left:20px">
+								<button type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
+									<i class="fa fa-bars"></i>
+								</button>
+							</div>		
+							<div class="get-post-titles">					
+								<button id="notice" type="button" class="navbar-toggle push-navbar" data-navbar-type="default">
+									<i id="checkicon" class="fa fa-bell-o"></i>
+								</button>						
+							</div>
+							<div class="get-post-titles" style="margin-right:10px">					
+								<button type="button" class="navbar-toggle push-navbar-undo" data-navbar-type="default" onclick="location.href='showMailList.php'">
+									<i class="fa fa-envelope"></i>
+								</button>						
+							</div>
+							<a class="modal-form" style="margin-right:10px"
+						href="showcreat-Username-${sessionScope.loginUser.username}.html">${sessionScope.loginUser.username}</a>
+								<a href="#" data-toggle="modal" data-target="#logout-form" class="modal-form">
+								<i class="fa fa-power-off"></i>
+							</a>
+						</c:otherwise>
+					</c:choose>
+					<button type="button" class="navbar-toggle collapsed menu-collapse" data-toggle="collapse" data-target="#main-nav">
+						<span class="sr-only">Toggle navigation</span>
+						<i class="fa fa-plus"></i>
+					</button>
+					<div class="collapse navbar-collapse" id="main-nav">
+						<ul class="nav navbar-nav">
+							<li><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">我的主页</a></li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</header>
 
 		<section class="post-fluid">
 		<div class="container-fluid">
 			<div class="row laread-author-detail">
-				<div class="author-picture">
+				<div class="author-picture" style="width:216px;height:220px;">
 					<img src="assets/img/img-49.jpg" alt="" />
 				</div>
 				<div class="author-subdetail">
@@ -375,7 +373,82 @@
         	return - ($(this).height() / 2);}
         });
   		$(function() {$('#myModal2').modal('hide')});
-	</script>	
-	
+	</script>
+	<script> 	
+	function delete_row(delete_id){
+		if(confirm("确定要取消关注？")){
+			$.ajax({
+				url:"deleteAttentionAction-userID-" + delete_id + ".html",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+					if(data == -1){
+						$("li").remove("#user-"+delete_id);
+						window.alert("取消关注成功");
+					}else{
+						window.alert("取消关注失败");
+					}
+				}
+			})
+		}
+	}
+	</script>
+	<script type="text/javascript">		
+		$("#att").click(function(){
+			$("#slideform").empty();
+			$.ajax({
+				url:"getaf.php",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data.attentionlist,function(i,list){
+							onclick_str="onclick=\"delete_row("+list.userId+")\"";
+							var _tr='<li class="pt-fashion" id="user-'+list.userId+'"><div><h5><i class="fa fa-file-text-o"></i> <a href="showUserdetailAction-attentionUserid-'+ list.userId +'.html">'+ list.username +'</a><a href="#"'+ onclick_str +'>&nbsp &nbsp &nbsp &nbsp取消关注</a></h5></div></li>';							                  		
+                       		 $("#slideform").append(_tr);
+                    })
+				}
+			})	
+		});
+	</script>
+	<script type="text/javascript">		
+		$("#fan").click(function(){
+			$("#slideform").empty();
+			$.ajax({
+				url:"getaf.php",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+                $.each(data.fanslist,function(i,list){
+							var _tr='<li class="pt-culture" id="user-'+list.userId+'"><div><h5><i class="fa fa-file-text-o"></i> <a href="showUserdetailAction-attentionUserid-'+ list.userId +'.html">'+ list.username +'</a></h5></div></li>';							                  		
+                       		 $("#slideform").append(_tr);
+                    })
+				}
+			})	
+		});
+	</script>
+	<script type="text/javascript">		
+		$("#notice").click(function(){
+			$("#slideform").empty();
+			$.ajax({
+				url:"notice.php",
+				type:"POST",
+				dataType:"json",
+				success:function(data){
+				$.each(data,function(i,list){
+							var _tr;
+							if(list.blogId == 0){
+								_tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a href="showMailList.action">' + list.content + '</a>' +
+								'</h5><div class="post-subinfo"></div></div></li>'	
+							}else{
+								_tr = '<li class="pt-culture pt-art"><div><h5><i>' + list.noticeId + '</i><a href="content.action?id=' + list.blogId + '">' + list.content + '</a>' +
+								'</h5><div class="post-subinfo"></div></div></li>'
+							}  
+                       		
+                       		 $("#slideform").append(_tr);
+                    })
+				}
+			})	
+		});
+	</script>
 </body>
 </html>

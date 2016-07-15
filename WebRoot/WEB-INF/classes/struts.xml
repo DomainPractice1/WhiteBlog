@@ -165,6 +165,12 @@
 		<action name="showcreat" class="ShowUserinfoAction" method="showcreat">
 			<result name="success" >/author_detail.jsp</result>
 		</action>
+		<action name="getaf" class="ShowUserinfoAction" method="execute">
+			<result name="success" type="json">
+				<param name="att">attentionlist</param>
+				<param name="fan">fanslist</param>	
+			</result>
+		</action>
 					<!-- 删除收藏的文章-->
 		<action name="deleteCollect" class="DeleteCollectAction" method="excute">
 			<result name="success" >/author_detail.jsp</result>
@@ -175,7 +181,10 @@
 		</action>
 					<!-- 取消关注-->
 		<action name="deleteAttentionAction" class="DeleteAttentionAction" method="excute">
-			<result name="success" >/author_detail.jsp</result>
+			<result name="success" type="json">
+				<param name="root">id</param>
+			</result>
+			<result name="error">/404.jsp</result>
 		</action>
 					<!-- 关注-->
 		<action name="payAttentionAction" class="PayAttentionAction" method="excute">

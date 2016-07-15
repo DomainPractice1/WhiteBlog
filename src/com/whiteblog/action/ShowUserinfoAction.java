@@ -30,7 +30,23 @@ public class ShowUserinfoAction extends ActionSupport {
 		private ProvinceDAO provinceDAO;
 		private HobbyDAO hobbyDAO;
 		private SupertypeDAO supertypeDAO;
-		
+		private List<User> attentionlist;
+		private List<User> fanslist;	
+		public List<User> getAttentionlist() {
+			return attentionlist;
+		}
+
+		public void setAttentionlist(List<User> attentionlist) {
+			this.attentionlist = attentionlist;
+		}
+
+		public List<User> getFanslist() {
+			return fanslist;
+		}
+
+		public void setFanslist(List<User> fanslist) {
+			this.fanslist = fanslist;
+		}
 		
 		public SupertypeDAO getSupertypeDAO() {
 			return supertypeDAO;
@@ -169,6 +185,17 @@ public class ShowUserinfoAction extends ActionSupport {
 			ActionContext.getContext().put("cl", cl);
 			ActionContext.getContext().put("pl", pl);
 			ActionContext.getContext().put("hl", superl);
+			return SUCCESS;
+		}
+		public String execute(){
+			Map<String, Object> session = ActionContext.getContext().getSession();
+			User me = (User) session.get("loginUser");
+			attentionlist = new ArrayList<User>();
+			fanslist = new ArrayList<User>();
+			attentionlist = showUserinfo.findActiveAttention(me);
+			// 关注我的
+			fanslist = showUserinfo.findPassiveAttention(me);
+			
 			return SUCCESS;
 		}
 }

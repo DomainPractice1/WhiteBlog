@@ -10,6 +10,7 @@ import com.whiteblog.service.DeleteAttentionService;
 public class DeleteAttentionAction extends ActionSupport {
 	private DeleteAttentionService deleteAttentionService;
     private Integer userID;
+    private Integer id;
 	public Integer getUserID() {
 		return userID;
 	}
@@ -29,7 +30,13 @@ public class DeleteAttentionAction extends ActionSupport {
 	public String excute(){
 		Map<String, Object> session = ActionContext.getContext().getSession();
 		User me = (User) session.get("loginUser");
-		deleteAttentionService.deleteAttention(userID,me);
-		return SUCCESS;
+		if(deleteAttentionService.deleteAttention(userID,me).equals("success")){
+			id=-1;
+			return SUCCESS;
+		}else{
+			id=-2;
+			return ERROR;
+		}
+		
 	}
 }
